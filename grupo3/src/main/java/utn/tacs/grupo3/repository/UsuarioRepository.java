@@ -1,7 +1,8 @@
 package utn.tacs.grupo3.repository;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Repository;
 
@@ -10,10 +11,26 @@ import utn.tacs.grupo3.model.Usuario;
 @Repository
 public class UsuarioRepository {
 	
+	private List<Usuario> usuarios;
+	
+	public UsuarioRepository() {
+		usuarios = new ArrayList<Usuario>();
+		usuarios.add(new Usuario("Juan", "Perez"));
+		usuarios.add(new Usuario("Jose", "Gonzalez"));
+	}
+
 	public List<Usuario> usuarios(){
-		return Arrays.asList(
-				new Usuario("Juan","Perez"),
-				new Usuario("Jose","Gonzalez"));
+		return usuarios;
+	}
+	
+	public List<Usuario> usuariosByNombre(String nombre){
+		return usuarios.stream().
+				filter(usuario -> usuario.getNombre().equalsIgnoreCase(nombre)).
+				collect(Collectors.toList());
+	}
+	
+	public void crearUsuario(String nombre, String apellido) {
+		usuarios.add(new Usuario(nombre, apellido));
 	}
 
 }
