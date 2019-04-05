@@ -15,8 +15,8 @@ public class UsuarioRepository {
 	
 	public UsuarioRepository() {
 		usuarios = new ArrayList<Usuario>();
-		usuarios.add(new Usuario("Juan", "Perez"));
-		usuarios.add(new Usuario("Jose", "Gonzalez"));
+		usuarios.add(new Usuario("Juan", "Perez",2,3,"s"));
+		usuarios.add(new Usuario("Jose", "Gonzalez",2,3,"s"));
 	}
 
 	public List<Usuario> usuarios(){
@@ -30,7 +30,7 @@ public class UsuarioRepository {
 	}
 	
 	public void crearUsuario(String nombre, String apellido) {
-		usuarios.add(new Usuario(nombre, apellido));
+		usuarios.add(new Usuario(nombre, apellido,2,3,"s"));
 	}
 
 }
