@@ -2,32 +2,54 @@ package utn.tacs.grupo3.model;
 
 public class User {
 	
-	private String nombre;
-	private String apellido;
-	private int cantidadDeListas;
-	private int cantidadDeLugaresVisitados;
-	private String ultimoAcceso;
+	private String firstName;
+	private String lastName;
+	private int numberOfLists;
+	private int numberOfVisitedPlaces;
+	private String lastAccess;
+	
 
-	public User(String nombre, String apellido, int cantidadDeListas, int cantidadDeLugaresVisitados, String ultimoAcceso) {
-		this.nombre = nombre;
-		this.apellido = apellido;
-		this.cantidadDeListas = cantidadDeListas;
-		this.cantidadDeLugaresVisitados = cantidadDeLugaresVisitados;
-		this.ultimoAcceso = ultimoAcceso;
+	public User(String firstName, String lastName, int numberOfLists, int numberOfVisitedPlaces, String lastAccess) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.numberOfLists = numberOfLists;
+		this.numberOfVisitedPlaces = numberOfVisitedPlaces;
+		this.lastAccess = lastAccess;
 	}
+	
+	public String getFirstName() {
+		return firstName;
+	}
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	public String getLastName() {
+		return lastName;
+	}
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+	public int getNumberOfLists() {
+		return numberOfLists;
+	}
+	public void setNumberOfLists(int numberOfLists) {
+		this.numberOfLists = numberOfLists;
+	}
+	public int getNumberOfVisitedPlaces() {
+		return numberOfVisitedPlaces;
+	}
+	public void setNumberOfVisitedPlaces(int numberOfVisitedPlaces) {
+		this.numberOfVisitedPlaces = numberOfVisitedPlaces;
+	}
+	public String getLastAccess() {
+		return lastAccess;
+	}
+	public void setLastAccess(String lastAccess) {
+		this.lastAccess = lastAccess;
+	}
+	
 
-	public String getNombre() {
-		return nombre;
-	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-	public String getApellido() {
-		return apellido;
-	}
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
-	}
+
 
 
 

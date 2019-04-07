@@ -10,26 +10,26 @@ import java.util.stream.Collectors;
 @Repository
 public class UserRepository {
 	
-	private List<User> usuarios;
+	private List<User> users;
 	
 	public UserRepository() {
-		usuarios = new ArrayList<User>();
-		usuarios.add(new User("Juan", "Perez",2,3,"s"));
-		usuarios.add(new User("Jose", "Gonzalez",2,3,"s"));
+		users = new ArrayList<User>();
+		users.add(new User("Juan", "Perez",2,3,"s"));
+		users.add(new User("Jose", "Gonzalez",2,3,"s"));
 	}
 
-	public List<User> usuarios(){
-		return usuarios;
+	public List<User> allUsers(){
+		return users;
 	}
 	
-	public List<User> usuariosByNombre(String nombre){
-		return usuarios.stream().
-				filter(usuario -> usuario.getNombre().equalsIgnoreCase(nombre)).
+	public List<User> usersByFirstName(String nombre){
+		return users.stream().
+				filter(user -> user.getFirstName().equalsIgnoreCase(nombre)).
 				collect(Collectors.toList());
 	}
 	
-	public void crearUsuario(String nombre, String apellido) {
-		usuarios.add(new User(nombre, apellido,2,3,"s"));
+	public void createUser(String nombre, String apellido) {
+		users.add(new User(nombre, apellido,2,3,"s"));
 	}
 
 }

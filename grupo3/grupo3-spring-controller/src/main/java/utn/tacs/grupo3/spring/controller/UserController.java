@@ -17,17 +17,17 @@ public class UserController {
 	
 	@GetMapping("/all")
 	public List<User> usuarios(){
-		return usuarioRepository.usuarios();
+		return usuarioRepository.allUsers();
 	}
 	
 	@GetMapping("/{nombre}")
 	public List<User> usuarioPorNombre(@PathVariable("nombre") String nombre){
-		return usuarioRepository.usuariosByNombre(nombre);
+		return usuarioRepository.usersByFirstName(nombre);
 	}
 	
 	@PostMapping(value = "/nuevo", params = {"nombre", "apellido"})
 	public String crearUsuario(@RequestParam("nombre") String nombre, @RequestParam("apellido") String apellido) {
-		usuarioRepository.crearUsuario(nombre, apellido);
+		usuarioRepository.createUser(nombre, apellido);
 		
 		return "Usuario creado";
 	}

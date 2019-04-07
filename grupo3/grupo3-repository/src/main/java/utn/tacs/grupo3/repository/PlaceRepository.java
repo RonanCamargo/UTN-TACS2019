@@ -10,26 +10,26 @@ import java.util.stream.Collectors;
 @Repository
 public class PlaceRepository {
 
-	private List<Place> lugares;
+	private List<Place> places;
 
 	public PlaceRepository() {
-		lugares = new ArrayList<Place>();
-		lugares.add(new Place("McDonalds Callao", "Av. Callao 131"));
-		lugares.add(new Place("On Tap Retiro ", "Marcelo Torcuato de Alvear 834"));
+		places = new ArrayList<Place>();
+		places.add(new Place("McDonalds Callao", "Av. Callao 131"));
+		places.add(new Place("On Tap Retiro ", "Marcelo Torcuato de Alvear 834"));
 	}
 
-	public List<Place> lugares(){
-		return lugares;
+	public List<Place> allPlaces(){
+		return places;
 	}
 	
-	public List<Place> lugaresByNombre(String nombre){
-		return lugares.stream().
-				filter(lugar -> lugar.getName().equalsIgnoreCase(nombre)).
+	public List<Place> placesByName(String name){
+		return places.stream().
+				filter(lugar -> lugar.getName().equalsIgnoreCase(name)).
 				collect(Collectors.toList());
 	}
 	
-	public void crearLugar(String nombre, String ubicacion) {
-		lugares.add(new Place(nombre, ubicacion));
+	public void createPlace(String name, String location) {
+		places.add(new Place(name, location));
 	}
 
 }
