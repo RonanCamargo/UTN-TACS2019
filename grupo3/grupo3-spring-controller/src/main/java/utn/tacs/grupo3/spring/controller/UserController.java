@@ -2,26 +2,26 @@ package utn.tacs.grupo3.spring.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import utn.tacs.grupo3.model.Usuario;
-import utn.tacs.grupo3.repository.UsuarioRepository;
+import utn.tacs.grupo3.model.User;
+import utn.tacs.grupo3.repository.UserRepository;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/usuario")
-public class UsuarioController {
+public class UserController {
 	
 	@Autowired
-	private UsuarioRepository usuarioRepository;
+	private UserRepository usuarioRepository;
 	
 	
 	@GetMapping("/all")
-	public List<Usuario> usuarios(){
+	public List<User> usuarios(){
 		return usuarioRepository.usuarios();
 	}
 	
 	@GetMapping("/{nombre}")
-	public List<Usuario> usuarioPorNombre(@PathVariable("nombre") String nombre){
+	public List<User> usuarioPorNombre(@PathVariable("nombre") String nombre){
 		return usuarioRepository.usuariosByNombre(nombre);
 	}
 	

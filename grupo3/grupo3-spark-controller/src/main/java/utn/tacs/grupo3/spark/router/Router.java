@@ -10,6 +10,7 @@ public class Router {
 		Gson gson = new Gson();
 
 		AdminController adminController = new AdminController();
+		
 		Spark.get("/usuarios/:id", adminController::getInformacionDelUsuario, gson::toJson);
 		Spark.get("/lugares_en_comun/usuarios", adminController::getLugaresEnComun, gson::toJson);
 		Spark.get("/lugares/:id/usuarios_interesados", adminController::getCantidadDeUsuariosInteresadosEnUnLugar, gson::toJson);

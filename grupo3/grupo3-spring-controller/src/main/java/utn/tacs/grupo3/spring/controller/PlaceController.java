@@ -2,27 +2,27 @@ package utn.tacs.grupo3.spring.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import utn.tacs.grupo3.model.Lugar;
-import utn.tacs.grupo3.model.Usuario;
-import utn.tacs.grupo3.repository.LugarRepository;
+import utn.tacs.grupo3.model.Place;
+import utn.tacs.grupo3.model.User;
+import utn.tacs.grupo3.repository.PlaceRepository;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/lugar")
-public class LugarController {
+public class PlaceController {
 	
 	@Autowired
-	private LugarRepository lugarRepository;
+	private PlaceRepository lugarRepository;
 
 
 	@GetMapping("/all")
-	public List<Lugar> lugares(){
+	public List<Place> lugares(){
 		return lugarRepository.lugares();
 	}
 	
 	@GetMapping("/{nombre}")
-	public List<Lugar> lugarPorNombre(@PathVariable("nombre") String nombre){
+	public List<Place> lugarPorNombre(@PathVariable("nombre") String nombre){
 		return lugarRepository.lugaresByNombre(nombre);
 	}
 	

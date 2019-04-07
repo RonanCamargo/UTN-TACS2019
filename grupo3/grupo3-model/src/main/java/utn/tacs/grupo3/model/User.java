@@ -1,6 +1,6 @@
 package utn.tacs.grupo3.model;
 
-public class Usuario {
+public class User {
 	
 	private String nombre;
 	private String apellido;
@@ -8,7 +8,7 @@ public class Usuario {
 	private int cantidadDeLugaresVisitados;
 	private String ultimoAcceso;
 
-	public Usuario(String nombre, String apellido, int cantidadDeListas, int cantidadDeLugaresVisitados, String ultimoAcceso) {
+	public User(String nombre, String apellido, int cantidadDeListas, int cantidadDeLugaresVisitados, String ultimoAcceso) {
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.cantidadDeListas = cantidadDeListas;
