@@ -46,5 +46,10 @@ public class PlaceController{
 	@GetMapping("/{place-id}/interested-users")
 	public int numberOfInterestedUsers(@PathVariable("place-id") String placeId) {
 		return 5;
-	}	
+	}
+	
+	@GetMapping("/registered-places")
+	public List<Place> registeredPlaces() {
+		return placeRepository.allPlaces();
+	}
 }
