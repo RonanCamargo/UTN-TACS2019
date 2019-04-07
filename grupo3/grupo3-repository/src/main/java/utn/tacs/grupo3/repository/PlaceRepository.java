@@ -28,8 +28,8 @@ public class PlaceRepository {
 				collect(Collectors.toList());
 	}
 	
-	public void createPlace(String name, String location) {
-		places.add(new Place(name, location));
+	public void createPlace(Place place) {
+		places.add(place);
 	}
 
 }

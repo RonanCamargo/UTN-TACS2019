@@ -7,7 +7,8 @@ public class User {
 	private int numberOfLists;
 	private int numberOfVisitedPlaces;
 	private String lastAccess;
-	
+
+	public User() {}
 
 	public User(String firstName, String lastName, int numberOfLists, int numberOfVisitedPlaces, String lastAccess) {
 		this.firstName = firstName;

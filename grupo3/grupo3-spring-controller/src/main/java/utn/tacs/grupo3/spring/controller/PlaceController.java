@@ -6,36 +6,45 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import utn.tacs.grupo3.model.Place;
 import utn.tacs.grupo3.repository.PlaceRepository;
 
 @RestController
-@RequestMapping("/lugar")
-public class PlaceController {
+@RequestMapping("/places")
+public class PlaceController{
 	
 	@Autowired
-	private PlaceRepository lugarRepository;
+	private PlaceRepository placeRepository;
 
 
-	@GetMapping("/all")
-	public List<Place> lugares(){
-		return lugarRepository.allPlaces();
+	@GetMapping
+	public List<Place> places(){
+		return placeRepository.allPlaces();
 	}
-	
-	@GetMapping("/{nombre}")
-	public List<Place> lugarPorNombre(@PathVariable("nombre") String nombre){
-		return lugarRepository.placesByName(nombre);
-	}
-	
-	@PostMapping(value = "/nuevo", params = {"nombre", "ubicacion"})
-	public String crearLugar(@RequestParam("nombre") String nombre, @RequestParam("ubicacion") String ubicacion) {
-		lugarRepository.createPlace(nombre, ubicacion);
+
+	@PostMapping
+	public String createPlace(@RequestBody Place place) {
+		placeRepository.createPlace(place);
 		
-		return "Lugar creado";
+		return "Lugar creado correctamente";
 	}
-
+	
+	@GetMapping("/{place-id}")
+	public Place placeById(@PathVariable("place-id") String placeId) {
+		return placeRepository.placesByName(placeId).get(0);
+	}
+	
+	@GetMapping("/near")
+	public List<Place> near(){
+		return placeRepository.allPlaces();
+	}
+	
+	@GetMapping("/{place-id}/interested-users")
+	public int numberOfInterestedUsers(@PathVariable("place-id") String placeId) {
+		return 5;
+	}	
 }

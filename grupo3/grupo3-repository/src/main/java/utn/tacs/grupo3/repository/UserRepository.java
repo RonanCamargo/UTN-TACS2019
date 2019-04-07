@@ -28,8 +28,8 @@ public class UserRepository {
 				collect(Collectors.toList());
 	}
 	
-	public void createUser(String nombre, String apellido) {
-		users.add(new User(nombre, apellido,2,3,"s"));
+	public void createUser(User user) {
+		users.add(user);
 	}
 
 }
