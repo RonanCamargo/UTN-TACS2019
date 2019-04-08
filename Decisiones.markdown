@@ -8,8 +8,8 @@ No observamos particular beneficio de utilizar Spark, fuera a la simplicidad de 
 ### Spring
 Spring, al igual que Spark, nos da la solución de un HTTP Server mediante Spring Boot. Si bien Spring requiere de annotations adicionales que ensucian el código y su configuración es un poco mas complicada, está ampliamente documentada, resuelven ORM incluso con bases de datos no relacionales y es compatible con MVC. Además, Spring posee soporte para Inyección de Dependencias(DI) e Inversion de Control(IoC), lo cual no se puede hacer utilizando, por ejemplo, solo Spark. 
 
-
-Como herramienta de gestión de tareas decidimos utilizar github.
+## Gestión de Tareas
+Como herramienta de gestión de tareas decidimos utilizar github, ya que tiene Project Boards que nos permitirá organizar y priorizar el trabajo, además de centralizar la comunicación del estado de las tareas en un solo lugar.
 
 #### Fuentes
 https://stackoverflow.com/questions/9403155/what-is-dependency-injection-and-inversion-of-control-in-spring-framework
