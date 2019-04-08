@@ -27,6 +27,11 @@ Desde el root del proyecto
     mvn spring-boot:run
 ```
 
+#### URL base
+```
+    http://localhost:8080
+```
+
 ## Endpoints
 
 | Method | URI | Descripción | Observación | 
