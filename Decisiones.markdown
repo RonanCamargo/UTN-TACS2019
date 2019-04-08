@@ -1,6 +1,6 @@
 ## Elección Framework
 
-Durante las semanas previas a la entrega probamos Spring y Spark.
+Durante las semanas previas a la entrega probamos Spring y Spark:
 
 ### Spark
 No observamos particular beneficio de utilizar Spark, fuera a la simplicidad de levantar un HTTP Server con endpoints. Como negativo, Spark no resuelve ORM para bases de datos no relacionales, por lo que habría que integrarlo con algún framework adicional. Ademas, cuando se quiere dar funcionalidad a la API, es necesario más trabajo manual que Spring ya tiene contemplado. Finalmente, dentro del modelo de arquitectura que se utilizará  (MVC), Spark solo actúa como Controller, teniendo entonces que resolver aun la Vista y Modelo.
