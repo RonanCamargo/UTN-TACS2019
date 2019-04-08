@@ -1,25 +1,23 @@
 package utn.tacs.grupo3.spark.controller;
 
-import com.google.gson.Gson;
+import java.util.List;
+
 import spark.Request;
 import spark.Response;
-import utn.tacs.grupo3.model.Usuario;
-import utn.tacs.grupo3.repository.UsuarioRepository;
-
-import java.util.List;
+import utn.tacs.grupo3.model.User;
+import utn.tacs.grupo3.repository.UserRepository;
 
 public class AdminController {
 
-    private static Gson GSON = new Gson();
-    private UsuarioRepository usuarioRepository = new UsuarioRepository();
+    private UserRepository userRepository = new UserRepository();
     private static String CONTENT_TYPE = "Content-Type";
     private static String APPLICATION_JSON = "application/json";
 
-    public List<Usuario> getInformacionDelUsuario(Request request, Response response) {
+    public List<User> getInformacionDelUsuario(Request request, Response response) {
         String name = request.params("name");
         response.header(CONTENT_TYPE, APPLICATION_JSON);
 
-        return usuarioRepository.usuariosByNombre(name);
+        return userRepository.usersByFirstName(name);
     }
 
     public String getLugaresEnComun(Request request, Response response) {
