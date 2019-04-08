@@ -15,3 +15,4 @@ Como herramienta de gestión de tareas decidimos utilizar github, ya que tiene P
 https://stackoverflow.com/questions/9403155/what-is-dependency-injection-and-inversion-of-control-in-spring-framework
 https://spring.io/guides/gs/spring-boot/
 https://www.g2.com/compare/apache-spark-vs-spring-framework
+https://help.github.com/en/articles/about-project-boards
