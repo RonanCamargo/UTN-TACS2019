@@ -1,9 +1,9 @@
-package utn.tacs.grupo3.model;
+package utn.tacs.grupo3.retrofit;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
-import utn.tacs.grupo3.model.pojoFoursquare.Json;
+import utn.tacs.grupo3.retrofit.pojo.Json;
 
 
 public interface GetDataService {

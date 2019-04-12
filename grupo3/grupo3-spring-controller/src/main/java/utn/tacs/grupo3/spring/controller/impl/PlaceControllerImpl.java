@@ -13,11 +13,13 @@ import org.springframework.web.bind.annotation.RestController;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import utn.tacs.grupo3.model.GetDataService;
 import utn.tacs.grupo3.model.Place;
-import utn.tacs.grupo3.model.RetrofitClientInstance;
-import utn.tacs.grupo3.model.pojoFoursquare.Json;
+
 import utn.tacs.grupo3.repository.PlaceRepository;
+
+import utn.tacs.grupo3.retrofit.GetDataService;
+import utn.tacs.grupo3.retrofit.RetrofitClientInstance;
+import utn.tacs.grupo3.retrofit.pojo.Json;
 import utn.tacs.grupo3.spring.controller.PlaceController;
 
 @RestController

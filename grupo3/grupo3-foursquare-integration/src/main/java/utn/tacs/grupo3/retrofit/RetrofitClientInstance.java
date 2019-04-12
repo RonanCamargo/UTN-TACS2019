@@ -1,4 +1,4 @@
-package utn.tacs.grupo3.model;
+package utn.tacs.grupo3.retrofit;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

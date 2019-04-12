@@ -1,7 +1,8 @@
-package utn.tacs.grupo3.model.pojoFoursquare;
+package utn.tacs.grupo3.retrofit.pojo;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import utn.tacs.grupo3.retrofit.pojo.Venue;
 
 import java.util.List;
 
