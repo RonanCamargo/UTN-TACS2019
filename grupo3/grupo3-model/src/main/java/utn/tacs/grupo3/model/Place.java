@@ -1,8 +1,14 @@
 package utn.tacs.grupo3.model;
 
-public class Place {
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
+public class Place {
+	@SerializedName("name")
+	@Expose
     private String name;
+	@SerializedName("id")
+	@Expose
     private String location;
 	   
     
