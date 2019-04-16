@@ -4,6 +4,7 @@ public class Place {
 
     private String name;
     private String location;
+	private String registrationDate;
 	   
     
     public Place(String name, String location) {

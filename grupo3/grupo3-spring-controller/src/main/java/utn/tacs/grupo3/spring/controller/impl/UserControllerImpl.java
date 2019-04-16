@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import utn.tacs.grupo3.model.FavouritePlaces;
+import utn.tacs.grupo3.model.ListOfPlaces;
 import utn.tacs.grupo3.model.Place;
 import utn.tacs.grupo3.model.User;
 import utn.tacs.grupo3.repository.UserRepository;
@@ -55,8 +55,8 @@ public class UserControllerImpl implements UserController {
 	
 	@Override
 	@GetMapping("/{user-id}/favourite-places/{list-id}")
-	public List<FavouritePlaces> favouritePlacesListById(){
-		return Arrays.asList(new FavouritePlaces());
+	public List<ListOfPlaces> favouritePlacesListById(){
+		return Arrays.asList(new ListOfPlaces());
 	}
 	
 	@Override
