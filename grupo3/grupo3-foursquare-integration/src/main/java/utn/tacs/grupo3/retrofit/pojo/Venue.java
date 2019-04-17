@@ -22,4 +22,24 @@ public class Venue {
         @SerializedName("hasPerk")
         @Expose
         public Boolean hasPerk;
+
+        public String getId() {
+                return id;
+        }
+
+        public String getName() {
+                return name;
+        }
+
+        public List<Category> getCategories() {
+                return categories;
+        }
+
+        public String getReferralId() {
+                return referralId;
+        }
+
+        public Boolean getHasPerk() {
+                return hasPerk;
+        }
 }

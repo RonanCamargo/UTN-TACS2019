@@ -1,13 +1,16 @@
 package utn.tacs.grupo3.retrofit;
 
 import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.Response;
 import utn.tacs.grupo3.retrofit.pojo.Pojo;
+import utn.tacs.grupo3.retrofit.pojo.Venue;
+
+import java.io.IOException;
+import java.util.List;
 
 public class ForsquarePlacesRequest {
 
-    public ForsquarePlacesRequest(ForsquarePlacesCallback callback) {
+    public ForsquarePlacesRequest() {
         this.callback = callback;
     }
 
@@ -17,23 +20,19 @@ public class ForsquarePlacesRequest {
     private final String CLIENT_SECRET = "BEK4JRCQKDEIZJB3GUBLE3SUNY33WXNRQ5EWBNJFOTOYSHN5";
     private final String DATE = "20180703";
 
-    public void getAllPlaces() {
+    public List<Venue> getAllPlaces(String latitudeAndLongitude) {
 
         ForsquareService service = RetrofitClientInstance.getRetrofitInstance().create(ForsquareService.class);
-        Call<Pojo> call = service.getAllPlaces(CLIENT_ID, CLIENT_SECRET, DATE, "-34.598599800,-58.419921700", 5);
-        call.enqueue(new Callback<Pojo>() {
-            @Override
-            public void onResponse(Call<Pojo> call, Response<Pojo> response) {
-                callback.onSuccess(response.body().response.venues);
-            }
+        Call<Pojo> call = service.getAllPlaces(CLIENT_ID, CLIENT_SECRET, DATE, latitudeAndLongitude, 5);
+        try {
+            Response<Pojo> response = call.execute();
+            return response.body().response.venues;
 
-            @Override
-            public void onFailure(Call<Pojo> call, Throwable t) {
-                callback.onError("dsds");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-            }
-        });
-
+        return null;
     }
 
 

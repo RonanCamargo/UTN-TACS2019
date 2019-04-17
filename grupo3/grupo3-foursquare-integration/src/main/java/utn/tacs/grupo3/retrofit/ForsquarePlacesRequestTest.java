@@ -1,25 +1,30 @@
 package utn.tacs.grupo3.retrofit;
 
-import org.junit.jupiter.api.Test;
-import utn.tacs.grupo3.model.Place;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
-import java.util.List;
+public class ForsquarePlacesRequestTest {
 
-public class ForsquarePlacesRequestTest implements ForsquarePlacesCallback {
+    private ForsquarePlacesRequest forsquarePlacesRequest;
+
+    @Before
+    public void initialize() {
+        forsquarePlacesRequest=new ForsquarePlacesRequest();
+    }
 
     @Test
-    public void requestTest() {
-        ForsquarePlacesRequest forsquarePlacesRequest=new ForsquarePlacesRequest(this);
-        forsquarePlacesRequest.getAllPlaces();
+    public void searchOfUTNByCartesianCoordinates() {
+        Assert.assertEquals("UTN.BA - Extensión Universitaria",forsquarePlacesRequest.getAllPlaces("-34.598599800,-58.419921700").get(0).getName());
     }
 
-    @Override
-    public void onSuccess(List<Place> places) {
-        places.get(1);
+    @Test
+    public void searchOfAnsesByCartesianCoordinates() {
+        Assert.assertEquals("Anses",forsquarePlacesRequest.getAllPlaces("-34.61315,-58.37723").get(1).getName());
     }
 
-    @Override
-    public void onError(String message) {
-
+    @Test
+    public void searchOfCongresoDeLaNaciónArgentinaByCartesianCoordinates() {
+        Assert.assertEquals("Palacio del Congreso de la Nación Argentina",forsquarePlacesRequest.getAllPlaces("-34.6093499,-58.3928535").get(0).getName());
     }
 }
