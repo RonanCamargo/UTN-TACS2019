@@ -1,14 +1,13 @@
-package utn.tacs.grupo3.model.test.administrator;
+package utn.tacs.grupo3.repository.test.administrator;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import utn.tacs.grupo3.model.AdministratorStatistics;
 import utn.tacs.grupo3.model.ListOfPlaces;
 import utn.tacs.grupo3.model.Place;
 import utn.tacs.grupo3.model.User;
+import utn.tacs.grupo3.repository.UserRepository;
 
-import java.util.Calendar;
 
 public class UsersRegisteredInTheSystemTest {
 
@@ -18,7 +17,7 @@ public class UsersRegisteredInTheSystemTest {
 
     private User user2;
     private ListOfPlaces listOfPlaces2;
-    private AdministratorStatistics administratorStatistics;
+    private UserRepository userRepository;
 
     @Before
     public void initialize() {
@@ -35,9 +34,9 @@ public class UsersRegisteredInTheSystemTest {
         listOfPlaces1.addPlace(aPlace1);
         listOfPlaces2.addPlace(aPlace1);
 
-        administratorStatistics = new AdministratorStatistics(Calendar.getInstance().getTime());
-        administratorStatistics.addUser(user1);
-        administratorStatistics.addUser(user2);
+        userRepository = new UserRepository();
+        userRepository.createUser(user1);
+        userRepository.createUser(user2);
     }
 
     // 12-Como administrador quiero poder ver los siguientes datos de un usuario:
@@ -61,7 +60,7 @@ public class UsersRegisteredInTheSystemTest {
 //    usuarios que se interesaron en el mismo (lo agregaron a una lista).
     @Test
     public void seeTheAmountOfUsersInterestedInAPlace() {
-        Assert.assertEquals(2, administratorStatistics.amountOfUsersInterestedIn(aPlace1));
+        Assert.assertEquals(2, userRepository.amountOfUsersInterestedIn(aPlace1));
     }
 
 }
