@@ -49,4 +49,16 @@ public class User {
     public boolean havePlacesInCommonWith(Place aPlace) {
         return listOfPlaces.stream().anyMatch(listPlaces -> listPlaces.getFavouritePlaces().contains(aPlace));
     }
+
+    public int amountOfPlacesLists() {
+        return listOfPlaces.size();
+    }
+
+    public int amountOfPlacesVisited() {
+        return placesVisited.size();
+    }
+
+    public String getLastAccess() {
+        return lastAccess;
+    }
 }

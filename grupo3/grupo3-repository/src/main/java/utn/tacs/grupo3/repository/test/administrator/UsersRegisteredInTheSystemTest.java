@@ -21,7 +21,7 @@ public class UsersRegisteredInTheSystemTest {
 
     @Before
     public void initialize() {
-        user1 = new User("Elver", "Galarga", null, "s");
+        user1 = new User("Elver", "Galarga", null, "2006-04-19");
         listOfPlaces1 = new ListOfPlaces("Lugares Favoritos");
         user1.getListOfPlaces().add(listOfPlaces1);
 
@@ -40,20 +40,36 @@ public class UsersRegisteredInTheSystemTest {
     }
 
     // 12-Como administrador quiero poder ver los siguientes datos de un usuario:
-//    -Usuario
-//    -Cantidad de listas
-//    -Cantidad de lugares visitados en sus listas.
-//    -Último acceso
+
+    //    -Usuario
     @Test
-    public void seeDataOfAuser() {
-        Assert.assertEquals("el MC", aPlace1.getName());
+    public void seeNameOfUser() {
+        Assert.assertEquals("Elver", user1.getFirstName());
+    }
+
+    //    -Cantidad de listas
+    @Test
+    public void seeTheNumberOfUserLists() {
+        Assert.assertEquals(1, user1.amountOfPlacesLists());
+    }
+
+    //    -Cantidad de lugares visitados en sus listas.
+    @Test
+    public void seeTheNumberOfPlacesVisitedInThePlacesLists() {
+        Assert.assertEquals(0, user1.amountOfPlacesVisited());
+    }
+
+    //    -Último acceso
+    @Test
+    public void seeTheUserLastAccess() {
+        Assert.assertEquals("2006-04-19", user1.getLastAccess());
     }
 
     // 13-Como administrador quiero seleccionar 2 listas de usuarios diferentes y
 //    ver si tienen algún lugar en común.
     @Test
     public void seeIfThereArePlacesInCommonInTwoListsOfPlaces() {
-        Assert.assertEquals(true, listOfPlaces1.areTherePlacesInCommonWith(listOfPlaces2));
+        Assert.assertTrue(listOfPlaces1.areTherePlacesInCommonWith(listOfPlaces2));
     }
 
     //14-Como administrador quiero seleccionar un lugar y ver la cantidad de
