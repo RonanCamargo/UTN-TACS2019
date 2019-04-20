@@ -15,8 +15,8 @@ public class UserRepository {
 
     public UserRepository() {
         users = new ArrayList<User>();
-        users.add(new User("Juan", "Perez", null, null, null, 2, 3, "s"));
-        users.add(new User("Elver", "Galarga", null, null, null, 2, 3, "s"));
+        users.add(new User("Juan", "Perez", null, "s"));
+        users.add(new User("Elver", "Galarga", null, "s"));
     }
 
     public List<User> allUsers() {
@@ -34,11 +34,7 @@ public class UserRepository {
     }
 
     public long amountOfUsersInterestedIn(Place aPlace) {
-        return users.stream().filter(u -> (isTherePlaceInCommon(aPlace, u))).count();
-    }
-
-    private boolean isTherePlaceInCommon(Place aPlace, User u) {
-        return u.getListOfPlaces().stream().anyMatch(listPlaces -> listPlaces.getFavouritePlaces().contains(aPlace));
+        return users.stream().filter(u -> u.havePlacesInCommonWith(aPlace)).count();
     }
 
 }

@@ -21,13 +21,13 @@ public class UsersRegisteredInTheSystemTest {
 
     @Before
     public void initialize() {
-        user1 = new User("Elver", "Galarga", null, null, null, 2, 3, "s");
+        user1 = new User("Elver", "Galarga", null, "s");
         listOfPlaces1 = new ListOfPlaces("Lugares Favoritos");
         user1.getListOfPlaces().add(listOfPlaces1);
 
         aPlace1 = new Place("el MC", "en algun lado");
 
-        user2 = new User("Jorge", "Vergara", null, null, null, 2, 3, "s");
+        user2 = new User("Jorge", "Vergara", null, "s");
         listOfPlaces2 = new ListOfPlaces("Mi lista");
         user2.getListOfPlaces().add(listOfPlaces1);
 

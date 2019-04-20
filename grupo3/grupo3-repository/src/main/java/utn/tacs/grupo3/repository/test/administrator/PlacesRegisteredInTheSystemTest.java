@@ -40,7 +40,8 @@ public class PlacesRegisteredInTheSystemTest {
         place3.setRegistrationDate(date3);
         place4.setRegistrationDate(date4);
 
-        placeRepository = new PlaceRepository(today);
+        placeRepository = new PlaceRepository();
+        placeRepository.setCurrentDate(today);
         placeRepository.createPlace(place1);
         placeRepository.createPlace(place2);
         placeRepository.createPlace(place3);

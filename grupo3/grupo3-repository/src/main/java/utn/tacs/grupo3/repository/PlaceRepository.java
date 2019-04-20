@@ -17,8 +17,7 @@ public class PlaceRepository {
     private Calendar calendar = Calendar.getInstance();
 
 
-    public PlaceRepository(Date currentDate) {
-        this.currentDate = currentDate;
+    public PlaceRepository() {
         places = new ArrayList<Place>();
     }
 
@@ -46,4 +45,7 @@ public class PlaceRepository {
         return places.stream().filter(p -> (p.getRegistrationDate().after(daysResults))).count();
     }
 
+    public void setCurrentDate(Date currentDate) {
+        this.currentDate = currentDate;
+    }
 }

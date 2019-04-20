@@ -12,9 +12,8 @@ public class ListOfPlaces {
     }
 
     public ListOfPlaces(String listName) {
-        favouritePlaces = new ArrayList<Place>();
+        favouritePlaces = new ArrayList<>();
         this.listName = listName;
-        this.favouritePlaces = favouritePlaces;
     }
 
     public String getListName() {
@@ -29,11 +28,6 @@ public class ListOfPlaces {
         return favouritePlaces;
     }
 
-    public void setFavouritePlaces(List<Place> favouritePlaces) {
-        this.favouritePlaces = favouritePlaces;
-    }
-
-
     public void addPlace(Place place) {
         favouritePlaces.add(place);
     }
@@ -41,6 +35,6 @@ public class ListOfPlaces {
     public boolean areTherePlacesInCommonWith(ListOfPlaces aListOfPlaces) {
         return favouritePlaces
                 .stream()
-                .anyMatch(o -> aListOfPlaces.getFavouritePlaces().contains(o));
+                .anyMatch(place -> aListOfPlaces.getFavouritePlaces().contains(place));
     }
 }
