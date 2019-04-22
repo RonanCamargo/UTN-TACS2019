@@ -2,6 +2,7 @@ package utn.tacs.grupo3.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class User {
 
@@ -60,5 +61,47 @@ public class User {
 
     public String getLastAccess() {
         return lastAccess;
+    }
+
+    public List<ListOfPlaces> listOfPlacesByName(String name) {
+        return listOfPlaces.stream().
+                filter(listOfPlaces -> listOfPlaces.getListName().equalsIgnoreCase(name)).
+                collect(Collectors.toList());
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public LocationCoordinates getLocationCoordinates() {
+        return locationCoordinates;
+    }
+
+    public void setLocationCoordinates(LocationCoordinates locationCoordinates) {
+        this.locationCoordinates = locationCoordinates;
+    }
+
+    public void setListOfPlaces(List<ListOfPlaces> listOfPlaces) {
+        this.listOfPlaces = listOfPlaces;
+    }
+
+    public List<Place> getPlacesVisited() {
+        return placesVisited;
+    }
+
+    public void setPlacesVisited(List<Place> placesVisited) {
+        this.placesVisited = placesVisited;
+    }
+
+    public void setLastAccess(String lastAccess) {
+        this.lastAccess = lastAccess;
     }
 }

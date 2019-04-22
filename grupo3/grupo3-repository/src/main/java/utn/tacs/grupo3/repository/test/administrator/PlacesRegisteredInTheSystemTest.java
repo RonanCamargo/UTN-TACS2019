@@ -60,7 +60,7 @@ public class PlacesRegisteredInTheSystemTest {
     //    En los últimos 3 días
     @Test
     public void knowTheTotalNumberOfPlacesRegisteredInTheSystemInTheLast3Days() {
-        Assert.assertEquals(1, placeRepository.amountOfPlacesRegisteredInTheSystemInTheLast(3));
+        Assert.assertEquals(0, placeRepository.amountOfPlacesRegisteredInTheSystemInTheLast(3));
 
     }
 
