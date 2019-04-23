@@ -9,16 +9,17 @@ import org.springframework.web.bind.annotation.*;
 import utn.tacs.grupo3.model.ListOfPlaces;
 import utn.tacs.grupo3.model.Place;
 import utn.tacs.grupo3.model.User;
+import utn.tacs.grupo3.repository.PlaceRepository;
 import utn.tacs.grupo3.repository.UserRepository;
 import utn.tacs.grupo3.spring.controller.UserController;
 
 @RestController
 @RequestMapping("/users")
 public class UserControllerImpl implements UserController {
-
     @Autowired
     private UserRepository userRepository;
-
+    @Autowired
+    private PlaceRepository placeRepository;
 
     @Override
     @GetMapping
@@ -85,13 +86,16 @@ public class UserControllerImpl implements UserController {
     @PostMapping("/{user-id}/favourite-places/{list-id}/{place-id}")
     public String registerFavouritePlaceInList(@PathVariable("user-id") String userId, @PathVariable("list-id") String listId, @PathVariable("place-id") String placeId) {
         Place place = new Place(placeId, "");
+        placeRepository.createPlace(place);
         userRepository.usersByFirstName(userId).get(0).listOfPlacesByName(listId).get(0).addPlace(place);
         return "Lugar registrado correctamente.";
     }
 
     @Override
     @GetMapping("/places-in-common")
-    public boolean placesInCommon(@RequestParam("user-1") String user1, @RequestParam("user-2") String user2) {
-        return false;
+    public boolean placesInCommon(@RequestParam("list_1") String list1, @RequestParam("list_2") String list2) {
+        ListOfPlaces listOfPlaces1 = userRepository.listOfPlacesByName(list1);
+        ListOfPlaces listOfPlaces2 = userRepository.listOfPlacesByName(list2);
+        return listOfPlaces1.areTherePlacesInCommonWith(listOfPlaces2);
     }
 }

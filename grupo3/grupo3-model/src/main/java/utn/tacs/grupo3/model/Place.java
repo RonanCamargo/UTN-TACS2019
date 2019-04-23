@@ -1,5 +1,6 @@
 package utn.tacs.grupo3.model;
 
+import java.util.Calendar;
 import java.util.Date;
 
 public class Place {
@@ -12,6 +13,7 @@ public class Place {
     public Place(String name, String location) {
         this.name = name;
         this.location = location;
+        setRegistrationDate(Calendar.getInstance().getTime());
     }
 
     public String getName() {

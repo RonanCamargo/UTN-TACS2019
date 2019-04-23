@@ -42,4 +42,10 @@ public class UserRepository {
         return users.stream().filter(u -> u.havePlacesInCommonWith(aPlace)).count();
     }
 
+    public ListOfPlaces listOfPlacesByName(String nombre) {
+        return users.stream().
+                filter(user -> user.getListOfPlaces().
+                        stream().anyMatch(s->s.getListName().equalsIgnoreCase(nombre))).
+                collect(Collectors.toList()).get(0).getListOfPlaces().get(0);
+    }
 }
