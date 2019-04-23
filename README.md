@@ -49,3 +49,32 @@ Desde el root del proyecto
 | GET | /places/near | Lugares cercanos a una coordenada | 
 | GET | /places/{place-id}/interested-users | Cantidad de usuarios interesados en un lugar | 
 | GET | /places/registered-places | Consultar lugares registrados en el sistema | Query: hoy, últimos 3 días. última semana, último mes, todos | 
+
+##
+### Proyecto Telegram
+
+#### Install
+
+```
+    cd grupo3-telegram-bot
+    mvn install
+```
+
+#### Build
+
+```    
+    mvn compile
+```
+
+#### Run
+
+```
+    mvn exec:java
+```
+
+
+#### Bot Username
+```
+    TACS20191CGrupo3Bot
+```
+

@@ -6,43 +6,39 @@ import utn.tacs.grupo3.model.Place;
 
 public interface PlaceController {
 
-	/**
-	 * 
-	 * @return
-	 */
-	List<Place> places();
+    /**
+     * @return
+     */
+    List<Place> places();
 
-	/**
-	 * 
-	 * @param place
-	 * @return
-	 */
-	String createPlace(Place place);
+    /**
+     * @param place
+     * @return
+     */
+    String createPlace(Place place);
 
-	/**
-	 * 
-	 * @param placeId
-	 * @return
-	 */
-	Place placeById(String placeId);
+    /**
+     * @param placeId
+     * @return
+     */
+    Place placeById(String placeId);
 
-	/**
-	 * 
-	 * @return
-	 */
-	List<Place> near();
+    /**
+     * @param coordinates
+     * @return
+     */
+    String near(String coordinates);
 
-	/**
-	 * 
-	 * @param placeId
-	 * @return
-	 */
-	int numberOfInterestedUsers(String placeId);
+    /**
+     * @param placeId
+     * @return
+     */
+    long numberOfInterestedUsers(String placeId);
 
-	/**
-	 * 
-	 * @return
-	 */
-	List<Place> registeredPlaces();
+    /**
+     * @param days
+     * @return
+     */
+    long registeredPlaces(int days);
 
 }
