@@ -15,8 +15,8 @@
 	<properties>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<maven.compiler.source>1.8</maven.compiler.source>
-		
-		<telegrambots.version>4.1</telegrambots.version>
+
+		<telegrambots.version>4.2</telegrambots.version>
 	</properties>
 
 
@@ -26,7 +26,6 @@
 			<artifactId>telegrambots</artifactId>
 			<version>${telegrambots.version}</version>
 		</dependency>
-
 
 		<dependency>
 			<groupId>junit</groupId>

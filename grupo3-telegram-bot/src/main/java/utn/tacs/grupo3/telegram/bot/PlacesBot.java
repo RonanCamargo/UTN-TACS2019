@@ -6,6 +6,9 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class PlacesBot extends TelegramLongPollingBot{
+	
+	private static final String BOT_USERNAME = "TACS20191CGrupo3Bot";
+	private static final String BOT_TOKEN = "837736990:AAGVZ27HyFKKyc-ZCbUhgIHE7iddP6-wchY";
 
 	@Override
 	public void onUpdateReceived(Update update) {
@@ -24,12 +27,12 @@ public class PlacesBot extends TelegramLongPollingBot{
 
 	@Override
 	public String getBotUsername() {
-		return "TACS20191CGrupo3Bot";
+		return BOT_USERNAME;
 	}
 
 	@Override
 	public String getBotToken() {
-		return "837736990:AAGVZ27HyFKKyc-ZCbUhgIHE7iddP6-wchY";
+		return BOT_TOKEN;
 	}
 
 }
