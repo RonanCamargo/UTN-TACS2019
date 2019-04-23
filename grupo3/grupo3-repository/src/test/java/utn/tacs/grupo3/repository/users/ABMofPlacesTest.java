@@ -1,4 +1,4 @@
-package utn.tacs.grupo3.repository.test.users;
+package utn.tacs.grupo3.repository.users;
 
 import org.junit.Assert;
 import org.junit.Before;

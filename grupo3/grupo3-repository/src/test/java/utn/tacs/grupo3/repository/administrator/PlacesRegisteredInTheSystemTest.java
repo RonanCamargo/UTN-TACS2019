@@ -1,4 +1,4 @@
-package utn.tacs.grupo3.repository.test.administrator;
+package utn.tacs.grupo3.repository.administrator;
 
 import org.junit.Assert;
 import org.junit.Before;
