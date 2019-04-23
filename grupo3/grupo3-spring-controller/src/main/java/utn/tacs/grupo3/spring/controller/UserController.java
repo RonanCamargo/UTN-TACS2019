@@ -2,66 +2,83 @@ package utn.tacs.grupo3.spring.controller;
 
 import java.util.List;
 
-import utn.tacs.grupo3.model.FavouritePlaces;
+import utn.tacs.grupo3.model.ListOfPlaces;
 import utn.tacs.grupo3.model.Place;
 import utn.tacs.grupo3.model.User;
 
 public interface UserController {
 
-	/**
-	 * 
-	 * @return
-	 */
-	List<User> users();
+    /**
+     * @return
+     */
+    List<User> users();
 
-	/**
-	 * 
-	 * @param user
-	 * @return
-	 */
-	String createUser(User user);
+    /**
+     * @param user
+     * @return
+     */
+    String createUser(User user);
 
-	/**
-	 * 
-	 * @param userId
-	 * @return
-	 */
-	User userById(String userId);
+    /**
+     * @param userId
+     * @return
+     */
+    User userById(String userId);
 
-	/**
-	 * 
-	 * @return
-	 */
-	List<String> listsOfFavouritePlaces();
+    /**
+     * @return
+     */
+    List<String> listsOfFavouritePlaces();
 
-	/**
-	 * 
-	 * @return
-	 */
-	List<FavouritePlaces> favouritePlacesListById();
+    /**
+     * @param userId
+     * @param listId
+     * @return
+     */
+    String createPlacesListById(String userId, String listId);
 
-	/**
-	 * 
-	 * @return
-	 */
-	String deleteFavouritePlacesList();
+    /**
+     * @param userId
+     * @param listId
+     * @return
+     */
+    List<ListOfPlaces> favouritePlacesListById(String userId, String listId);
 
-	/**
-	 * 
-	 * @return
-	 */
-	String editFavouritePlacesList();
+    /**
+     * @param userId
+     * @param listId
+     * @return
+     */
+    String deleteFavouritePlacesList(String userId, String listId);
 
-	/**
-	 * 
-	 * @return
-	 */
-	String registerFavouritePlaceInList();
+    /**
+     * @param userId
+     * @param listId
+     * @param newName
+     * @return
+     */
+    String editFavouritePlacesList(String userId, String listId, String newName);
 
-	/**
-	 * 
-	 * @return
-	 */
-	List<Place> placesInCommon();
+    /**
+     * @param userId
+     * @param listId
+     * @param placeId
+     * @return
+     */
+    String registerFavouritePlaceInList(String userId, String listId, String placeId);
+
+    /**
+     * @param user1
+     * @param user2
+     * @return
+     */
+    boolean placesInCommon(String user1, String user2);
+
+    /**
+     * @param userId
+     * @param placeId
+     * @return
+     */
+    String markAsVisitedAPlace(String userId, String placeId);
 
 }
