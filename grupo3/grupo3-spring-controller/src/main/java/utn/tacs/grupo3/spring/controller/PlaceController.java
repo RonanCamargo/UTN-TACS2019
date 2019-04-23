@@ -33,12 +33,12 @@ public interface PlaceController {
      * @param placeId
      * @return
      */
-    int numberOfInterestedUsers(String placeId);
+    long numberOfInterestedUsers(String placeId);
 
     /**
-     * @param date
+     * @param days
      * @return
      */
-    List<Place> registeredPlaces(String date);
+    long registeredPlaces(int days);
 
 }

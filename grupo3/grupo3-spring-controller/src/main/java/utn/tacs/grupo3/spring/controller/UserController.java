@@ -68,11 +68,11 @@ public interface UserController {
     String registerFavouritePlaceInList(String userId, String listId, String placeId);
 
     /**
-     * @param user1
-     * @param user2
+     * @param list1
+     * @param list2
      * @return
      */
-    boolean placesInCommon(String user1, String user2);
+    boolean placesInCommon(String list1, String list2);
 
     /**
      * @param userId
