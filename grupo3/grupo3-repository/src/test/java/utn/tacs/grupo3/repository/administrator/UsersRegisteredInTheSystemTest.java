@@ -1,5 +1,8 @@
 package utn.tacs.grupo3.repository.administrator;
 
+import java.time.LocalDateTime;
+import java.time.Month;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,7 +16,7 @@ public class UsersRegisteredInTheSystemTest {
 
     private User user1;
     private ListOfPlaces listOfPlaces1;
-    private Place aPlace1;
+    private Place place1;
 
     private User user2;
     private ListOfPlaces listOfPlaces2;
@@ -21,18 +24,20 @@ public class UsersRegisteredInTheSystemTest {
 
     @Before
     public void initialize() {
-        user1 = new User("Elver", "Galarga", null, "2006-04-19");
+        user1 = new User("Elver", "Galarga");
+        user1.setLastAccess(LocalDateTime.of(2006, Month.APRIL, 19, 18, 00, 00));
+        
         listOfPlaces1 = new ListOfPlaces("Lugares Favoritos");
         user1.getListOfPlaces().add(listOfPlaces1);
 
-        aPlace1 = new Place("el MC", "en algun lado");
+        place1 = new Place("el MC", "en algun lado");
 
-        user2 = new User("Jorge", "Vergara", null, "s");
+        user2 = new User("Jorge", "Vergara");
         listOfPlaces2 = new ListOfPlaces("Mi lista");
         user2.getListOfPlaces().add(listOfPlaces1);
 
-        listOfPlaces1.addPlace(aPlace1);
-        listOfPlaces2.addPlace(aPlace1);
+        listOfPlaces1.addPlace(place1);
+        listOfPlaces2.addPlace(place1);
 
         userRepository = new UserRepository();
         userRepository.createUser(user1);
@@ -62,7 +67,7 @@ public class UsersRegisteredInTheSystemTest {
     //    -Último acceso
     @Test
     public void seeTheUserLastAccess() {
-        Assert.assertEquals("2006-04-19", user1.getLastAccess());
+        Assert.assertEquals(LocalDateTime.of(2006, Month.APRIL, 19, 18, 00, 00), user1.getLastAccess());
     }
 
     // 13-Como administrador quiero seleccionar 2 listas de usuarios diferentes y
@@ -76,7 +81,7 @@ public class UsersRegisteredInTheSystemTest {
 //    usuarios que se interesaron en el mismo (lo agregaron a una lista).
     @Test
     public void seeTheAmountOfUsersInterestedInAPlace() {
-        Assert.assertEquals(2, userRepository.amountOfUsersInterestedIn(aPlace1));
+        Assert.assertEquals(2, userRepository.amountOfUsersInterestedIn(place1));
     }
 
 }

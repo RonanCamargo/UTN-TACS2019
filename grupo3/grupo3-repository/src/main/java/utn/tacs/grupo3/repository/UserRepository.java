@@ -16,12 +16,12 @@ public class UserRepository {
 
     public UserRepository() {
         users = new ArrayList<User>();
-        User user1 = new User("Juan", "Perez", null, "s");
+        User user1 = new User("Juan", "Perez");
         ListOfPlaces listOfPlaces1 = new ListOfPlaces("Lugares Favoritos");
         user1.getListOfPlaces().add(listOfPlaces1);
 
         users.add(user1);
-        users.add(new User("Elver", "Galarga", null, "s"));
+        users.add(new User("Elver", "Galarga"));
     }
 
     public List<User> allUsers() {

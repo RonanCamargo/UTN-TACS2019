@@ -1,5 +1,6 @@
 package utn.tacs.grupo3.model;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,12 +12,20 @@ public class User {
     private LocationCoordinates locationCoordinates;
     private List<ListOfPlaces> listOfPlaces;
     private List<Place> placesVisited;
-    private String lastAccess;
+    private LocalDateTime lastAccess;
 
     public User() {
     }
 
-    public User(String firstName, String lastName, LocationCoordinates locationCoordinates, String lastAccess) {
+    public User(String firstName, String lastName) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+        this.listOfPlaces = new ArrayList<>();
+        this.placesVisited = new ArrayList<>();
+
+	}
+
+	public User(String firstName, String lastName, LocationCoordinates locationCoordinates, LocalDateTime lastAccess) {
         listOfPlaces = new ArrayList<>();
         placesVisited = new ArrayList<>();
 
@@ -26,41 +35,28 @@ public class User {
         this.lastAccess = lastAccess;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public List<ListOfPlaces> getListOfPlaces() {
-        return listOfPlaces;
+    public boolean havePlacesInCommonWith(Place aPlace) {
+    	return listOfPlaces.stream().anyMatch(listPlaces -> listPlaces.getFavouritePlaces().contains(aPlace));
     }
 
     public void createListOfPlaces(String name) {
-        listOfPlaces.add(new ListOfPlaces(name));
-
+    	listOfPlaces.add(new ListOfPlaces(name));    	
     }
-
+    
     public void removeFromListsOfPlaces(ListOfPlaces aListOfPlaces) {
-        listOfPlaces.remove(aListOfPlaces);
+    	listOfPlaces.remove(aListOfPlaces);
     }
-
+    
     public void markAsVisited(Place aPlace) {
-        placesVisited.add(aPlace);
+    	placesVisited.add(aPlace);
     }
-
-    public boolean havePlacesInCommonWith(Place aPlace) {
-        return listOfPlaces.stream().anyMatch(listPlaces -> listPlaces.getFavouritePlaces().contains(aPlace));
-    }
-
+    
     public int amountOfPlacesLists() {
-        return listOfPlaces.size();
+    	return listOfPlaces.size();
     }
-
+    
     public int amountOfPlacesVisited() {
-        return placesVisited.size();
-    }
-
-    public String getLastAccess() {
-        return lastAccess;
+    	return placesVisited.size();
     }
 
     public List<ListOfPlaces> listOfPlacesByName(String name) {
@@ -69,39 +65,53 @@ public class User {
                 collect(Collectors.toList());
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+    
+	public String getFirstName() {
+		return firstName;
+	}
 
-    public String getLastName() {
-        return lastName;
-    }
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+	public String getLastName() {
+		return lastName;
+	}
 
-    public LocationCoordinates getLocationCoordinates() {
-        return locationCoordinates;
-    }
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
 
-    public void setLocationCoordinates(LocationCoordinates locationCoordinates) {
-        this.locationCoordinates = locationCoordinates;
-    }
+	public LocationCoordinates getLocationCoordinates() {
+		return locationCoordinates;
+	}
 
-    public void setListOfPlaces(List<ListOfPlaces> listOfPlaces) {
-        this.listOfPlaces = listOfPlaces;
-    }
+	public void setLocationCoordinates(LocationCoordinates locationCoordinates) {
+		this.locationCoordinates = locationCoordinates;
+	}
 
-    public List<Place> getPlacesVisited() {
-        return placesVisited;
-    }
+	public List<ListOfPlaces> getListOfPlaces() {
+		return listOfPlaces;
+	}
 
-    public void setPlacesVisited(List<Place> placesVisited) {
-        this.placesVisited = placesVisited;
-    }
+	public void setListOfPlaces(List<ListOfPlaces> listOfPlaces) {
+		this.listOfPlaces = listOfPlaces;
+	}
 
-    public void setLastAccess(String lastAccess) {
-        this.lastAccess = lastAccess;
-    }
+	public List<Place> getPlacesVisited() {
+		return placesVisited;
+	}
+
+	public void setPlacesVisited(List<Place> placesVisited) {
+		this.placesVisited = placesVisited;
+	}
+
+	public LocalDateTime getLastAccess() {
+		return lastAccess;
+	}
+
+	public void setLastAccess(LocalDateTime lastAccess) {
+		this.lastAccess = lastAccess;
+	}
+
 }

@@ -1,10 +1,19 @@
 package utn.tacs.grupo3.spring.controller.impl;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import utn.tacs.grupo3.model.ListOfPlaces;
 import utn.tacs.grupo3.model.Place;
@@ -16,6 +25,7 @@ import utn.tacs.grupo3.spring.controller.UserController;
 @RestController
 @RequestMapping("/users")
 public class UserControllerImpl implements UserController {
+	
     @Autowired
     private UserRepository userRepository;
     @Autowired
@@ -98,4 +108,5 @@ public class UserControllerImpl implements UserController {
         ListOfPlaces listOfPlaces2 = userRepository.listOfPlacesByName(list2);
         return listOfPlaces1.areTherePlacesInCommonWith(listOfPlaces2);
     }
+
 }
