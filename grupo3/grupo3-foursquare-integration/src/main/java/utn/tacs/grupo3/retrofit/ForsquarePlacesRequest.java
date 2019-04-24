@@ -10,12 +10,6 @@ import java.util.List;
 
 public class ForsquarePlacesRequest {
 
-    public ForsquarePlacesRequest() {
-        this.callback = callback;
-    }
-
-    private ForsquarePlacesCallback callback;
-
     private final String CLIENT_ID = "0CIZ4KNH3ALVF0GUOZ12A143LUYBUFLGDKF1GBNFF0G0JSSR";
     private final String CLIENT_SECRET = "BEK4JRCQKDEIZJB3GUBLE3SUNY33WXNRQ5EWBNJFOTOYSHN5";
     private final String DATE = "20180703";

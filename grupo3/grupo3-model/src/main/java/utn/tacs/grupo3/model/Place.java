@@ -7,7 +7,7 @@ public class Place {
 
     private String name;
     private String location;
-    private Date registrationDate;
+	private Date registrationDate;
 
 
     public Place(String name, String location) {
@@ -27,5 +27,10 @@ public class Place {
     public void setRegistrationDate(Date registrationDate) {
         this.registrationDate = registrationDate;
     }
+    
+    public String getLocation() {
+		return location;
+	}
+
 }
 

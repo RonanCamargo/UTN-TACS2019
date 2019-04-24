@@ -3,7 +3,6 @@ package utn.tacs.grupo3.spring.controller;
 import java.util.List;
 
 import utn.tacs.grupo3.model.ListOfPlaces;
-import utn.tacs.grupo3.model.Place;
 import utn.tacs.grupo3.model.User;
 
 public interface UserController {
