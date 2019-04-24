@@ -1,6 +1,5 @@
 package utn.tacs.grupo3.spring.controller.impl;
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,8 +50,8 @@ public class UserControllerImpl implements UserController {
 
     @Override
     @GetMapping("/{user-id}/favourite-places")
-    public List<String> listsOfFavouritePlaces() {
-        return Arrays.asList("Cine");
+    public List<ListOfPlaces> listsOfFavouritePlaces(@PathVariable("user-id") String userId) {
+        return userRepository.usersByFirstName(userId).get(0).getListOfPlaces();
     }
 
     @Override
@@ -102,7 +101,7 @@ public class UserControllerImpl implements UserController {
 
     @Override
     @GetMapping("/places-in-common")
-    public boolean placesInCommon(@RequestParam("list_1") String list1, @RequestParam("list_2") String list2) {
+    public boolean placesInCommon(@RequestParam("list-1") String list1, @RequestParam("list-2") String list2) {
         ListOfPlaces listOfPlaces1 = userRepository.listOfPlacesByName(list1);
         ListOfPlaces listOfPlaces2 = userRepository.listOfPlacesByName(list2);
         return listOfPlaces1.areTherePlacesInCommonWith(listOfPlaces2);

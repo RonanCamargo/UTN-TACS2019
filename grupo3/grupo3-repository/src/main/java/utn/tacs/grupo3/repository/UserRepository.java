@@ -18,6 +18,7 @@ public class UserRepository {
         users = new ArrayList<User>();
         User user1 = new User("Juan", "Perez");
         ListOfPlaces listOfPlaces1 = new ListOfPlaces("Lugares Favoritos");
+        listOfPlaces1.addPlace(new Place("Casa", "Calle falsa 123"));
         user1.getListOfPlaces().add(listOfPlaces1);
 
         users.add(user1);

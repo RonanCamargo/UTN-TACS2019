@@ -25,9 +25,10 @@ public interface UserController {
     User userById(String userId);
 
     /**
+     * @param userId
      * @return
      */
-    List<String> listsOfFavouritePlaces();
+    List<ListOfPlaces> listsOfFavouritePlaces(String userId);
 
     /**
      * @param userId
