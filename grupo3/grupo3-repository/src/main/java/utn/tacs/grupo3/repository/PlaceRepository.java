@@ -1,21 +1,19 @@
 package utn.tacs.grupo3.repository;
 
-import org.springframework.stereotype.Repository;
-import utn.tacs.grupo3.model.Place;
-
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import org.springframework.stereotype.Repository;
+
+import utn.tacs.grupo3.model.Place;
 
 @Repository
 public class PlaceRepository {
 
     private List<Place> places;
-    private Date currentDate;
-    private Calendar calendar = Calendar.getInstance();
-
+    private LocalDate currentDate;
 
     public PlaceRepository() {
         places = new ArrayList<Place>();
@@ -36,16 +34,20 @@ public class PlaceRepository {
     }
 
     public long amountOfPlacesRegisteredInTheSystemToday() {
-        return places.stream().filter(p -> (p.getRegistrationDate().equals(currentDate))).count();
+        return places.stream()
+        		.filter(p -> p.getRegistrationDate().equals(currentDate))
+        		.count();
     }
 
     public long amountOfPlacesRegisteredInTheSystemInTheLast(int days) {
-        calendar.add(Calendar.DATE, -days);
-        Date daysResults = calendar.getTime();
-        return places.stream().filter(p -> (p.getRegistrationDate().after(daysResults))).count();
-    }
+        LocalDate lastDays = currentDate.minusDays(days);
 
-    public void setCurrentDate(Date currentDate) {
-        this.currentDate = currentDate;
+        return places.stream()
+        		.filter(p -> p.getRegistrationDate().isAfter(lastDays))
+        		.count();
+    }
+    
+    public void setCurrentDate(LocalDate currentDate) {
+    	this.currentDate = currentDate;
     }
 }

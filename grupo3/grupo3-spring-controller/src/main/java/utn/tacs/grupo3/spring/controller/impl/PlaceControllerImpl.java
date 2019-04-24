@@ -1,10 +1,16 @@
 package utn.tacs.grupo3.spring.controller.impl;
 
-import java.util.Calendar;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import utn.tacs.grupo3.model.Place;
 import utn.tacs.grupo3.repository.PlaceRepository;
@@ -43,7 +49,6 @@ public class PlaceControllerImpl implements PlaceController {
 
     @Override
     @GetMapping("/near")
-
     public String near(@RequestParam("coordinates") String coordinates) {
         ForsquarePlacesRequest forsquarePlacesRequest = new ForsquarePlacesRequest();
         return forsquarePlacesRequest.getAllPlaces(coordinates).get(0).getName();
@@ -59,7 +64,7 @@ public class PlaceControllerImpl implements PlaceController {
     @Override
     @GetMapping("/registered-places")
     public long registeredPlaces(@RequestParam("days") int days) {
-        placeRepository.setCurrentDate(Calendar.getInstance().getTime());
+        placeRepository.setCurrentDate(LocalDate.now());
         return placeRepository.amountOfPlacesRegisteredInTheSystemInTheLast(days);
     }
 }
