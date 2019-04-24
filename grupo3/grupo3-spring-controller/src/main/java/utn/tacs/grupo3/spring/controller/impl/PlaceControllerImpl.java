@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import utn.tacs.grupo3.model.Place;
 import utn.tacs.grupo3.repository.PlaceRepository;
 import utn.tacs.grupo3.repository.UserRepository;
-import utn.tacs.grupo3.retrofit.ForsquarePlacesRequest;
+import utn.tacs.grupo3.retrofit.FoursquarePlacesRequest;
 import utn.tacs.grupo3.spring.controller.PlaceController;
 
 @RestController
@@ -26,7 +26,8 @@ public class PlaceControllerImpl implements PlaceController {
     private PlaceRepository placeRepository;
     @Autowired
     private UserRepository userRepository;
-
+    @Autowired
+    private FoursquarePlacesRequest foursquarePlacesRequest;
 
     @Override
     @GetMapping
@@ -50,8 +51,7 @@ public class PlaceControllerImpl implements PlaceController {
     @Override
     @GetMapping("/near")
     public String near(@RequestParam("coordinates") String coordinates) {
-        ForsquarePlacesRequest forsquarePlacesRequest = new ForsquarePlacesRequest();
-        return forsquarePlacesRequest.getAllPlaces(coordinates).get(0).getName();
+        return foursquarePlacesRequest.getAllPlaces(coordinates).get(0).getName();
     }
 
     @Override
