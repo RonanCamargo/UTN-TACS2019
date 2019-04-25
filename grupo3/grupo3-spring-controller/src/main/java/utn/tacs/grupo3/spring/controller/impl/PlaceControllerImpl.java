@@ -54,17 +54,4 @@ public class PlaceControllerImpl implements PlaceController {
         return foursquarePlacesRequest.getAllPlaces(coordinates).get(0).getName();
     }
 
-    @Override
-    @GetMapping("/{place-id}/interested-users")
-    public long numberOfInterestedUsers(@PathVariable("place-id") String placeId) {
-        Place place = placeRepository.placesByName(placeId).get(0);
-        return userRepository.amountOfUsersInterestedIn(place);
-    }
-
-    @Override
-    @GetMapping("/registered-places")
-    public long registeredPlaces(@RequestParam("days") int days) {
-        placeRepository.setCurrentDate(LocalDate.now());
-        return placeRepository.amountOfPlacesRegisteredInTheSystemInTheLast(days);
-    }
 }

@@ -23,7 +23,7 @@ import utn.tacs.grupo3.spring.controller.UserController;
 @RestController
 @RequestMapping("/users")
 public class UserControllerImpl implements UserController {
-	
+
     @Autowired
     private UserRepository userRepository;
     @Autowired
@@ -49,62 +49,21 @@ public class UserControllerImpl implements UserController {
     }
 
     @Override
-    @GetMapping("/{user-id}/favourite-places")
-    public List<ListOfPlaces> listsOfFavouritePlaces(@PathVariable("user-id") String userId) {
-        return userRepository.usersByFirstName(userId).get(0).getListOfPlaces();
-    }
-
-    @Override
-    @PostMapping("/{user-id}/favourite-places/{list-id}")
-    public String createPlacesListById(@PathVariable("user-id") String userId, @PathVariable("list-id") String listId) {
-        userRepository.usersByFirstName(userId).get(0).createListOfPlaces(listId);
-        return "Lista creada correctamente.";
-    }
-
-    @Override
-    @GetMapping("/{user-id}/favourite-places/{list-id}")
-    public List<ListOfPlaces> favouritePlacesListById(@PathVariable("user-id") String userId, @PathVariable("list-id") String listId) {
-        return userRepository.usersByFirstName(userId).get(0).listOfPlacesByName(listId);
-    }
-
-    @Override
-    @DeleteMapping("/{user-id}/favourite-places/{list-id}")
-    public String deleteFavouritePlacesList(@PathVariable("user-id") String userId, @PathVariable("list-id") String listId) {
-        userRepository.usersByFirstName(userId).get(0).removeFromListsOfPlaces(userRepository.usersByFirstName(userId).get(0).listOfPlacesByName(listId).get(0));
-        return "Lista eliminada correctamente.";
-    }
-
-    @Override
-    @PutMapping("/{user-id}/favourite-places/{list-id}")
-    public String editFavouritePlacesList(@PathVariable("user-id") String userId, @PathVariable("list-id") String listId, @RequestParam("new-name") String newName) {
-        userRepository.usersByFirstName(userId).get(0).listOfPlacesByName(listId).get(0).setListName(newName);
-        return "Lista modificada correctamente.";
-    }
-
-    @Override
     @PutMapping("/{user-id}/places-visited/{place-id}")
     public String markAsVisitedAPlace(@PathVariable("user-id") String userId, @PathVariable("place-id") String placeId) {
         Place place = new Place(placeId, "");
         userRepository.usersByFirstName(userId).get(0).markAsVisited(place);
         return "lugar marcado como visitado.";
-
     }
 
     @Override
-    @PostMapping("/{user-id}/favourite-places/{list-id}/{place-id}")
-    public String registerFavouritePlaceInList(@PathVariable("user-id") String userId, @PathVariable("list-id") String listId, @PathVariable("place-id") String placeId) {
+    @PostMapping("/{user-id}/list-of-places/{list-id}/{place-id}")
+    public String registerPlaceInListOfPlaces(@PathVariable("user-id") String userId, @PathVariable("list-id") String listId, @PathVariable("place-id") String placeId) {
         Place place = new Place(placeId, "");
         placeRepository.createPlace(place);
         userRepository.usersByFirstName(userId).get(0).listOfPlacesByName(listId).get(0).addPlace(place);
         return "Lugar registrado correctamente.";
     }
 
-    @Override
-    @GetMapping("/places-in-common")
-    public boolean placesInCommon(@RequestParam("list-1") String list1, @RequestParam("list-2") String list2) {
-        ListOfPlaces listOfPlaces1 = userRepository.listOfPlacesByName(list1);
-        ListOfPlaces listOfPlaces2 = userRepository.listOfPlacesByName(list2);
-        return listOfPlaces1.areTherePlacesInCommonWith(listOfPlaces2);
-    }
 
 }
