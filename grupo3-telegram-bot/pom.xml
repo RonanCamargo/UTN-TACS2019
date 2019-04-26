@@ -27,7 +27,13 @@
 			<artifactId>telegrambots</artifactId>
 			<version>${telegrambots.version}</version>
 		</dependency>
-
+		
+		<dependency>
+			<groupId>org.telegram</groupId>
+			<artifactId>telegrambotsextensions</artifactId>
+			<version>${telegrambots.version}</version>
+		</dependency>
+		
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -43,7 +49,7 @@
 				<artifactId>exec-maven-plugin</artifactId>
 				<version>${exec.maven.version}</version>
 				<executions>
-					<execution>						
+					<execution>
 						<goals>
 							<goal>java</goal>
 						</goals>
