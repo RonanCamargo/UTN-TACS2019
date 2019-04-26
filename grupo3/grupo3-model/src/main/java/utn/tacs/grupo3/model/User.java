@@ -9,7 +9,6 @@ public class User {
 
     private String firstName;
     private String lastName;
-    private LocationCoordinates locationCoordinates;
     private List<ListOfPlaces> listOfPlaces;
     private List<Place> placesVisited;
     private LocalDateTime lastAccess;
@@ -25,18 +24,17 @@ public class User {
 
 	}
 
-	public User(String firstName, String lastName, LocationCoordinates locationCoordinates, LocalDateTime lastAccess) {
+	public User(String firstName, String lastName, LocalDateTime lastAccess) {
         listOfPlaces = new ArrayList<>();
         placesVisited = new ArrayList<>();
 
         this.firstName = firstName;
         this.lastName = lastName;
-        this.locationCoordinates = locationCoordinates;
         this.lastAccess = lastAccess;
     }
 
     public boolean havePlacesInCommonWith(Place aPlace) {
-    	return listOfPlaces.stream().anyMatch(listPlaces -> listPlaces.getFavouritePlaces().contains(aPlace));
+    	return listOfPlaces.stream().anyMatch(listPlaces -> listPlaces.getPlaces().contains(aPlace));
     }
 
     public void createListOfPlaces(String name) {
@@ -80,14 +78,6 @@ public class User {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
-	}
-
-	public LocationCoordinates getLocationCoordinates() {
-		return locationCoordinates;
-	}
-
-	public void setLocationCoordinates(LocationCoordinates locationCoordinates) {
-		this.locationCoordinates = locationCoordinates;
 	}
 
 	public List<ListOfPlaces> getListOfPlaces() {

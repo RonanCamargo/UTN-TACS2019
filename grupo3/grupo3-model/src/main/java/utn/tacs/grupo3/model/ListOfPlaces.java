@@ -6,13 +6,13 @@ import java.util.List;
 public class ListOfPlaces {
 
     private String listName;
-    private List<Place> favouritePlaces;
+    private List<Place> places;
 
     public ListOfPlaces() {
     }
 
     public ListOfPlaces(String listName) {
-        favouritePlaces = new ArrayList<>();
+        places = new ArrayList<>();
         this.listName = listName;
     }
 
@@ -24,17 +24,17 @@ public class ListOfPlaces {
         this.listName = listName;
     }
 
-    public List<Place> getFavouritePlaces() {
-        return favouritePlaces;
+    public List<Place> getPlaces() {
+        return places;
     }
 
     public void addPlace(Place place) {
-        favouritePlaces.add(place);
+        places.add(place);
     }
 
     public boolean areTherePlacesInCommonWith(ListOfPlaces aListOfPlaces) {
-        return favouritePlaces
+        return places
                 .stream()
-                .anyMatch(place -> aListOfPlaces.getFavouritePlaces().contains(place));
+                .anyMatch(place -> aListOfPlaces.getPlaces().contains(place));
     }
 }

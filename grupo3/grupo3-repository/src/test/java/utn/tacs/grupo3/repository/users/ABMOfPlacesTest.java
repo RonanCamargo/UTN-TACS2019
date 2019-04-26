@@ -23,10 +23,10 @@ public class ABMOfPlacesTest {
 
     //6-Como usuario quiero poder registrar un lugar que me interesa en una de mis listas de lugares.
     @Test
-    public void registerAPlaceinAListOfFavouritePlaces() {
+    public void registerAPlaceinAListOfPlaces() {
         Place place1 = new Place("mundo fantastico", "calle falsa 123");
         listOfPlaces1.addPlace(place1);
-        Assert.assertEquals(1, listOfPlaces1.getFavouritePlaces().size());
+        Assert.assertEquals(1, listOfPlaces1.getPlaces().size());
     }
 
     //7-Como usuario quiero crear, eliminar o cambiar el nombre a las diferentes listas de lugares que poseo.
