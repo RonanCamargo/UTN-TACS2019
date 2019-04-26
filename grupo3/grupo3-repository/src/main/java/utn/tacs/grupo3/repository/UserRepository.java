@@ -35,6 +35,10 @@ public class UserRepository {
                 collect(Collectors.toList());
     }
 
+    public User userByFirstName(String name) {
+        return usersByFirstName(name).get(0);
+    }
+
     public void createUser(User user) {
         users.add(user);
     }
@@ -43,10 +47,10 @@ public class UserRepository {
         return users.stream().filter(u -> u.havePlacesInCommonWith(aPlace)).count();
     }
 
-    public ListOfPlaces listOfPlacesByName(String nombre) {
+    public ListOfPlaces listOfPlacesById(int id) {
         return users.stream().
                 filter(user -> user.getListOfPlaces().
-                        stream().anyMatch(s->s.getListName().equalsIgnoreCase(nombre))).
+                        stream().anyMatch(lp->lp.getId()==id)).
                 collect(Collectors.toList()).get(0).getListOfPlaces().get(0);
     }
 }

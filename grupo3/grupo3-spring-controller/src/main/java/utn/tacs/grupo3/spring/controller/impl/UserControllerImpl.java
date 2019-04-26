@@ -42,21 +42,21 @@ public class UserControllerImpl implements UserController {
     @Override
     @GetMapping("/{user-id}")
     public User userById(@PathVariable("user-id") String userId) {
-        return userRepository.usersByFirstName(userId).get(0);
+        return userRepository.userByFirstName(userId);
     }
 
     @Override
     @PutMapping("/{user-id}/places-visited/{place-id}")
     public String markAsVisitedAPlace(@PathVariable("user-id") String userId, @PathVariable("place-id") String placeId) {
         Place place = new Place(placeId, "");
-        userRepository.usersByFirstName(userId).get(0).markAsVisited(place);
+        userRepository.userByFirstName(userId).markAsVisited(place);
         return "lugar marcado como visitado.";
     }
 
     @Override
     @PostMapping("/{user-id}/list-of-places/{list-id}/{place-id}")
     public String registerPlaceInListOfPlaces(@PathVariable("user-id") String userId, @PathVariable("list-id") String listId, @PathVariable("place-id") String placeId) {
-        userRepository.usersByFirstName(userId).get(0).listOfPlacesByName(listId).get(0).addPlace(placeRepository.findPlaceOrCreateIt(placeId));
+        userRepository.userByFirstName(userId).registerAPlaceinAListOfPlaces(listId,placeRepository.createPlace(placeId));
         return "Lugar registrado correctamente.";
     }
 }

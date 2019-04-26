@@ -21,16 +21,16 @@ public class AdministratorControllerImpl implements AdministratorController {
 
     @Override
     @GetMapping("/places-in-common")
-    public boolean placesInCommon(@RequestParam("list-1") String list1, @RequestParam("list-2") String list2) {
-        ListOfPlaces listOfPlaces1 = userRepository.listOfPlacesByName(list1);
-        ListOfPlaces listOfPlaces2 = userRepository.listOfPlacesByName(list2);
+    public boolean placesInCommon(@RequestParam("list-id-1") int listId1, @RequestParam("list-id-2") int listId2) {
+        ListOfPlaces listOfPlaces1 = userRepository.listOfPlacesById(listId1);
+        ListOfPlaces listOfPlaces2 = userRepository.listOfPlacesById(listId2);
         return listOfPlaces1.areTherePlacesInCommonWith(listOfPlaces2);
     }
 
     @Override
     @GetMapping("/{place-id}/interested-users")
     public long numberOfInterestedUsers(@PathVariable("place-id") String placeId) {
-        Place place = placeRepository.placesByName(placeId).get(0);
+        Place place = placeRepository.placeByName(placeId);
         return userRepository.amountOfUsersInterestedIn(place);
     }
 

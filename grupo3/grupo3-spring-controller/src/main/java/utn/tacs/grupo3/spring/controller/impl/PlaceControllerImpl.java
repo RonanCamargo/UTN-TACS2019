@@ -34,14 +34,14 @@ public class PlaceControllerImpl implements PlaceController {
     @Override
     @PostMapping
     public String createPlace(@RequestBody Place place) {
-        placeRepository.createPlace(place);
+        placeRepository.createPlace(place.getName());
         return "Lugar creado correctamente";
     }
 
     @Override
     @GetMapping("/{place-id}")
     public Place placeById(@PathVariable("place-id") String placeId) {
-        return placeRepository.placesByName(placeId).get(0);
+        return placeRepository.placeByName(placeId);
     }
 
     @Override

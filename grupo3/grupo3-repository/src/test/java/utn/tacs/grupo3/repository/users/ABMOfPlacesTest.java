@@ -24,8 +24,7 @@ public class ABMOfPlacesTest {
     //6-Como usuario quiero poder registrar un lugar que me interesa en una de mis listas de lugares.
     @Test
     public void registerAPlaceinAListOfPlaces() {
-        Place place1 = new Place("mundo fantastico", "calle falsa 123");
-        listOfPlaces1.addPlace(place1);
+        user1.registerAPlaceinAListOfPlaces("Lugares Favoritos",place1);
         Assert.assertEquals(1, listOfPlaces1.getPlaces().size());
     }
 
@@ -54,6 +53,4 @@ public class ABMOfPlacesTest {
         user1.markAsVisited(place1);
         Assert.assertEquals("el MC", place1.getName());
     }
-
-
 }

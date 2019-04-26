@@ -16,10 +16,11 @@ public class PlacesRegisteredInTheSystemTest {
 
     @Before
     public void initialize() {
-        Place place1 = new Place("", "");
-        Place place2 = new Place("", "");
-        Place place3 = new Place("", "");
-        Place place4 = new Place("", "");
+        placeRepository = new PlaceRepository();
+        Place place1 = placeRepository.createPlace("place1");
+        Place place2 = placeRepository.createPlace("place2");
+        Place place3 = placeRepository.createPlace("place3");
+        Place place4 = placeRepository.createPlace("place4");
 
         LocalDate today = LocalDate.of(2019, Month.APRIL, 19);
 
@@ -28,13 +29,8 @@ public class PlacesRegisteredInTheSystemTest {
         place3.setRegistrationDate(LocalDate.of(2019, Month.MARCH, 30));
         place4.setRegistrationDate(LocalDate.of(2006, Month.APRIL, 19));
 
-        placeRepository = new PlaceRepository();
         placeRepository.setCurrentDate(today);
-        
-        placeRepository.createPlace(place1);
-        placeRepository.createPlace(place2);
-        placeRepository.createPlace(place3);
-        placeRepository.createPlace(place4);
+
     }
 
     //15-Como administrador quiero conocer la cantidad total de lugares

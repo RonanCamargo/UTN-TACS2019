@@ -5,11 +5,11 @@ public interface AdministratorController {
     /**
      * Searches places in common among two lists of places
      *
-     * @param list1
-     * @param list2
+     * @param listId1
+     * @param listId2
      * @return
      */
-    boolean placesInCommon(String list1, String list2);
+    boolean placesInCommon(int listId1, int listId2);
 
     /**
      * Returns the number of interested users in a place

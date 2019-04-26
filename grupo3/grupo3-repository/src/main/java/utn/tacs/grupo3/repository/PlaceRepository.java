@@ -29,14 +29,14 @@ public class PlaceRepository {
                 collect(Collectors.toList());
     }
 
-    public void createPlace(Place place) {
-        places.add(place);
+    public Place placeByName(String placeId) {
+        return placesByName(placeId).get(0);
     }
 
-    public Place findPlaceOrCreateIt(String placeId) {
+    public Place createPlace(String placeId) {
         if (placesByName(placeId).isEmpty()) {
             Place place = new Place(placeId, "");
-            createPlace(place);
+            places.add(place);
         }
         return placesByName(placeId).get(0);
     }
@@ -58,4 +58,6 @@ public class PlaceRepository {
     public void setCurrentDate(LocalDate currentDate) {
         this.currentDate = currentDate;
     }
+
+
 }

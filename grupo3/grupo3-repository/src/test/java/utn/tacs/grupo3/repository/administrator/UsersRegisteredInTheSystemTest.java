@@ -83,5 +83,4 @@ public class UsersRegisteredInTheSystemTest {
     public void seeTheAmountOfUsersInterestedInAPlace() {
         Assert.assertEquals(2, userRepository.amountOfUsersInterestedIn(place1));
     }
-
 }

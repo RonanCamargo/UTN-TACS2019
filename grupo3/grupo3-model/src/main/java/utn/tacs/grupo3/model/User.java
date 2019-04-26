@@ -57,12 +57,19 @@ public class User {
     	return placesVisited.size();
     }
 
-    public List<ListOfPlaces> listOfPlacesByName(String name) {
+    public List<ListOfPlaces> listsOfPlacesByName(String name) {
         return listOfPlaces.stream().
                 filter(listOfPlaces -> listOfPlaces.getListName().equalsIgnoreCase(name)).
                 collect(Collectors.toList());
     }
 
+	public ListOfPlaces listOfPlacesByName(String listId) {
+		return listsOfPlacesByName(listId).get(0);
+	}
+
+	public void registerAPlaceinAListOfPlaces(String listId, Place place) {
+		listsOfPlacesByName(listId).get(0).addPlace(place);
+	}
     
 	public String getFirstName() {
 		return firstName;

@@ -17,33 +17,33 @@ public class ListOfPlacesControllerImpl implements ListOfPlacesController {
     @Override
     @GetMapping("/{user-id}/list-of-places")
     public List<ListOfPlaces> listsOfListOfPlaces(@PathVariable("user-id") String userId) {
-        return userRepository.usersByFirstName(userId).get(0).getListOfPlaces();
+        return userRepository.userByFirstName(userId).getListOfPlaces();
     }
 
     @Override
     @PostMapping("/{user-id}/list-of-places/{list-id}")
-    public String createListOfPlaces(@PathVariable("user-id") String userId, @PathVariable("list-id") String listId) {
-        userRepository.usersByFirstName(userId).get(0).createListOfPlaces(listId);
+        public String createListOfPlaces(@PathVariable("user-id") String userId, @PathVariable("list-id") String listId) {
+        userRepository.userByFirstName(userId).createListOfPlaces(listId);
         return "Lista creada correctamente.";
     }
 
     @Override
     @GetMapping("/{user-id}/list-of-places/{list-id}")
     public List<ListOfPlaces> listOfPlacesListById(@PathVariable("user-id") String userId, @PathVariable("list-id") String listId) {
-        return userRepository.usersByFirstName(userId).get(0).listOfPlacesByName(listId);
+        return userRepository.userByFirstName(userId).listsOfPlacesByName(listId);
     }
 
     @Override
     @DeleteMapping("/{user-id}/list-of-places/{list-id}")
     public String deleteListOfPlacesList(@PathVariable("user-id") String userId, @PathVariable("list-id") String listId) {
-        userRepository.usersByFirstName(userId).get(0).removeFromListsOfPlaces(userRepository.usersByFirstName(userId).get(0).listOfPlacesByName(listId).get(0));
+        userRepository.userByFirstName(userId).removeFromListsOfPlaces(userRepository.userByFirstName(userId).listOfPlacesByName(listId));
         return "Lista eliminada correctamente.";
     }
 
     @Override
     @PutMapping("/{user-id}/list-of-places/{list-id}")
     public String editListOfPlacesList(@PathVariable("user-id") String userId, @PathVariable("list-id") String listId, @RequestParam("new-name") String newName) {
-        userRepository.usersByFirstName(userId).get(0).listOfPlacesByName(listId).get(0).setListName(newName);
+        userRepository.userByFirstName(userId).listOfPlacesByName(listId).setListName(newName);
         return "Lista modificada correctamente.";
     }
 
