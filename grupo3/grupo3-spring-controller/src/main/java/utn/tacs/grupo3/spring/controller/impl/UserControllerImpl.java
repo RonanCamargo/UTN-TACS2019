@@ -56,11 +56,7 @@ public class UserControllerImpl implements UserController {
     @Override
     @PostMapping("/{user-id}/list-of-places/{list-id}/{place-id}")
     public String registerPlaceInListOfPlaces(@PathVariable("user-id") String userId, @PathVariable("list-id") String listId, @PathVariable("place-id") String placeId) {
-        Place place = new Place(placeId, "");
-        placeRepository.createPlace(place);
-        userRepository.usersByFirstName(userId).get(0).listOfPlacesByName(listId).get(0).addPlace(place);
+        userRepository.usersByFirstName(userId).get(0).listOfPlacesByName(listId).get(0).addPlace(placeRepository.findPlaceOrCreateIt(placeId));
         return "Lugar registrado correctamente.";
     }
-
-
 }
