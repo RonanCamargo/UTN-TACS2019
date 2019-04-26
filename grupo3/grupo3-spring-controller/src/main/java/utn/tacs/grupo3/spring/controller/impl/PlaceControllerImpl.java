@@ -1,6 +1,5 @@
 package utn.tacs.grupo3.spring.controller.impl;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import utn.tacs.grupo3.model.Place;
 import utn.tacs.grupo3.repository.PlaceRepository;
-import utn.tacs.grupo3.repository.UserRepository;
 import utn.tacs.grupo3.retrofit.FoursquarePlacesRequest;
 import utn.tacs.grupo3.spring.controller.PlaceController;
 
@@ -24,8 +22,6 @@ public class PlaceControllerImpl implements PlaceController {
 
     @Autowired
     private PlaceRepository placeRepository;
-    @Autowired
-    private UserRepository userRepository;
     @Autowired
     private FoursquarePlacesRequest foursquarePlacesRequest;
 
