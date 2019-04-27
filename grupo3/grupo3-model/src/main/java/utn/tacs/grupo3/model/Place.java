@@ -1,31 +1,44 @@
 package utn.tacs.grupo3.model;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Place {
 
     private String name;
     private String location;
-    private Date registrationDate;
+	private LocalDate registrationDate;
 
-
+	public Place() {}
+	
     public Place(String name, String location) {
         this.name = name;
         this.location = location;
-        setRegistrationDate(Calendar.getInstance().getTime());
+        this.registrationDate = LocalDate.now();
     }
 
-    public String getName() {
-        return name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public Date getRegistrationDate() {
-        return registrationDate;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void setRegistrationDate(Date registrationDate) {
-        this.registrationDate = registrationDate;
-    }
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+	public LocalDate getRegistrationDate() {
+		return registrationDate;
+	}
+
+	public void setRegistrationDate(LocalDate registrationDate) {
+		this.registrationDate = registrationDate;
+	}
+    
 }
 
