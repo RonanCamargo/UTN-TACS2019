@@ -5,14 +5,18 @@ import java.util.List;
 
 public class ListOfPlaces {
 
+    private static int autoIncrement = 0;
+    private int id = 0;
     private String listName;
-    private List<Place> favouritePlaces;
+    private List<Place> places;
 
     public ListOfPlaces() {
     }
 
     public ListOfPlaces(String listName) {
-        favouritePlaces = new ArrayList<>();
+        autoIncrement = autoIncrement + 1;
+        id = autoIncrement;
+        places = new ArrayList<>();
         this.listName = listName;
     }
 
@@ -20,21 +24,25 @@ public class ListOfPlaces {
         return listName;
     }
 
+    public int getId() {
+        return id;
+    }
+
     public void setListName(String listName) {
         this.listName = listName;
     }
 
-    public List<Place> getFavouritePlaces() {
-        return favouritePlaces;
+    public List<Place> getPlaces() {
+        return places;
     }
 
     public void addPlace(Place place) {
-        favouritePlaces.add(place);
+        places.add(place);
     }
 
     public boolean areTherePlacesInCommonWith(ListOfPlaces aListOfPlaces) {
-        return favouritePlaces
+        return places
                 .stream()
-                .anyMatch(place -> aListOfPlaces.getFavouritePlaces().contains(place));
+                .anyMatch(place -> aListOfPlaces.getPlaces().contains(place));
     }
 }

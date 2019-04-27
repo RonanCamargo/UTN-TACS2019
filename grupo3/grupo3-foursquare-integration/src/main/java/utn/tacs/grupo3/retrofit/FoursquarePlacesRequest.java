@@ -8,13 +8,10 @@ import utn.tacs.grupo3.retrofit.pojo.Venue;
 import java.io.IOException;
 import java.util.List;
 
-public class ForsquarePlacesRequest {
+import org.springframework.stereotype.Component;
 
-    public ForsquarePlacesRequest() {
-        this.callback = callback;
-    }
-
-    private ForsquarePlacesCallback callback;
+@Component
+public class FoursquarePlacesRequest {
 
     private final String CLIENT_ID = "0CIZ4KNH3ALVF0GUOZ12A143LUYBUFLGDKF1GBNFF0G0JSSR";
     private final String CLIENT_SECRET = "BEK4JRCQKDEIZJB3GUBLE3SUNY33WXNRQ5EWBNJFOTOYSHN5";
@@ -22,7 +19,7 @@ public class ForsquarePlacesRequest {
 
     public List<Venue> getAllPlaces(String latitudeAndLongitude) {
 
-        ForsquareService service = RetrofitClientInstance.getRetrofitInstance().create(ForsquareService.class);
+        FoursquareService service = RetrofitClientInstance.getRetrofitInstance().create(FoursquareService.class);
         Call<Pojo> call = service.getAllPlaces(CLIENT_ID, CLIENT_SECRET, DATE, latitudeAndLongitude, 5);
         try {
             Response<Pojo> response = call.execute();

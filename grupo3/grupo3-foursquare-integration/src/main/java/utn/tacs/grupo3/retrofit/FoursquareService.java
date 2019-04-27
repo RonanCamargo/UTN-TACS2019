@@ -6,7 +6,7 @@ import retrofit2.http.Query;
 import utn.tacs.grupo3.retrofit.pojo.Pojo;
 
 
-public interface ForsquareService {
+public interface FoursquareService {
 
     @GET("v2/venues/search")
     Call<Pojo> getAllPlaces(

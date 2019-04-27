@@ -2,79 +2,51 @@ package utn.tacs.grupo3.spring.controller;
 
 import java.util.List;
 
-import utn.tacs.grupo3.model.ListOfPlaces;
-import utn.tacs.grupo3.model.Place;
 import utn.tacs.grupo3.model.User;
 
+/**
+ * Interface for user-related controller methods
+ */
 public interface UserController {
 
     /**
-     * @return
+     * Returns all registered users
+     *
+     * @return a list of users
      */
     List<User> users();
 
     /**
+     * Registers a new user
+     *
      * @param user
      * @return
      */
     String createUser(User user);
 
     /**
+     * Searches a user by its id
+     *
      * @param userId
      * @return
      */
     User userById(String userId);
 
-    /**
-     * @return
-     */
-    List<String> listsOfFavouritePlaces();
 
     /**
-     * @param userId
-     * @param listId
-     * @return
-     */
-    String createPlacesListById(String userId, String listId);
-
-    /**
-     * @param userId
-     * @param listId
-     * @return
-     */
-    List<ListOfPlaces> favouritePlacesListById(String userId, String listId);
-
-    /**
-     * @param userId
-     * @param listId
-     * @return
-     */
-    String deleteFavouritePlacesList(String userId, String listId);
-
-    /**
-     * @param userId
-     * @param listId
-     * @param newName
-     * @return
-     */
-    String editFavouritePlacesList(String userId, String listId, String newName);
-
-    /**
+     * Register a new place in an user's list of places
+     *
      * @param userId
      * @param listId
      * @param placeId
      * @return
      */
-    String registerFavouritePlaceInList(String userId, String listId, String placeId);
+    String registerPlaceInListOfPlaces(String userId, String listId, String placeId);
+
 
     /**
-     * @param list1
-     * @param list2
-     * @return
-     */
-    boolean placesInCommon(String list1, String list2);
-
-    /**
+     * Marks a place as visited
+     *
      * @param userId
      * @param placeId
      * @return
