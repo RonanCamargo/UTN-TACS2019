@@ -1,5 +1,7 @@
 package utn.tacs.grupo3.spring.controller;
 
+import java.util.Map;
+
 public interface AdministratorController {
 
     /**
@@ -9,7 +11,7 @@ public interface AdministratorController {
      * @param listId2
      * @return
      */
-    boolean placesInCommon(int listId1, int listId2);
+    Map<String, Boolean> placesInCommon(int listId1, int listId2);
 
     /**
      * Returns the number of interested users in a place
@@ -17,7 +19,7 @@ public interface AdministratorController {
      * @param placeId
      * @return
      */
-    long numberOfInterestedUsers(String placeId);
+    Map<String, Long> numberOfInterestedUsers(String placeId);
 
     /**
      * Returns the number of registered places in the last days
@@ -25,5 +27,5 @@ public interface AdministratorController {
      * @param days
      * @return
      */
-    long registeredPlaces(int days);
+    Map<String, Long> registeredPlaces(int days);
 }

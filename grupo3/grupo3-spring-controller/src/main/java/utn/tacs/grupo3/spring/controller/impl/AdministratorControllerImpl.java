@@ -9,6 +9,8 @@ import utn.tacs.grupo3.repository.UserRepository;
 import utn.tacs.grupo3.spring.controller.AdministratorController;
 
 import java.time.LocalDate;
+import java.util.Collections;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/places")
@@ -21,23 +23,23 @@ public class AdministratorControllerImpl implements AdministratorController {
 
     @Override
     @GetMapping("/places-in-common")
-    public boolean placesInCommon(@RequestParam("list-id-1") int listId1, @RequestParam("list-id-2") int listId2) {
+    public Map<String, Boolean> placesInCommon(@RequestParam("list-id-1") int listId1, @RequestParam("list-id-2") int listId2) {
         ListOfPlaces listOfPlaces1 = userRepository.listOfPlacesById(listId1);
         ListOfPlaces listOfPlaces2 = userRepository.listOfPlacesById(listId2);
-        return listOfPlaces1.areTherePlacesInCommonWith(listOfPlaces2);
+        return Collections.singletonMap("placesInCommon",listOfPlaces1.areTherePlacesInCommonWith(listOfPlaces2));
     }
 
     @Override
     @GetMapping("/{place-id}/interested-users")
-    public long numberOfInterestedUsers(@PathVariable("place-id") String placeId) {
+    public Map<String, Long> numberOfInterestedUsers(@PathVariable("place-id") String placeId) {
         Place place = placeRepository.placeByName(placeId);
-        return userRepository.amountOfUsersInterestedIn(place);
+        return Collections.singletonMap("totalOfUsersInterested",userRepository.amountOfUsersInterestedIn(place));
     }
 
     @Override
     @GetMapping("/registered-places")
-    public long registeredPlaces(@RequestParam("days") int days) {
+    public Map<String, Long> registeredPlaces(@RequestParam("days") int days) {
         placeRepository.setCurrentDate(LocalDate.now());
-        return placeRepository.amountOfPlacesRegisteredInTheSystemInTheLast(days);
+        return Collections.singletonMap("totalRegisteredPlaces",  placeRepository.amountOfPlacesRegisteredInTheSystemInTheLast(days));
     }
 }
