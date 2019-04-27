@@ -7,26 +7,25 @@ import utn.tacs.grupo3.model.ListOfPlaces;
 import utn.tacs.grupo3.model.Place;
 import utn.tacs.grupo3.model.User;
 
-public class ABMofPlacesTest {
+public class ABMOfPlacesTest {
     private User user1;
     private ListOfPlaces listOfPlaces1;
-    private Place aPlace1;
+    private Place place1;
 
     @Before
     public void initialize() {
-        user1 = new User("Elver", "Galarga", null, "s");
+        user1 = new User("Elver", "Galarga");
         listOfPlaces1 = new ListOfPlaces("Lugares Favoritos");
         user1.getListOfPlaces().add(listOfPlaces1);
-        aPlace1 = new Place("el MC", "en algun lado");
+        place1 = new Place("el MC", "en algun lado");
     }
 
 
     //6-Como usuario quiero poder registrar un lugar que me interesa en una de mis listas de lugares.
     @Test
-    public void registerAPlaceinAListOfFavouritePlaces() {
-        Place place1 = new Place("mundo fantastico", "calle falsa 123");
-        listOfPlaces1.addPlace(place1);
-        Assert.assertEquals(1, listOfPlaces1.getFavouritePlaces().size());
+    public void registerAPlaceinAListOfPlaces() {
+        user1.registerAPlaceinAListOfPlaces("Lugares Favoritos",place1);
+        Assert.assertEquals(1, listOfPlaces1.getPlaces().size());
     }
 
     //7-Como usuario quiero crear, eliminar o cambiar el nombre a las diferentes listas de lugares que poseo.
@@ -51,9 +50,7 @@ public class ABMofPlacesTest {
     //8-Como usuario quiero marcar en una lista los lugares a los que ya fui (sin eliminarlos de la lista)
     @Test
     public void markAsVisitedAPlace() {
-        user1.markAsVisited(aPlace1);
-        Assert.assertEquals("el MC", aPlace1.getName());
+        user1.markAsVisited(place1);
+        Assert.assertEquals("el MC", place1.getName());
     }
-
-
 }
