@@ -5,26 +5,39 @@ import utn.tacs.grupo3.model.exception.ExceptionbyResourceNotFound;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class User {
 
+	private Long id;
     private String firstName;
     private String lastName;
     private List<ListOfPlaces> listsOfPlaces;
     private List<Place> placesVisited;
     private LocalDateTime lastAccess;
 
+    private String username;
+    private String password;
+	private Set<Role> roles = new HashSet<Role>();
+
     public User() {
     }
 
-    public User(String firstName, String lastName) {
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
+    public User(String username, String password, String firstName, String lastName) {
+        this.username = username;
+        this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.listsOfPlaces = new ArrayList<>();
         this.placesVisited = new ArrayList<>();
-
     }
 
     public User(String firstName, String lastName, LocalDateTime lastAccess) {
@@ -72,7 +85,6 @@ public class User {
                 .orElseThrow(() -> new ExceptionbyListOfPlaceNotFound(name));
     }
 
-
     public void registerAPlaceinAListOfPlaces(String listId, Place place) throws ExceptionbyResourceNotFound {
         listOfPlacesByName(listId).addPlace(place);
     }
@@ -117,4 +129,39 @@ public class User {
         this.lastAccess = lastAccess;
     }
 
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Set<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
+
+    public void addRole(Role role) {
+        this.roles.add(role);
+    }
 }

@@ -20,14 +20,6 @@ public interface UserController {
     List<User> users();
 
     /**
-     * Registers a new user
-     *
-     * @param user
-     * @return
-     */
-    String createUser(User user);
-
-    /**
      * Searches a user by its id
      *
      * @param userId

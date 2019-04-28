@@ -37,8 +37,8 @@ public class UserControllerImpl implements UserController {
     @Autowired
     private FoursquarePlacesRequest foursquarePlacesRequest;
     @Autowired
-    private FullVenueToPlaceConverter fullVenueToPlaceConverter; 
-    
+    private FullVenueToPlaceConverter fullVenueToPlaceConverter;
+
     @Override
     @RequestMapping(value= "/users/*", method={RequestMethod.OPTIONS, RequestMethod.GET})
     public void corsHeaders(HttpServletResponse response) {
@@ -52,13 +52,6 @@ public class UserControllerImpl implements UserController {
     @GetMapping
     public List<User> users() {
         return userRepository.allUsers();
-    }
-
-    @Override
-    @PostMapping
-    public String createUser(@RequestBody User user) {
-        userRepository.createUser(user);
-        return "Usuario creado correctamente.";
     }
 
     @Override
@@ -80,7 +73,7 @@ public class UserControllerImpl implements UserController {
     public String registerPlaceInListOfPlaces(@PathVariable("user-id") String userId, @PathVariable("list-id") String listId, @PathVariable("place-id") String placeId) throws ExceptionbyResourceNotFound {
     	FullVenue venue = foursquarePlacesRequest.getVenueById(placeId);
     	Place place = fullVenueToPlaceConverter.convert(venue);
-    	
+
         userRepository.userByFirstName(userId).registerAPlaceinAListOfPlaces(listId, placeRepository.createPlace(place));
         return "Lugar registrado correctamente.";
     }
