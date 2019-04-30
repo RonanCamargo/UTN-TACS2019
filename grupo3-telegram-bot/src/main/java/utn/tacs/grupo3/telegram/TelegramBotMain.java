@@ -21,6 +21,7 @@ public class TelegramBotMain
     	ApiContextInitializer.init();
         TelegramBotsApi api = new TelegramBotsApi();
         
+        
         PlacesBot placesBot = new PlacesBot();
         
         List<IBotCommand> commands = Arrays.asList(

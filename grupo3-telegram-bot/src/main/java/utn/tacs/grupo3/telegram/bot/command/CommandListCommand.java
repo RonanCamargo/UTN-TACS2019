@@ -1,19 +1,15 @@
 package utn.tacs.grupo3.telegram.bot.command;
 
 import org.telegram.telegrambots.extensions.bots.commandbot.TelegramLongPollingCommandBot;
-import org.telegram.telegrambots.extensions.bots.commandbot.commands.IBotCommand;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import org.telegram.telegrambots.meta.api.objects.Message;
-import org.telegram.telegrambots.meta.bots.AbsSender;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import utn.tacs.grupo3.telegram.bot.util.TelegramCommandUtil;
 
-public class CommandListCommand implements IBotCommand{
+public class CommandListCommand extends TelegramCommand{
 
 	private TelegramLongPollingCommandBot bot;
 	
 	public CommandListCommand(TelegramLongPollingCommandBot bot) {
+		super();
 		this.bot = bot; 
 	}
 	
@@ -28,16 +24,8 @@ public class CommandListCommand implements IBotCommand{
 	}
 
 	@Override
-	public void processMessage(AbsSender absSender, Message message, String[] arguments) {
-		SendMessage sendMessage = new SendMessage(
-				message.getChatId(), 
-				TelegramCommandUtil.formattedCommandList(bot.getRegisteredCommands()));
-		
-		try {
-			absSender.execute(sendMessage);
-		} catch (TelegramApiException e) {
-			e.printStackTrace();
-		}
+	protected String getMessage() {
+		return TelegramCommandUtil.formattedCommandList(bot.getRegisteredCommands());
 	}
 
 }
