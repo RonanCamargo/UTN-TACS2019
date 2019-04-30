@@ -17,7 +17,7 @@ public class PlaceRepository {
     private LocalDate currentDate;
 
     public PlaceRepository() {
-        places = new ArrayList<Place>();
+        places = new ArrayList<>();
     }
 
     public List<Place> allPlaces() {
@@ -26,7 +26,7 @@ public class PlaceRepository {
 
     public List<Place> placesByName(String name) {
         return places.stream().
-                filter(lugar -> lugar.getName().equalsIgnoreCase(name)).
+                filter(place -> place.getName().equalsIgnoreCase(name)).
                 collect(Collectors.toList());
     }
 
@@ -44,23 +44,17 @@ public class PlaceRepository {
         return placesByName(placeId).get(0);
     }
 
-    public long amountOfPlacesRegisteredInTheSystemToday() {
-        return places.stream()
-                .filter(p -> p.getRegistrationDate().equals(currentDate))
-                .count();
-    }
-
     public long amountOfPlacesRegisteredInTheSystemInTheLast(int days) {
         LocalDate lastDays = currentDate.minusDays(days);
 
         return places.stream()
-                .filter(p -> p.getRegistrationDate().isAfter(lastDays))
+                .filter(place -> place.getRegistrationDate().isAfter(lastDays)
+                || place.getRegistrationDate().equals(currentDate))
                 .count();
     }
 
     public void setCurrentDate(LocalDate currentDate) {
         this.currentDate = currentDate;
     }
-
 
 }
