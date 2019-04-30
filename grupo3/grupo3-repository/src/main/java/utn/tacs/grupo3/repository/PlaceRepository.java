@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Repository;
 
+import utn.tacs.grupo3.model.ExceptionbyResourceNotFound;
 import utn.tacs.grupo3.model.Place;
 
 @Repository
@@ -29,8 +30,10 @@ public class PlaceRepository {
                 collect(Collectors.toList());
     }
 
-    public Place placeByName(String placeId) {
-        return placesByName(placeId).get(0);
+    public Place placeByName(String placeId) throws ExceptionbyResourceNotFound {
+        return placesByName(placeId)
+                .stream().findFirst()
+                .orElseThrow(() -> new ExceptionbyResourceNotFound("no se encontro el lugar buscado"));
     }
 
     public Place createPlace(String placeId) {

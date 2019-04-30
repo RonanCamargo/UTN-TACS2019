@@ -2,6 +2,7 @@ package utn.tacs.grupo3.spring.controller;
 
 import java.util.List;
 
+import utn.tacs.grupo3.model.ExceptionbyResourceNotFound;
 import utn.tacs.grupo3.model.User;
 
 /**
@@ -30,7 +31,7 @@ public interface UserController {
      * @param userId
      * @return
      */
-    User userById(String userId);
+    User userById(String userId) throws ExceptionbyResourceNotFound;
 
 
     /**
@@ -41,7 +42,7 @@ public interface UserController {
      * @param placeId
      * @return
      */
-    String registerPlaceInListOfPlaces(String userId, String listId, String placeId);
+    String registerPlaceInListOfPlaces(String userId, String listId, String placeId) throws ExceptionbyResourceNotFound;
 
 
     /**
@@ -51,6 +52,6 @@ public interface UserController {
      * @param placeId
      * @return
      */
-    String markAsVisitedAPlace(String userId, String placeId);
+    String markAsVisitedAPlace(String userId, String placeId) throws ExceptionbyResourceNotFound;
 
 }
