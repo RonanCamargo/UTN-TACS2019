@@ -12,7 +12,7 @@ import utn.tacs.grupo3.telegram.bot.PlacesBot;
 import utn.tacs.grupo3.telegram.bot.command.AddToListOfPlacesCommand;
 import utn.tacs.grupo3.telegram.bot.command.CommandListCommand;
 import utn.tacs.grupo3.telegram.bot.command.SearchPlaceCommand;
-import utn.tacs.grupo3.telegram.bot.command.ViewListOfPlacesCommand;
+import utn.tacs.grupo3.telegram.bot.factory.TelegramCommandFactory;
 
 public class TelegramBotMain 
 {
@@ -25,10 +25,11 @@ public class TelegramBotMain
         PlacesBot placesBot = new PlacesBot();
         
         List<IBotCommand> commands = Arrays.asList(
-        		new ViewListOfPlacesCommand(), 
+        		TelegramCommandFactory.viewListOfPlacesCommand(), 
         		new SearchPlaceCommand(), 
         		new AddToListOfPlacesCommand(), 
-        		new CommandListCommand(placesBot));
+        		new CommandListCommand(placesBot),
+        		TelegramCommandFactory.listsOfPlacesCommand());
         
         commands.forEach(cmd -> placesBot.register(cmd));
         

@@ -1,5 +1,7 @@
 package utn.tacs.grupo3.telegram.bot.command;
 
+import org.telegram.telegrambots.meta.api.objects.Message;
+
 public class SearchPlaceCommand extends TelegramCommand{
 
 	public SearchPlaceCommand() {
@@ -17,7 +19,7 @@ public class SearchPlaceCommand extends TelegramCommand{
 	}
 
 	@Override
-	protected String getMessage() {
+	protected String getResponseMessage(Message message, String[] arguments) {
 		return "A place";
 	}
 

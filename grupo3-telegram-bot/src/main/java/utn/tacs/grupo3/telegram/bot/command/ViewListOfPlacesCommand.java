@@ -1,14 +1,21 @@
 package utn.tacs.grupo3.telegram.bot.command;
 
-import org.telegram.telegrambots.extensions.bots.commandbot.commands.IBotCommand;
 import org.telegram.telegrambots.meta.api.objects.Message;
-import org.telegram.telegrambots.meta.bots.AbsSender;
 
-public class ViewListOfPlacesCommand implements IBotCommand{
+import utn.tacs.grupo3.telegram.bot.request.ApiRequest;
+
+public class ViewListOfPlacesCommand extends TelegramCommand{
+		
+	private ApiRequest placeRequest;
+	
+	public ViewListOfPlacesCommand(ApiRequest placeRequest) {
+		super();
+		this.placeRequest = placeRequest;
+	}
 
 	@Override
 	public String getCommandIdentifier() {
-		return "view";
+		return "viewlist";
 	}
 
 	@Override
@@ -17,9 +24,11 @@ public class ViewListOfPlacesCommand implements IBotCommand{
 	}
 
 	@Override
-	public void processMessage(AbsSender absSender, Message message, String[] arguments) {
-		// TODO Auto-generated method stub
+	protected String getResponseMessage(Message message, String[] arguments) {
+		String user = arguments[0];
+		String listName = arguments[1];
 		
+		return placeRequest.listOfPlaces(user, listName).getBody();
 	}
 
 }

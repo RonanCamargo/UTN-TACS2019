@@ -1,6 +1,7 @@
 package utn.tacs.grupo3.telegram.bot.command;
 
 import org.telegram.telegrambots.extensions.bots.commandbot.TelegramLongPollingCommandBot;
+import org.telegram.telegrambots.meta.api.objects.Message;
 
 import utn.tacs.grupo3.telegram.bot.util.TelegramCommandUtil;
 
@@ -24,8 +25,7 @@ public class CommandListCommand extends TelegramCommand{
 	}
 
 	@Override
-	protected String getMessage() {
-		return TelegramCommandUtil.formattedCommandList(bot.getRegisteredCommands());
+	protected String getResponseMessage(Message message, String[] arguments) {
+		return TelegramCommandUtil.formattedCommandList(bot.getRegisteredCommands());	
 	}
-
 }

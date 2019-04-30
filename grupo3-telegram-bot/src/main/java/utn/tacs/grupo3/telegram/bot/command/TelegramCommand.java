@@ -17,16 +17,15 @@ public abstract class TelegramCommand implements IBotCommand{
 		this.commandParameters = new ArrayList<String>();
 	}
 
+	protected abstract String getResponseMessage(Message message, String[] arguments);
+//	protected abstract ReplyKeyboard getKeyboard(Message message);
+	
 	@Override
 	public void processMessage(AbsSender absSender, Message message, String[] arguments) {
 		SendMessage sendMessage = new SendMessage();
 		sendMessage.setChatId(message.getChatId());
-		
-		if (!validateArguments(arguments)) {
-			sendMessage.setText("La cantidad de argumentos es inválida");
-		} else {
-			sendMessage.setText(getMessage());
-		}
+		sendMessage.setText(validateArgumentsAndSetText(message, arguments));
+		sendMessage.enableHtml(true);
 		
 		try {
 			absSender.execute(sendMessage);
@@ -39,11 +38,12 @@ public abstract class TelegramCommand implements IBotCommand{
 		this.commandParameters.add(parameterName);
 	}
 	
-	protected abstract String getMessage();
 	
-	
-	private boolean validateArguments(String[] arguments) {
-		return commandParameters.size() == arguments.length;
+	private String validateArgumentsAndSetText(Message message, String[] arguments) {
+		if (commandParameters.size() == arguments.length) {
+			return getResponseMessage(message, arguments);
+		}else {
+			return "La cantidad de argumentos es inválida";
+		}
 	}
-
 }

@@ -17,9 +17,14 @@ public class UserRepository {
     public UserRepository() {
         users = new ArrayList<User>();
         User user1 = new User("Juan", "Perez");
-        ListOfPlaces listOfPlaces1 = new ListOfPlaces("Lugares Favoritos");
+        ListOfPlaces listOfPlaces1 = new ListOfPlaces("LugaresFavoritos");
         listOfPlaces1.addPlace(new Place("Casa", "Calle falsa 123"));
+        ListOfPlaces listOfPlaces2 = new ListOfPlaces("Universidades");
+        listOfPlaces2.addPlace(new Place("UTN Medrano", "Av. Medrano"));
+        listOfPlaces2.addPlace(new Place("UTN Campus", "Campus 123"));
+        
         user1.getListOfPlaces().add(listOfPlaces1);
+        user1.getListOfPlaces().add(listOfPlaces2);
 
         users.add(user1);
         users.add(new User("Elver", "Galarga"));
