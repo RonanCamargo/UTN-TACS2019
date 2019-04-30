@@ -44,7 +44,8 @@ module.exports = {
     devServer: {
         contentBase: path.join(__dirname, 'public'),
         port: 8008,
-        publicPath: 'http://localhost:8008/build'
+        publicPath: 'http://localhost:8008/build',
+        historyApiFallback: true
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),

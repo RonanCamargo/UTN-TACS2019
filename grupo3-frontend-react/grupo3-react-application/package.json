@@ -30,6 +30,10 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router": "~4.3.0",
-    "react-router-dom": "^4.2.2"
+    "react-router-dom": "^4.2.2",
+    "superagent": "~1.8.3",
+    "superagent-defaults": "~0.1.14",
+    "superagent-promise-plugin": "~3.2.0",
+    "user-agent-parser": "^0.6.0"
   }
 }
