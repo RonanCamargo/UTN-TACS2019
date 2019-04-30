@@ -8,10 +8,10 @@ class LoginUser extends Component {
     }
 
     componentDidMount() {
-        http_request.get('http://localhost:8080/users')
+        let value =http_request.get('http://localhost:8080/users')
+        .withCredentials()
         .send()
-        .then(res => res.json())
-        .then(json => this.setState({ data: json }));
+        .then(json => this.setState({ data: json }))
     }
 
     render() {
@@ -20,7 +20,7 @@ class LoginUser extends Component {
                 <ul>
                     {this.state.data.map(user => (
                         <li>
-                            {user.name}: {user.lastName}
+                            {user.firstName}: {user.lastName}
                         </li>
                     ))}
                 </ul>
