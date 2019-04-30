@@ -3,6 +3,7 @@ package utn.tacs.grupo3.spring.controller;
 import java.util.List;
 
 import utn.tacs.grupo3.model.Place;
+import utn.tacs.grupo3.model.ExceptionbyResourceNotFound;
 
 /**
  * Interface for place-related controller methods
@@ -30,7 +31,7 @@ public interface PlaceController {
      * @param placeId
      * @return
      */
-    Place placeById(String placeId);
+    Place placeById(String placeId) throws ExceptionbyResourceNotFound;
 
     /**
      * Searches near places based on coordinates

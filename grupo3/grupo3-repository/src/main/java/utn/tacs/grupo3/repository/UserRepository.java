@@ -1,6 +1,7 @@
 package utn.tacs.grupo3.repository;
 
 import org.springframework.stereotype.Repository;
+import utn.tacs.grupo3.model.ExceptionbyResourceNotFound;
 import utn.tacs.grupo3.model.ListOfPlaces;
 import utn.tacs.grupo3.model.Place;
 import utn.tacs.grupo3.model.User;
@@ -35,8 +36,10 @@ public class UserRepository {
                 collect(Collectors.toList());
     }
 
-    public User userByFirstName(String name) {
-        return usersByFirstName(name).get(0);
+    public User userByFirstName(String name) throws ExceptionbyResourceNotFound {
+        return usersByFirstName(name)
+                .stream().findFirst()
+                .orElseThrow(() -> new ExceptionbyResourceNotFound("no se encontro al usuario"));
     }
 
     public void createUser(User user) {
@@ -47,10 +50,19 @@ public class UserRepository {
         return users.stream().filter(u -> u.havePlacesInCommonWith(aPlace)).count();
     }
 
-    public ListOfPlaces listOfPlacesById(int id) {
-        return users.stream().
-                filter(user -> user.getListOfPlaces().
-                        stream().anyMatch(lp->lp.getId()==id)).
-                collect(Collectors.toList()).get(0).getListOfPlaces().get(0);
+    public List<ListOfPlaces> listsOfPlacesById(int id) throws ExceptionbyResourceNotFound {
+        return users.stream()
+                .map(user -> user.getListOfPlaces())
+                .filter(listOfPlaces -> listOfPlaces.stream()
+                        .anyMatch(lp -> lp.getId() == id)).
+                        collect(Collectors.toList())
+                .stream().findFirst()
+                .orElseThrow(() -> new ExceptionbyResourceNotFound("no se encontro la lista de lugares con el id:" + id));
     }
+
+    public ListOfPlaces listOfPlacesById(int id) throws ExceptionbyResourceNotFound {
+        return listsOfPlacesById(id).get(0);
+    }
+
+
 }

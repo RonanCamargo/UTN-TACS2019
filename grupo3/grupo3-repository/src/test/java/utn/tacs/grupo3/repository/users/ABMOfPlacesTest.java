@@ -3,6 +3,7 @@ package utn.tacs.grupo3.repository.users;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import utn.tacs.grupo3.model.ExceptionbyResourceNotFound;
 import utn.tacs.grupo3.model.ListOfPlaces;
 import utn.tacs.grupo3.model.Place;
 import utn.tacs.grupo3.model.User;
@@ -23,8 +24,8 @@ public class ABMOfPlacesTest {
 
     //6-Como usuario quiero poder registrar un lugar que me interesa en una de mis listas de lugares.
     @Test
-    public void registerAPlaceinAListOfPlaces() {
-        user1.registerAPlaceinAListOfPlaces("Lugares Favoritos",place1);
+    public void registerAPlaceinAListOfPlaces() throws ExceptionbyResourceNotFound {
+        user1.registerAPlaceinAListOfPlaces("Lugares Favoritos", place1);
         Assert.assertEquals(1, listOfPlaces1.getPlaces().size());
     }
 
