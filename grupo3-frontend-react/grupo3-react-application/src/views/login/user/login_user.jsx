@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import http_request from 'helpers/http_request'
 
 class LoginUser extends Component {
     constructor() {
@@ -7,9 +8,10 @@ class LoginUser extends Component {
     }
 
     componentDidMount() {
-        fetch(`http://localhost:8080/users`)
-            .then(res => res.json())
-            .then(json => this.setState({ data: json }));
+        http_request.get('http://localhost:8080/users')
+        .send()
+        .then(res => res.json())
+        .then(json => this.setState({ data: json }));
     }
 
     render() {
