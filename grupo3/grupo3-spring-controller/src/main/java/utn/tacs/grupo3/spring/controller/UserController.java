@@ -1,6 +1,8 @@
 package utn.tacs.grupo3.spring.controller;
 
 import java.util.List;
+import javax.servlet.http.HttpServletResponse;
+
 
 import utn.tacs.grupo3.model.User;
 
@@ -53,4 +55,7 @@ public interface UserController {
      */
     String markAsVisitedAPlace(String userId, String placeId);
 
-}
+    void corsHeaders(HttpServletResponse response);
+
+
+    }
