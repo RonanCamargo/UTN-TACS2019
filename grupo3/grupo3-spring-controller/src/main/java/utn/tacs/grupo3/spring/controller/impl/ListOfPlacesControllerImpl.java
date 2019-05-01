@@ -18,7 +18,7 @@ public class ListOfPlacesControllerImpl implements ListOfPlacesController {
     @Override
     @GetMapping("/{user-id}/list-of-places")
     public List<ListOfPlaces> listsOfListOfPlaces(@PathVariable("user-id") String userId) throws ExceptionbyResourceNotFound {
-        return userRepository.userByFirstName(userId).getListOfPlaces();
+        return userRepository.userByFirstName(userId).getListsOfPlaces();
     }
 
     @Override

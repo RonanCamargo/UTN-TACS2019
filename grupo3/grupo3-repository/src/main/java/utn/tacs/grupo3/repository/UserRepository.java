@@ -9,6 +9,7 @@ import utn.tacs.grupo3.model.User;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Repository
 public class UserRepository {
@@ -20,10 +21,7 @@ public class UserRepository {
         User user1 = new User("Juan", "Perez");
         ListOfPlaces listOfPlaces1 = new ListOfPlaces("Lugares Favoritos");
         listOfPlaces1.addPlace(new Place("Casa", "Calle falsa 123"));
-        user1.getListOfPlaces().add(listOfPlaces1);
-
-        users.add(user1);
-        users.add(new User("Elver", "Galarga"));
+        user1.getListsOfPlaces().add(listOfPlaces1);
     }
 
     public List<User> allUsers() {
@@ -50,19 +48,20 @@ public class UserRepository {
         return users.stream().filter(u -> u.havePlacesInCommonWith(aPlace)).count();
     }
 
-    public List<ListOfPlaces> listsOfPlacesById(int id) throws ExceptionbyResourceNotFound {
+    public Stream<List<ListOfPlaces>> listsOfPlacesById(int id) {
         return users.stream()
-                .map(user -> user.getListOfPlaces())
-                .filter(listOfPlaces -> listOfPlaces.stream()
-                        .anyMatch(lp -> lp.getId() == id)).
-                        collect(Collectors.toList())
-                .stream().findFirst()
-                .orElseThrow(() -> new ExceptionbyResourceNotFound("no se encontro la lista de lugares con el id:" + id));
+                .map(user -> user.getListsOfPlaces())
+                .filter(listsOfPlaces ->
+                        listsOfPlaces.stream().anyMatch(lp -> lp.getId() == id));
+    }
+
+    private List<ListOfPlaces> searchForListsOfPlacesBy(int id) throws ExceptionbyResourceNotFound {
+        return listsOfPlacesById(id).findFirst().
+                orElseThrow(() -> new ExceptionbyResourceNotFound("no se encontro la lista de lugares con el id:" + id));
     }
 
     public ListOfPlaces listOfPlacesById(int id) throws ExceptionbyResourceNotFound {
-        return listsOfPlacesById(id).get(0);
+        return searchForListsOfPlacesBy(id).get(0);
+
     }
-
-
 }

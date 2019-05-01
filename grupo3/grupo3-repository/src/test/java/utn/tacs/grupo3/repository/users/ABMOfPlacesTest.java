@@ -17,7 +17,7 @@ public class ABMOfPlacesTest {
     public void initialize() {
         user1 = new User("Elver", "Galarga");
         listOfPlaces1 = new ListOfPlaces("Lugares Favoritos");
-        user1.getListOfPlaces().add(listOfPlaces1);
+        user1.getListsOfPlaces().add(listOfPlaces1);
         place1 = new Place("el MC", "en algun lado");
     }
 
@@ -33,13 +33,13 @@ public class ABMOfPlacesTest {
     @Test
     public void createListOfPlaces() {
         user1.createListOfPlaces("Lugares Fantasticos");
-        Assert.assertEquals("Lugares Fantasticos", user1.getListOfPlaces().get(1).getListName());
+        Assert.assertEquals("Lugares Fantasticos", user1.getListsOfPlaces().get(1).getListName());
     }
 
     @Test
     public void removeListOfPlaces() {
         user1.removeFromListsOfPlaces(listOfPlaces1);
-        Assert.assertEquals(0, user1.getListOfPlaces().size());
+        Assert.assertEquals(0, user1.getListsOfPlaces().size());
     }
 
     @Test
