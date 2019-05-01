@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestMethod;
+import javax.servlet.http.HttpServletResponse;
 
 import utn.tacs.grupo3.model.ExceptionbyResourceNotFound;
 import utn.tacs.grupo3.model.Place;
@@ -19,6 +22,7 @@ import utn.tacs.grupo3.repository.UserRepository;
 import utn.tacs.grupo3.spring.controller.UserController;
 
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*", maxAge = 3600)
 @RequestMapping("/users")
 public class UserControllerImpl implements UserController {
 
@@ -26,6 +30,15 @@ public class UserControllerImpl implements UserController {
     private UserRepository userRepository;
     @Autowired
     private PlaceRepository placeRepository;
+
+    @Override
+    @RequestMapping(value= "/users/*", method={RequestMethod.OPTIONS, RequestMethod.GET})
+    public void corsHeaders(HttpServletResponse response) {
+        response.addHeader("Access-Control-Allow-Origin", "http://localhost:8008");
+        response.addHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+        response.addHeader("Access-Control-Allow-Headers", "origin, content-type, accept, x-requested-with");
+        response.addHeader("Access-Control-Max-Age", "3600");
+    }
 
     @Override
     @GetMapping

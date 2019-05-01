@@ -1,6 +1,8 @@
 package utn.tacs.grupo3.spring.controller;
 
 import java.util.List;
+import javax.servlet.http.HttpServletResponse;
+
 
 import utn.tacs.grupo3.model.ExceptionbyResourceNotFound;
 import utn.tacs.grupo3.model.User;
@@ -54,4 +56,7 @@ public interface UserController {
      */
     String markAsVisitedAPlace(String userId, String placeId) throws ExceptionbyResourceNotFound;
 
-}
+    void corsHeaders(HttpServletResponse response);
+
+
+    }
