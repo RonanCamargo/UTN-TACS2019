@@ -17,15 +17,18 @@ public class MyListsCommandHandler implements CommandHandler{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<SendMessage> handleCommand(Message message) {
-		SendMessage answer = MessageFactory.createSendMessageWithChatId(message);
+		SendMessage answer = MessageFactory.createSendMessage(message);
 		
 		List<String> myListsNames = ListOfPlacesRepo.listNames();
 		
 		StringBuilder text = new StringBuilder(HtmlHelper.bold("Mis listas")).append(HtmlHelper.multipleBr(2));
 		
 		myListsNames.forEach(name -> text.append(EMOJI)
-				.append(name).append(HtmlHelper.br())
-				.append("Ver: ").append("/mylist_").append(name.toLowerCase())
+				.append(name)
+				.append(HtmlHelper.br())
+				.append("Ver: ")
+				.append("/viewlist_")
+				.append(name.toLowerCase())
 				.append(HtmlHelper.multipleBr(2))
 				);
 		

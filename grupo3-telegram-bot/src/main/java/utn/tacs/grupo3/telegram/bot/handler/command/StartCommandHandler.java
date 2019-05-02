@@ -18,7 +18,7 @@ public class StartCommandHandler implements CommandHandler{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<SendMessage> handleCommand(Message message) {
-		SendMessage answer = MessageFactory.createSendMessageWithChatId(message);
+		SendMessage answer = MessageFactory.createSendMessage(message);
 		answer.setText(START_MESSAGE);
 		
 		answer.setReplyMarkup(ReplyKeyboardFactory.createCommandKeyboard());
