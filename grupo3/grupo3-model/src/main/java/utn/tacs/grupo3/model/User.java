@@ -1,5 +1,8 @@
 package utn.tacs.grupo3.model;
 
+import utn.tacs.grupo3.model.exception.ExceptionbyListOfPlaceNotFound;
+import utn.tacs.grupo3.model.exception.ExceptionbyResourceNotFound;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -66,7 +69,7 @@ public class User {
     public ListOfPlaces listOfPlacesByName(String name) throws ExceptionbyResourceNotFound {
         return listsOfPlacesByName(name)
                 .stream().findFirst()
-                .orElseThrow(() -> new ExceptionbyResourceNotFound("no se encontro la lista de lugares"));
+                .orElseThrow(() -> new ExceptionbyListOfPlaceNotFound(name));
     }
 
 

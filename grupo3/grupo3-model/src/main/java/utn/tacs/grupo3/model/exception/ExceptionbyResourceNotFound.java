@@ -1,4 +1,4 @@
-package utn.tacs.grupo3.model;
+package utn.tacs.grupo3.model.exception;
 
 public class ExceptionbyResourceNotFound extends Exception {
 
@@ -11,6 +11,6 @@ public class ExceptionbyResourceNotFound extends Exception {
 
     @Override
     public String getMessage() {
-        return message;
+        return "no existe el recurso "+message;
     }
 }

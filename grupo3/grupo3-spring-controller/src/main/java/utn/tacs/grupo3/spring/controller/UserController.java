@@ -2,7 +2,7 @@ package utn.tacs.grupo3.spring.controller;
 
 import java.util.List;
 
-import utn.tacs.grupo3.model.ExceptionbyResourceNotFound;
+import utn.tacs.grupo3.model.exception.ExceptionbyResourceNotFound;
 import utn.tacs.grupo3.model.User;
 
 /**

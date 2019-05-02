@@ -7,7 +7,8 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Repository;
 
-import utn.tacs.grupo3.model.ExceptionbyResourceNotFound;
+import utn.tacs.grupo3.model.exception.ExceptionbyPlaceNotFound;
+import utn.tacs.grupo3.model.exception.ExceptionbyResourceNotFound;
 import utn.tacs.grupo3.model.Place;
 
 @Repository
@@ -33,7 +34,7 @@ public class PlaceRepository {
     public Place placeByName(String placeId) throws ExceptionbyResourceNotFound {
         return placesByName(placeId)
                 .stream().findFirst()
-                .orElseThrow(() -> new ExceptionbyResourceNotFound("no se encontro el lugar buscado"));
+                .orElseThrow(() -> new ExceptionbyPlaceNotFound(placeId));
     }
 
     public Place createPlace(String placeId) {
@@ -48,8 +49,7 @@ public class PlaceRepository {
         LocalDate lastDays = currentDate.minusDays(days);
 
         return places.stream()
-                .filter(place -> place.getRegistrationDate().isAfter(lastDays)
-                || place.getRegistrationDate().equals(currentDate))
+                .filter(place -> place.wasRegisteredInTheDays(lastDays,currentDate))
                 .count();
     }
 

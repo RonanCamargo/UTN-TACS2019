@@ -1,6 +1,6 @@
 package utn.tacs.grupo3.spring.controller;
 
-import utn.tacs.grupo3.model.ExceptionbyResourceNotFound;
+import utn.tacs.grupo3.model.exception.ExceptionbyResourceNotFound;
 import utn.tacs.grupo3.model.ListOfPlaces;
 
 import java.util.List;

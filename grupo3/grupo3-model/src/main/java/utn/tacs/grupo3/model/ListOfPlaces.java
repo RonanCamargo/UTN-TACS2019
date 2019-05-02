@@ -20,6 +20,16 @@ public class ListOfPlaces {
         this.listName = listName;
     }
 
+    public void addPlace(Place place) {
+        places.add(place);
+    }
+
+    public boolean areTherePlacesInCommonWith(ListOfPlaces aListOfPlaces) {
+        return places
+                .stream()
+                .anyMatch(place -> aListOfPlaces.getPlaces().contains(place));
+    }
+
     public String getListName() {
         return listName;
     }
@@ -34,15 +44,5 @@ public class ListOfPlaces {
 
     public List<Place> getPlaces() {
         return places;
-    }
-
-    public void addPlace(Place place) {
-        places.add(place);
-    }
-
-    public boolean areTherePlacesInCommonWith(ListOfPlaces aListOfPlaces) {
-        return places
-                .stream()
-                .anyMatch(place -> aListOfPlaces.getPlaces().contains(place));
     }
 }

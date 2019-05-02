@@ -1,10 +1,12 @@
 package utn.tacs.grupo3.repository;
 
 import org.springframework.stereotype.Repository;
-import utn.tacs.grupo3.model.ExceptionbyResourceNotFound;
+import utn.tacs.grupo3.model.exception.ExceptionbyListOfPlaceNotFound;
+import utn.tacs.grupo3.model.exception.ExceptionbyResourceNotFound;
 import utn.tacs.grupo3.model.ListOfPlaces;
 import utn.tacs.grupo3.model.Place;
 import utn.tacs.grupo3.model.User;
+import utn.tacs.grupo3.model.exception.ExceptionbyUserNotFound;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +39,7 @@ public class UserRepository {
     public User userByFirstName(String name) throws ExceptionbyResourceNotFound {
         return usersByFirstName(name)
                 .stream().findFirst()
-                .orElseThrow(() -> new ExceptionbyResourceNotFound("no se encontro al usuario"));
+                .orElseThrow(() -> new ExceptionbyUserNotFound(name));
     }
 
     public void createUser(User user) {
@@ -57,7 +59,7 @@ public class UserRepository {
 
     private List<ListOfPlaces> searchForListsOfPlacesBy(int id) throws ExceptionbyResourceNotFound {
         return listsOfPlacesById(id).findFirst().
-                orElseThrow(() -> new ExceptionbyResourceNotFound("no se encontro la lista de lugares con el id:" + id));
+                orElseThrow(() -> new ExceptionbyListOfPlaceNotFound(""+id));
     }
 
     public ListOfPlaces listOfPlacesById(int id) throws ExceptionbyResourceNotFound {

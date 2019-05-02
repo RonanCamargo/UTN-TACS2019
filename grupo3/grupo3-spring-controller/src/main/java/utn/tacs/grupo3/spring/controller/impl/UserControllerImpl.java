@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import utn.tacs.grupo3.model.ExceptionbyResourceNotFound;
+import utn.tacs.grupo3.model.exception.ExceptionbyResourceNotFound;
 import utn.tacs.grupo3.model.Place;
 import utn.tacs.grupo3.model.User;
 import utn.tacs.grupo3.repository.PlaceRepository;
