@@ -8,6 +8,6 @@ import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 
 public interface CallbackQueryHandler {
 	
-	<T extends Serializable> List<BotApiMethod<?>> handleCommand(CallbackQuery message);
+	<T extends Serializable> List<BotApiMethod<?>> handleCommand(CallbackQuery callbackQuery);
 
 }
