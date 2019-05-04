@@ -15,6 +15,10 @@ public final class LoggedUsers {
 		loggedUsers = new HashMap<Integer, String>();
 	}
 	
+	public static String getUsername(Integer telegramId) {
+		return loggedUsers.get(telegramId);
+	}
+	
 	public static void addLoggedUser(Integer telegramId, String username) {
 		loggedUsers.put(telegramId, username);
 	}

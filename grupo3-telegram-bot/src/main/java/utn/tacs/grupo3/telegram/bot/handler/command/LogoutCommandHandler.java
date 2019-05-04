@@ -23,11 +23,11 @@ public class LogoutCommandHandler extends AbstractCommandHandler{
 	@Override
 	public <T extends Serializable> List<BotApiMethod<?>> handleCommand(Message message) {
 		loginStatusChecker.checkUserLoginStatus(message.getFrom());
-		
-		String text = HtmlHelper.bold("Successful logout");
+
+		apiRequest.logout(LoggedUsers.getUsername(message.getFrom().getId()));
 		
 		SendMessage answer = MessageFactory.createSendMessage(message)
-				.setText(text)
+				.setText(HtmlHelper.bold("Successful logout"))
 				.setReplyMarkup(ReplyKeyboardFactory.createInitialKeyBoard());
 		
 		LoggedUsers.removeLoggedUser(message.getFrom().getId());

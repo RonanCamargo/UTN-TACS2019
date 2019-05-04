@@ -12,8 +12,8 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKe
 
 import utn.tacs.grupo3.telegram.bot.factory.MessageFactory;
 import utn.tacs.grupo3.telegram.bot.handler.AbstractCommandHandler;
-import utn.tacs.grupo3.telegram.bot.mock.repo.ListOfPlacesRepo;
-import utn.tacs.grupo3.telegram.bot.mock.repo.Place;
+import utn.tacs.grupo3.telegram.bot.request.entity.Place;
+import utn.tacs.grupo3.telegram.bot.user.LoggedUsers;
 import utn.tacs.grupo3.telegram.bot.user.LoginStatusChecker;
 
 public class ViewListCommandHandler extends AbstractCommandHandler{
@@ -24,8 +24,10 @@ public class ViewListCommandHandler extends AbstractCommandHandler{
 
 	@Override
 	public <T extends Serializable> List<BotApiMethod<?>> handleCommand(Message message) {
+		//TODO refactor
 		String listName = message.getText().substring(10);
-		List<Place> places = ListOfPlacesRepo.places(listName);
+//		List<Place> places = ListOfPlacesRepo.places(listName);
+		List<Place> places = apiRequest.listByName(LoggedUsers.getUsername(message.getFrom().getId()), listName);
 		
 		InlineKeyboardMarkup keyboard = new InlineKeyboardMarkup();
 		List<List<InlineKeyboardButton>> buttons = List.of(

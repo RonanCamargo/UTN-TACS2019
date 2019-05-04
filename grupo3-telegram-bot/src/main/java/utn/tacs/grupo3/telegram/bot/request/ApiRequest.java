@@ -2,6 +2,7 @@ package utn.tacs.grupo3.telegram.bot.request;
 
 import java.util.List;
 
+import utn.tacs.grupo3.telegram.bot.request.entity.Place;
 import utn.tacs.grupo3.telegram.bot.request.entity.Venue;
 
 /**
@@ -14,7 +15,7 @@ public interface ApiRequest {
 	
 	void logout(String username);
 	
-	List<String> listNames(String username);
+	List<String> listNames(String username);	
 	
 	List<Venue> near(float latitude, float longitude);
 	
@@ -24,4 +25,5 @@ public interface ApiRequest {
 	
 	Venue venueByFoursquareId(String foursquareId);
 	
+	List<Place> listByName(String username, String listName);
 }

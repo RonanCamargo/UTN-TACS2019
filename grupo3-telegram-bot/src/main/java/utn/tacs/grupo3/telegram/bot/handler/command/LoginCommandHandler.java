@@ -26,6 +26,7 @@ public class LoginCommandHandler extends AbstractCommandHandler{
 		loginStatusChecker.checkUserLoginStatus(message.getFrom());
 		
 		//TODO Make request
+		apiRequest.login(getUsername(message.getText()),getPassword(message.getText()));
 		
 		SendMessage successfullLogin = MessageFactory.createSendMessage(message)
 				.setText("Successful login, welcome");
@@ -40,7 +41,7 @@ public class LoginCommandHandler extends AbstractCommandHandler{
 				.setText(text)
 				.setReplyMarkup(ReplyKeyboardFactory.createCommandKeyboard());		
 		
-		LoggedUsers.addLoggedUser(message.getFrom().getId(), "Ronan");
+		LoggedUsers.addLoggedUser(message.getFrom().getId(), getUsername(message.getText()));
 
 		return List.of(successfullLogin, answer);
 	}

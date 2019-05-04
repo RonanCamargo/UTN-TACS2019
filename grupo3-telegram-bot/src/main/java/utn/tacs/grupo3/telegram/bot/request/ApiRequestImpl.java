@@ -1,6 +1,8 @@
 package utn.tacs.grupo3.telegram.bot.request;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.core.ParameterizedTypeReference;
@@ -9,16 +11,24 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 import utn.tacs.grupo3.telegram.bot.request.entity.ListOfPlace;
+import utn.tacs.grupo3.telegram.bot.request.entity.Place;
 import utn.tacs.grupo3.telegram.bot.request.entity.Venue;
 
 public class ApiRequestImpl implements ApiRequest{
 	
 	private static final String API_BASE_URL = "http://localhost:8080";
 	private static final String NEAR_PLACES = "/places/near?coordinates=:lat,:long";
-	private static final String USER_LISTS_OF_PLACES = "/users/:user-id/list-of-places"; 
+	private static final String USER_LISTS_OF_PLACES = "/users/:user-id/list-of-places";
+	
+	private static Map<String, String> userTokenMap;
+	
+	static {
+		userTokenMap = new HashMap<String, String>();		
+	}
 	
 	private RestTemplate rest = new RestTemplate();
 	
+		
 	@Override
 	public void login(String username, String password) {
 		// TODO Auto-generated method stub
@@ -76,6 +86,18 @@ public class ApiRequestImpl implements ApiRequest{
 
 	@Override
 	public Venue venueByFoursquareId(String foursquareId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
+	private String getToken(String username) {
+		return userTokenMap.get(username);
+	}
+
+
+	@Override
+	public List<Place> listByName(String username, String listName) {
 		// TODO Auto-generated method stub
 		return null;
 	}

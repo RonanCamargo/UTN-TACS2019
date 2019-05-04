@@ -52,7 +52,7 @@ public class PlacesBot extends TelegramLongPollingBot{
 			}
 						
 		} catch (TelegramBotException e) {
-			
+			e.printStackTrace();
 		} finally {
 			this.sendAnswers(answers);
 		}
