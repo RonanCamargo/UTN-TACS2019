@@ -9,7 +9,7 @@ public class Place {
 	private LocalDate registrationDate;
 
 	public Place() {}
-	
+
     public Place(String name, String location) {
         this.name = name;
         this.location = location;
@@ -18,6 +18,10 @@ public class Place {
 
 	public String getName() {
 		return name;
+	}
+
+	public boolean wasRegisteredInTheDays(LocalDate lastDays, LocalDate currentDate) {
+		return registrationDate.isAfter(lastDays) || registrationDate.equals(currentDate);
 	}
 
 	public void setName(String name) {
@@ -39,6 +43,5 @@ public class Place {
 	public void setRegistrationDate(LocalDate registrationDate) {
 		this.registrationDate = registrationDate;
 	}
-    
 }
 

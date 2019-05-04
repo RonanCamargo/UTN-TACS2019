@@ -28,13 +28,13 @@ public class UsersRegisteredInTheSystemTest {
         user1.setLastAccess(LocalDateTime.of(2006, Month.APRIL, 19, 18, 00, 00));
         
         listOfPlaces1 = new ListOfPlaces("Lugares Favoritos");
-        user1.getListOfPlaces().add(listOfPlaces1);
+        user1.getListsOfPlaces().add(listOfPlaces1);
 
         place1 = new Place("el MC", "en algun lado");
 
         user2 = new User("Jorge", "Vergara");
         listOfPlaces2 = new ListOfPlaces("Mi lista");
-        user2.getListOfPlaces().add(listOfPlaces1);
+        user2.getListsOfPlaces().add(listOfPlaces1);
 
         listOfPlaces1.addPlace(place1);
         listOfPlaces2.addPlace(place1);

@@ -2,7 +2,7 @@ package utn.tacs.grupo3.spring.controller.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import utn.tacs.grupo3.model.ExceptionbyResourceNotFound;
+import utn.tacs.grupo3.model.exception.ExceptionbyResourceNotFound;
 import utn.tacs.grupo3.model.ListOfPlaces;
 import utn.tacs.grupo3.repository.UserRepository;
 import utn.tacs.grupo3.spring.controller.ListOfPlacesController;
@@ -18,7 +18,7 @@ public class ListOfPlacesControllerImpl implements ListOfPlacesController {
     @Override
     @GetMapping("/{user-id}/list-of-places")
     public List<ListOfPlaces> listsOfListOfPlaces(@PathVariable("user-id") String userId) throws ExceptionbyResourceNotFound {
-        return userRepository.userByFirstName(userId).getListOfPlaces();
+        return userRepository.userByFirstName(userId).getListsOfPlaces();
     }
 
     @Override

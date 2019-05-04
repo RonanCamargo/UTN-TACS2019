@@ -40,7 +40,7 @@ public class PlacesRegisteredInTheSystemTest {
 //    En el día de hoy
     @Test
     public void knowTheTotalNumberOfPlacesRegisteredInTheSystemToday() {
-        Assert.assertEquals(1, placeRepository.amountOfPlacesRegisteredInTheSystemToday());
+        Assert.assertEquals(1, placeRepository.amountOfPlacesRegisteredInTheSystemInTheLast(0));
 
     }
 

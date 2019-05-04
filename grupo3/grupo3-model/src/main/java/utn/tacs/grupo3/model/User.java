@@ -1,5 +1,8 @@
 package utn.tacs.grupo3.model;
 
+import utn.tacs.grupo3.model.exception.ExceptionbyListOfPlaceNotFound;
+import utn.tacs.grupo3.model.exception.ExceptionbyResourceNotFound;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +12,7 @@ public class User {
 
     private String firstName;
     private String lastName;
-    private List<ListOfPlaces> listOfPlaces;
+    private List<ListOfPlaces> listsOfPlaces;
     private List<Place> placesVisited;
     private LocalDateTime lastAccess;
 
@@ -19,13 +22,13 @@ public class User {
     public User(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.listOfPlaces = new ArrayList<>();
+        this.listsOfPlaces = new ArrayList<>();
         this.placesVisited = new ArrayList<>();
 
     }
 
     public User(String firstName, String lastName, LocalDateTime lastAccess) {
-        listOfPlaces = new ArrayList<>();
+        listsOfPlaces = new ArrayList<>();
         placesVisited = new ArrayList<>();
 
         this.firstName = firstName;
@@ -34,15 +37,15 @@ public class User {
     }
 
     public boolean havePlacesInCommonWith(Place aPlace) {
-        return listOfPlaces.stream().anyMatch(listPlaces -> listPlaces.getPlaces().contains(aPlace));
+        return listsOfPlaces.stream().anyMatch(listPlaces -> listPlaces.getPlaces().contains(aPlace));
     }
 
     public void createListOfPlaces(String name) {
-        listOfPlaces.add(new ListOfPlaces(name));
+        listsOfPlaces.add(new ListOfPlaces(name));
     }
 
     public void removeFromListsOfPlaces(ListOfPlaces aListOfPlaces) {
-        listOfPlaces.remove(aListOfPlaces);
+        listsOfPlaces.remove(aListOfPlaces);
     }
 
     public void markAsVisited(Place aPlace) {
@@ -50,7 +53,7 @@ public class User {
     }
 
     public int amountOfPlacesLists() {
-        return listOfPlaces.size();
+        return listsOfPlaces.size();
     }
 
     public int amountOfPlacesVisited() {
@@ -58,7 +61,7 @@ public class User {
     }
 
     public List<ListOfPlaces> listsOfPlacesByName(String name) {
-        return listOfPlaces.stream().
+        return listsOfPlaces.stream().
                 filter(listOfPlaces -> listOfPlaces.getListName().equalsIgnoreCase(name)).
                 collect(Collectors.toList());
     }
@@ -66,7 +69,7 @@ public class User {
     public ListOfPlaces listOfPlacesByName(String name) throws ExceptionbyResourceNotFound {
         return listsOfPlacesByName(name)
                 .stream().findFirst()
-                .orElseThrow(() -> new ExceptionbyResourceNotFound("no se encontro la lista de lugares"));
+                .orElseThrow(() -> new ExceptionbyListOfPlaceNotFound(name));
     }
 
 
@@ -90,12 +93,12 @@ public class User {
         this.lastName = lastName;
     }
 
-    public List<ListOfPlaces> getListOfPlaces() {
-        return listOfPlaces;
+    public List<ListOfPlaces> getListsOfPlaces() {
+        return listsOfPlaces;
     }
 
-    public void setListOfPlaces(List<ListOfPlaces> listOfPlaces) {
-        this.listOfPlaces = listOfPlaces;
+    public void setListsOfPlaces(List<ListOfPlaces> listsOfPlaces) {
+        this.listsOfPlaces = listsOfPlaces;
     }
 
     public List<Place> getPlacesVisited() {

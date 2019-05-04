@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import utn.tacs.grupo3.model.Place;
-import utn.tacs.grupo3.model.ExceptionbyResourceNotFound;
+import utn.tacs.grupo3.model.exception.ExceptionbyResourceNotFound;
 import utn.tacs.grupo3.repository.PlaceRepository;
 import utn.tacs.grupo3.retrofit.FoursquarePlacesRequest;
 import utn.tacs.grupo3.spring.controller.PlaceController;
