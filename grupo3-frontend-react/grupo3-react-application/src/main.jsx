@@ -4,7 +4,7 @@ import history from 'helpers/history'
 import {
     Router as Router,
 } from 'react-router-dom'
-
+import './index.css';
 import App from 'views/app'
 
 render(
