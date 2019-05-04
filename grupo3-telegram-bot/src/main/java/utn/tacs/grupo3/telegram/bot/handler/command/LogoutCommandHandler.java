@@ -9,18 +9,28 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 
 import utn.tacs.grupo3.telegram.bot.factory.MessageFactory;
 import utn.tacs.grupo3.telegram.bot.factory.ReplyKeyboardFactory;
-import utn.tacs.grupo3.telegram.bot.handler.CommandHandler;
+import utn.tacs.grupo3.telegram.bot.handler.AbstractCommandHandler;
 import utn.tacs.grupo3.telegram.bot.helper.HtmlHelper;
+import utn.tacs.grupo3.telegram.bot.user.LoggedUsers;
+import utn.tacs.grupo3.telegram.bot.user.LoginStatusChecker;
 
-public class LogoutCommandHandler implements CommandHandler{
+public class LogoutCommandHandler extends AbstractCommandHandler{
+	
+	public LogoutCommandHandler(LoginStatusChecker loginStatusChecker) {
+		super(loginStatusChecker);
+	}
 
 	@Override
 	public <T extends Serializable> List<BotApiMethod<?>> handleCommand(Message message) {
+		loginStatusChecker.checkUserLoginStatus(message.getFrom());
+		
 		String text = HtmlHelper.bold("Sesión finalizada");
 		
 		SendMessage answer = MessageFactory.createSendMessage(message)
 				.setText(text)
 				.setReplyMarkup(ReplyKeyboardFactory.createInitialKeyBoard());
+		
+		LoggedUsers.removeLoggedUser(message.getFrom().getId());
 		
 		return List.of(answer);
 		

@@ -6,17 +6,24 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
 import utn.tacs.grupo3.telegram.bot.factory.MessageFactory;
-import utn.tacs.grupo3.telegram.bot.handler.CommandHandler;
+import utn.tacs.grupo3.telegram.bot.handler.AbstractCommandHandler;
 import utn.tacs.grupo3.telegram.bot.helper.HtmlHelper;
 import utn.tacs.grupo3.telegram.bot.mock.repo.ListOfPlacesRepo;
+import utn.tacs.grupo3.telegram.bot.user.LoginStatusChecker;
 
-public class MyListsCommandHandler implements CommandHandler{
+public class MyListsCommandHandler extends AbstractCommandHandler{
 
 	private static final String EMOJI = "\u2194 ";
+
+	public MyListsCommandHandler(LoginStatusChecker loginStatusChecker) {
+		super(loginStatusChecker);
+	}
 	
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<SendMessage> handleCommand(Message message) {
+		loginStatusChecker.checkUserLoginStatus(message.getFrom());
+		
 		SendMessage answer = MessageFactory.createSendMessage(message);
 		
 		List<String> myListsNames = ListOfPlacesRepo.listNames();

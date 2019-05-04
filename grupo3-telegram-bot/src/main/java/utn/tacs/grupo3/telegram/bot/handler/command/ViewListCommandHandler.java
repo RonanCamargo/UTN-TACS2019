@@ -11,11 +11,16 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMa
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
 import utn.tacs.grupo3.telegram.bot.factory.MessageFactory;
-import utn.tacs.grupo3.telegram.bot.handler.CommandHandler;
+import utn.tacs.grupo3.telegram.bot.handler.AbstractCommandHandler;
 import utn.tacs.grupo3.telegram.bot.mock.repo.ListOfPlacesRepo;
 import utn.tacs.grupo3.telegram.bot.mock.repo.Place;
+import utn.tacs.grupo3.telegram.bot.user.LoginStatusChecker;
 
-public class ViewListCommandHandler implements CommandHandler{
+public class ViewListCommandHandler extends AbstractCommandHandler{
+
+	public ViewListCommandHandler(LoginStatusChecker loginStatusChecker) {
+		super(loginStatusChecker);
+	}
 
 	@Override
 	public <T extends Serializable> List<BotApiMethod<?>> handleCommand(Message message) {

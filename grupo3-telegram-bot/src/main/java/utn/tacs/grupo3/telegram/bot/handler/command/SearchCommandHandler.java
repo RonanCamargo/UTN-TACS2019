@@ -11,13 +11,19 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKe
 
 import utn.tacs.grupo3.telegram.bot.factory.InlineKeyboardFactory;
 import utn.tacs.grupo3.telegram.bot.factory.MessageFactory;
-import utn.tacs.grupo3.telegram.bot.handler.CommandHandler;
+import utn.tacs.grupo3.telegram.bot.handler.AbstractCommandHandler;
+import utn.tacs.grupo3.telegram.bot.user.LoginStatusChecker;
 
-public class SearchCommandHandler implements CommandHandler{
+public class SearchCommandHandler extends AbstractCommandHandler{
+
+	public SearchCommandHandler(LoginStatusChecker loginStatusChecker) {
+		super(loginStatusChecker);
+	}
 
 	@Override
 	public <T extends Serializable> List<BotApiMethod<?>> handleCommand(Message message) {
-
+		loginStatusChecker.checkUserLoginStatus(message.getFrom());
+		
 		InlineKeyboardMarkup keyboard = InlineKeyboardFactory.createInlineKeyboard(				
 				List.of(
 					new InlineKeyboardButton("Place name").setSwitchInlineQueryCurrentChat("search "),

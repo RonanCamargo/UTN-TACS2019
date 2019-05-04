@@ -1,5 +1,6 @@
 package utn.tacs.grupo3.telegram.bot;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,7 +24,7 @@ public class PlacesBot extends TelegramLongPollingBot{
 	private static final String BOT_TOKEN = "837736990:AAGVZ27HyFKKyc-ZCbUhgIHE7iddP6-wchY";
 	
 	private static Map<String, InlineQueryHandler> inlineQueries;
-	private static final String SEARCH_NEAR_ME_INLINE = "search near me";
+	private static final String SEARCH_NEAR_ME_INLINE = "search places near me";
 	
 	static {		
 		inlineQueries = new HashMap<String, InlineQueryHandler>();
@@ -63,6 +64,10 @@ public class PlacesBot extends TelegramLongPollingBot{
 	@Override
 	public String getBotToken() {
 		return BOT_TOKEN;
+	}
+	
+	private List<BotApiMethod<Serializable>> handleException(Exception e){
+		return null;
 	}
 	
 	private void sendAnswers(List<BotApiMethod<?>> answers) {
