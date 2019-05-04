@@ -2,14 +2,26 @@ package utn.tacs.grupo3.telegram.bot.request;
 
 import java.util.List;
 
-import org.springframework.http.ResponseEntity;
+import utn.tacs.grupo3.telegram.bot.request.entity.Venue;
 
+/**
+ * Interface for backend api requests
+ *
+ */
 public interface ApiRequest {
+		
+	void login(String username, String password);
 	
-	ResponseEntity<String> near(String coordinates);
+	void logout(String username);
 	
-	ResponseEntity<String> listOfPlaces(String user, String listName);
+	List<String> listNames(String username);
 	
-	List<String> listsOfPlacesNames(String user);
+	List<Venue> near(float latitude, float longitude);
+	
+	List<Venue> searchPlacesByName(String name);
+	
+	void addPlaceToList(String username, String listName);
+	
+	Venue venueByFoursquareId(String foursquareId);
 	
 }
