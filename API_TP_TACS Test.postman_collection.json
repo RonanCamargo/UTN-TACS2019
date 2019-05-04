@@ -1,0 +1,574 @@
+{
+	"info": {
+		"_postman_id": "1d22929b-fd94-4cdf-8cda-acb08f4f67d2",
+		"name": "API_TP_TACS Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "crear usuario 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d3f5d63f-33bf-4369-be69-3e23117afcf4",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"firstName\":\"Elver\",\"lastName\":\"Galarga\",\"locationCoordinates\":null,\"listsOfPlaces\":[],\"placesVisited\":[],\"lastAccess\":null}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "crear usuario 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c158664e-bd2d-4992-a31c-527b5d324796",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"firstName\":\"Maxi\",\"lastName\":\"Perez\",\"locationCoordinates\":null,\"listsOfPlaces\":[],\"placesVisited\":[],\"lastAccess\":null}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "crear una listas de lugares 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3e5c00b2-799a-4e44-8aa2-f85bcceef35b",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/users/Elver/list-of-places/1/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"Elver",
+						"list-of-places",
+						"1",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "crear una listas de lugares 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b7522016-b951-48e8-8a4b-7552de14a525",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/users/Maxi/list-of-places/2/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"Maxi",
+						"list-of-places",
+						"2",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Registrar un lugar en lista 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "19250d0f-c360-44e1-8218-4b4cd27853f5",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/users/Elver/list-of-places/1/Campus",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"Elver",
+						"list-of-places",
+						"1",
+						"Campus"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Registrar un lugar en lista 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fbe129e3-09de-4e62-8cdd-5a6824eb959c",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/users/Maxi/list-of-places/2/Campus",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"Maxi",
+						"list-of-places",
+						"2",
+						"Campus"
+					],
+					"query": [
+						{
+							"key": "user-id",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "list-id",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "place-id",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "buscar una lista de lugares",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ee0e6116-9194-44a5-84cd-edc20308549b",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/users/Elver/list-of-places/1/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"Elver",
+						"list-of-places",
+						"1",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "marcar un lugar como visitado",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "26489c1b-f13e-4f95-85af-8fca5962d9ca",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/users/Elver/places-visited/Campus?",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"Elver",
+						"places-visited",
+						"Campus"
+					],
+					"query": [
+						{
+							"key": "new-name",
+							"value": "lugares feos feos",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Administrador]Ver Datos de un usuario:",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "37bcbc12-f646-4f88-b328-a1d1a8bd5779",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/users/Elver",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"Elver"
+					]
+				},
+				"description": "Como administrador quiero poder ver los siguientes datos de un usuario:\nUsuario\nCantidad de listas\nCantidad de lugares visitados en sus listas.\nÚltimo acceso"
+			},
+			"response": []
+		},
+		{
+			"name": "[Administrador]  ver la cantidad de usuarios interesados en un lugar",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4e501b8e-b8b8-4fba-afe7-9fa043713083",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/places/Campus/interested-users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"places",
+						"Campus",
+						"interested-users"
+					]
+				},
+				"description": "Como administrador quiero seleccionar un lugar y ver la cantidad de usuarios que se interesaron en el mismo (lo agregaron a una lista)."
+			},
+			"response": []
+		},
+		{
+			"name": "[Administrador] Ver si tienen algún lugar en común.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a0a937e7-38ad-48e2-b14f-223d6529836f",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/places/places-in-common?list-id-1=2&list-id-2=3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"places",
+						"places-in-common"
+					],
+					"query": [
+						{
+							"key": "list-id-1",
+							"value": "2"
+						},
+						{
+							"key": "list-id-2",
+							"value": "3"
+						}
+					]
+				},
+				"description": "Como administrador quiero seleccionar 2 listas de usuarios diferentes y ver si tienen algún lugar en común."
+			},
+			"response": []
+		},
+		{
+			"name": "[Administrador] Cantidad total de lugares registrados en el sistema en una fecha",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "16b3d72c-2f07-45c2-a413-67996fda9a9d",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/places/registered-places?days=30",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"places",
+						"registered-places"
+					],
+					"query": [
+						{
+							"key": "days",
+							"value": "30"
+						}
+					]
+				},
+				"description": "Como administrador quiero conocer la cantidad total de lugares registrados en el sistema\nEn el día de hoy\nEn los últimos 3 días\nEn la última semana\nEn el último mes\nDesde el inicio de los tiempos\n"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "ebf0fb06-4514-4dd7-8845-aa2e90cb03ef",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "072e2088-bac4-40f6-8975-b16da631896a",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

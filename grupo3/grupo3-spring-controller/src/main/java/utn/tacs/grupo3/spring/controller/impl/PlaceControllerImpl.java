@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import utn.tacs.grupo3.model.Place;
+import utn.tacs.grupo3.model.exception.ExceptionbyResourceNotFound;
 import utn.tacs.grupo3.repository.PlaceRepository;
 import utn.tacs.grupo3.retrofit.FoursquarePlacesRequest;
+import utn.tacs.grupo3.retrofit.pojo.Venue;
 import utn.tacs.grupo3.spring.controller.PlaceController;
 
 @RestController
@@ -40,14 +42,20 @@ public class PlaceControllerImpl implements PlaceController {
 
     @Override
     @GetMapping("/{place-id}")
-    public Place placeById(@PathVariable("place-id") String placeId) {
+    public Place placeById(@PathVariable("place-id") String placeId) throws ExceptionbyResourceNotFound {
         return placeRepository.placeByName(placeId);
     }
 
     @Override
     @GetMapping("/near")
-    public String near(@RequestParam("coordinates") String coordinates) {
-        return foursquarePlacesRequest.getAllPlaces(coordinates).get(0).getName();
+    public List<Venue> near(@RequestParam("coordinates") String coordinates) {
+        return foursquarePlacesRequest.getAllPlacesByCoordinates(coordinates);
+    }
+
+    @Override
+    @GetMapping("/near-by-name")
+    public List<Venue> nearByName(@RequestParam("name") String name) {
+        return foursquarePlacesRequest.getAllPlacesByName(name);
     }
 
 }

@@ -1,5 +1,7 @@
 package utn.tacs.grupo3.spring.controller;
 
+import utn.tacs.grupo3.model.exception.ExceptionbyResourceNotFound;
+
 import java.util.Map;
 
 public interface AdministratorController {
@@ -11,7 +13,7 @@ public interface AdministratorController {
      * @param listId2
      * @return
      */
-    Map<String, Boolean> placesInCommon(int listId1, int listId2);
+    Map<String, Boolean> placesInCommon(int listId1, int listId2) throws ExceptionbyResourceNotFound;
 
     /**
      * Returns the number of interested users in a place
@@ -19,7 +21,7 @@ public interface AdministratorController {
      * @param placeId
      * @return
      */
-    Map<String, Long> numberOfInterestedUsers(String placeId);
+    Map<String, Long> numberOfInterestedUsers(String placeId) throws ExceptionbyResourceNotFound;
 
     /**
      * Returns the number of registered places in the last days

@@ -3,6 +3,7 @@ package utn.tacs.grupo3.repository.users;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import utn.tacs.grupo3.model.exception.ExceptionbyResourceNotFound;
 import utn.tacs.grupo3.model.ListOfPlaces;
 import utn.tacs.grupo3.model.Place;
 import utn.tacs.grupo3.model.User;
@@ -16,15 +17,15 @@ public class ABMOfPlacesTest {
     public void initialize() {
         user1 = new User("Elver", "Galarga");
         listOfPlaces1 = new ListOfPlaces("Lugares Favoritos");
-        user1.getListOfPlaces().add(listOfPlaces1);
+        user1.getListsOfPlaces().add(listOfPlaces1);
         place1 = new Place("el MC", "en algun lado");
     }
 
 
     //6-Como usuario quiero poder registrar un lugar que me interesa en una de mis listas de lugares.
     @Test
-    public void registerAPlaceinAListOfPlaces() {
-        user1.registerAPlaceinAListOfPlaces("Lugares Favoritos",place1);
+    public void registerAPlaceinAListOfPlaces() throws ExceptionbyResourceNotFound {
+        user1.registerAPlaceinAListOfPlaces("Lugares Favoritos", place1);
         Assert.assertEquals(1, listOfPlaces1.getPlaces().size());
     }
 
@@ -32,13 +33,13 @@ public class ABMOfPlacesTest {
     @Test
     public void createListOfPlaces() {
         user1.createListOfPlaces("Lugares Fantasticos");
-        Assert.assertEquals("Lugares Fantasticos", user1.getListOfPlaces().get(1).getListName());
+        Assert.assertEquals("Lugares Fantasticos", user1.getListsOfPlaces().get(1).getListName());
     }
 
     @Test
     public void removeListOfPlaces() {
         user1.removeFromListsOfPlaces(listOfPlaces1);
-        Assert.assertEquals(0, user1.getListOfPlaces().size());
+        Assert.assertEquals(0, user1.getListsOfPlaces().size());
     }
 
     @Test
