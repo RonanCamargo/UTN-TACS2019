@@ -13,8 +13,8 @@ import utn.tacs.grupo3.telegram.bot.user.LoginStatusChecker;
 
 public class MyListsCommandHandler extends AbstractCommandHandler{
 
-	private static final String EMOJI = "\u2194 ";
-
+	private static final String CLIPBOARD_EMOJI = "\uD83D\uDCCB ";
+	
 	public MyListsCommandHandler(LoginStatusChecker loginStatusChecker) {
 		super(loginStatusChecker);
 	}
@@ -28,12 +28,12 @@ public class MyListsCommandHandler extends AbstractCommandHandler{
 		
 		List<String> myListsNames = ListOfPlacesRepo.listNames();
 		
-		StringBuilder text = new StringBuilder(HtmlHelper.bold("Mis listas")).append(HtmlHelper.multipleBr(2));
+		StringBuilder text = new StringBuilder(HtmlHelper.bold("My lists")).append(HtmlHelper.multipleBr(2));
 		
-		myListsNames.forEach(name -> text.append(EMOJI)
+		myListsNames.forEach(name -> text.append(CLIPBOARD_EMOJI)
 				.append(name)
 				.append(HtmlHelper.br())
-				.append("Ver: ")
+				.append("See places: ")
 				.append("/viewlist_")
 				.append(name.toLowerCase())
 				.append(HtmlHelper.multipleBr(2))

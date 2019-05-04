@@ -6,6 +6,7 @@ import java.util.List;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendLocation;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.methods.send.SendVenue;
 import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 
 import utn.tacs.grupo3.telegram.bot.factory.MessageFactory;
@@ -22,20 +23,15 @@ public class ViewPlaceCallbackQueryHandler implements CallbackQueryHandler{
 		List<Place> places = ListOfPlacesRepo.places(parsed[1]);
 		Place place = ListOfPlacesRepo.placeByName(parsed[2], places);
 		
-		SendMessage title = MessageFactory.createSendMessage(callbackQuery.getMessage())
-				.setText(new StringBuilder()
-						.append(HtmlHelper.bold(place.getName()))
-						.append(HtmlHelper.br())
-						.append("Lat: ").append(place.getLat())
-						.append(" ")
-						.append("Long: ").append(place.getLongit())
-						.toString());
+		SendVenue venue = new SendVenue();
+		venue.setAddress("Av. Medrano 951")
+			.setChatId(callbackQuery.getMessage().getChatId())
+			.setTitle("UTN Medrano")
+			.setLatitude(place.getLat())
+			.setLongitude(place.getLongit())
+			.setFoursquareType("arts_entertainment/aquarium");
 		
-		SendLocation location = MessageFactory.createSendLocation(callbackQuery.getMessage())
-				.setLatitude(place.getLat())
-				.setLongitude(place.getLongit());				
-		
-		return List.of(title, location);
+		return List.of(venue);
 	}
 
 }
