@@ -11,6 +11,7 @@ import org.telegram.telegrambots.meta.api.objects.inlinequery.result.InlineQuery
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
+import utn.tacs.grupo3.telegram.bot.factory.InlineKeyboardFactory;
 import utn.tacs.grupo3.telegram.bot.factory.MessageFactory;
 import utn.tacs.grupo3.telegram.bot.handler.InlineQueryHandler;
 
@@ -22,9 +23,9 @@ public class SearchNearMeInlineQueryHandler implements InlineQueryHandler{
 		Location location = inlineQuery.getLocation();
 		location.getClass();
 		
-		InlineKeyboardMarkup keyboard = new InlineKeyboardMarkup();
-		List<List<InlineKeyboardButton>> buttons = List.of(List.of(new InlineKeyboardButton("Add to list").setCallbackData("/addplacetolist_" + "1")));
-		keyboard.setKeyboard(buttons);
+		InlineKeyboardMarkup keyboard = InlineKeyboardFactory.createInlineKeyboard(
+				List.of(new InlineKeyboardButton("Add to list").setCallbackData("/addplacetolist_" + "1"))
+				);
 		
 		List<InlineQueryResult> results = List.of(
 				new InlineQueryResultLocation().setId("1").setTitle("UTN Campus")

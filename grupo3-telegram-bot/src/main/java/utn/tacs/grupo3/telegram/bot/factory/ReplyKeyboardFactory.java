@@ -4,22 +4,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardRemove;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardButton;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
+
+import utn.tacs.grupo3.telegram.bot.constants.PlacesBotConstants;
 
 public final class ReplyKeyboardFactory {
 	
 	private ReplyKeyboardFactory() {}
 	
 	public static ReplyKeyboardMarkup createInitialKeyBoard() {
-		return createKeyboard(List.of("/help"));
+		return createKeyboard(List.of(PlacesBotConstants.HELP_COMMAND));
 	}
 	
 	public static ReplyKeyboardMarkup createCommandKeyboard() {
 		return createKeyboard(
-				List.of("/search", "/mylists"),
-				List.of("/logout")
+				List.of(PlacesBotConstants.MY_LISTS_COMMAND, PlacesBotConstants.SEARCH_COMMAND),
+				List.of(PlacesBotConstants.LOGOUT_COMMAND)
 				);		
+	}
+	
+	public static ReplyKeyboardRemove createKeyboardRemove() {
+		return new ReplyKeyboardRemove().setSelective(true);
 	}
 
 	@SafeVarargs

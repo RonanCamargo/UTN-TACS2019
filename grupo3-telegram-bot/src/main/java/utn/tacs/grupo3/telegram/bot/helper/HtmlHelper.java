@@ -17,5 +17,15 @@ public class HtmlHelper {
 	public static String multipleBr(int count) {
 		return br().repeat(count);
 	}
+	
+	public static String formatText(String...args) {
+		StringBuilder text = new StringBuilder();
+		
+		for (String string : args) {
+			text.append(string);
+		}
+		
+		return text.toString();
+	}
 
 }

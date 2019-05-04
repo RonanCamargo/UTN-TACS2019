@@ -21,7 +21,7 @@ public class StartCommandHandler implements CommandHandler{
 		SendMessage answer = MessageFactory.createSendMessage(message);
 		answer.setText(START_MESSAGE);
 		
-		answer.setReplyMarkup(ReplyKeyboardFactory.createCommandKeyboard());
+		answer.setReplyMarkup(ReplyKeyboardFactory.createKeyboardRemove());
 		
 		return List.of(answer);
 	}

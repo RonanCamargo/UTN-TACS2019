@@ -12,10 +12,16 @@ public final class InlineKeyboardFactory {
 	public static InlineKeyboardMarkup createSearchKeyboard() {
 		InlineKeyboardMarkup keyboard = new InlineKeyboardMarkup();
 		
-		List<List<InlineKeyboardButton>> buttons = List.of();
-		
+		List<List<InlineKeyboardButton>> buttons = List.of();		
 		
 		keyboard.setKeyboard(buttons);
+		return keyboard;
+	}
+	
+	@SafeVarargs
+	public static InlineKeyboardMarkup createInlineKeyboard(List<InlineKeyboardButton>... buttonRows) {
+		InlineKeyboardMarkup keyboard = new InlineKeyboardMarkup();		
+		keyboard.setKeyboard(List.of(buttonRows));
 		return keyboard;
 	}
 

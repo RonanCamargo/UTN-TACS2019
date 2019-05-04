@@ -9,12 +9,16 @@ import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
+import utn.tacs.grupo3.telegram.bot.exception.TelegramBotException;
 import utn.tacs.grupo3.telegram.bot.handler.CallbackQueryHandler;
 import utn.tacs.grupo3.telegram.bot.handler.CommandHandler;
 import utn.tacs.grupo3.telegram.bot.handler.InlineQueryHandler;
 import utn.tacs.grupo3.telegram.bot.handler.callbackQuery.AddPlaceToListCallbackQueryHandler;
 import utn.tacs.grupo3.telegram.bot.handler.callbackQuery.AddPlaceToSelectedListCallbackQueryHandler;
 import utn.tacs.grupo3.telegram.bot.handler.callbackQuery.ViewPlaceCallbackQueryHandler;
+import utn.tacs.grupo3.telegram.bot.handler.command.HelpCommandHandler;
+import utn.tacs.grupo3.telegram.bot.handler.command.LoginCommandHandler;
+import utn.tacs.grupo3.telegram.bot.handler.command.LogoutCommandHandler;
 import utn.tacs.grupo3.telegram.bot.handler.command.MyListsCommandHandler;
 import utn.tacs.grupo3.telegram.bot.handler.command.SearchCommandHandler;
 import utn.tacs.grupo3.telegram.bot.handler.command.StartCommandHandler;
@@ -28,9 +32,12 @@ public class PlacesBot extends TelegramLongPollingBot{
 	
 	private static Map<String, CommandHandler> commands;
 	private static final String START_COMMAND = "/start";
+	private static final String LOGIN_COMMAND = "/login";
+	private static final String HELP_COMMAND = "/help";
 	private static final String MY_LISTS_COMMAND = "/mylists";
 	private static final String VIEW_LIST_COMMAND = "/viewlist";
 	private static final String SEARCH_COMMAND = "/search";
+	private static final String LOGOUT_COMMAND = "/logout";
 	
 	private static Map<String, CallbackQueryHandler> callbackQueries;
 	private static final String VIEW_PLACE_CALLBACK = "/viewplace";
@@ -43,9 +50,12 @@ public class PlacesBot extends TelegramLongPollingBot{
 	static {
 		commands = new HashMap<String, CommandHandler>();
 		commands.put(START_COMMAND, new StartCommandHandler());
+		commands.put(LOGIN_COMMAND, new LoginCommandHandler());
 		commands.put(MY_LISTS_COMMAND, new MyListsCommandHandler());
 		commands.put(VIEW_LIST_COMMAND, new ViewListCommandHandler());
 		commands.put(SEARCH_COMMAND, new SearchCommandHandler());
+		commands.put(LOGOUT_COMMAND, new LogoutCommandHandler());
+		commands.put(HELP_COMMAND, new HelpCommandHandler());
 		
 		callbackQueries = new HashMap<String, CallbackQueryHandler>();
 		callbackQueries.put(VIEW_PLACE_CALLBACK, new ViewPlaceCallbackQueryHandler());
@@ -53,30 +63,35 @@ public class PlacesBot extends TelegramLongPollingBot{
 		callbackQueries.put(ADD_PLACE_TO_SELECTED_LIST, new AddPlaceToSelectedListCallbackQueryHandler());
 		
 		inlineQueries = new HashMap<String, InlineQueryHandler>();
-		inlineQueries.put(SEARCH_NEAR_ME_INLINE, new SearchNearMeInlineQueryHandler());
-		
+		inlineQueries.put(SEARCH_NEAR_ME_INLINE, new SearchNearMeInlineQueryHandler());		
 	}
 	
 	@Override
 	public void onUpdateReceived(Update update) {
 		List<BotApiMethod<?>> answers = null;
 		
-		if (update.hasMessage() && update.getMessage().getText() != null) {
-			CommandHandler handler = commands.get(update.getMessage().getText().split("_")[0]);
-			answers = handler.handleCommand(update.getMessage());
-		}
-		if (update.hasCallbackQuery()) {
-			CallbackQueryHandler handler = callbackQueries.get(update.getCallbackQuery().getData().split("_")[0]);
-			answers = handler.handleCommand(update.getCallbackQuery());
-		}
-		if (update.hasInlineQuery()) {
-			if (inlineQueries.containsKey(update.getInlineQuery().getQuery())) {
-				InlineQueryHandler handler = inlineQueries.get(update.getInlineQuery().getQuery());
-				answers = handler.handleInlineQuery(update.getInlineQuery());
+		try {
+			
+			if (update.hasMessage() && update.getMessage().getText() != null) {
+				CommandHandler handler = commands.get(update.getMessage().getText().split("_")[0]);
+				answers = handler.handleCommand(update.getMessage());
 			}
+			if (update.hasCallbackQuery()) {
+				CallbackQueryHandler handler = callbackQueries.get(update.getCallbackQuery().getData().split("_")[0]);
+				answers = handler.handleCommand(update.getCallbackQuery());
+			}
+			if (update.hasInlineQuery()) {
+				if (inlineQueries.containsKey(update.getInlineQuery().getQuery())) {
+					InlineQueryHandler handler = inlineQueries.get(update.getInlineQuery().getQuery());
+					answers = handler.handleInlineQuery(update.getInlineQuery());
+				}
+			}
+						
+		} catch (TelegramBotException e) {
+			
+		} finally {
+			this.sendAnswers(answers);
 		}
-		
-		this.sendAnswers(answers);
 	}
 	@Override
 	public String getBotUsername() {
