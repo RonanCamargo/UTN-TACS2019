@@ -3,6 +3,8 @@ package utn.tacs.grupo3.telegram.bot.handler.locator;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
+
 import utn.tacs.grupo3.telegram.bot.constants.PlacesBotConstants;
 import utn.tacs.grupo3.telegram.bot.exception.CallbackQueryNotFoundException;
 import utn.tacs.grupo3.telegram.bot.handler.CallbackQueryHandler;
@@ -21,10 +23,12 @@ public class CallbackQueryHandlerLocator {
 		callbackQueries.put(PlacesBotConstants.ADD_PLACE_TO_SELECTED_LIST, new AddPlaceToSelectedListCallbackQueryHandler());
 	}
 	
-	public static CallbackQueryHandler getHandler(String callbackData) {
-		if (!callbackQueries.containsKey(callbackData)) {
-			throw new CallbackQueryNotFoundException("CallbackQuery: " + callbackData + " is not registered");
+	public static CallbackQueryHandler getHandler(CallbackQuery callbackQuery) {
+		String callbackQueryCommand = callbackQuery.getData().split("_")[0];
+		
+		if (!callbackQueries.containsKey(callbackQueryCommand)) {
+			throw new CallbackQueryNotFoundException("CallbackQuery: " + callbackQueryCommand + " is not registered");
 		}
-		return callbackQueries.get(callbackData);
+		return callbackQueries.get(callbackQueryCommand);
 	}
 }

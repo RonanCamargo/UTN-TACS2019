@@ -3,6 +3,8 @@ package utn.tacs.grupo3.telegram.bot.handler.locator;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.telegram.telegrambots.meta.api.objects.Message;
+
 import utn.tacs.grupo3.telegram.bot.constants.PlacesBotConstants;
 import utn.tacs.grupo3.telegram.bot.exception.CommandNotFoundException;
 import utn.tacs.grupo3.telegram.bot.handler.CommandHandler;
@@ -14,7 +16,7 @@ import utn.tacs.grupo3.telegram.bot.handler.command.SearchCommandHandler;
 import utn.tacs.grupo3.telegram.bot.handler.command.StartCommandHandler;
 import utn.tacs.grupo3.telegram.bot.handler.command.ViewListCommandHandler;
 
-public class CommandQueryHandlerLocator {
+public class CommandHandlerLocator {
 	
 	private static Map<String, CommandHandler> commands;
 
@@ -30,7 +32,9 @@ public class CommandQueryHandlerLocator {
 		commands.put(PlacesBotConstants.HELP_COMMAND, new HelpCommandHandler());
 	}
 	
-	public static CommandHandler getHandler(String command) {
+	public static CommandHandler getHandler(Message message) {
+		String command = message.getText().split("_")[0];
+		
 		if (!commands.containsKey(command)) {
 			throw new CommandNotFoundException("Command: " + command + "is not registered");
 		}
