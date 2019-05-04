@@ -12,6 +12,7 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKe
 
 import utn.tacs.grupo3.telegram.bot.factory.MessageFactory;
 import utn.tacs.grupo3.telegram.bot.handler.AbstractCommandHandler;
+import utn.tacs.grupo3.telegram.bot.helper.HtmlHelper;
 import utn.tacs.grupo3.telegram.bot.request.entity.Place;
 import utn.tacs.grupo3.telegram.bot.user.LoggedUsers;
 import utn.tacs.grupo3.telegram.bot.user.LoginStatusChecker;
@@ -26,7 +27,6 @@ public class ViewListCommandHandler extends AbstractCommandHandler{
 	public <T extends Serializable> List<BotApiMethod<?>> handleCommand(Message message) {
 		//TODO refactor
 		String listName = message.getText().substring(10);
-//		List<Place> places = ListOfPlacesRepo.places(listName);
 		List<Place> places = apiRequest.listByName(LoggedUsers.getUsername(message.getFrom().getId()), listName).getPlaces();
 		
 		InlineKeyboardMarkup keyboard = new InlineKeyboardMarkup();
@@ -39,7 +39,7 @@ public class ViewListCommandHandler extends AbstractCommandHandler{
 		keyboard.setKeyboard(buttons);
 		
 		SendMessage answer = MessageFactory.createSendMessage(message)
-				.setText("<b>Seleccione un lugar</b>")
+				.setText(HtmlHelper.bold("Select a place"))
 				.setReplyMarkup(keyboard);
 		
 		return List.of(answer);
