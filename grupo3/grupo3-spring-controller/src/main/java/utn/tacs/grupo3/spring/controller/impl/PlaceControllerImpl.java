@@ -49,7 +49,13 @@ public class PlaceControllerImpl implements PlaceController {
     @Override
     @GetMapping("/near")
     public List<Venue> near(@RequestParam("coordinates") String coordinates) {
-        return foursquarePlacesRequest.getAllPlaces(coordinates);
+        return foursquarePlacesRequest.getAllPlacesByCoordinates(coordinates);
+    }
+
+    @Override
+    @GetMapping("/near-by-name")
+    public List<Venue> nearByName(@RequestParam("name") String name) {
+        return foursquarePlacesRequest.getAllPlacesByName(name);
     }
 
 }
