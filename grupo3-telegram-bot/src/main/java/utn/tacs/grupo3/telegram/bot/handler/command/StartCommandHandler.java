@@ -19,6 +19,7 @@ public class StartCommandHandler implements CommandHandler{
 				HtmlHelper.bold("Welcome to UTN Places Bot"),
 				HtmlHelper.multipleBr(2),
 				"Please send your username and password as follows",
+				HtmlHelper.br(),
 				"/login USERNAME, PASSWORD"
 				);
 				

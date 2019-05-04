@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({ "id", "listName", "places" })
-public class ListOfPlace {
+public class ListOfPlaces {
 
 	@JsonProperty("id")
 	private Integer id;

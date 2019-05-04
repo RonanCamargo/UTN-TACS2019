@@ -2,6 +2,7 @@ package utn.tacs.grupo3.telegram.bot.request;
 
 import java.util.List;
 
+import utn.tacs.grupo3.telegram.bot.request.entity.ListOfPlaces;
 import utn.tacs.grupo3.telegram.bot.request.entity.Place;
 import utn.tacs.grupo3.telegram.bot.request.entity.Venue;
 
@@ -50,9 +51,10 @@ public class MockApiRequest implements ApiRequest{
 	}
 
 	@Override
-	public List<Place> listByName(String username, String listName) {
+	public ListOfPlaces listByName(String username, String listName) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 
 }

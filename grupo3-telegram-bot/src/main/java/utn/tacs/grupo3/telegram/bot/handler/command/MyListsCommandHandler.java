@@ -8,7 +8,6 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 import utn.tacs.grupo3.telegram.bot.factory.MessageFactory;
 import utn.tacs.grupo3.telegram.bot.handler.AbstractCommandHandler;
 import utn.tacs.grupo3.telegram.bot.helper.HtmlHelper;
-import utn.tacs.grupo3.telegram.bot.mock.repo.ListOfPlacesRepo;
 import utn.tacs.grupo3.telegram.bot.user.LoginStatusChecker;
 
 public class MyListsCommandHandler extends AbstractCommandHandler{
@@ -26,7 +25,7 @@ public class MyListsCommandHandler extends AbstractCommandHandler{
 		
 		SendMessage answer = MessageFactory.createSendMessage(message);
 		
-		List<String> myListsNames = ListOfPlacesRepo.listNames();
+		List<String> myListsNames = apiRequest.listNames(getUsernameByUser(message.getFrom()));
 		
 		StringBuilder text = new StringBuilder(HtmlHelper.bold("My lists")).append(HtmlHelper.multipleBr(2));
 		

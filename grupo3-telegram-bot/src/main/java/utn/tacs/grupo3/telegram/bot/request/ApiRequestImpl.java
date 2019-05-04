@@ -10,8 +10,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
-import utn.tacs.grupo3.telegram.bot.request.entity.ListOfPlace;
-import utn.tacs.grupo3.telegram.bot.request.entity.Place;
+import utn.tacs.grupo3.telegram.bot.request.entity.ListOfPlaces;
 import utn.tacs.grupo3.telegram.bot.request.entity.Venue;
 
 public class ApiRequestImpl implements ApiRequest{
@@ -19,6 +18,8 @@ public class ApiRequestImpl implements ApiRequest{
 	private static final String API_BASE_URL = "http://localhost:8080";
 	private static final String NEAR_PLACES = "/places/near?coordinates=:lat,:long";
 	private static final String USER_LISTS_OF_PLACES = "/users/:user-id/list-of-places";
+	private static final String PLACES_BY_NAME = "/places/near-by-name?name=:name";
+	private static final String LIST_BY_NAME = "/users/:user-id/list-of-places/:list-name";
 	
 	private static Map<String, String> userTokenMap;
 	
@@ -47,10 +48,10 @@ public class ApiRequestImpl implements ApiRequest{
 				.setParameter(":user-id", username)
 				.build();
 		
-		ResponseEntity<List<ListOfPlace>> lists = rest.exchange(
+		ResponseEntity<List<ListOfPlaces>> lists = rest.exchange(
 				uri,
 				HttpMethod.GET, null,
-				new ParameterizedTypeReference<List<ListOfPlace>>() {});
+				new ParameterizedTypeReference<List<ListOfPlaces>>() {});
 		
 		return lists.getBody().stream().map(list -> list.getListName()).collect(Collectors.toList());
 	}
@@ -73,8 +74,14 @@ public class ApiRequestImpl implements ApiRequest{
 
 	@Override
 	public List<Venue> searchPlacesByName(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		String uri = new URIBuilder()
+				.setBaseUri(API_BASE_URL)
+				.setRelativeUri(PLACES_BY_NAME)
+				.setParameter(":name", name)
+				.build();
+		ResponseEntity<List<Venue>> venuesByName = rest.exchange(uri, HttpMethod.GET, null, new ParameterizedTypeReference<List<Venue>>() {});
+		
+		return venuesByName.getBody();
 	}
 
 
@@ -97,9 +104,16 @@ public class ApiRequestImpl implements ApiRequest{
 
 
 	@Override
-	public List<Place> listByName(String username, String listName) {
-		// TODO Auto-generated method stub
-		return null;
+	public ListOfPlaces listByName(String username, String listName) {
+		String uri = new URIBuilder()
+				.setBaseUri(API_BASE_URL)
+				.setRelativeUri(LIST_BY_NAME)
+				.setParameter(":user-id", username)
+				.setParameter(":list-name", listName)
+				.build();
+		ResponseEntity<ListOfPlaces> listOfPlaces = rest.exchange(uri, HttpMethod.GET, null, ListOfPlaces.class);
+		
+		return listOfPlaces.getBody();
 	}
 
 }

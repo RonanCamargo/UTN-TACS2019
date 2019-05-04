@@ -27,7 +27,7 @@ public class ViewListCommandHandler extends AbstractCommandHandler{
 		//TODO refactor
 		String listName = message.getText().substring(10);
 //		List<Place> places = ListOfPlacesRepo.places(listName);
-		List<Place> places = apiRequest.listByName(LoggedUsers.getUsername(message.getFrom().getId()), listName);
+		List<Place> places = apiRequest.listByName(LoggedUsers.getUsername(message.getFrom().getId()), listName).getPlaces();
 		
 		InlineKeyboardMarkup keyboard = new InlineKeyboardMarkup();
 		List<List<InlineKeyboardButton>> buttons = List.of(
