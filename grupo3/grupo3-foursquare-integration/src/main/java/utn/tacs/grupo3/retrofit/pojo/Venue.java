@@ -12,16 +12,10 @@ public class Venue {
         @SerializedName("name")
         @Expose
         public String name;
-        @SerializedName("categories")
+        @SerializedName("location")
         @Expose
-        public List<Category> categories = null;
+        private Location location;
 
-        @SerializedName("referralId")
-        @Expose
-        public String referralId;
-        @SerializedName("hasPerk")
-        @Expose
-        public Boolean hasPerk;
 
         public String getId() {
                 return id;
@@ -31,15 +25,8 @@ public class Venue {
                 return name;
         }
 
-        public List<Category> getCategories() {
-                return categories;
+        public Location getLocation() {
+                return location;
         }
 
-        public String getReferralId() {
-                return referralId;
-        }
-
-        public Boolean getHasPerk() {
-                return hasPerk;
-        }
 }
