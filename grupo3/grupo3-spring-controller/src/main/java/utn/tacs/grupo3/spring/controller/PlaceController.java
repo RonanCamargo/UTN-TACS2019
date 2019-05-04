@@ -4,6 +4,7 @@ import java.util.List;
 
 import utn.tacs.grupo3.model.Place;
 import utn.tacs.grupo3.model.exception.ExceptionbyResourceNotFound;
+import utn.tacs.grupo3.retrofit.pojo.Venue;
 
 /**
  * Interface for place-related controller methods
@@ -39,6 +40,6 @@ public interface PlaceController {
      * @param coordinates
      * @return
      */
-    String near(String coordinates);
+    List<Venue> near(String coordinates);
 
 }

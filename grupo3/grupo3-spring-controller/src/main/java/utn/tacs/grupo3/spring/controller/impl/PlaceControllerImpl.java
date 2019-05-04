@@ -15,6 +15,7 @@ import utn.tacs.grupo3.model.Place;
 import utn.tacs.grupo3.model.exception.ExceptionbyResourceNotFound;
 import utn.tacs.grupo3.repository.PlaceRepository;
 import utn.tacs.grupo3.retrofit.FoursquarePlacesRequest;
+import utn.tacs.grupo3.retrofit.pojo.Venue;
 import utn.tacs.grupo3.spring.controller.PlaceController;
 
 @RestController
@@ -47,8 +48,8 @@ public class PlaceControllerImpl implements PlaceController {
 
     @Override
     @GetMapping("/near")
-    public String near(@RequestParam("coordinates") String coordinates) {
-        return foursquarePlacesRequest.getAllPlaces(coordinates).get(0).getName();
+    public List<Venue> near(@RequestParam("coordinates") String coordinates) {
+        return foursquarePlacesRequest.getAllPlaces(coordinates);
     }
 
 }
