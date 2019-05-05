@@ -34,7 +34,7 @@ class Card extends Component
 					    <div className = "card-body">
 								{!this.state.isHidden && <InputGroup label="Save" />}
 							  <a target="_blank" href={ this.props.url } >
-							    <img src={ this.props.url } alt="Cinque Terre" width="300" height="auto">
+							    <img src={ this.props.url } alt="Cinque Terre" width="300" height="auto" className="w3-grayscale-max">
 									</img>
 							  </a>
 					        <p><mark>{ this.props.url }</mark></p>

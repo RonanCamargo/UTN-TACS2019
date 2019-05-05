@@ -1,4 +1,4 @@
-body {
+.body {
 
   margin: 0;
   padding: 0;
@@ -8,7 +8,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-background: #DDDDDD;
+  background: #DDDDDD;
 
 }
 
@@ -20,7 +20,27 @@ background: #DDDDDD;
  padding-bottom: 100px; /* height of your footer */
 }
 
-footer {
+.thumb {
+  border: 1px solid #ddd; /* Gray border */
+  border-radius: 4px;  /* Rounded border */
+  padding: 5px; /* Some padding */
+  width: 150px; /* Set a small width */
+  height: 150px;
+}
+
+.listCardHeader {
+  background: #d6d6c2;
+  padding: 5px; /* Some padding */
+  width: 250px; /* Set a small width */
+
+}
+
+.listCardHeader:hover {
+background: #b8b894;
+  box-shadow: 0 0 4px 2px rgba(0, 100, 146, 0.5);
+}
+
+.footer {
   background:Black;
   color: Darkgrey;
   text-align: center;
@@ -30,7 +50,7 @@ footer {
   height: 50px;
 }
 
-code {
+.code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }

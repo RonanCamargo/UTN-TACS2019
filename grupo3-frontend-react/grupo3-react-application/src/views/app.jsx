@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom'
 import LogInUser from 'views/login/user/login_user'
 import PlaceView from 'views/place/PlaceView'
+import ListView from 'views/place/ListView'
 
 class App extends Component {
 
@@ -20,7 +21,8 @@ class App extends Component {
             <div>
                 <Switch>
                     <Route path={'/login'} component={LogInUser} />
-                    //<Route path={'/places'} component={PlaceView} />
+                    <Route path={'/places'} component={PlaceView} />
+                    <Route path={'/users/list-of-places'} component={ListView} />
                 </Switch>
             </div>
         )

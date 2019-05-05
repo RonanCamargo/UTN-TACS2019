@@ -48,34 +48,23 @@ class PlaceView extends Component {
     // }
 
     render() {
-      const places = this.state.places.map(place => {
-    return(
-      <Card key={place.id} cardName = {place.name} id = {place.id} url = {place.location} />
-    )
-  })
-  return (
-    <div className="App">
-      <Navigation title= "Home" />
-      <div className= "container">
-          <div className= "row mt-4">
-          <div className="row active-with-click">
-          { places}
+        const places = this.state.places.map(place => {
+        return(
+        <Card key={place.id} cardName = {place.name} id = {place.id} url = {place.location} />
+        )
+        })
+        return (
+        <div className="App">
+        <Navigation title= "Home" />
+        <div className= "container">
+            <div className= "row mt-4">
+            <div className="row active-with-click">
+            { places}
+             </div>
            </div>
-         </div>
-      </div>
-    </div>
-  );
-        // return (
-        //     <div>
-        //         <ul>
-        //             {this.state.places.map(place => (
-        //                 <li>
-        //                     {place.name}: {place.location}
-        //                 </li>
-        //             ))}
-        //         </ul>
-        //     </div>
-        // );
+        </div>
+        </div>
+        );
     }
 }
 
