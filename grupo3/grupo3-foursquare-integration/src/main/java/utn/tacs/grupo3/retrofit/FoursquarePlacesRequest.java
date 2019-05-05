@@ -1,14 +1,16 @@
 package utn.tacs.grupo3.retrofit;
 
-import retrofit2.Call;
-import retrofit2.Response;
-import utn.tacs.grupo3.retrofit.pojo.Pojo;
-import utn.tacs.grupo3.retrofit.pojo.Venue;
-
 import java.io.IOException;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
+
+import retrofit2.Call;
+import retrofit2.Response;
+import utn.tacs.grupo3.retrofit.pojo.Pojo;
+import utn.tacs.grupo3.retrofit.pojo.Venue;
+import utn.tacs.grupo3.retrofit.pojo.venue.FullVenue;
+import utn.tacs.grupo3.retrofit.pojo.venue.VenuePojo;
 
 @Component
 public class FoursquarePlacesRequest {
@@ -30,6 +32,19 @@ public class FoursquarePlacesRequest {
 
         Call<Pojo> call = service.getAllPlacesByName(CLIENT_ID, CLIENT_SECRET, DATE, 5, name,NEAR);
         return executeCall(call);
+    }
+    
+    public FullVenue getVenueById(String venueId) {
+        FoursquareService service = RetrofitClientInstance.getRetrofitInstance().create(FoursquareService.class);
+
+        Call<VenuePojo> call = service.getVenue(venueId, CLIENT_ID, CLIENT_SECRET, DATE);
+        
+        try {
+			return call.execute().body().getResponse().getVenue();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+        return null;
     }
 
 
