@@ -44,6 +44,13 @@ public class PlaceRepository {
         }
         return placesByName(placeId).get(0);
     }
+    
+    public Place createPlace(Place place) {
+        if (placesByName(place.getName()).isEmpty()) {
+            places.add(place);
+        }
+        return placesByName(place.getName()).get(0);
+    }
 
     public long amountOfPlacesRegisteredInTheSystemInTheLast(int days) {
         LocalDate lastDays = currentDate.minusDays(days);
