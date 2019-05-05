@@ -5,14 +5,18 @@ import java.time.LocalDate;
 public class Place {
 
     private String name;
-    private String location;
+    private String address;
 	private LocalDate registrationDate;
+	private Float latitude;
+	private Float longitude;
+	private String foursquareId;
+
 
 	public Place() {}
 
-    public Place(String name, String location) {
+    public Place(String name, String address) {
         this.name = name;
-        this.location = location;
+        this.address = address;
         this.registrationDate = LocalDate.now();
     }
 
@@ -27,13 +31,13 @@ public class Place {
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	public String getLocation() {
-		return location;
+	
+	public String getAddress() {
+		return address;
 	}
 
-	public void setLocation(String location) {
-		this.location = location;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 	public LocalDate getRegistrationDate() {
@@ -42,6 +46,30 @@ public class Place {
 
 	public void setRegistrationDate(LocalDate registrationDate) {
 		this.registrationDate = registrationDate;
+	}
+
+	public Float getLatitude() {
+		return latitude;
+	}
+	
+	public void setLatitude(Float latitude) {
+		this.latitude = latitude;
+	}
+	
+	public Float getLongitude() {
+		return longitude;
+	}
+	
+	public void setLongitude(Float longitude) {
+		this.longitude = longitude;
+	}
+	
+	public String getFoursquareId() {
+		return foursquareId;
+	}
+	
+	public void setFoursquareId(String foursquareId) {
+		this.foursquareId = foursquareId;
 	}
 }
 
