@@ -39,7 +39,7 @@ Desde el root del proyecto
 | GET | /users | Todos los usuarios | 
 | POST | /users | Crear un usuario | body=JSON
 | GET | /places/near | Lugares cercanos a una coordenada | parameter=coordinates
-| POST | /users/{user-id}/list-of-places{list-id}/{place-id} |Registrar un lugar en una lista de lugares | 
+| POST | /users/{user-id}/list-of-places{list-id}/{place-id} |Registrar un lugar en una lista de lugares | place-id es el id de foursquare
 | POST | /users/{user-id}/list-of-places/{list-id} | crear una listas de lugares | 
 | GET | /users/{user-id}/list-of-places | Listas de lugares favoritos | 
 | GET | /users/{user-id}/list-of-places/{list-id} | buscar una lista de lugares | 
