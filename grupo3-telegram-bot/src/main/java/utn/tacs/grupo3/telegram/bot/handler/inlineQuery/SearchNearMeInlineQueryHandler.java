@@ -6,35 +6,26 @@ import org.telegram.telegrambots.meta.api.methods.AnswerInlineQuery;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.objects.Location;
 import org.telegram.telegrambots.meta.api.objects.inlinequery.InlineQuery;
-import org.telegram.telegrambots.meta.api.objects.inlinequery.result.InlineQueryResult;
-import org.telegram.telegrambots.meta.api.objects.inlinequery.result.InlineQueryResultLocation;
-import org.telegram.telegrambots.meta.api.objects.inlinequery.result.InlineQueryResultVenue;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
-import utn.tacs.grupo3.telegram.bot.factory.InlineKeyboardFactory;
+import utn.tacs.grupo3.telegram.bot.exception.LocationNotEnabledException;
+import utn.tacs.grupo3.telegram.bot.factory.InlineQueryResultFactory;
 import utn.tacs.grupo3.telegram.bot.factory.MessageFactory;
 import utn.tacs.grupo3.telegram.bot.handler.InlineQueryHandler;
+import utn.tacs.grupo3.telegram.bot.request.ApiRequestImpl;
+import utn.tacs.grupo3.telegram.bot.request.entity.Venue;
 
 public class SearchNearMeInlineQueryHandler implements InlineQueryHandler{
 
 	@Override
 	public List<BotApiMethod<?>> handleInlineQuery(InlineQuery inlineQuery) {
-		AnswerInlineQuery answer = MessageFactory.createAnswerInlineQuery(inlineQuery);
-		Location location = inlineQuery.getLocation();
-		location.getClass();
+		if (inlineQuery.getLocation() == null) {
+			throw new LocationNotEnabledException("Please enable location services");
+		}
+		Location location = inlineQuery.getLocation();		
+		List<Venue> venues = new ApiRequestImpl().near(location.getLatitude(), location.getLongitude());
 		
-		InlineKeyboardMarkup keyboard = InlineKeyboardFactory.createInlineKeyboard(
-				List.of(new InlineKeyboardButton("Add to list").setCallbackData("/addplacetolist_" + "1"))
-				);
-		
-		List<InlineQueryResult> results = List.of(
-				new InlineQueryResultLocation().setId("1").setTitle("UTN Campus")
-					.setLatitude(-34.659606f).setLongitude(-58.468083f).setReplyMarkup(keyboard),
-				new InlineQueryResultLocation().setId("2").setTitle("UTN Medrano")
-					.setLatitude(-34.598359f).setLongitude(-58.419878f).setReplyMarkup(keyboard)
-				);
-		answer.setResults(results);		
+		AnswerInlineQuery answer = MessageFactory.createAnswerInlineQuery(inlineQuery);		
+		answer.setResults(InlineQueryResultFactory.createNearMeQueryResultsWithKeyboard(venues));		
 
 		return List.of(answer);
 	}
