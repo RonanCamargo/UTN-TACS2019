@@ -26,12 +26,12 @@ public class SearchCommandHandler extends AbstractCommandHandler{
 		
 		InlineKeyboardMarkup keyboard = InlineKeyboardFactory.createInlineKeyboard(				
 				List.of(
-					new InlineKeyboardButton("Place name").setSwitchInlineQueryCurrentChat("search "),
-					new InlineKeyboardButton("Near me").setSwitchInlineQueryCurrentChat("search places near me")
+					new InlineKeyboardButton("By name").setSwitchInlineQueryCurrentChat("search "),
+					new InlineKeyboardButton("Near me").setSwitchInlineQueryCurrentChat("search near me")
 				));
 		
 		SendMessage answer = MessageFactory.createSendMessage(message)
-				.setText("Search by")
+				.setText("Search places")
 				.setReplyMarkup(keyboard);		
 		
 		return List.of(answer);
