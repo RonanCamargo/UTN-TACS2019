@@ -36,11 +36,7 @@ class ListCard extends Component
 					    <div className = "card-body">
                 <div className = "row-md-2">
                   <p>{ this.props.cardName } </p>
-
                     {!this.state.isHidden && <EditButton />}
-
-
-
                 </div>
 					    </div>
           </div>

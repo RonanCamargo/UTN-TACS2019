@@ -55,14 +55,26 @@ class PlaceView extends Component {
         })
         return (
         <div className="App">
-        <Navigation title= "Home" />
-        <div className= "container">
+          <Navigation title= "Home" />
+          <div className= "helper">
             <div className= "row mt-4">
-            <div className="row active-with-click">
-            { places}
+            <p><strong>Borrar todo esto.</strong></p>
+                <p>View para users o admins.</p>
+                <p>Un user podra buscar places con search.</p>
+                <p>Search desplegara un form de criterios de busqueda.</p>
+                <p>Un user podra agregar un lugar a una de sus listas con "save".</p>
+                <p>Un user podra crear una lista nueva con "create" agregando un nombre de lista.</p>
+                <p>Un user podra marcar un lugar con un flag de visitado.</p>
+                <p>Un admin podra ver un star con el numero de users que tienen guardado un lugar en alguna de sus listas.</p>
+            </div>
+          </div>
+          <div className= "container">
+              <div className= "row mt-4">
+                <div className="row active-with-click">
+                {places}
+                </div>
              </div>
-           </div>
-        </div>
+          </div>
         </div>
         );
     }

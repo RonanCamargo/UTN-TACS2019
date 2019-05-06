@@ -21,23 +21,39 @@
 }
 
 .thumb {
-  border: 1px solid #ddd; /* Gray border */
+  border: 10px solid #fff; /* Gray border */
   border-radius: 4px;  /* Rounded border */
   padding: 5px; /* Some padding */
   width: 150px; /* Set a small width */
   height: 150px;
 }
 
+.helper
+{
+  background: #a6a692;
+  padding: 20px; /* Some padding */
+  width: 150px; /* Set a small width */
+  float: right;
+}
+
+.extraInfo {
+  background: #a6a692;
+  padding: 5px; /* Some padding */
+  text-align: right;
+}
 .listCardHeader {
   background: #d6d6c2;
   padding: 5px; /* Some padding */
-  width: 250px; /* Set a small width */
-
+/*  width: 250px;  Set a small width */
 }
-
+.listCardBody {
+  background: #e9e9d9;
+  padding: 5px; /* Some padding */
+/*  width: 250px;  Set a small width */
+}
 .listCardHeader:hover {
-background: #b8b894;
-  box-shadow: 0 0 4px 2px rgba(0, 100, 146, 0.5);
+  background: #b8b894;
+  /*  box-shadow: 0 0 4px 2px rgba(0, 100, 146, 0.5); */
 }
 
 .footer {

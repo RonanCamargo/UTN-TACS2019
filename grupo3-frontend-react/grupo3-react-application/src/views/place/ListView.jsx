@@ -84,7 +84,15 @@ class ListView extends Component {
 
         return (
         <div className="App">
-            <Navigation title= "Home" />
+            <Navigation title= "Home"/>
+            <div className= "helper">
+              <div className= "row mt-4">
+                <p><strong>Borrar todo esto.</strong></p>
+                  <p>View para users.</p>
+                  <p>Agregar form con botones para permitir editar el nombre de la lista o para eliminarla.</p>
+                  <p>Ver si conviene tambien crear listas desde aca</p>
+              </div>
+            </div>
             <div className= "container md-2">
             <h3>my lists
             </h3>
