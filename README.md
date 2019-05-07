@@ -87,3 +87,14 @@ Desde el root del proyecto
     npm i
     npm start
 ```
+
+#### URLs para probar el frontend
+```
+    http://localhost:8008/stats
+    http://localhost:8008/users/list-of-places
+    http://localhost:8008/places
+    http://localhost:8008/users
+    http://localhost:8008/signup
+    http://localhost:8008/login
+    
+```
