@@ -21,12 +21,7 @@ public class ApiRequestImpl implements ApiRequest{
 	private static final String PLACES_BY_NAME = "/places/near-by-name?name=:name";
 	private static final String LIST_BY_NAME = "/users/:user-id/list-of-places/:list-name";
 	private static final String ADD_PLACE_TO_SELECTED_LIST = "/users/:user-id/list-of-places/:list-name/:place-id";
-	
-	private static Map<String, String> userTokenMap;
-	
-	static {
-		userTokenMap = new HashMap<String, String>();		
-	}
+		
 	
 	private RestTemplate rest = new RestTemplate();
 	
@@ -105,12 +100,6 @@ public class ApiRequestImpl implements ApiRequest{
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	
-	private String getToken(String username) {
-		return userTokenMap.get(username);
-	}
-
 
 	@Override
 	public ListOfPlaces listByName(String username, String listName) {
