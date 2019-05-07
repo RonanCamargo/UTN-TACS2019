@@ -10,6 +10,7 @@ import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
+import utn.tacs.grupo3.telegram.bot.constants.PlacesBotConstants;
 import utn.tacs.grupo3.telegram.bot.exception.TelegramBotException;
 import utn.tacs.grupo3.telegram.bot.handler.CallbackQueryHandler;
 import utn.tacs.grupo3.telegram.bot.handler.CommandHandler;
@@ -24,11 +25,10 @@ public class PlacesBot extends TelegramLongPollingBot{
 	private static final String BOT_TOKEN = "837736990:AAGVZ27HyFKKyc-ZCbUhgIHE7iddP6-wchY";
 	
 	private static Map<String, InlineQueryHandler> inlineQueries;
-	private static final String SEARCH_NEAR_ME_INLINE = "search places near me";
-	
+		
 	static {		
 		inlineQueries = new HashMap<String, InlineQueryHandler>();
-		inlineQueries.put(SEARCH_NEAR_ME_INLINE, new SearchNearMeInlineQueryHandler());		
+		inlineQueries.put(PlacesBotConstants.SEARCH_NEAR_ME_INLINE, new SearchNearMeInlineQueryHandler());		
 	}
 	
 	@Override

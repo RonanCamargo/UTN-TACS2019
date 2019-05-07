@@ -20,6 +20,7 @@ public class ApiRequestImpl implements ApiRequest{
 	private static final String USER_LISTS_OF_PLACES = "/users/:user-id/list-of-places";
 	private static final String PLACES_BY_NAME = "/places/near-by-name?name=:name";
 	private static final String LIST_BY_NAME = "/users/:user-id/list-of-places/:list-name";
+	private static final String ADD_PLACE_TO_SELECTED_LIST = "/users/:user-id/list-of-places/:list-name/:place-id";
 	
 	private static Map<String, String> userTokenMap;
 	
@@ -86,9 +87,17 @@ public class ApiRequestImpl implements ApiRequest{
 
 
 	@Override
-	public void addPlaceToList(String username, String listName) {
-		// TODO Auto-generated method stub
+	public void addPlaceToList(String username, String listName, String placeId) {
+		String uri = new URIBuilder()
+				.setBaseUri(API_BASE_URL)
+				.setRelativeUri(ADD_PLACE_TO_SELECTED_LIST)
+				.setParameter(":user-id", username)
+				.setParameter(":list-name", listName)
+				.setParameter(":place-id", placeId)
+				.build();
 		
+		ResponseEntity<String> response = rest.exchange(uri, HttpMethod.POST, null, String.class);
+		response.getBody();
 	}
 
 	@Override

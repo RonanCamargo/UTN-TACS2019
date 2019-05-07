@@ -39,12 +39,6 @@ public class MockApiRequest implements ApiRequest{
 	}
 
 	@Override
-	public void addPlaceToList(String username, String listName) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public Venue venueByFoursquareId(String foursquareId) {
 		// TODO Auto-generated method stub
 		return null;
@@ -54,6 +48,12 @@ public class MockApiRequest implements ApiRequest{
 	public ListOfPlaces listByName(String username, String listName) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void addPlaceToList(String username, String listName, String placeId) {
+		// TODO Auto-generated method stub
+		
 	}
 
 

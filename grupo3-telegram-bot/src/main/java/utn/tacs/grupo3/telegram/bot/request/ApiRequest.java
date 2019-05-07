@@ -21,7 +21,7 @@ public interface ApiRequest {
 	
 	List<Venue> searchPlacesByName(String name);
 	
-	void addPlaceToList(String username, String listName);
+	void addPlaceToList(String username, String listName, String placeId);
 	
 	Venue venueByFoursquareId(String foursquareId);
 	

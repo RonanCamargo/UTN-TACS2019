@@ -30,12 +30,11 @@ public class ViewListCommandHandler extends AbstractCommandHandler{
 		List<Place> places = apiRequest.listByName(LoggedUsers.getUsername(message.getFrom().getId()), listName).getPlaces();
 		
 		InlineKeyboardMarkup keyboard = new InlineKeyboardMarkup();
-		List<List<InlineKeyboardButton>> buttons = List.of(
-				places.stream().map(place -> new InlineKeyboardButton(
+		List<List<InlineKeyboardButton>> buttons = places.stream().map(place -> List.of(new InlineKeyboardButton(
 						place.getName())
-						.setCallbackData("/viewplace_" + listName + "_" + place.getName()))
-				.collect(Collectors.toList())
-				);
+						.setCallbackData("/viewplace_" + listName + "_" + place.getName())))
+				.collect(Collectors.toList());
+		
 		keyboard.setKeyboard(buttons);
 		
 		SendMessage answer = MessageFactory.createSendMessage(message)
