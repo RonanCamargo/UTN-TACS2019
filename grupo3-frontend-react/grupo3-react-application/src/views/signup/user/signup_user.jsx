@@ -1,14 +1,17 @@
-import React, { Component } from "react"
+import React, { Component } from 'react'
 import { Form, Button, FormGroup, FormControl, Alert } from "react-bootstrap"
 import CSSModules from 'react-css-modules'
-import styles from "./login_user.css"
+import styles from "./signup_user.css"
 
-class LoginUser extends Component {
+class SignUp extends Component {
+
     constructor() {
         super()
         this.state = {
-            email: "",
-            password: ""
+            firstName : "",
+            lastName : "",
+            email : "",
+            password : ""
         }
     }
 
@@ -24,30 +27,47 @@ class LoginUser extends Component {
 
     handleSubmit = event => {
         event.preventDefault()
-        let response = http_request.get('http://localhost:8080/login')
-        .send({
-            username: this.state.email,
-            password: this.state.password
-        })
+        let response = http_request.get('http://localhost:8080/security/register')
+            .send({
+                firstName: this.state.firstName,
+                lastName: this.state.lastName,
+                email: this.state.email,
+                password: this.state.password
+            })
     }
 
     render() {
         return (
-            <div className="Login">
+            <div className="signup">
                 <Form onSubmit={this.handleSubmit}>
+                    <h2>Sign up</h2>
+                    <Form.Group controlId="firstName">
+                        <Form.Control
+                            autoFocus
+                            value={this.state.firstName}
+                            onChange={this.handleChange}
+                            placeholder="First name"
+                        />
+                    </Form.Group>
+                    <Form.Group controlId="lastName">
+                        <Form.Control
+                            autoFocus
+                            value={this.state.lastName}
+                            onChange={this.handleChange}
+                            placeholder="Last name"
+                        />
+                    </Form.Group>
                     <Form.Group controlId="email">
-                        <Form.Label>Username/Email</Form.Label>
                         <Form.Control
                             autoFocus
                             type="email"
                             value={this.state.email}
                             onChange={this.handleChange}
-                            placeholder="Enter username or email"
+                            placeholder="Email"
                         />
                     </Form.Group>
 
                     <Form.Group controlId="password">
-                        <Form.Label>Password</Form.Label>
                         <Form.Control
                             value={this.state.password}
                             onChange={this.handleChange}
@@ -55,21 +75,16 @@ class LoginUser extends Component {
                             placeholder="Password"
                         />
                     </Form.Group>
-                    <Form.Group controlId="signup">
-                        <Form.Label>
-                            Don't have an account? <Alert.Link href="http://localhost:8008/signup">Sign Up</Alert.Link>
-                        </Form.Label>
-                    </Form.Group>
                     <Button
-                        block
                         disabled={!this.validateForm()}
                         type="submit"
                         variant="primary">
-                        Login
+                        Sign Up
                     </Button>
                 </Form>
             </div>
         )
     }
 }
-export default CSSModules(LoginUser, styles, {allowMultiple: true})
+
+export default CSSModules(SignUp, styles, {allowMultiple: true})
