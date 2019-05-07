@@ -18,6 +18,8 @@
 
 		<telegrambots.version>4.2</telegrambots.version>
 		<exec.maven.version>1.6.0</exec.maven.version>
+		<spring.version>5.1.6.RELEASE</spring.version>
+		<junit.version>4.12</junit.version>
 	</properties>
 
 
@@ -29,9 +31,21 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>3.8.1</version>
+			<version>${junit.version}</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
@@ -43,7 +57,7 @@
 				<artifactId>exec-maven-plugin</artifactId>
 				<version>${exec.maven.version}</version>
 				<executions>
-					<execution>						
+					<execution>
 						<goals>
 							<goal>java</goal>
 						</goals>
