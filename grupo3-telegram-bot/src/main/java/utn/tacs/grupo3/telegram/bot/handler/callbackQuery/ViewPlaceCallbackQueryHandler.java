@@ -19,13 +19,13 @@ public class ViewPlaceCallbackQueryHandler implements CallbackQueryHandler{
 		String[] parsed = callbackQuery.getData().split("_");
 		List<Place> places = new ApiRequestImpl().listByName(LoggedUsers.getUsername(callbackQuery.getFrom().getId()), parsed[1]).getPlaces();
 		Place place = places.stream().filter(aPlace -> aPlace.getName().equalsIgnoreCase(parsed[2])).findFirst().get();
-		//TODO cambiar lat y long hardcodeados
+		
 		SendVenue venue = new SendVenue();
-		venue.setAddress(place.getLocation())
+		venue.setAddress(place.getAddress())
 			.setChatId(callbackQuery.getMessage().getChatId())
 			.setTitle(place.getName())
-			.setLatitude(-34.598359f)
-			.setLongitude(-58.419878f);
+			.setLatitude(place.getLatitude().floatValue())
+			.setLongitude(place.getLongitude().floatValue());
 		
 		return List.of(venue);
 	}

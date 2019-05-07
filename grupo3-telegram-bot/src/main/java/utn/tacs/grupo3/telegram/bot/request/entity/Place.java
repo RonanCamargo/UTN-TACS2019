@@ -6,15 +6,21 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "name", "location", "registrationDate" })
+@JsonPropertyOrder({ "name", "address", "registrationDate", "latitude", "longitude", "foursquareId" })
 public class Place {
 
 	@JsonProperty("name")
 	private String name;
-	@JsonProperty("location")
-	private String location;
+	@JsonProperty("address")
+	private String address;
 	@JsonProperty("registrationDate")
 	private String registrationDate;
+	@JsonProperty("latitude")
+	private Double latitude;
+	@JsonProperty("longitude")
+	private Double longitude;
+	@JsonProperty("foursquareId")
+	private Object foursquareId;
 
 	@JsonProperty("name")
 	public String getName() {
@@ -26,14 +32,14 @@ public class Place {
 		this.name = name;
 	}
 
-	@JsonProperty("location")
-	public String getLocation() {
-		return location;
+	@JsonProperty("address")
+	public String getAddress() {
+		return address;
 	}
 
-	@JsonProperty("location")
-	public void setLocation(String location) {
-		this.location = location;
+	@JsonProperty("address")
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 	@JsonProperty("registrationDate")
@@ -44,6 +50,36 @@ public class Place {
 	@JsonProperty("registrationDate")
 	public void setRegistrationDate(String registrationDate) {
 		this.registrationDate = registrationDate;
+	}
+
+	@JsonProperty("latitude")
+	public Double getLatitude() {
+		return latitude;
+	}
+
+	@JsonProperty("latitude")
+	public void setLatitude(Double latitude) {
+		this.latitude = latitude;
+	}
+
+	@JsonProperty("longitude")
+	public Double getLongitude() {
+		return longitude;
+	}
+
+	@JsonProperty("longitude")
+	public void setLongitude(Double longitude) {
+		this.longitude = longitude;
+	}
+
+	@JsonProperty("foursquareId")
+	public Object getFoursquareId() {
+		return foursquareId;
+	}
+
+	@JsonProperty("foursquareId")
+	public void setFoursquareId(Object foursquareId) {
+		this.foursquareId = foursquareId;
 	}
 
 }
