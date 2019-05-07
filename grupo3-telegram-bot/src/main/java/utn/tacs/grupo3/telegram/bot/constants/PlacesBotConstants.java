@@ -17,7 +17,7 @@ public final class PlacesBotConstants {
 	public static final String ADD_PLACE_TO_SELECTED_LIST = "/addplacetolist";
 
 	//Inline queries
-	public static final String SEARCH_NEAR_ME_INLINE = "search near me";
-	public static final String SEARCH_BY_NAME = "search";
+	public static final String SEARCH_NEAR_ME_INLINE = "near me";
+	public static final String SEARCH_BY_NAME = "name ";
 
 }

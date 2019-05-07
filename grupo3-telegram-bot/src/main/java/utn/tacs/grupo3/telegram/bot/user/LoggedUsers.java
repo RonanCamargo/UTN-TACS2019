@@ -9,18 +9,22 @@ import java.util.Map;
  */
 public final class LoggedUsers {
 	
-	private static Map<Integer, String> loggedUsers;
+	private static Map<Integer, LoggedUser> loggedUsers;
 	
 	static {
-		loggedUsers = new HashMap<Integer, String>();
+		loggedUsers = new HashMap<Integer, LoggedUser>();
 	}
 	
 	public static String getUsername(Integer telegramId) {
-		return loggedUsers.get(telegramId);
+		return loggedUsers.get(telegramId).getUserName();
 	}
 	
-	public static void addLoggedUser(Integer telegramId, String username) {
-		loggedUsers.put(telegramId, username);
+	public static String getChatId(Integer telegramId) {
+		return loggedUsers.get(telegramId).getChatId();
+	}
+	
+	public static void addLoggedUser(Integer telegramId, String username, String chatId) {
+		loggedUsers.put(telegramId, new LoggedUser(username, chatId));
 	}
 	
 	public static void removeLoggedUser(Integer telegramId) {

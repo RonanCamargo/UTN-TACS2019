@@ -15,6 +15,7 @@ import utn.tacs.grupo3.telegram.bot.exception.TelegramBotException;
 import utn.tacs.grupo3.telegram.bot.handler.CallbackQueryHandler;
 import utn.tacs.grupo3.telegram.bot.handler.CommandHandler;
 import utn.tacs.grupo3.telegram.bot.handler.InlineQueryHandler;
+import utn.tacs.grupo3.telegram.bot.handler.inlineQuery.SearchByNameInlineQueryHandler;
 import utn.tacs.grupo3.telegram.bot.handler.inlineQuery.SearchNearMeInlineQueryHandler;
 import utn.tacs.grupo3.telegram.bot.handler.locator.CallbackQueryHandlerLocator;
 import utn.tacs.grupo3.telegram.bot.handler.locator.CommandHandlerLocator;
@@ -28,7 +29,8 @@ public class PlacesBot extends TelegramLongPollingBot{
 		
 	static {		
 		inlineQueries = new HashMap<String, InlineQueryHandler>();
-		inlineQueries.put(PlacesBotConstants.SEARCH_NEAR_ME_INLINE, new SearchNearMeInlineQueryHandler());		
+		inlineQueries.put(PlacesBotConstants.SEARCH_NEAR_ME_INLINE, new SearchNearMeInlineQueryHandler());
+		inlineQueries.put(PlacesBotConstants.SEARCH_BY_NAME, new SearchByNameInlineQueryHandler());
 	}
 	
 	@Override
@@ -45,14 +47,16 @@ public class PlacesBot extends TelegramLongPollingBot{
 				answers = handler.handleCommand(update.getCallbackQuery());
 			}
 			if (update.hasInlineQuery()) {
-				if (inlineQueries.containsKey(update.getInlineQuery().getQuery())) {
-					InlineQueryHandler handler = inlineQueries.get(update.getInlineQuery().getQuery());
+				String inlineQuery = getInlineQueryCommand(update.getInlineQuery().getQuery());
+				if (inlineQueries.containsKey(inlineQuery)) {
+					InlineQueryHandler handler = inlineQueries.get(inlineQuery);
 					answers = handler.handleInlineQuery(update.getInlineQuery());
 				}
 			}
 						
 		} catch (TelegramBotException e) {
 			e.printStackTrace();
+			this.handleException(e);
 		} finally {
 			this.sendAnswers(answers);
 		}
@@ -76,12 +80,20 @@ public class PlacesBot extends TelegramLongPollingBot{
 				try {
 					execute(answer);
 				} catch (TelegramApiException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			});
 		}
 		
+	}
+	
+	private String getInlineQueryCommand(String query) {
+		if (query.startsWith(PlacesBotConstants.SEARCH_BY_NAME)) {
+			return PlacesBotConstants.SEARCH_BY_NAME;
+		} else if (query.startsWith(PlacesBotConstants.SEARCH_NEAR_ME_INLINE)) {
+			return PlacesBotConstants.SEARCH_BY_NAME;
+		}
+		return "";
 	}
 	
 	

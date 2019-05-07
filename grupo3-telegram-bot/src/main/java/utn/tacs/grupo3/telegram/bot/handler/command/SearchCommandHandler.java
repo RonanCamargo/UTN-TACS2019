@@ -9,6 +9,7 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
+import utn.tacs.grupo3.telegram.bot.constants.PlacesBotConstants;
 import utn.tacs.grupo3.telegram.bot.factory.InlineKeyboardFactory;
 import utn.tacs.grupo3.telegram.bot.factory.MessageFactory;
 import utn.tacs.grupo3.telegram.bot.handler.AbstractCommandHandler;
@@ -26,8 +27,8 @@ public class SearchCommandHandler extends AbstractCommandHandler{
 		
 		InlineKeyboardMarkup keyboard = InlineKeyboardFactory.createInlineKeyboard(				
 				List.of(
-					new InlineKeyboardButton("By name").setSwitchInlineQueryCurrentChat("search "),
-					new InlineKeyboardButton("Near me").setSwitchInlineQueryCurrentChat("search near me")
+					new InlineKeyboardButton("By name").setSwitchInlineQueryCurrentChat(PlacesBotConstants.SEARCH_BY_NAME),
+					new InlineKeyboardButton("Near me").setSwitchInlineQueryCurrentChat(PlacesBotConstants.SEARCH_NEAR_ME_INLINE)
 				));
 		
 		SendMessage answer = MessageFactory.createSendMessage(message)

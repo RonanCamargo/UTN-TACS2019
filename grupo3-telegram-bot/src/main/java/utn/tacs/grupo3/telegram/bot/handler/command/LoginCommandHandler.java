@@ -41,7 +41,7 @@ public class LoginCommandHandler extends AbstractCommandHandler{
 				.setText(text)
 				.setReplyMarkup(ReplyKeyboardFactory.createCommandKeyboard());		
 		
-		LoggedUsers.addLoggedUser(message.getFrom().getId(), getUsername(message.getText()));
+		LoggedUsers.addLoggedUser(message.getFrom().getId(), getUsername(message.getText()), message.getChatId().toString());
 
 		return List.of(successfullLogin, answer);
 	}

@@ -21,7 +21,7 @@ public class AddPlaceToListCallbackQueryHandler implements CallbackQueryHandler{
 	public <T extends Serializable> List<BotApiMethod<?>> handleCommand(CallbackQuery callbackQuery) {
 		String placeId = callbackQuery.getData().split("_")[1];
 		SendMessage answer = new SendMessage()
-				.setChatId("762715463")
+				.setChatId(LoggedUsers.getChatId(callbackQuery.getFrom().getId()))
 				.setText("Select a list to add a new place");
 		
 		InlineKeyboardMarkup kb = new InlineKeyboardMarkup();
@@ -31,11 +31,6 @@ public class AddPlaceToListCallbackQueryHandler implements CallbackQueryHandler{
 					List.of(new InlineKeyboardButton(listName).setCallbackData(PlacesBotConstants.ADD_PLACE_TO_SELECTED_LIST + "_" + listName + "_" + placeId)))
 				.collect(Collectors.toList());
 		
-//		InlineKeyboardMarkup keyboard = new InlineKeyboardMarkup();
-//		List<List<InlineKeyboardButton>> buttons = List.of(
-//				List.of(new InlineKeyboardButton("Universidades").setCallbackData("/addplacetoselectedlist_" + "1")),
-//				List.of(new InlineKeyboardButton("Comida").setCallbackData("/addplacetoselectedlist_" + "2"))
-//				);		
 		kb.setKeyboard(buttons);
 		answer.setReplyMarkup(kb);
 		
