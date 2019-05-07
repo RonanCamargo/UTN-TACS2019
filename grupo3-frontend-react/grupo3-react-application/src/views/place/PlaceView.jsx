@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import http_request from 'helpers/http_request';
 import Navigation from 'components/Navigation';
-import Card from 'components/Card';
+import PlaceCard from 'components/PlaceCard';
 
 class PlaceView extends Component {
     constructor() {
@@ -50,11 +50,11 @@ class PlaceView extends Component {
     render() {
         const places = this.state.places.map(place => {
         return(
-        <Card key={place.id} cardName = {place.name} id = {place.id} url = {place.location} />
+        <PlaceCard key={place.id} cardName = {place.name} id = {place.id} url = {place.location} image = "w3-grayscale-max" />
         )
         })
         return (
-        <div className="App">
+        <div className="main-container">
           <Navigation title= "Home" />
           <div className= "helper">
             <div className= "row mt-4">

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import InputGroup from './InputGroup';
 
-class Card extends Component
+class PlaceCard extends Component
 {
 	constructor () {
 	    super()
@@ -34,11 +34,12 @@ class Card extends Component
 					    <div className = "card-body">
 								{!this.state.isHidden && <InputGroup label="Save" />}
 							  <a target="_blank" href={ this.props.url } >
-							    <img src={ this.props.url } alt="Cinque Terre" width="300" height="auto" className="w3-grayscale-max">
+							    <img src={ this.props.url } alt="Cinque Terre" width="100%" height="auto" className={ this.props.image }>
 									</img>
 							  </a>
-					        <p><mark>{ this.props.url }</mark></p>
-					        <p>{ this.props.id }</p>
+					        <p><mark>some description</mark></p>
+					        <p>id: { this.props.id }</p>
+
 					    </div>
           </div>
         </div>
@@ -46,4 +47,4 @@ class Card extends Component
   }
 }
 
-export default Card;
+export default PlaceCard;

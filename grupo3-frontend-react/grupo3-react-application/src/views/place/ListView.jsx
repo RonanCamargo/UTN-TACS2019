@@ -83,7 +83,7 @@ class ListView extends Component {
         });
 
         return (
-        <div className="App">
+        <div className="main-container">
             <Navigation title= "Home"/>
             <div className= "helper">
               <div className= "row mt-4">
@@ -91,19 +91,21 @@ class ListView extends Component {
                   <p>View para users.</p>
                   <p>Agregar form con botones para permitir editar el nombre de la lista o para eliminarla.</p>
                   <p>Ver si conviene tambien crear listas desde aca</p>
+                  <p>Al hacer click en un card de list mostrar su contenido de places</p>
               </div>
             </div>
             <div className= "container md-2">
-            <h3>my lists
-            </h3>
-            <div className= "container">
-                <div className= "row">
-                    <div className="row active-with-click">
-                      {lists}
-                    </div>
-               </div>
+                <h3>my lists</h3>
+                <div className= "container">
+                    <div className= "row">
+                        <div className="row active-with-click">
+                          {lists}
+                        </div>
+                   </div>
+                </div>
             </div>
-        </div>  </div>
+
+        </div>
         );
     }
 }

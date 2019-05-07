@@ -1,94 +1,82 @@
 import React, { Component } from "react";
 import http_request from 'helpers/http_request';
 import Navigation from 'components/Navigation';
-import CardUser from 'components/CardUser';
+import PlaceCard from 'components/PlaceCard';
 
 class AdminView extends Component {
     constructor() {
         super();
         this.state = {
-          users: [
+          places: [
                   { "id": "1",
-                    "name": "Celeste Sanchez",
-                    "lists": "3",
-                    "visits": "12",
-                    "lastAccess": "06-04-19",
-                    "url": "https://i.pinimg.com/564x/92/e6/24/92e624d8392f7ae612c107b3c487919c.jpg"
+                    "name": "Washington Square Park",
+                    "location": "https://i.pinimg.com/564x/d7/be/ea/d7beea08f312788090240120bd929b01.jpg"
                   }
                   ,
                   { "id": "2",
-                    "name": "Mercedes Alonso",
-                    "lists": "4",
-                    "visits": "7",
-                    "lastAccess": "06-04-19",
-                    "url": "https://i.pinimg.com/236x/22/d9/3c/22d93c3950b0feb81c2142ec74fbef89.jpg"
+                    "name": "South Park",
+                    "location": "https://i.pinimg.com/564x/7a/6b/e3/7a6be38270ff81198292148236222748.jpg"
                   }
                   ,
                   { "id": "3",
-                    "name": "Mariana Gramajo",
-                    "lists": "7",
-                    "visits": "24",
-                    "lastAccess": "26-04-19",
-                    "url": "https://i.pinimg.com/236x/4f/f1/62/4ff162a314ccdcc6976e284a2e5aa1ac.jpg"
+                    "name": "Washington DC",
+                    "location": "https://i.pinimg.com/564x/55/9e/43/559e43ef4ff55bf74be9c21e35191234.jpg"
                   },
                   { "id": "4",
-                    "name": "Marina Zerbarini",
-                    "lists": "2",
-                    "visits": "12",
-                    "lastAccess": "05-04-19",
-                    "url": "https://i.pinimg.com/564x/9b/d7/64/9bd764e8f3004b4a7236db5b16e394c9.jpg"
+                    "name": "La Noria",
+                    "location": "https://i.pinimg.com/564x/ed/59/7e/ed597ee6b1bba5a37a4ec337b26ce737.jpg"
                   }
                   ,
                   { "id": "5",
-                    "name": "Antonella Paoletti",
-                    "lists": "5",
-                    "visits": "12",
-                    "lastAccess": "06-02-19",
-                    "url": "https://i.pinimg.com/564x/41/97/f5/4197f5ae530692d5f204c9a123d85b25.jpg"
+                    "name": "Mexico",
+                    "location": "https://i.pinimg.com/564x/13/42/36/134236aa9b5b7a6e5e400d8f5fbb34e4.jpg"
                   }
                   ,
                   { "id": "6",
-                    "name": "Ciro Museres",
-                    "lists": "1",
-                    "visits": "11",
-                    "lastAccess": "16-01-19",
-                    "url": "https://i.pinimg.com/564x/0e/0f/06/0e0f06d1cfecb08d97645c7751e91a8c.jpg"
+                    "name": "China",
+                    "location": "https://i.pinimg.com/564x/f1/1e/82/f11e82851e2390f633d2ceb15a51b021.jpg"
                   }
-                ]
-               };
+                ],
+      };
     }
 
-    // componentDidMount() {
-    //     let value =http_request.get('http://localhost:8080/places')
-    //     .withCredentials()
-    //     .send()
-    //     .then(json => this.setState({ places: json }))
-    // }
-
     render() {
-        const users = this.state.users.map(user => {
+        const places = this.state.places.map(place => {
         return(
-          <CardUser key={user.id} cardName = {user.name} lists = {user.lists} visits = {user.visits} lastAccess = {user.lastAccess} url = {user.url} />
+           <PlaceCard key={place.id} cardName = {place.name} id = {place.id} url = {place.location} image="thumb"/>
         )
         })
         return (
-          <div className="App">
+          <div className="main-container">
             <Navigation title= "Home" />
+
             <div className= "helper">
               <div className= "row mt-4">
                 <p><strong>Borrar todo esto.</strong></p>
                   <p>View solo para admins.</p>
-                  <p>Modificar style de card user.</p>
-                  <p>Agregar select o nav para elegir consultar places o users.</p>
-                  <p>El boton compare debe permitir seleccionar un user y mostrarlo en un div con user name y list seleccionada</p>
-                  <p>Si tengo dos users seleccionados los muestro juntos y me podra decir los lugares comunes</p>
+                  <p>Filtrar places por registrationDate.</p>
+                  <p>Ver si hace falta mostrar los places o solo poner numeros y estadisticas.</p>
+                  <p>Ver que atributos mostrar de cada place si hiciera falta mostrarlos.</p>
+                  <p>Sacar el active del boton "all".</p>
               </div>
             </div>
+
             <div className= "container">
                 <div className= "row mt-4">
-                  <div className="row active-with-click">
-                    {users}
-                   </div>
+
+                    <div className="btn-group" role="group">
+                    <span className="input-group-btn">
+                      <strong>See registered places:</strong>
+                      <button type="button" className="btn btn-primary" >today</button>
+                      <button type="button" className="btn btn-primary" >last 3 days</button>
+                      <button type="button" className="btn btn-primary" >last week</button>
+                      <button type="button" className="btn btn-primary" >last month</button>
+                      <button type="button" className="btn btn-primary active" >all</button>
+                  </span>  </div>
+
+                    <div className="row active-with-click">
+                        {places}
+                    </div>
                </div>
             </div>
           </div>
