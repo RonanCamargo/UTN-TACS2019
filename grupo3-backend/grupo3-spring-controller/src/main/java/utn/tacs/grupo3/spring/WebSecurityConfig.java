@@ -12,7 +12,12 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import utn.tacs.grupo3.spring.security.RestAuthenticationEntryPoint;
+
+import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
@@ -30,21 +35,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .cors().and()
                 .csrf().disable()
                 .exceptionHandling()
                 .authenticationEntryPoint(restAuthenticationEntryPoint)
                 .and()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.POST, "/places/**").permitAll()
-                .antMatchers(HttpMethod.POST,"/users/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/places/**").hasAnyAuthority("ADMIN","USER")
+                .antMatchers(HttpMethod.GET, "/places/**").hasAnyAuthority("ADMIN","USER")
+                .antMatchers(HttpMethod.POST,"/users/**").hasAnyAuthority("ADMIN","USER")
+                .antMatchers(HttpMethod.GET,"/users/**").hasAnyAuthority("ADMIN","USER")
                 .antMatchers(HttpMethod.POST,"/security/**").permitAll()
-                .antMatchers(HttpMethod.GET,"/users/**").permitAll()
                 .antMatchers(HttpMethod.GET,"/security/**").permitAll()
-                .antMatchers(HttpMethod.GET, "/places/**").permitAll()
 
-//                .antMatchers(HttpMethod.POST, "/places/**").hasAnyAuthority("ADMIN","USER")
-//                .antMatchers(HttpMethod.POST,"/users/**").hasAnyAuthority("ADMIN","USER")
-//                .antMatchers(HttpMethod.GET,"/users/**").hasAnyAuthority("USER")
                 .and()
                 .formLogin()
                 .and()
@@ -54,6 +57,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public AuthenticationManager customAuthenticationManager() throws Exception {
         return authenticationManager();
+    }
+
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        final CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(Arrays.asList("*"));
+        configuration.setAllowedMethods(Arrays.asList("HEAD",
+                "GET", "POST", "PUT", "DELETE", "PATCH"));
+        configuration.setAllowCredentials(true);
+        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type"));
+        final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
     }
 
     @Autowired

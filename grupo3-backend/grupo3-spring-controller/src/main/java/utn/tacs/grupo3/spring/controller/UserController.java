@@ -47,8 +47,4 @@ public interface UserController {
      * @return
      */
     String markAsVisitedAPlace(String userId, String placeId) throws ExceptionbyResourceNotFound;
-
-    void corsHeaders(HttpServletResponse response);
-
-
-    }
+}

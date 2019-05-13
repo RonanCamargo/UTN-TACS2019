@@ -22,6 +22,7 @@ public class User {
     private String username;
     private String password;
 	private Set<Role> roles = new HashSet<Role>();
+	private String token;
 
     public User() {
     }
@@ -163,5 +164,13 @@ public class User {
 
     public void addRole(Role role) {
         this.roles.add(role);
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }

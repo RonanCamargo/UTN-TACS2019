@@ -1,6 +1,7 @@
 package utn.tacs.grupo3.spring.controller.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.*;
 import utn.tacs.grupo3.model.User;
 import utn.tacs.grupo3.spring.controller.LoginController;
@@ -14,6 +15,8 @@ public class LoginControllerImpl implements LoginController {
         @Autowired
         UserService userService;
         @Autowired
+        AuthenticationManager authenticationManager;
+        @Autowired
         SecurityService securityService;
 
         @PostMapping("/register")
@@ -22,5 +25,6 @@ public class LoginControllerImpl implements LoginController {
 
             securityService.autoLogin(user.getUsername(), user.getPassword());
         }
+
     }
 

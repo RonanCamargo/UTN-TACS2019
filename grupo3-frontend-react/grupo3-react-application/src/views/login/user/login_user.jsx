@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import { Form, Button, FormGroup, FormControl, Alert } from "react-bootstrap"
 import CSSModules from 'react-css-modules'
+import http_request from 'helpers/http_request'
 import styles from "./login_user.css"
 
 class LoginUser extends Component {
@@ -22,13 +23,20 @@ class LoginUser extends Component {
         })
     }
 
-    handleSubmit = event => {
-        event.preventDefault()
-        let response = http_request.get('http://localhost:8080/login')
-        .send({
-            username: this.state.email,
-            password: this.state.password
-        })
+    handleSubmit = async event => {
+        event.preventDefault();
+        try{
+            let response = await http_request.post('http://localhost:8080/login')
+            .send({
+                username: this.state.email,
+                password: this.state.password
+            });
+
+            alert(response);
+        }
+        catch(error) {
+            alert(error);
+        }
     }
 
     render() {

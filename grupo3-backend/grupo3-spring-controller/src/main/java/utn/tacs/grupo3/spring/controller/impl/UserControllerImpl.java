@@ -40,15 +40,6 @@ public class UserControllerImpl implements UserController {
     private FullVenueToPlaceConverter fullVenueToPlaceConverter;
 
     @Override
-    @RequestMapping(value= "/users/*", method={RequestMethod.OPTIONS, RequestMethod.GET})
-    public void corsHeaders(HttpServletResponse response) {
-        response.addHeader("Access-Control-Allow-Origin", "http://localhost:8008");
-        response.addHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-        response.addHeader("Access-Control-Allow-Headers", "origin, content-type, accept, x-requested-with");
-        response.addHeader("Access-Control-Max-Age", "3600");
-    }
-
-    @Override
     @GetMapping
     public List<User> users() {
         return userRepository.allUsers();
