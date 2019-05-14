@@ -12,23 +12,22 @@ import utn.tacs.grupo3.spring.service.UserService;
 @RestController
 @RequestMapping("/security")
 public class LoginControllerImpl implements LoginController {
-        @Autowired
-        UserService userService;
-        @Autowired
-        AuthenticationManager authenticationManager;
-        @Autowired
-        SecurityService securityService;
+    @Autowired
+    UserService userService;
+    @Autowired
+    AuthenticationManager authenticationManager;
+    @Autowired
+    SecurityService securityService;
 
-        @PostMapping("/register")
-        public User register(@RequestBody User newUser) {
-            String password = newUser.getPassword();
-            String username = newUser.getUsername();
-            User user = userService.create(newUser);
+    @PostMapping("/register")
+    public User register(@RequestBody User newUser) {
+        String password = newUser.getPassword();
+        String username = newUser.getUsername();
+        User user = userService.create(newUser);
 
-            // Para hacer el login hay que usar el password antes de hashearlo
-            securityService.autoLogin(username, password);
+        // Para hacer el login hay que usar el password antes de hashearlo
+        securityService.autoLogin(username, password);
 
-            return user;
-        }
+        return user;
     }
-
+}

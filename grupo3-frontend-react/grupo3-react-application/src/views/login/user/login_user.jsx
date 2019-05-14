@@ -28,13 +28,10 @@ class LoginUser extends Component {
         try{
             let response = await axios.post(
                 'http://localhost:8080/login',
-                null,
                 {
-                    params: {
-                        username: this.state.email,
-                        password: this.state.password
-                    }
-                }
+                    username: this.state.email,
+                    password: this.state.password
+                }                
             );
 
             alert(response);
