@@ -21,14 +21,20 @@ public class UserServiceImpl implements UserService {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
-    public void save(User user) {
+    public User save(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.addRole(roleRepository.getByName("USER"));
-        userRepository.createUser(user);
+
+        return userRepository.createUser(user);
     }
+
     @Override
-    public void create(String username, String password) {
-        save(new User(username, password));
+    public User create(User user) {
+        if(userRepository.usernameExists(user.getUsername())) {
+            throw new RuntimeException("Ya existe un usuario con ese nombre");
+        }
+
+        return save(user);
     }
 
     @Override

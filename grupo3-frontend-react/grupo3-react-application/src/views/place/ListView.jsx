@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import http_request from 'helpers/http_request';
 import Navigation from 'components/Navigation';
+import axios from 'axios'
 import ListCard from 'components/ListCard';
 
 class ListView extends Component {
@@ -68,9 +68,8 @@ class ListView extends Component {
     }
 
     // componentDidMount() {
-    //     let value =http_request.get('http://localhost:8080//users/{user-id}/list-of-places')
-    //     .withCredentials()
-    //     .send()
+    //   const user_id = "Juan";
+    //   axios.get(`http://localhost:8080//users/${user_id}/list-of-places`,{withCredentials:true})
     //     .then(json => this.setState({ lists: json }))
     // }
 

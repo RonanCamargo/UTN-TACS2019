@@ -6,5 +6,5 @@ import utn.tacs.grupo3.model.User;
  * Interface for login-related controller methods
  */
 public interface LoginController {
-    void register(User user);
+    User register(User user);
 }

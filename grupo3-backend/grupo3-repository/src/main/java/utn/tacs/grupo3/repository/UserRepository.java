@@ -54,8 +54,15 @@ public class UserRepository {
                 .orElseThrow(() -> new ExceptionbyResourceNotFound("no se encontró el usuario de nombre: " + username));
     }
 
-    public void createUser(User user) {
-        users.add(user);
+    public boolean usernameExists(String username) {
+        return users.stream()
+                .anyMatch(user -> user.getUsername().equals(username));
+    }
+
+    public User createUser(User newUser) {
+        users.add(newUser);
+
+        return newUser;
     }
 
     public long amountOfUsersInterestedIn(Place aPlace) {

@@ -20,11 +20,15 @@ public class LoginControllerImpl implements LoginController {
         SecurityService securityService;
 
         @PostMapping("/register")
-        public void register(@RequestBody User user) {
-            userService.create(user.getUsername(), user.getPassword());
+        public User register(@RequestBody User newUser) {
+            String password = newUser.getPassword();
+            String username = newUser.getUsername();
+            User user = userService.create(newUser);
 
-            securityService.autoLogin(user.getUsername(), user.getPassword());
+            // Para hacer el login hay que usar el password antes de hashearlo
+            securityService.autoLogin(username, password);
+
+            return user;
         }
-
     }
 

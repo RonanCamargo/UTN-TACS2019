@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import http_request from 'helpers/http_request';
+import axios from 'axios'
 import Navigation from 'components/Navigation';
 import PlaceCard from 'components/PlaceCard';
 

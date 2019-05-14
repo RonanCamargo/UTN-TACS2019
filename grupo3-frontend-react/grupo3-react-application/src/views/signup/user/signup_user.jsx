@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Form, Button, FormGroup, FormControl, Alert } from "react-bootstrap"
 import CSSModules from 'react-css-modules'
-import http_request from 'helpers/http_request';
+import axios from 'axios';
 import styles from "./signup_user.css"
 
 class SignUp extends Component {
@@ -29,13 +29,15 @@ class SignUp extends Component {
     handleSubmit = async event => {
         event.preventDefault()
         try{
-            const response = await http_request.query('http://localhost:8080/security/register')
-            .send({
-                firstName: this.state.firstName,
-                lastName: this.state.lastName,
-                email: this.state.email,
-                password: this.state.password
-            });
+            const response = await axios.post(
+                'http://localhost:8080/security/register',
+                {
+                    firstName: this.state.firstName,
+                    lastName: this.state.lastName,
+                    username: this.state.email,
+                    password: this.state.password
+                }
+            );
 
             alert(response.data);
         }
