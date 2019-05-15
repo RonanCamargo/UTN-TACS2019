@@ -37,7 +37,8 @@ Desde el root del proyecto
 | Method | URI | Descripción | Observación | 
 | ------ | ------ | ------ | ------ |
 | GET | /users | Todos los usuarios | 
-| POST | /users | Crear un usuario | body=JSON
+| POST | /sign-up | Crear un usuario | body=JSON
+| POST | /login | login a un usuario | body=JSON
 | GET | /places/near | Lugares cercanos a una coordenada | parameter=coordinates
 | POST | /users/{user-id}/list-of-places{list-id}/{place-id} |Registrar un lugar en una lista de lugares | place-id es el id de foursquare
 | POST | /users/{user-id}/list-of-places/{list-id} | crear una listas de lugares | 
@@ -51,7 +52,6 @@ Desde el root del proyecto
 | GET | /places/places-in-common | Obtener lugares en comun entre usuarios | parameter1=list-id-1 parameter2=,list-id-2
 | GET | /places/registered-places | Consultar lugares registrados en el sistema | days: hoy, últimos 3 días. última semana, último mes, todos (days=0)
 | GET | /places | Todos los lugares | 
-| PUT | /users/{user-id}/list-of-places/{list-id} | Modificar una lista de lugares | parameter=new_name
 
 ##
 ### Proyecto Telegram
