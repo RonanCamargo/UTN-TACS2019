@@ -33,6 +33,7 @@ Desde el root del proyecto
 ```
 
 ## Endpoints
+## [Importante] Ver collecion de Postman para ver los parametros y el body que se envian en los metodos HTTP
 
 | Method | URI | Descripción | Observación | 
 | ------ | ------ | ------ | ------ |
