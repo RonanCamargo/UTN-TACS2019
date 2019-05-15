@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import http_request from 'helpers/http_request';
+import axios from 'axios';
 import Navigation from 'components/Navigation';
 import UserCard from 'components/UserCard';
 
@@ -58,12 +58,10 @@ class UserView extends Component {
                };
     }
 
-    // componentDidMount() {
-    //     let value =http_request.get('http://localhost:8080/places')
-    //     .withCredentials()
-    //     .send()
-    //     .then(json => this.setState({ places: json }))
-    // }
+    componentDidMount() {
+      axios.get('http://localhost:8080/places', {withCredentials: true})
+        .then(json => this.setState({ places: json }))
+    }
 
     render() {
         const users = this.state.users.map(user => {

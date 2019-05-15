@@ -20,12 +20,12 @@ public class UserRepository {
 
     public UserRepository() {
         users = new ArrayList<User>();
-        User user1 = new User("Juan", "Perez");
+        User user1 = new User("Juan", "Perez","123","ADMIN");
         ListOfPlaces listOfPlaces1 = new ListOfPlaces("LugaresFavoritos");
         Place casa = new Place("Casa", "Calle falsa 123");
         casa.setLatitude(-34.659581f);
         casa.setLongitude(-58.468068f);
-        
+
         listOfPlaces1.addPlace(casa);
         user1.getListsOfPlaces().add(listOfPlaces1);
         users.add(user1);

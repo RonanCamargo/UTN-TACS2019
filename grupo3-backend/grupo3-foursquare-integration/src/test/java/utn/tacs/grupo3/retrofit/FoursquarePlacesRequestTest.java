@@ -24,7 +24,7 @@ public class FoursquarePlacesRequestTest {
     public void searchForPlacesByName() {
         Assert.assertEquals(5, foursquarePlacesRequest.getAllPlacesByName("utn").size());
     }
-    
+
     @Test
     public void searchUTNCampusByFoursquareId() {
     	FullVenue fullVenue = foursquarePlacesRequest.getVenueById("4b850a3bf964a520934931e3");

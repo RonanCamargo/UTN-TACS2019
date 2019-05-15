@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import http_request from 'helpers/http_request';
 import Navigation from 'components/Navigation';
 import PlaceCard from 'components/PlaceCard';
+import axios from 'axios'
 
 class PlaceView extends Component {
     constructor() {
@@ -41,10 +41,10 @@ class PlaceView extends Component {
     }
 
     // componentDidMount() {
-    //     let value =http_request.get('http://localhost:8080/places')
-    //     .withCredentials()
-    //     .send()
-    //     .then(json => this.setState({ places: json }))
+    //   axios.get('http://localhost:8080/places', { withCredentials: true })
+    //     .then(json => 
+    //       this.setState({ places: json })
+    //     )
     // }
 
     render() {

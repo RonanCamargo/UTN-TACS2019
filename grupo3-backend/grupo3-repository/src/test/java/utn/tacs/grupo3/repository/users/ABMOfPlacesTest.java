@@ -15,7 +15,7 @@ public class ABMOfPlacesTest {
 
     @Before
     public void initialize() {
-        user1 = new User("Elver", "Galarga");
+        user1 = new User("Elver", "Galarga",null,null);
         listOfPlaces1 = new ListOfPlaces("Lugares Favoritos");
         user1.getListsOfPlaces().add(listOfPlaces1);
         place1 = new Place("el MC", "en algun lado");

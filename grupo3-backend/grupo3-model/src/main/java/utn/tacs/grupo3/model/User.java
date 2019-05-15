@@ -15,26 +15,21 @@ public class User {
     private List<ListOfPlaces> listsOfPlaces;
     private List<Place> placesVisited;
     private LocalDateTime lastAccess;
+    private String password;
+    private String rol;
 
     public User() {
     }
 
-    public User(String firstName, String lastName) {
+    public User(String firstName, String lastName,String password, String rol) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.listsOfPlaces = new ArrayList<>();
         this.placesVisited = new ArrayList<>();
-
+        this.rol = rol;
+        this.password = password;
     }
 
-    public User(String firstName, String lastName, LocalDateTime lastAccess) {
-        listsOfPlaces = new ArrayList<>();
-        placesVisited = new ArrayList<>();
-
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.lastAccess = lastAccess;
-    }
 
     public boolean havePlacesInCommonWith(Place aPlace) {
         return listsOfPlaces.stream().anyMatch(listPlaces -> listPlaces.getPlaces().contains(aPlace));
@@ -117,4 +112,18 @@ public class User {
         this.lastAccess = lastAccess;
     }
 
+    public String getPassword() {
+        return "{noop}"+this.password;
+    }
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
+    }
 }

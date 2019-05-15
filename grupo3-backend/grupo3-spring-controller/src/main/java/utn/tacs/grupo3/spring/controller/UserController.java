@@ -19,13 +19,7 @@ public interface UserController {
      */
     List<User> users();
 
-    /**
-     * Registers a new user
-     *
-     * @param user
-     * @return
-     */
-    String createUser(User user);
+
 
     /**
      * Searches a user by its id
@@ -55,8 +49,4 @@ public interface UserController {
      * @return
      */
     String markAsVisitedAPlace(String userId, String placeId) throws ExceptionbyResourceNotFound;
-
-    void corsHeaders(HttpServletResponse response);
-
-
-    }
+}
