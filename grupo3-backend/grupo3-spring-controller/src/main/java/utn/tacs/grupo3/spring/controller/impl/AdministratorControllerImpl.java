@@ -14,7 +14,7 @@ import java.util.Collections;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/admin")
+@RequestMapping("/places")
 public class AdministratorControllerImpl implements AdministratorController {
 
     @Autowired

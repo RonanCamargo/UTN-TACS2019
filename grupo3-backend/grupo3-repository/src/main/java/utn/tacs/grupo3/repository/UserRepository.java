@@ -20,7 +20,7 @@ public class UserRepository {
 
     public UserRepository() {
         users = new ArrayList<User>();
-        User user1 = new User("jperez","MOCK","Juan", "Perez");
+        User user1 = new User("Juan", "Perez","123","ADMIN");
         ListOfPlaces listOfPlaces1 = new ListOfPlaces("LugaresFavoritos");
         Place casa = new Place("Casa", "Calle falsa 123");
         casa.setLatitude(-34.659581f);
@@ -47,22 +47,8 @@ public class UserRepository {
                 .orElseThrow(() -> new ExceptionbyUserNotFound(name));
     }
 
-    public User userByUsername(String username) throws ExceptionbyResourceNotFound {
-        return users.stream()
-                .filter(user -> user.getUsername().equals(username))
-                .findFirst()
-                .orElseThrow(() -> new ExceptionbyResourceNotFound("no se encontró el usuario de nombre: " + username));
-    }
-
-    public boolean usernameExists(String username) {
-        return users.stream()
-                .anyMatch(user -> user.getUsername().equals(username));
-    }
-
-    public User createUser(User newUser) {
-        users.add(newUser);
-
-        return newUser;
+    public void createUser(User user) {
+        users.add(user);
     }
 
     public long amountOfUsersInterestedIn(Place aPlace) {

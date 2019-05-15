@@ -5,50 +5,31 @@ import utn.tacs.grupo3.model.exception.ExceptionbyResourceNotFound;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 public class User {
 
-	private Long id;
     private String firstName;
     private String lastName;
     private List<ListOfPlaces> listsOfPlaces;
     private List<Place> placesVisited;
     private LocalDateTime lastAccess;
-
-    private String username;
     private String password;
-	private Set<Role> roles = new HashSet<Role>();
-	private String token;
+    private String rol;
 
     public User() {
     }
 
-    public User(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
-
-    public User(String username, String password, String firstName, String lastName) {
-        this.username = username;
-        this.password = password;
+    public User(String firstName, String lastName,String password, String rol) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.listsOfPlaces = new ArrayList<>();
         this.placesVisited = new ArrayList<>();
+        this.rol = rol;
+        this.password = password;
     }
 
-    public User(String firstName, String lastName, LocalDateTime lastAccess) {
-        listsOfPlaces = new ArrayList<>();
-        placesVisited = new ArrayList<>();
-
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.lastAccess = lastAccess;
-    }
 
     public boolean havePlacesInCommonWith(Place aPlace) {
         return listsOfPlaces.stream().anyMatch(listPlaces -> listPlaces.getPlaces().contains(aPlace));
@@ -85,6 +66,7 @@ public class User {
                 .stream().findFirst()
                 .orElseThrow(() -> new ExceptionbyListOfPlaceNotFound(name));
     }
+
 
     public void registerAPlaceinAListOfPlaces(String listId, Place place) throws ExceptionbyResourceNotFound {
         listOfPlacesByName(listId).addPlace(place);
@@ -130,47 +112,18 @@ public class User {
         this.lastAccess = lastAccess;
     }
 
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Set<Role> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(Set<Role> roles) {
-		this.roles = roles;
-	}
-
-    public void addRole(Role role) {
-        this.roles.add(role);
+    public String getPassword() {
+        return "{noop}"+this.password;
+    }
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public String getToken() {
-        return token;
+    public String getRol() {
+        return rol;
     }
 
-    public void setToken(String token) {
-        this.token = token;
+    public void setRol(String rol) {
+        this.rol = rol;
     }
 }

@@ -19,6 +19,8 @@ public interface UserController {
      */
     List<User> users();
 
+
+
     /**
      * Searches a user by its id
      *
