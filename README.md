@@ -1,13 +1,14 @@
 # TACS-2019-GRUPO3
 Repositorio del TP cuatrimestral de TACS UTN 1C-2019
 
-### Proyecto Spring
+### Proyecto backend
 
 ### Install
 
 Desde el root del proyecto
 
 ```bash
+    cd grupo3-backend
     mvn install
 ```
 
@@ -15,7 +16,7 @@ Desde el root del proyecto
 
 Desde el root del proyecto
 ```
-    cd grupo3/grupo3-spring-controller
+    cd grupo3-backend/grupo3-spring-controller
     mvn compile
 ```
 
@@ -23,7 +24,7 @@ Desde el root del proyecto
 
 Desde el root del proyecto
 ```
-    cd grupo3/grupo3-spring-controller
+    cd grupo3-backend/grupo3-spring-controller
     mvn spring-boot:run
 ```
 
