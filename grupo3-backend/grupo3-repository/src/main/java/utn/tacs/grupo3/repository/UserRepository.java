@@ -47,6 +47,19 @@ public class UserRepository {
                 .orElseThrow(() -> new ExceptionbyUserNotFound(name));
     }
 
+    public List<User> usersByUsername(String nombre) {
+        return users.stream().
+                filter(user -> user.getUsername().equalsIgnoreCase(nombre)).
+                collect(Collectors.toList());
+    }
+
+
+    public User userByUsername(String name) throws ExceptionbyResourceNotFound {
+        return usersByUsername(name)
+                .stream().findFirst()
+                .orElseThrow(() -> new ExceptionbyUserNotFound(name));
+    }
+
     public void createUser(User user) {
         users.add(user);
     }
