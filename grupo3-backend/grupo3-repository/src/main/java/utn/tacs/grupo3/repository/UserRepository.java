@@ -41,7 +41,7 @@ public class UserRepository {
                 collect(Collectors.toList());
     }
 
-        public User userByUsername(String name) throws ExceptionbyResourceNotFound {
+    public User userByUsername(String name) throws ExceptionbyResourceNotFound {
         return usersByUsername(name)
                 .stream().findFirst()
                 .orElseThrow(() -> new ExceptionbyUserNotFound(name));
