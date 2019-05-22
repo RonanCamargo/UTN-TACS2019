@@ -18,7 +18,7 @@ public class SearchByNameInlineQueryHandler implements InlineQueryHandler{
 	public List<BotApiMethod<?>> handleInlineQuery(InlineQuery inlineQuery) {
 		String searchedName = inlineQuery.getQuery().substring(PlacesBotConstants.SEARCH_BY_NAME.length()).trim();
 		
-		List<Venue> venues = apiRequest.searchPlacesByName(searchedName);
+		List<Venue> venues = apiRequest.searchPlacesByName(searchedName, inlineQuery.getFrom().getId());
 		
 		AnswerInlineQuery answer = MessageFactory.createAnswerInlineQuery(inlineQuery);		
 		answer.setResults(InlineQueryResultFactory.createNearMeQueryResultsWithKeyboard(venues));		

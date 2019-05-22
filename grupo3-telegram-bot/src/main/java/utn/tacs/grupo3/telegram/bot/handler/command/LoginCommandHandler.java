@@ -14,6 +14,7 @@ import utn.tacs.grupo3.telegram.bot.handler.AbstractCommandHandler;
 import utn.tacs.grupo3.telegram.bot.helper.HtmlHelper;
 import utn.tacs.grupo3.telegram.bot.user.LoggedUsers;
 import utn.tacs.grupo3.telegram.bot.user.LoginStatusChecker;
+import utn.tacs.grupo3.telegram.bot.user.User;
 
 public class LoginCommandHandler extends AbstractCommandHandler{
 	
@@ -26,7 +27,7 @@ public class LoginCommandHandler extends AbstractCommandHandler{
 		loginStatusChecker.checkUserLoginStatus(message.getFrom());
 		
 		//TODO Make request
-		apiRequest.login(getUsername(message.getText()),getPassword(message.getText()));
+		String token = apiRequest.login(new User(getUsername(message.getText()),getPassword(message.getText())));
 		
 		SendMessage successfullLogin = MessageFactory.createSendMessage(message)
 				.setText("Successful login, welcome");
@@ -41,7 +42,11 @@ public class LoginCommandHandler extends AbstractCommandHandler{
 				.setText(text)
 				.setReplyMarkup(ReplyKeyboardFactory.createCommandKeyboard());		
 		
-		LoggedUsers.addLoggedUser(message.getFrom().getId(), getUsername(message.getText()), message.getChatId().toString());
+		LoggedUsers.addLoggedUser(
+				message.getFrom().getId(), 
+				getUsername(message.getText()), 
+				message.getChatId().toString(),
+				token);
 
 		return List.of(successfullLogin, answer);
 	}

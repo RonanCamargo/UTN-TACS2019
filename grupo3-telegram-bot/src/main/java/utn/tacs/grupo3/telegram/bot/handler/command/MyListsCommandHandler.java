@@ -25,7 +25,10 @@ public class MyListsCommandHandler extends AbstractCommandHandler{
 		
 		SendMessage answer = MessageFactory.createSendMessage(message);
 		
-		List<String> myListsNames = apiRequest.listNames(getUsernameByUser(message.getFrom()));
+		List<String> myListsNames = apiRequest.listNames(
+				getUsernameByUser(message.getFrom()),
+				message.getFrom().getId()
+				);
 		
 		StringBuilder text = new StringBuilder(HtmlHelper.bold("My lists")).append(HtmlHelper.multipleBr(2));
 		

@@ -4,6 +4,7 @@ import java.util.List;
 
 import utn.tacs.grupo3.telegram.bot.request.entity.ListOfPlaces;
 import utn.tacs.grupo3.telegram.bot.request.entity.Venue;
+import utn.tacs.grupo3.telegram.bot.user.User;
 
 /**
  * Interface for backend api requests
@@ -11,19 +12,20 @@ import utn.tacs.grupo3.telegram.bot.request.entity.Venue;
  */
 public interface ApiRequest {
 		
-	void login(String username, String password);
+	String login(User user);
 	
 	void logout(String username);
 	
-	List<String> listNames(String username);	
+	List<String> listNames(String username, Integer telegramUserId);	
 	
-	List<Venue> near(float latitude, float longitude);
+	List<Venue> near(float latitude, float longitude, Integer telegramUserId);
 	
-	List<Venue> searchPlacesByName(String name);
+	List<Venue> searchPlacesByName(String name, Integer telegramUserId);
 	
-	void addPlaceToList(String username, String listName, String placeId);
+	void addPlaceToList(String username, String listName, String placeId, Integer telegramUserId);
 	
 	Venue venueByFoursquareId(String foursquareId);
 	
-	ListOfPlaces listByName(String username, String listName);
+	ListOfPlaces listByName(String username, String listName, Integer telegramUserId);
+
 }

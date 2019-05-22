@@ -19,7 +19,12 @@ public class AddPlaceToSelectedListCallbackQueryHandler implements CallbackQuery
 	public <T extends Serializable> List<BotApiMethod<?>> handleCommand(CallbackQuery callbackQuery) {
 		String[] parsed = callbackQuery.getData().split(PlacesBotConstants.ADD_PLACE_TO_SELECTED_LIST + "_")[1].split("_");
 		
-		new ApiRequestImpl().addPlaceToList(LoggedUsers.getUsername(callbackQuery.getFrom().getId()), parsed[0], parsed[1]);
+		new ApiRequestImpl().addPlaceToList(
+				LoggedUsers.getUsername(callbackQuery.getFrom().getId()),
+				parsed[0],
+				parsed[1],
+				callbackQuery.getFrom().getId());
+		
 		SendMessage answer = MessageFactory.createSendMessage(callbackQuery.getMessage())
 				.setText("Place added to list successfully");
 		

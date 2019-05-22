@@ -25,7 +25,12 @@ public class AddPlaceToListCallbackQueryHandler implements CallbackQueryHandler{
 				.setText("Select a list to add a new place");
 		
 		InlineKeyboardMarkup kb = new InlineKeyboardMarkup();
-		List<String> listNames = new ApiRequestImpl().listNames(LoggedUsers.getUsername(callbackQuery.getFrom().getId()));
+		
+		List<String> listNames = new ApiRequestImpl().listNames(
+				LoggedUsers.getUsername(callbackQuery.getFrom().getId()),
+				callbackQuery.getFrom().getId()
+				);
+		
 		List<List<InlineKeyboardButton>> buttons = listNames.stream()
 				.map(listName -> 
 					List.of(new InlineKeyboardButton(listName).setCallbackData(PlacesBotConstants.ADD_PLACE_TO_SELECTED_LIST + "_" + listName + "_" + placeId)))

@@ -27,7 +27,10 @@ public class ViewListCommandHandler extends AbstractCommandHandler{
 	public <T extends Serializable> List<BotApiMethod<?>> handleCommand(Message message) {
 		//TODO refactor
 		String listName = message.getText().substring(10);
-		List<Place> places = apiRequest.listByName(LoggedUsers.getUsername(message.getFrom().getId()), listName).getPlaces();
+		List<Place> places = apiRequest.listByName(
+				LoggedUsers.getUsername(message.getFrom().getId()),
+				listName,
+				message.getFrom().getId()).getPlaces();
 		
 		InlineKeyboardMarkup keyboard = new InlineKeyboardMarkup();
 		List<List<InlineKeyboardButton>> buttons = places.stream().map(place -> List.of(new InlineKeyboardButton(

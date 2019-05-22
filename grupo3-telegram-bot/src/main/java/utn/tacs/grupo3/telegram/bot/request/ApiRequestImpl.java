@@ -4,12 +4,16 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 import utn.tacs.grupo3.telegram.bot.request.entity.ListOfPlaces;
 import utn.tacs.grupo3.telegram.bot.request.entity.Venue;
+import utn.tacs.grupo3.telegram.bot.user.LoggedUsers;
+import utn.tacs.grupo3.telegram.bot.user.User;
 
 public class ApiRequestImpl implements ApiRequest{
 	
@@ -19,14 +23,24 @@ public class ApiRequestImpl implements ApiRequest{
 	private static final String PLACES_BY_NAME = "/places/near-by-name?name=:name";
 	private static final String LIST_BY_NAME = "/users/:user-id/list-of-places/:list-name";
 	private static final String ADD_PLACE_TO_SELECTED_LIST = "/users/:user-id/list-of-places/:list-name/:place-id";
+	private static final String LOGIN = "/login";
 		
-	
+	private static final String AUTHORIZATION_HEADER = "Authorization";
 	private RestTemplate rest = new RestTemplate();
 	
 		
 	@Override
-	public void login(String username, String password) {
-		// TODO Auto-generated method stub
+	public String login(User user) {
+		String uri = new URIBuilder()
+				.setBaseUri(API_BASE_URL)
+				.setRelativeUri(LOGIN)
+				.build();
+		
+		String token = rest.exchange(uri, HttpMethod.POST, new HttpEntity<User>(user), ResponseEntity.class)
+				.getHeaders()
+				.getFirst(AUTHORIZATION_HEADER);
+		
+		return token.replace("Bearer ", "");
 	}
 	
 	
@@ -35,7 +49,8 @@ public class ApiRequestImpl implements ApiRequest{
 		// TODO Auto-generated method stub		
 	}
 
-	public List<String> listNames(String username){
+	@Override
+	public List<String> listNames(String username, Integer telegramUserId){
 		String uri = new URIBuilder()
 				.setBaseUri(API_BASE_URL)
 				.setRelativeUri(USER_LISTS_OF_PLACES)
@@ -44,7 +59,7 @@ public class ApiRequestImpl implements ApiRequest{
 		
 		ResponseEntity<List<ListOfPlaces>> lists = rest.exchange(
 				uri,
-				HttpMethod.GET, null,
+				HttpMethod.GET, getHeaders(telegramUserId),
 				new ParameterizedTypeReference<List<ListOfPlaces>>() {});
 		
 		return lists.getBody().stream().map(list -> list.getListName()).collect(Collectors.toList());
@@ -52,7 +67,7 @@ public class ApiRequestImpl implements ApiRequest{
 
 
 	@Override
-	public List<Venue> near(float latitude, float longitude) {
+	public List<Venue> near(float latitude, float longitude, Integer telegramUserId) {
 		String uri = new URIBuilder()
 				.setBaseUri(API_BASE_URL)
 				.setRelativeUri(NEAR_PLACES)
@@ -60,27 +75,36 @@ public class ApiRequestImpl implements ApiRequest{
 				.setParameter(":long", longitude)
 				.build();
 		
-		ResponseEntity<List<Venue>> venuesNearLocation = rest.exchange(uri, HttpMethod.GET, null, new ParameterizedTypeReference<List<Venue>>() {});
+		ResponseEntity<List<Venue>> venuesNearLocation = rest.exchange(
+				uri, 
+				HttpMethod.GET,
+				getHeaders(telegramUserId),
+				new ParameterizedTypeReference<List<Venue>>() {});
 		
 		return venuesNearLocation.getBody();
 	}
 
 
 	@Override
-	public List<Venue> searchPlacesByName(String name) {
+	public List<Venue> searchPlacesByName(String name, Integer telegramUserId) {
 		String uri = new URIBuilder()
 				.setBaseUri(API_BASE_URL)
 				.setRelativeUri(PLACES_BY_NAME)
 				.setParameter(":name", name)
 				.build();
-		ResponseEntity<List<Venue>> venuesByName = rest.exchange(uri, HttpMethod.GET, null, new ParameterizedTypeReference<List<Venue>>() {});
+		
+		ResponseEntity<List<Venue>> venuesByName = rest.exchange(
+				uri,
+				HttpMethod.GET, 
+				getHeaders(telegramUserId), 
+				new ParameterizedTypeReference<List<Venue>>() {});
 		
 		return venuesByName.getBody();
 	}
 
 
 	@Override
-	public void addPlaceToList(String username, String listName, String placeId) {
+	public void addPlaceToList(String username, String listName, String placeId, Integer telegramUserId) {
 		String uri = new URIBuilder()
 				.setBaseUri(API_BASE_URL)
 				.setRelativeUri(ADD_PLACE_TO_SELECTED_LIST)
@@ -89,7 +113,11 @@ public class ApiRequestImpl implements ApiRequest{
 				.setParameter(":place-id", placeId)
 				.build();
 		
-		ResponseEntity<String> response = rest.exchange(uri, HttpMethod.POST, null, String.class);
+		ResponseEntity<String> response = rest.exchange(
+				uri,
+				HttpMethod.POST,
+				getHeaders(telegramUserId),
+				String.class);
 		response.getBody();
 	}
 
@@ -100,16 +128,30 @@ public class ApiRequestImpl implements ApiRequest{
 	}
 
 	@Override
-	public ListOfPlaces listByName(String username, String listName) {
+	public ListOfPlaces listByName(String username, String listName, Integer telegramUserId) {
 		String uri = new URIBuilder()
 				.setBaseUri(API_BASE_URL)
 				.setRelativeUri(LIST_BY_NAME)
 				.setParameter(":user-id", username)
 				.setParameter(":list-name", listName)
 				.build();
-		ResponseEntity<ListOfPlaces> listOfPlaces = rest.exchange(uri, HttpMethod.GET, null, ListOfPlaces.class);
+		
+		ResponseEntity<ListOfPlaces> listOfPlaces = rest.exchange(
+				uri,
+				HttpMethod.GET,
+				getHeaders(telegramUserId),
+				ListOfPlaces.class);
 		
 		return listOfPlaces.getBody();
+	}
+	
+	private HttpEntity<String> getHeaders(Integer telegramUserId) {
+		
+		HttpHeaders header = new HttpHeaders();
+		header.add(AUTHORIZATION_HEADER, LoggedUsers.getToken(telegramUserId));
+		HttpEntity<String> entity = new HttpEntity<String>(header);
+		
+		return entity;
 	}
 
 }
