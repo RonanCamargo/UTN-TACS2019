@@ -28,14 +28,17 @@ class SignUp extends Component {
   handleSubmit = async event => {
     event.preventDefault();
     try {
-      const response = await axios.post("http://localhost:8080/sign-up", {
+      const user = {
         firstName: this.state.firstName,
         lastName: this.state.lastName,
         username: this.state.username,
         password: this.state.password
-      });
+      };
+
+      const response = await axios.post("http://localhost:8080/sign-up", user);
 
       alert(response.data);
+      this.props.history.push("/login");
     } catch (error) {
       alert(error);
     }

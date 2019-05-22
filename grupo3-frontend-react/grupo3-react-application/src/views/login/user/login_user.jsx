@@ -23,15 +23,21 @@ class LoginUser extends Component {
     });
   };
 
+  login = user => {
+    window.loggedUser = { user };
+  };
+
   handleSubmit = async event => {
     event.preventDefault();
     try {
-      let response = await axios.post("http://localhost:8080/login", {
+      const user = {
         username: this.state.username,
         password: this.state.password
-      });
+      };
+      let response = await axios.post("http://localhost:8080/login", user);
 
-      alert(response);
+      this.login(user);
+      this.props.history.push("/places");
     } catch (error) {
       alert(error);
     }
