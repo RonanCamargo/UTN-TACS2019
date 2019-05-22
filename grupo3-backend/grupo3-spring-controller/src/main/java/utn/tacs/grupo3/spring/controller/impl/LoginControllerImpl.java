@@ -16,6 +16,7 @@ public class LoginControllerImpl implements LoginController {
     @Override
     @PostMapping(path = "/sign-up")
     public String createUser(@RequestBody User user) {
+        user.setRol("USER");
         userRepository.createUser(user);
         return "Usuario creado correctamente.";
     }

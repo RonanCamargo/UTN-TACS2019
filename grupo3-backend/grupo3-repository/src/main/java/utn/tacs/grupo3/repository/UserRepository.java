@@ -20,7 +20,7 @@ public class UserRepository {
 
     public UserRepository() {
         users = new ArrayList<User>();
-        User user1 = new User("Juan", "Perez","123","ADMIN");
+        User user1 = new User("Juan", "Perez","JPerez1","123","ADMIN");
         ListOfPlaces listOfPlaces1 = new ListOfPlaces("LugaresFavoritos");
         Place casa = new Place("Casa", "Calle falsa 123");
         casa.setLatitude(-34.659581f);
@@ -35,14 +35,14 @@ public class UserRepository {
         return users;
     }
 
-    public List<User> usersByFirstName(String nombre) {
+    public List<User> usersByUsername(String name) {
         return users.stream().
-                filter(user -> user.getFirstName().equalsIgnoreCase(nombre)).
+                filter(user -> user.getUsername().equalsIgnoreCase(name)).
                 collect(Collectors.toList());
     }
 
-    public User userByFirstName(String name) throws ExceptionbyResourceNotFound {
-        return usersByFirstName(name)
+        public User userByUsername(String name) throws ExceptionbyResourceNotFound {
+        return usersByUsername(name)
                 .stream().findFirst()
                 .orElseThrow(() -> new ExceptionbyUserNotFound(name));
     }

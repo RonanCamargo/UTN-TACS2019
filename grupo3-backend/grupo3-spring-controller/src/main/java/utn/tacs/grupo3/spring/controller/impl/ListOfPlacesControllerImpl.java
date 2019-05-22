@@ -18,33 +18,33 @@ public class ListOfPlacesControllerImpl implements ListOfPlacesController {
     @Override
     @GetMapping("/{user-id}/list-of-places")
     public List<ListOfPlaces> listsOfListOfPlaces(@PathVariable("user-id") String userId) throws ExceptionbyResourceNotFound {
-        return userRepository.userByFirstName(userId).getListsOfPlaces();
+        return userRepository.userByUsername(userId).getListsOfPlaces();
     }
 
     @Override
     @PostMapping("/{user-id}/list-of-places/{list-id}")
     public String createListOfPlaces(@PathVariable("user-id") String userId, @PathVariable("list-id") String listId) throws ExceptionbyResourceNotFound {
-        userRepository.userByFirstName(userId).createListOfPlaces(listId);
+        userRepository.userByUsername(userId).createListOfPlaces(listId);
         return "Lista creada correctamente.";
     }
 
     @Override
     @GetMapping("/{user-id}/list-of-places/{list-id}")
     public ListOfPlaces listOfPlacesListById(@PathVariable("user-id") String userId, @PathVariable("list-id") String listId) throws ExceptionbyResourceNotFound {
-        return userRepository.userByFirstName(userId).listOfPlacesByName(listId);
+        return userRepository.userByUsername(userId).listOfPlacesByName(listId);
     }
 
     @Override
     @DeleteMapping("/{user-id}/list-of-places/{list-id}")
     public String deleteListOfPlacesList(@PathVariable("user-id") String userId, @PathVariable("list-id") String listId) throws ExceptionbyResourceNotFound {
-        userRepository.userByFirstName(userId).removeFromListsOfPlaces(userRepository.userByFirstName(userId).listOfPlacesByName(listId));
+        userRepository.userByUsername(userId).removeFromListsOfPlaces(userRepository.userByUsername(userId).listOfPlacesByName(listId));
         return "Lista eliminada correctamente.";
     }
 
     @Override
     @PutMapping("/{user-id}/list-of-places/{list-id}")
     public String editListOfPlacesList(@PathVariable("user-id") String userId, @PathVariable("list-id") String listId, @RequestParam("new-name") String newName) throws ExceptionbyResourceNotFound {
-        userRepository.userByFirstName(userId).listOfPlacesByName(listId).setListName(newName);
+        userRepository.userByUsername(userId).listOfPlacesByName(listId).setListName(newName);
         return "Lista modificada correctamente.";
     }
 

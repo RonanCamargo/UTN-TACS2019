@@ -15,13 +15,15 @@ public class User {
     private List<ListOfPlaces> listsOfPlaces;
     private List<Place> placesVisited;
     private LocalDateTime lastAccess;
+    private String username;
     private String password;
     private String rol;
 
     public User() {
     }
 
-    public User(String firstName, String lastName,String password, String rol) {
+    public User(String firstName, String lastName, String username, String password, String rol) {
+        this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
         this.listsOfPlaces = new ArrayList<>();
@@ -125,5 +127,13 @@ public class User {
 
     public void setRol(String rol) {
         this.rol = rol;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

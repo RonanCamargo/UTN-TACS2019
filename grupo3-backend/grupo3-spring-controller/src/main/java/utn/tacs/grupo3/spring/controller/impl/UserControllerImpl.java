@@ -2,17 +2,13 @@ package utn.tacs.grupo3.spring.controller.impl;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import utn.tacs.grupo3.model.Place;
@@ -48,14 +44,14 @@ public class UserControllerImpl implements UserController {
     @Override
     @GetMapping("/{user-id}")
     public User userById(@PathVariable("user-id") String userId) throws ExceptionbyResourceNotFound {
-        return userRepository.userByFirstName(userId);
+        return userRepository.userByUsername(userId);
     }
 
     @Override
     @PutMapping("/{user-id}/places-visited/{place-id}")
     public String markAsVisitedAPlace(@PathVariable("user-id") String userId, @PathVariable("place-id") String placeId) throws ExceptionbyResourceNotFound {
         Place place = placeRepository.placeByName(placeId);
-        userRepository.userByFirstName(userId).markAsVisited(place);
+        userRepository.userByUsername(userId).markAsVisited(place);
         return "lugar marcado como visitado.";
     }
 
@@ -65,7 +61,7 @@ public class UserControllerImpl implements UserController {
     	FullVenue venue = foursquarePlacesRequest.getVenueById(placeId);
     	Place place = fullVenueToPlaceConverter.convert(venue);
 
-        userRepository.userByFirstName(userId).registerAPlaceinAListOfPlaces(listId, placeRepository.createPlace(place));
+        userRepository.userByUsername(userId).registerAPlaceinAListOfPlaces(listId, placeRepository.createPlace(place));
         return "Lugar registrado correctamente.";
     }
 }

@@ -24,7 +24,7 @@ public class UsersRegisteredInTheSystemTest {
 
     @Before
     public void initialize() {
-        user1 = new User("Elver", "Galarga",null,null);
+        user1 = new User("Elver", "Galarga","Elver",null,null);
         user1.setLastAccess(LocalDateTime.of(2006, Month.APRIL, 19, 18, 00, 00));
         
         listOfPlaces1 = new ListOfPlaces("Lugares Favoritos");
@@ -32,7 +32,7 @@ public class UsersRegisteredInTheSystemTest {
 
         place1 = new Place("el MC", "en algun lado");
 
-        user2 = new User("Jorge", "Vergara",null,null);
+        user2 = new User("Jorge", "Vergara","Jorge",null,null);
         listOfPlaces2 = new ListOfPlaces("Mi lista");
         user2.getListsOfPlaces().add(listOfPlaces1);
 
