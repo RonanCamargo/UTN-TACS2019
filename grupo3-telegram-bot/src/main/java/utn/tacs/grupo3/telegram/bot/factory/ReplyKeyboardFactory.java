@@ -21,7 +21,8 @@ public final class ReplyKeyboardFactory {
 	public static ReplyKeyboardMarkup createCommandKeyboard() {
 		return createKeyboard(
 				List.of(PlacesBotConstants.MY_LISTS_COMMAND, PlacesBotConstants.SEARCH_COMMAND),
-				List.of(PlacesBotConstants.LOGOUT_COMMAND)
+				List.of(PlacesBotConstants.LOGOUT_COMMAND),
+				List.of(PlacesBotConstants.HELP_COMMAND)
 				);		
 	}
 	

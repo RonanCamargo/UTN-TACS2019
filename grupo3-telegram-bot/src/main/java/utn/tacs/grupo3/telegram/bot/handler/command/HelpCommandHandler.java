@@ -6,14 +6,12 @@ import java.util.List;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 
 import utn.tacs.grupo3.telegram.bot.constants.PlacesBotConstants;
 import utn.tacs.grupo3.telegram.bot.factory.MessageFactory;
 import utn.tacs.grupo3.telegram.bot.factory.ReplyKeyboardFactory;
 import utn.tacs.grupo3.telegram.bot.handler.CommandHandler;
 import utn.tacs.grupo3.telegram.bot.helper.HtmlHelper;
-import utn.tacs.grupo3.telegram.bot.user.LoggedUser;
 import utn.tacs.grupo3.telegram.bot.user.LoggedUsers;
 
 public class HelpCommandHandler implements CommandHandler{

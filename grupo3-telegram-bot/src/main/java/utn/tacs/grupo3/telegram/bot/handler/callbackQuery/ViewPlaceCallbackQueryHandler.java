@@ -17,7 +17,13 @@ public class ViewPlaceCallbackQueryHandler implements CallbackQueryHandler{
 	@Override
 	public <T extends Serializable> List<BotApiMethod<?>> handleCommand(CallbackQuery callbackQuery) {
 		String[] parsed = callbackQuery.getData().split("_");
-		List<Place> places = new ApiRequestImpl().listByName(LoggedUsers.getUsername(callbackQuery.getFrom().getId()), parsed[1]).getPlaces();
+		
+		List<Place> places = new ApiRequestImpl().listByName(
+				LoggedUsers.getUsername(callbackQuery.getFrom().getId())
+				,parsed[1],
+				callbackQuery.getFrom().getId()
+				).getPlaces();
+		
 		Place place = places.stream().filter(aPlace -> aPlace.getName().equalsIgnoreCase(parsed[2])).findFirst().get();
 		
 		SendVenue venue = new SendVenue();

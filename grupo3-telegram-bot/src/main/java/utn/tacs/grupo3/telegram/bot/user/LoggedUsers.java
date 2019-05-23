@@ -23,8 +23,12 @@ public final class LoggedUsers {
 		return loggedUsers.get(telegramId).getChatId();
 	}
 	
-	public static void addLoggedUser(Integer telegramId, String username, String chatId) {
-		loggedUsers.put(telegramId, new LoggedUser(username, chatId));
+	public static String getToken(Integer telegramId) {
+		return loggedUsers.get(telegramId).getToken();
+	}
+	
+	public static void addLoggedUser(Integer telegramId, String username, String chatId, String token) {
+		loggedUsers.put(telegramId, new LoggedUser(username, chatId, token));
 	}
 	
 	public static void removeLoggedUser(Integer telegramId) {

@@ -24,7 +24,7 @@ public class LogoutCommandHandler extends AbstractCommandHandler{
 	public <T extends Serializable> List<BotApiMethod<?>> handleCommand(Message message) {
 		loginStatusChecker.checkUserLoginStatus(message.getFrom());
 
-		apiRequest.logout(LoggedUsers.getUsername(message.getFrom().getId()));
+//		apiRequest.logout(LoggedUsers.getUsername(message.getFrom().getId()));
 		
 		SendMessage answer = MessageFactory.createSendMessage(message)
 				.setText(HtmlHelper.bold("Successful logout"))

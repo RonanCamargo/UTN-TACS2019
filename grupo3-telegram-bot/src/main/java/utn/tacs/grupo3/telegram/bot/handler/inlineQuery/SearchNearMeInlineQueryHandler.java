@@ -21,7 +21,10 @@ public class SearchNearMeInlineQueryHandler implements InlineQueryHandler{
 			throw new LocationNotEnabledException("Please enable location services");
 		}
 		Location location = inlineQuery.getLocation();		
-		List<Venue> venues = apiRequest.near(location.getLatitude(), location.getLongitude());
+		List<Venue> venues = apiRequest.near(
+				location.getLatitude(), 
+				location.getLongitude(),
+				inlineQuery.getFrom().getId());
 		
 		AnswerInlineQuery answer = MessageFactory.createAnswerInlineQuery(inlineQuery);		
 		answer.setResults(InlineQueryResultFactory.createNearMeQueryResultsWithKeyboard(venues));		

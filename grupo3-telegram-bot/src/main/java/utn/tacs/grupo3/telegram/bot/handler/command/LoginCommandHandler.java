@@ -12,8 +12,10 @@ import utn.tacs.grupo3.telegram.bot.factory.MessageFactory;
 import utn.tacs.grupo3.telegram.bot.factory.ReplyKeyboardFactory;
 import utn.tacs.grupo3.telegram.bot.handler.AbstractCommandHandler;
 import utn.tacs.grupo3.telegram.bot.helper.HtmlHelper;
+import utn.tacs.grupo3.telegram.bot.request.exception.BadCredentialsException;
 import utn.tacs.grupo3.telegram.bot.user.LoggedUsers;
 import utn.tacs.grupo3.telegram.bot.user.LoginStatusChecker;
+import utn.tacs.grupo3.telegram.bot.user.User;
 
 public class LoginCommandHandler extends AbstractCommandHandler{
 	
@@ -26,24 +28,39 @@ public class LoginCommandHandler extends AbstractCommandHandler{
 		loginStatusChecker.checkUserLoginStatus(message.getFrom());
 		
 		//TODO Make request
-		apiRequest.login(getUsername(message.getText()),getPassword(message.getText()));
-		
-		SendMessage successfullLogin = MessageFactory.createSendMessage(message)
-				.setText("Successful login, welcome");
-		
-		String text = HtmlHelper.formatText(
-				HtmlHelper.bold("Select an option please"), HtmlHelper.br(),
-				PlacesBotConstants.MY_LISTS_COMMAND, HtmlHelper.br(),
-				PlacesBotConstants.SEARCH_COMMAND
-				);
-		
-		SendMessage answer = MessageFactory.createSendMessage(message)
-				.setText(text)
-				.setReplyMarkup(ReplyKeyboardFactory.createCommandKeyboard());		
-		
-		LoggedUsers.addLoggedUser(message.getFrom().getId(), getUsername(message.getText()), message.getChatId().toString());
+		String token;
+		try {
+			token = apiRequest.login(new User(getUsername(message.getText()),getPassword(message.getText())));
+			SendMessage successfulLogin = MessageFactory.createSendMessage(message)
+					.setText("Successful login, welcome");
+			
+			String text = HtmlHelper.formatText(
+					HtmlHelper.bold("Select an option please"), HtmlHelper.br(),
+					PlacesBotConstants.MY_LISTS_COMMAND, HtmlHelper.br(),
+					PlacesBotConstants.SEARCH_COMMAND
+					);
+			
+			SendMessage answer = MessageFactory.createSendMessage(message)
+					.setText(text)
+					.setReplyMarkup(ReplyKeyboardFactory.createCommandKeyboard());		
+			
+			LoggedUsers.addLoggedUser(
+					message.getFrom().getId(), 
+					getUsername(message.getText()), 
+					message.getChatId().toString(),
+					token);
 
-		return List.of(successfullLogin, answer);
+			return List.of(successfulLogin, answer);
+			
+		} catch (BadCredentialsException e) {
+			SendMessage failedLogin = MessageFactory.createSendMessage(message)
+					.setText("You have entered an invalid username or password")
+					.setReplyMarkup(ReplyKeyboardFactory.createInitialKeyBoard());
+			
+			return List.of(failedLogin);
+		}
+		
+
 	}
 
 }
