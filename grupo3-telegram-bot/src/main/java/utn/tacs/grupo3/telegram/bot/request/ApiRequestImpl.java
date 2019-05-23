@@ -8,10 +8,12 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import utn.tacs.grupo3.telegram.bot.request.entity.ListOfPlaces;
 import utn.tacs.grupo3.telegram.bot.request.entity.Venue;
+import utn.tacs.grupo3.telegram.bot.request.exception.BadCredentialsException;
 import utn.tacs.grupo3.telegram.bot.user.LoggedUsers;
 import utn.tacs.grupo3.telegram.bot.user.User;
 
@@ -30,17 +32,23 @@ public class ApiRequestImpl implements ApiRequest{
 	
 		
 	@Override
-	public String login(User user) {
+	public String login(User user) throws BadCredentialsException {
 		String uri = new URIBuilder()
 				.setBaseUri(API_BASE_URL)
 				.setRelativeUri(LOGIN)
 				.build();
 		
-		String token = rest.exchange(uri, HttpMethod.POST, new HttpEntity<User>(user), ResponseEntity.class)
-				.getHeaders()
-				.getFirst(AUTHORIZATION_HEADER);
+		try {
+			String token = rest.exchange(uri, HttpMethod.POST, new HttpEntity<User>(user), ResponseEntity.class)
+					.getHeaders()
+					.getFirst(AUTHORIZATION_HEADER);
+
+			return token.replace("Bearer ", "");
+
+		} catch (HttpClientErrorException e) {
+			throw new BadCredentialsException("Invalid username or password. Status code [" + e.getRawStatusCode() + "]", e);
+		}
 		
-		return token.replace("Bearer ", "");
 	}
 	
 	
