@@ -3,6 +3,8 @@ package utn.tacs.grupo3.spring.security;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.GenericFilterBean;
 import org.springframework.security.core.Authentication;
+import utn.tacs.grupo3.spring.security.token.ValidateToken;
+
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
@@ -24,7 +26,7 @@ public class JwtFilter extends GenericFilterBean {
             throws IOException, ServletException {
 
 
-        Authentication authentication = JwtUtil.getAuthentication((HttpServletRequest)request);
+        Authentication authentication = new ValidateToken().getAuthentication((HttpServletRequest)request);
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
