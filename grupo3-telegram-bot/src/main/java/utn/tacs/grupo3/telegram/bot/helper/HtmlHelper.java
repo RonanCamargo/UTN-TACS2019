@@ -7,7 +7,7 @@ public class HtmlHelper {
 	}
 	
 	public static String italic(String toItalic) {
-		return "<i>" + toItalic + "</b>";
+		return "<i>" + toItalic + "</i>";
 	}
 	
 	public static String br() {

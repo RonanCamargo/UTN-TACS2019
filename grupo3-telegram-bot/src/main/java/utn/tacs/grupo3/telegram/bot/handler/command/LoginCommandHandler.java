@@ -23,10 +23,9 @@ public class LoginCommandHandler extends AbstractCommandHandler{
 
 	@Override
 	public List<BotApiMethod<?>> handle(Message message) {
-		UserCredentials credentials = getUserCredentials(message.getText());
 		
 		SendMessage successfulLogin = MessageFactory.createSendMessage(message)
-				.setText("Successful login, welcome");
+				.setText(HtmlHelper.bold("Successful login, welcome"));
 		
 		String text = HtmlHelper.formatText(
 				HtmlHelper.bold("Select an option please"), HtmlHelper.br(),
@@ -38,7 +37,9 @@ public class LoginCommandHandler extends AbstractCommandHandler{
 				.setText(text)
 				.setReplyMarkup(ReplyKeyboardFactory.createCommandKeyboard());		
 
-		try {			
+		try {
+			UserCredentials credentials = getUserCredentials(message.getText());
+
 			apiRequest.login(credentials, message.getFrom().getId());			
 
 			return List.of(successfulLogin, answer);
