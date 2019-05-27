@@ -15,7 +15,7 @@ import utn.tacs.grupo3.telegram.bot.user.LoggedUsers;
 public class ViewPlaceCallbackQueryHandler implements CallbackQueryHandler{
 
 	@Override
-	public List<BotApiMethod<?>> handleCommand(CallbackQuery callbackQuery) {
+	public List<BotApiMethod<?>> handle(CallbackQuery callbackQuery) {
 		String[] parsed = callbackQuery.getData().split(PlacesBotConstants.COMMAND_SEPARATOR);
 		
 		List<Place> places = new ApiRequestImpl().listByName(

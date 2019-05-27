@@ -17,7 +17,7 @@ import utn.tacs.grupo3.telegram.bot.user.LoggedUsers;
 public class AddPlaceToListCallbackQueryHandler implements CallbackQueryHandler{
 
 	@Override
-	public List<BotApiMethod<?>> handleCommand(CallbackQuery callbackQuery) {
+	public List<BotApiMethod<?>> handle(CallbackQuery callbackQuery) {
 		String placeId = callbackQuery.getData().split("_")[1];
 		SendMessage answer = new SendMessage()
 				.setChatId(LoggedUsers.getChatId(callbackQuery.getFrom().getId()))

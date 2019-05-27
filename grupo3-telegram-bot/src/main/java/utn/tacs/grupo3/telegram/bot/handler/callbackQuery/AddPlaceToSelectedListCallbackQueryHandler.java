@@ -15,7 +15,7 @@ import utn.tacs.grupo3.telegram.bot.user.LoggedUsers;
 public class AddPlaceToSelectedListCallbackQueryHandler implements CallbackQueryHandler{
 
 	@Override
-	public List<BotApiMethod<?>> handleCommand(CallbackQuery callbackQuery) {
+	public List<BotApiMethod<?>> handle(CallbackQuery callbackQuery) {
 		String[] parsed = callbackQuery.getData().split(PlacesBotConstants.ADD_PLACE_TO_SELECTED_LIST + "_")[1].split("_");
 		
 		new ApiRequestImpl().addPlaceToList(
