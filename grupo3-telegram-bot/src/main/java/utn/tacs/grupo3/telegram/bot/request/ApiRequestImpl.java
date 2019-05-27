@@ -61,8 +61,9 @@ public class ApiRequestImpl implements ApiRequest{
 	
 	
 	@Override
-	public void logout(String username) {
-		// TODO Auto-generated method stub		
+	public void logout(Integer telegramUserId) {
+		LoggedUsers.removeLoggedUser(telegramUserId);
+		//request a backend
 	}
 
 	@Override

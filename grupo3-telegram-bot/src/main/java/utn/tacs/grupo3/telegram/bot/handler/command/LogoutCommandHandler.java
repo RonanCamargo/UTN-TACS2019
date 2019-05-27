@@ -10,7 +10,6 @@ import utn.tacs.grupo3.telegram.bot.factory.MessageFactory;
 import utn.tacs.grupo3.telegram.bot.factory.ReplyKeyboardFactory;
 import utn.tacs.grupo3.telegram.bot.handler.AbstractCommandHandler;
 import utn.tacs.grupo3.telegram.bot.helper.HtmlHelper;
-import utn.tacs.grupo3.telegram.bot.user.LoggedUsers;
 import utn.tacs.grupo3.telegram.bot.user.LoginStatusChecker;
 
 public class LogoutCommandHandler extends AbstractCommandHandler{
@@ -21,15 +20,13 @@ public class LogoutCommandHandler extends AbstractCommandHandler{
 
 	@Override
 	public List<BotApiMethod<?>> handle(Message message) {
-		loginStatusChecker.checkUserLoginStatus(message.getFrom());
+//		loginStatusChecker.checkUserLoginStatus(message.getFrom());
 
-//		apiRequest.logout(LoggedUsers.getUsername(message.getFrom().getId()));
+		apiRequest.logout(message.getFrom().getId());
 		
 		SendMessage answer = MessageFactory.createSendMessage(message)
 				.setText(HtmlHelper.bold("Successful logout"))
 				.setReplyMarkup(ReplyKeyboardFactory.createInitialKeyBoard());
-		
-		LoggedUsers.removeLoggedUser(message.getFrom().getId());
 		
 		return List.of(answer);
 		

@@ -15,7 +15,7 @@ public interface ApiRequest {
 		
 	String login(UserCredentials user, Integer telegramUserId) throws BadCredentialsException;
 	
-	void logout(String username);
+	void logout(Integer telegramUserId);
 	
 	List<String> listNames(Integer telegramUserId);	
 	
