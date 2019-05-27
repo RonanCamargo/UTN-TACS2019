@@ -12,17 +12,11 @@ import utn.tacs.grupo3.telegram.bot.constants.PlacesBotConstants;
 import utn.tacs.grupo3.telegram.bot.factory.InlineKeyboardFactory;
 import utn.tacs.grupo3.telegram.bot.factory.MessageFactory;
 import utn.tacs.grupo3.telegram.bot.handler.AbstractCommandHandler;
-import utn.tacs.grupo3.telegram.bot.user.LoginStatusChecker;
 
 public class SearchCommandHandler extends AbstractCommandHandler{
 
-	public SearchCommandHandler(LoginStatusChecker loginStatusChecker) {
-		super(loginStatusChecker);
-	}
-
 	@Override
 	public List<BotApiMethod<?>> handle(Message message) {
-		loginStatusChecker.checkUserLoginStatus(message.getFrom());
 		
 		InlineKeyboardMarkup keyboard = InlineKeyboardFactory.createInlineKeyboard(				
 				List.of(

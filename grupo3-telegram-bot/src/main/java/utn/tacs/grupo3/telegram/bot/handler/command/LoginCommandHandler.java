@@ -13,7 +13,6 @@ import utn.tacs.grupo3.telegram.bot.factory.ReplyKeyboardFactory;
 import utn.tacs.grupo3.telegram.bot.handler.AbstractCommandHandler;
 import utn.tacs.grupo3.telegram.bot.helper.HtmlHelper;
 import utn.tacs.grupo3.telegram.bot.request.exception.BadCredentialsException;
-import utn.tacs.grupo3.telegram.bot.user.LoginStatusChecker;
 import utn.tacs.grupo3.telegram.bot.user.UserCredentials;
 
 /**
@@ -21,10 +20,6 @@ import utn.tacs.grupo3.telegram.bot.user.UserCredentials;
  *
  */
 public class LoginCommandHandler extends AbstractCommandHandler{
-	
-	public LoginCommandHandler(LoginStatusChecker loginStatusChecker) {
-		super(loginStatusChecker);
-	}
 
 	@Override
 	public List<BotApiMethod<?>> handle(Message message) {

@@ -14,13 +14,8 @@ import utn.tacs.grupo3.telegram.bot.factory.MessageFactory;
 import utn.tacs.grupo3.telegram.bot.handler.AbstractCommandHandler;
 import utn.tacs.grupo3.telegram.bot.helper.HtmlHelper;
 import utn.tacs.grupo3.telegram.bot.request.entity.Place;
-import utn.tacs.grupo3.telegram.bot.user.LoginStatusChecker;
 
 public class ViewListCommandHandler extends AbstractCommandHandler {
-
-	public ViewListCommandHandler(LoginStatusChecker loginStatusChecker) {
-		super(loginStatusChecker);
-	}
 
 	@Override
 	public List<BotApiMethod<?>> handle(Message message) {
