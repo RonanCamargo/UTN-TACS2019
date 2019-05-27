@@ -11,6 +11,9 @@ import utn.tacs.grupo3.telegram.bot.factory.ReplyKeyboardFactory;
 import utn.tacs.grupo3.telegram.bot.handler.CommandHandler;
 import utn.tacs.grupo3.telegram.bot.helper.HtmlHelper;
 
+/**
+ * Handler for /start command
+ */
 public class StartCommandHandler implements CommandHandler{
 	
 	@Override
@@ -20,7 +23,7 @@ public class StartCommandHandler implements CommandHandler{
 				HtmlHelper.multipleBr(2),
 				"Please send your username and password as follows",
 				HtmlHelper.br(),
-				"/login USERNAME, PASSWORD"
+				"/login USERNAME PASSWORD"
 				);
 				
 		SendMessage answer = MessageFactory.createSendMessage(message)

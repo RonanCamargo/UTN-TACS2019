@@ -11,6 +11,9 @@ import utn.tacs.grupo3.telegram.bot.factory.ReplyKeyboardFactory;
 import utn.tacs.grupo3.telegram.bot.handler.AbstractCommandHandler;
 import utn.tacs.grupo3.telegram.bot.helper.HtmlHelper;
 
+/**
+ * Handler for /logout command
+ */
 public class LogoutCommandHandler extends AbstractCommandHandler{
 
 	@Override

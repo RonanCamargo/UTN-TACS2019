@@ -15,6 +15,9 @@ import utn.tacs.grupo3.telegram.bot.handler.AbstractCommandHandler;
 import utn.tacs.grupo3.telegram.bot.helper.HtmlHelper;
 import utn.tacs.grupo3.telegram.bot.request.entity.Place;
 
+/**
+ * Handler for /viewlist command
+ */
 public class ViewListCommandHandler extends AbstractCommandHandler {
 
 	@Override

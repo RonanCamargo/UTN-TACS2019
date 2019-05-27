@@ -13,6 +13,9 @@ import utn.tacs.grupo3.telegram.bot.handler.CommandHandler;
 import utn.tacs.grupo3.telegram.bot.helper.HtmlHelper;
 import utn.tacs.grupo3.telegram.bot.user.LoggedUsers;
 
+/**
+ * Handler for /help command
+ */
 public class HelpCommandHandler implements CommandHandler{
 
 	@Override

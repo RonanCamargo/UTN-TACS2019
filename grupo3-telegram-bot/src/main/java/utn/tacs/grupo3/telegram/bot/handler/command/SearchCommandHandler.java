@@ -13,6 +13,9 @@ import utn.tacs.grupo3.telegram.bot.factory.InlineKeyboardFactory;
 import utn.tacs.grupo3.telegram.bot.factory.MessageFactory;
 import utn.tacs.grupo3.telegram.bot.handler.AbstractCommandHandler;
 
+/**
+ * Handler for /search command
+ */
 public class SearchCommandHandler extends AbstractCommandHandler{
 
 	@Override

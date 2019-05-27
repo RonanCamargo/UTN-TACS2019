@@ -11,6 +11,9 @@ import utn.tacs.grupo3.telegram.bot.factory.MessageFactory;
 import utn.tacs.grupo3.telegram.bot.handler.AbstractCommandHandler;
 import utn.tacs.grupo3.telegram.bot.helper.HtmlHelper;
 
+/**
+ * Handler for /mylists handler
+ */
 public class MyListsCommandHandler extends AbstractCommandHandler{
 
 	private static final String CLIPBOARD_EMOJI = "\uD83D\uDCCB ";
