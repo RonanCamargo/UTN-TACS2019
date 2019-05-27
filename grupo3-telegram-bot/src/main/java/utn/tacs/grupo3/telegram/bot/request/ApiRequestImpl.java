@@ -14,6 +14,7 @@ import org.springframework.web.client.RestTemplate;
 import utn.tacs.grupo3.telegram.bot.request.entity.ListOfPlaces;
 import utn.tacs.grupo3.telegram.bot.request.entity.Venue;
 import utn.tacs.grupo3.telegram.bot.request.exception.BadCredentialsException;
+import utn.tacs.grupo3.telegram.bot.request.exception.TelegramUserNotLoggedException;
 import utn.tacs.grupo3.telegram.bot.user.LoggedUsers;
 import utn.tacs.grupo3.telegram.bot.user.UserCredentials;
 
@@ -68,6 +69,8 @@ public class ApiRequestImpl implements ApiRequest{
 
 	@Override
 	public List<String> listNames(Integer telegramUserId){
+		checkUserLogged(telegramUserId);
+		
 		String uri = new URIBuilder()
 				.setBaseUri(API_BASE_URL)
 				.setRelativeUri(USER_LISTS_OF_PLACES)
@@ -85,6 +88,8 @@ public class ApiRequestImpl implements ApiRequest{
 
 	@Override
 	public List<Venue> near(float latitude, float longitude, Integer telegramUserId) {
+		checkUserLogged(telegramUserId);
+		
 		String uri = new URIBuilder()
 				.setBaseUri(API_BASE_URL)
 				.setRelativeUri(NEAR_PLACES)
@@ -104,6 +109,8 @@ public class ApiRequestImpl implements ApiRequest{
 
 	@Override
 	public List<Venue> searchPlacesByName(String name, Integer telegramUserId) {
+		checkUserLogged(telegramUserId);
+		
 		String uri = new URIBuilder()
 				.setBaseUri(API_BASE_URL)
 				.setRelativeUri(PLACES_BY_NAME)
@@ -122,6 +129,8 @@ public class ApiRequestImpl implements ApiRequest{
 
 	@Override
 	public void addPlaceToList(String listName, String placeId, Integer telegramUserId) {
+		checkUserLogged(telegramUserId);
+		
 		String uri = new URIBuilder()
 				.setBaseUri(API_BASE_URL)
 				.setRelativeUri(ADD_PLACE_TO_SELECTED_LIST)
@@ -138,14 +147,11 @@ public class ApiRequestImpl implements ApiRequest{
 		response.getBody();
 	}
 
-	@Override
-	public Venue venueByFoursquareId(String foursquareId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 	@Override
 	public ListOfPlaces listByName(String listName, Integer telegramUserId) {
+		checkUserLogged(telegramUserId);
+		
 		String uri = new URIBuilder()
 				.setBaseUri(API_BASE_URL)
 				.setRelativeUri(LIST_BY_NAME)
@@ -169,6 +175,12 @@ public class ApiRequestImpl implements ApiRequest{
 		HttpEntity<String> entity = new HttpEntity<String>(header);
 		
 		return entity;
+	}
+	
+	private void checkUserLogged(Integer telegramUserId) {
+		if (!LoggedUsers.isLogged(telegramUserId)) {
+			throw new TelegramUserNotLoggedException("Telegram user [Id=" + telegramUserId + "] should be logged.");
+		}
 	}
 
 }

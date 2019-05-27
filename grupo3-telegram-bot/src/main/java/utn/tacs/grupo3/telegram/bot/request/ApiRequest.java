@@ -25,8 +25,6 @@ public interface ApiRequest {
 	
 	void addPlaceToList(String listName, String placeId, Integer telegramUserId);
 	
-	Venue venueByFoursquareId(String foursquareId);
-	
 	ListOfPlaces listByName(String listName, Integer telegramUserId);
 
 }
