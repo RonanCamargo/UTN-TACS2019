@@ -36,7 +36,6 @@ class LoginUser extends Component {
 		try {
 			axios.post("http://localhost:8080/login", user)
 				.then(res => {
-					console.log(res)
 					this.login(user)
 					this.props.history.push("/places")
 				})
