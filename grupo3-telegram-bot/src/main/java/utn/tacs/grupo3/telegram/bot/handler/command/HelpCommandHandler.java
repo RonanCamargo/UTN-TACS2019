@@ -36,7 +36,7 @@ public class HelpCommandHandler implements CommandHandler{
 					HtmlHelper.multipleBr(2),
 					"To login, please send your username and password as follows",
 					HtmlHelper.br(),
-					"/login USERNAME, PASSWORD"
+					"/login USERNAME PASSWORD"
 					);
 			answer.setReplyMarkup(ReplyKeyboardFactory.createInitialKeyBoard());
 		}
