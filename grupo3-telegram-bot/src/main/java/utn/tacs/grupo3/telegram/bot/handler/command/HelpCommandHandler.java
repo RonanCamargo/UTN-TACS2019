@@ -1,6 +1,5 @@
 package utn.tacs.grupo3.telegram.bot.handler.command;
 
-import java.io.Serializable;
 import java.util.List;
 
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
@@ -17,7 +16,7 @@ import utn.tacs.grupo3.telegram.bot.user.LoggedUsers;
 public class HelpCommandHandler implements CommandHandler{
 
 	@Override
-	public <T extends Serializable> List<BotApiMethod<?>> handleCommand(Message message) {
+	public List<BotApiMethod<?>> handleCommand(Message message) {
 		SendMessage answer = MessageFactory.createSendMessage(message);
 		String text;
 		
@@ -46,5 +45,4 @@ public class HelpCommandHandler implements CommandHandler{
 		
 		return List.of(answer);
 	}
-
 }

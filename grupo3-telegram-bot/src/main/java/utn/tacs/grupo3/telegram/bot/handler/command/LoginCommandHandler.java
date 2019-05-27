@@ -1,6 +1,5 @@
 package utn.tacs.grupo3.telegram.bot.handler.command;
 
-import java.io.Serializable;
 import java.util.List;
 
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
@@ -24,7 +23,7 @@ public class LoginCommandHandler extends AbstractCommandHandler{
 	}
 
 	@Override
-	public <T extends Serializable> List<BotApiMethod<?>> handleCommand(Message message) {
+	public List<BotApiMethod<?>> handleCommand(Message message) {
 		loginStatusChecker.checkUserLoginStatus(message.getFrom());
 		
 		//TODO Make request

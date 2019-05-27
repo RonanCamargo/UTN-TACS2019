@@ -1,6 +1,5 @@
 package utn.tacs.grupo3.telegram.bot.handler.callbackQuery;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,7 +17,7 @@ import utn.tacs.grupo3.telegram.bot.user.LoggedUsers;
 public class AddPlaceToListCallbackQueryHandler implements CallbackQueryHandler{
 
 	@Override
-	public <T extends Serializable> List<BotApiMethod<?>> handleCommand(CallbackQuery callbackQuery) {
+	public List<BotApiMethod<?>> handleCommand(CallbackQuery callbackQuery) {
 		String placeId = callbackQuery.getData().split("_")[1];
 		SendMessage answer = new SendMessage()
 				.setChatId(LoggedUsers.getChatId(callbackQuery.getFrom().getId()))

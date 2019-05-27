@@ -1,6 +1,5 @@
 package utn.tacs.grupo3.telegram.bot.handler.command;
 
-import java.io.Serializable;
 import java.util.List;
 
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
@@ -21,7 +20,7 @@ public class LogoutCommandHandler extends AbstractCommandHandler{
 	}
 
 	@Override
-	public <T extends Serializable> List<BotApiMethod<?>> handleCommand(Message message) {
+	public List<BotApiMethod<?>> handleCommand(Message message) {
 		loginStatusChecker.checkUserLoginStatus(message.getFrom());
 
 //		apiRequest.logout(LoggedUsers.getUsername(message.getFrom().getId()));
