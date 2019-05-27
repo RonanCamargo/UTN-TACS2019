@@ -9,7 +9,6 @@ import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 import utn.tacs.grupo3.telegram.bot.constants.PlacesBotConstants;
 import utn.tacs.grupo3.telegram.bot.factory.MessageFactory;
 import utn.tacs.grupo3.telegram.bot.handler.CallbackQueryHandler;
-import utn.tacs.grupo3.telegram.bot.user.LoggedUsers;
 
 public class AddPlaceToSelectedListCallbackQueryHandler implements CallbackQueryHandler {
 
@@ -20,7 +19,6 @@ public class AddPlaceToSelectedListCallbackQueryHandler implements CallbackQuery
 						.split(PlacesBotConstants.COMMAND_SEPARATOR);
 
 		apiRequest.addPlaceToList(
-				LoggedUsers.getUsername(callbackQuery.getFrom().getId()), 
 				parsed[0],
 				parsed[1], 
 				callbackQuery.getFrom().getId());

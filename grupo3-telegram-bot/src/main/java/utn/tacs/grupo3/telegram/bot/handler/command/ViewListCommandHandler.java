@@ -14,7 +14,6 @@ import utn.tacs.grupo3.telegram.bot.factory.MessageFactory;
 import utn.tacs.grupo3.telegram.bot.handler.AbstractCommandHandler;
 import utn.tacs.grupo3.telegram.bot.helper.HtmlHelper;
 import utn.tacs.grupo3.telegram.bot.request.entity.Place;
-import utn.tacs.grupo3.telegram.bot.user.LoggedUsers;
 import utn.tacs.grupo3.telegram.bot.user.LoginStatusChecker;
 
 public class ViewListCommandHandler extends AbstractCommandHandler {
@@ -29,7 +28,7 @@ public class ViewListCommandHandler extends AbstractCommandHandler {
 		String listName = removeCommandFromMessageText(message.getText(), PlacesBotConstants.VIEW_LIST_COMMAND);
 
 		List<Place> places = apiRequest
-				.listByName(LoggedUsers.getUsername(message.getFrom().getId()), listName, message.getFrom().getId())
+				.listByName(listName, message.getFrom().getId())
 				.getPlaces();
 
 		SendMessage answer = MessageFactory.createSendMessage(message)

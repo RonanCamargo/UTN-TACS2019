@@ -9,7 +9,6 @@ import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 import utn.tacs.grupo3.telegram.bot.constants.PlacesBotConstants;
 import utn.tacs.grupo3.telegram.bot.handler.CallbackQueryHandler;
 import utn.tacs.grupo3.telegram.bot.request.entity.Place;
-import utn.tacs.grupo3.telegram.bot.user.LoggedUsers;
 
 public class ViewPlaceCallbackQueryHandler implements CallbackQueryHandler{
 
@@ -17,11 +16,9 @@ public class ViewPlaceCallbackQueryHandler implements CallbackQueryHandler{
 	public List<BotApiMethod<?>> handle(CallbackQuery callbackQuery) {
 		String[] parsed = callbackQuery.getData().split(PlacesBotConstants.COMMAND_SEPARATOR);
 		
-		List<Place> places = apiRequest.listByName(
-				LoggedUsers.getUsername(callbackQuery.getFrom().getId())
-				,parsed[1],
-				callbackQuery.getFrom().getId()
-				).getPlaces();
+		List<Place> places = apiRequest
+				.listByName(parsed[1], callbackQuery.getFrom().getId())
+				.getPlaces();
 		
 		Place place = places.stream().filter(aPlace -> aPlace.getName().equalsIgnoreCase(parsed[2])).findFirst().get();		
 		SendVenue venue = createVenue(callbackQuery, place);

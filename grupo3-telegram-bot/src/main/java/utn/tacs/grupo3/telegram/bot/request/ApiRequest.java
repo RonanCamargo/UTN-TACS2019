@@ -23,10 +23,10 @@ public interface ApiRequest {
 	
 	List<Venue> searchPlacesByName(String name, Integer telegramUserId);
 	
-	void addPlaceToList(String username, String listName, String placeId, Integer telegramUserId);
+	void addPlaceToList(String listName, String placeId, Integer telegramUserId);
 	
 	Venue venueByFoursquareId(String foursquareId);
 	
-	ListOfPlaces listByName(String username, String listName, Integer telegramUserId);
+	ListOfPlaces listByName(String listName, Integer telegramUserId);
 
 }

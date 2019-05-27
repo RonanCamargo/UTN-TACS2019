@@ -120,11 +120,11 @@ public class ApiRequestImpl implements ApiRequest{
 
 
 	@Override
-	public void addPlaceToList(String username, String listName, String placeId, Integer telegramUserId) {
+	public void addPlaceToList(String listName, String placeId, Integer telegramUserId) {
 		String uri = new URIBuilder()
 				.setBaseUri(API_BASE_URL)
 				.setRelativeUri(ADD_PLACE_TO_SELECTED_LIST)
-				.setParameter(":user-id", username)
+				.setParameter(":user-id", LoggedUsers.getUsername(telegramUserId))
 				.setParameter(":list-name", listName)
 				.setParameter(":place-id", placeId)
 				.build();
@@ -144,11 +144,11 @@ public class ApiRequestImpl implements ApiRequest{
 	}
 
 	@Override
-	public ListOfPlaces listByName(String username, String listName, Integer telegramUserId) {
+	public ListOfPlaces listByName(String listName, Integer telegramUserId) {
 		String uri = new URIBuilder()
 				.setBaseUri(API_BASE_URL)
 				.setRelativeUri(LIST_BY_NAME)
-				.setParameter(":user-id", username)
+				.setParameter(":user-id", LoggedUsers.getUsername(telegramUserId))
 				.setParameter(":list-name", listName)
 				.build();
 		
