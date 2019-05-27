@@ -15,7 +15,7 @@ import utn.tacs.grupo3.telegram.bot.request.entity.ListOfPlaces;
 import utn.tacs.grupo3.telegram.bot.request.entity.Venue;
 import utn.tacs.grupo3.telegram.bot.request.exception.BadCredentialsException;
 import utn.tacs.grupo3.telegram.bot.user.LoggedUsers;
-import utn.tacs.grupo3.telegram.bot.user.User;
+import utn.tacs.grupo3.telegram.bot.user.UserCredentials;
 
 public class ApiRequestImpl implements ApiRequest{
 	
@@ -28,18 +28,18 @@ public class ApiRequestImpl implements ApiRequest{
 	private static final String LOGIN = "/login";
 		
 	private static final String AUTHORIZATION_HEADER = "Authorization";
-	private RestTemplate rest = new RestTemplate();
 	
+	private RestTemplate rest = new RestTemplate();	
 		
 	@Override
-	public String login(User user) throws BadCredentialsException {
+	public String login(UserCredentials user) throws BadCredentialsException {
 		String uri = new URIBuilder()
 				.setBaseUri(API_BASE_URL)
 				.setRelativeUri(LOGIN)
 				.build();
 		
 		try {
-			String token = rest.exchange(uri, HttpMethod.POST, new HttpEntity<User>(user), ResponseEntity.class)
+			String token = rest.exchange(uri, HttpMethod.POST, new HttpEntity<UserCredentials>(user), ResponseEntity.class)
 					.getHeaders()
 					.getFirst(AUTHORIZATION_HEADER);
 

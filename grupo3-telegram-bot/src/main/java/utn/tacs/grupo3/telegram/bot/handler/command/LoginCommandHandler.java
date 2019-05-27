@@ -14,7 +14,6 @@ import utn.tacs.grupo3.telegram.bot.helper.HtmlHelper;
 import utn.tacs.grupo3.telegram.bot.request.exception.BadCredentialsException;
 import utn.tacs.grupo3.telegram.bot.user.LoggedUsers;
 import utn.tacs.grupo3.telegram.bot.user.LoginStatusChecker;
-import utn.tacs.grupo3.telegram.bot.user.User;
 
 public class LoginCommandHandler extends AbstractCommandHandler{
 	
@@ -24,12 +23,13 @@ public class LoginCommandHandler extends AbstractCommandHandler{
 
 	@Override
 	public List<BotApiMethod<?>> handleCommand(Message message) {
-		loginStatusChecker.checkUserLoginStatus(message.getFrom());
+//		loginStatusChecker.checkUserLoginStatus(message.getFrom());
 		
 		//TODO Make request
 		String token;
 		try {
-			token = apiRequest.login(new User(getUsername(message.getText()),getPassword(message.getText())));
+			token = apiRequest.login(getUserCredentialsFromMessage(message));
+			
 			SendMessage successfulLogin = MessageFactory.createSendMessage(message)
 					.setText("Successful login, welcome");
 			

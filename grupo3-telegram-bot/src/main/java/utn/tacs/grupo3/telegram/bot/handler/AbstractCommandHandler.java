@@ -1,5 +1,7 @@
 package utn.tacs.grupo3.telegram.bot.handler;
 
+
+import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.User;
 
 import utn.tacs.grupo3.telegram.bot.constants.PlacesBotConstants;
@@ -7,6 +9,7 @@ import utn.tacs.grupo3.telegram.bot.request.ApiRequest;
 import utn.tacs.grupo3.telegram.bot.request.ApiRequestImpl;
 import utn.tacs.grupo3.telegram.bot.user.LoggedUsers;
 import utn.tacs.grupo3.telegram.bot.user.LoginStatusChecker;
+import utn.tacs.grupo3.telegram.bot.user.UserCredentials;
 
 public abstract class AbstractCommandHandler implements CommandHandler{
 	
@@ -31,6 +34,13 @@ public abstract class AbstractCommandHandler implements CommandHandler{
 	
 	protected String getUsernameByUser(User user) {
 		return LoggedUsers.getUsername(user.getId());
+	}
+	
+	protected UserCredentials getUserCredentialsFromMessage(Message message) {
+		return new UserCredentials(
+				getUsername(message.getText()), 
+				getPassword(message.getText())
+				);
 	}
 	
 }

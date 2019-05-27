@@ -23,6 +23,8 @@ public final class PlacesBotConstants {
 	public static final String SEARCH_NEAR_ME_INLINE = "near me";
 	public static final String SEARCH_BY_NAME = "name ";
 	
+	public static final String COMMAND_SEPARATOR = "_";
+	
 	public static List<String> allCommands(){
 		return Arrays.asList(
 				START_COMMAND, LOGIN_COMMAND, HELP_COMMAND, MY_LISTS_COMMAND, VIEW_LIST_COMMAND, SEARCH_COMMAND, LOGOUT_COMMAND, 

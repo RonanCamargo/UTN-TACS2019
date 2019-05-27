@@ -6,6 +6,7 @@ import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
+import utn.tacs.grupo3.telegram.bot.constants.PlacesBotConstants;
 import utn.tacs.grupo3.telegram.bot.factory.MessageFactory;
 import utn.tacs.grupo3.telegram.bot.handler.AbstractCommandHandler;
 import utn.tacs.grupo3.telegram.bot.helper.HtmlHelper;
@@ -21,27 +22,32 @@ public class MyListsCommandHandler extends AbstractCommandHandler{
 	
 	@Override
 	public List<BotApiMethod<?>> handleCommand(Message message) {
-		loginStatusChecker.checkUserLoginStatus(message.getFrom());
-		
-		SendMessage answer = MessageFactory.createSendMessage(message);
+//		loginStatusChecker.checkUserLoginStatus(message.getFrom());
 		
 		List<String> myListsNames = apiRequest.listNames(
 				getUsernameByUser(message.getFrom()),
 				message.getFrom().getId()
 				);
+
+		SendMessage answer = MessageFactory.createSendMessage(message);		
 		
-		StringBuilder text = new StringBuilder(HtmlHelper.bold("My lists")).append(HtmlHelper.multipleBr(2));
+		if (!myListsNames.isEmpty()) {
+			StringBuilder text = new StringBuilder(HtmlHelper.bold("My lists")).append(HtmlHelper.multipleBr(2));
+			
+			myListsNames.forEach(name -> text.append(CLIPBOARD_EMOJI)
+					.append(name)
+					.append(HtmlHelper.br())
+					.append("See places: ")
+					.append(PlacesBotConstants.VIEW_LIST_COMMAND).append(PlacesBotConstants.COMMAND_SEPARATOR)
+					.append(name.toLowerCase())
+					.append(HtmlHelper.multipleBr(2))
+					);
+			
+			answer.setText(text.toString());						
+		} else {
+			answer.setText("You don't have any list of places");			
+		}
 		
-		myListsNames.forEach(name -> text.append(CLIPBOARD_EMOJI)
-				.append(name)
-				.append(HtmlHelper.br())
-				.append("See places: ")
-				.append("/viewlist_")
-				.append(name.toLowerCase())
-				.append(HtmlHelper.multipleBr(2))
-				);
-		
-		answer.setText(text.toString());
 		return List.of(answer);
 	}
 

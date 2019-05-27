@@ -40,12 +40,16 @@ public class CommandHandlerLocator {
 	}
 	
 	public static CommandHandler getHandler(Message message) {
-		String command = message.getText().split(" ")[0].split("_")[0];
+		String command = getCommandFromMessage(message);
 		
 		if (!commands.containsKey(command)) {
 			throw new CommandNotFoundException("Command: \"" + command + "\" is not registered");
 		}
 		
 		return commands.get(command);
+	}
+	
+	private static String getCommandFromMessage(Message message) {
+		return message.getText().split(" ")[0].split("_")[0];
 	}
 }

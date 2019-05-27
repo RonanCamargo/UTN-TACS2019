@@ -5,7 +5,7 @@ import java.util.List;
 import utn.tacs.grupo3.telegram.bot.request.entity.ListOfPlaces;
 import utn.tacs.grupo3.telegram.bot.request.entity.Venue;
 import utn.tacs.grupo3.telegram.bot.request.exception.BadCredentialsException;
-import utn.tacs.grupo3.telegram.bot.user.User;
+import utn.tacs.grupo3.telegram.bot.user.UserCredentials;
 
 /**
  * Interface for backend api requests
@@ -13,7 +13,7 @@ import utn.tacs.grupo3.telegram.bot.user.User;
  */
 public interface ApiRequest {
 		
-	String login(User user) throws BadCredentialsException;
+	String login(UserCredentials user) throws BadCredentialsException;
 	
 	void logout(String username);
 	
