@@ -1,12 +1,14 @@
 package utn.tacs.grupo3.telegram.bot;
 
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
+import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
@@ -22,6 +24,8 @@ import utn.tacs.grupo3.telegram.bot.handler.locator.CommandHandlerLocator;
 
 public class PlacesBot extends TelegramLongPollingBot{
 	
+	private static Logger logger = Logger.getLogger(PlacesBot.class.getName());
+	
 	private static final String BOT_USERNAME = "TACS20191CGrupo3Bot";
 	private static final String BOT_TOKEN = "837736990:AAGVZ27HyFKKyc-ZCbUhgIHE7iddP6-wchY";
 	
@@ -33,6 +37,10 @@ public class PlacesBot extends TelegramLongPollingBot{
 		inlineQueries.put(PlacesBotConstants.SEARCH_BY_NAME, new SearchByNameInlineQueryHandler());
 	}
 	
+	/**
+	 * Manages all updates sent by a telegram user. 
+	 * Only sends answers to registered commands, callback queries and inline queries.
+	 */
 	@Override
 	public void onUpdateReceived(Update update) {
 		List<BotApiMethod<?>> answers = null;
@@ -55,8 +63,7 @@ public class PlacesBot extends TelegramLongPollingBot{
 			}
 						
 		} catch (TelegramBotException e) {
-			e.printStackTrace();
-			this.handleException(e);
+			answers = this.handleException(e, update);
 		} finally {
 			this.sendAnswers(answers);
 		}
@@ -70,22 +77,35 @@ public class PlacesBot extends TelegramLongPollingBot{
 		return BOT_TOKEN;
 	}
 	
-	private List<BotApiMethod<Serializable>> handleException(Exception e){
-		return null;
+	/**
+	 * Handles any TelegramBotException and creates an answer for the user based on the exception message.
+	 * @param e
+	 * @param update
+	 * @return answer
+	 */
+	private List<BotApiMethod<?>> handleException(Exception e, Update update){
+		SendMessage errorAnswer = new SendMessage()
+				.setChatId(update.getMessage().getChatId())
+				.setText(e.getMessage());
+		
+		return List.of(errorAnswer);
 	}
 	
+	/**
+	 * Sends all answers to the user in order.
+	 * @param answers
+	 */
 	private void sendAnswers(List<BotApiMethod<?>> answers) {
 		if (answers != null) {
 			answers.forEach(answer -> {
 				try {
 					execute(answer);
 				} catch (TelegramApiException e) {
-					e.printStackTrace();
+					logger.log(Level.WARNING, e.getMessage(), e);
 				}
 			});
-		}
-		
-	}
+		}		
+	}	
 	
 	private String getInlineQueryCommand(String query) {
 		if (query.startsWith(PlacesBotConstants.SEARCH_BY_NAME)) {
