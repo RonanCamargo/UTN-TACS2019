@@ -29,10 +29,10 @@ public class ApiRequestImpl implements ApiRequest{
 		
 	private static final String AUTHORIZATION_HEADER = "Authorization";
 	
-	private RestTemplate rest = new RestTemplate();	
+	private RestTemplate rest = new RestTemplate();
 		
 	@Override
-	public String login(UserCredentials user) throws BadCredentialsException {
+	public String login(UserCredentials user, Integer telegramUserId) throws BadCredentialsException {
 		String uri = new URIBuilder()
 				.setBaseUri(API_BASE_URL)
 				.setRelativeUri(LOGIN)
@@ -42,11 +42,19 @@ public class ApiRequestImpl implements ApiRequest{
 			String token = rest.exchange(uri, HttpMethod.POST, new HttpEntity<UserCredentials>(user), ResponseEntity.class)
 					.getHeaders()
 					.getFirst(AUTHORIZATION_HEADER);
-
+			
+			LoggedUsers.addLoggedUser(telegramUserId, user.getUsername(), token);
+			
 			return token.replace("Bearer ", "");
-
+			
+			
 		} catch (HttpClientErrorException e) {
-			throw new BadCredentialsException("Invalid username or password. Status code [" + e.getRawStatusCode() + "]", e);
+			switch (e.getStatusCode()) {
+			case FORBIDDEN:
+				throw new BadCredentialsException("Invalid username or password. Status code [" + e.getRawStatusCode() + "]", e);
+			default:
+				throw e;
+			}
 		}
 		
 	}
@@ -58,11 +66,11 @@ public class ApiRequestImpl implements ApiRequest{
 	}
 
 	@Override
-	public List<String> listNames(String username, Integer telegramUserId){
+	public List<String> listNames(Integer telegramUserId){
 		String uri = new URIBuilder()
 				.setBaseUri(API_BASE_URL)
 				.setRelativeUri(USER_LISTS_OF_PLACES)
-				.setParameter(":user-id", username)
+				.setParameter(":user-id", LoggedUsers.getUsername(telegramUserId))
 				.build();
 		
 		ResponseEntity<List<ListOfPlaces>> lists = rest.exchange(

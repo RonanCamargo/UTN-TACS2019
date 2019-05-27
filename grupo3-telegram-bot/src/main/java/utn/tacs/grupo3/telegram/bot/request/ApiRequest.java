@@ -13,11 +13,11 @@ import utn.tacs.grupo3.telegram.bot.user.UserCredentials;
  */
 public interface ApiRequest {
 		
-	String login(UserCredentials user) throws BadCredentialsException;
+	String login(UserCredentials user, Integer telegramUserId) throws BadCredentialsException;
 	
 	void logout(String username);
 	
-	List<String> listNames(String username, Integer telegramUserId);	
+	List<String> listNames(Integer telegramUserId);	
 	
 	List<Venue> near(float latitude, float longitude, Integer telegramUserId);
 	

@@ -13,7 +13,6 @@ import utn.tacs.grupo3.telegram.bot.factory.ReplyKeyboardFactory;
 import utn.tacs.grupo3.telegram.bot.handler.AbstractCommandHandler;
 import utn.tacs.grupo3.telegram.bot.helper.HtmlHelper;
 import utn.tacs.grupo3.telegram.bot.request.exception.BadCredentialsException;
-import utn.tacs.grupo3.telegram.bot.user.LoggedUsers;
 import utn.tacs.grupo3.telegram.bot.user.LoginStatusChecker;
 import utn.tacs.grupo3.telegram.bot.user.UserCredentials;
 
@@ -29,32 +28,23 @@ public class LoginCommandHandler extends AbstractCommandHandler{
 
 	@Override
 	public List<BotApiMethod<?>> handle(Message message) {
-//		loginStatusChecker.checkUserLoginStatus(message.getFrom());
+		UserCredentials credentials = getUserCredentials(message.getText());
 		
-		String token;
-		try {
-			UserCredentials credentials = getUserCredentials(message.getText());
-			
-			token = apiRequest.login(credentials);
-			
-			SendMessage successfulLogin = MessageFactory.createSendMessage(message)
-					.setText("Successful login, welcome");
-			
-			String text = HtmlHelper.formatText(
-					HtmlHelper.bold("Select an option please"), HtmlHelper.br(),
-					PlacesBotConstants.MY_LISTS_COMMAND, HtmlHelper.br(),
-					PlacesBotConstants.SEARCH_COMMAND
-					);
-			
-			SendMessage answer = MessageFactory.createSendMessage(message)
-					.setText(text)
-					.setReplyMarkup(ReplyKeyboardFactory.createCommandKeyboard());		
-			
-			LoggedUsers.addLoggedUser(
-					message.getFrom().getId(), 
-					credentials.getUsername(), 
-					message.getChatId().toString(),
-					token);
+		SendMessage successfulLogin = MessageFactory.createSendMessage(message)
+				.setText("Successful login, welcome");
+		
+		String text = HtmlHelper.formatText(
+				HtmlHelper.bold("Select an option please"), HtmlHelper.br(),
+				PlacesBotConstants.MY_LISTS_COMMAND, HtmlHelper.br(),
+				PlacesBotConstants.SEARCH_COMMAND
+				);
+		
+		SendMessage answer = MessageFactory.createSendMessage(message)
+				.setText(text)
+				.setReplyMarkup(ReplyKeyboardFactory.createCommandKeyboard());		
+
+		try {			
+			apiRequest.login(credentials, message.getFrom().getId());			
 
 			return List.of(successfulLogin, answer);
 			
@@ -73,9 +63,7 @@ public class LoginCommandHandler extends AbstractCommandHandler{
 		
 		if (parsed.length != 3) {
 			throw new ParseException("Invalid format. It must be /login USERNAME PASSWORD");
-		}
-		
-		return new UserCredentials(parsed[1], parsed[2]);
-		
+		}		
+		return new UserCredentials(parsed[1], parsed[2]);		
 	}
 }

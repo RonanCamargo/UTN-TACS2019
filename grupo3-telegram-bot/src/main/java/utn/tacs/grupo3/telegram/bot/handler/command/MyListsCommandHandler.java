@@ -23,13 +23,10 @@ public class MyListsCommandHandler extends AbstractCommandHandler{
 	@Override
 	public List<BotApiMethod<?>> handle(Message message) {
 //		loginStatusChecker.checkUserLoginStatus(message.getFrom());
-		
-		List<String> myListsNames = apiRequest.listNames(
-				getUsernameByUser(message.getFrom()),
-				message.getFrom().getId()
-				);
 
-		SendMessage answer = MessageFactory.createSendMessage(message);		
+		List<String> myListsNames = apiRequest.listNames(message.getFrom().getId());
+
+		SendMessage answer = MessageFactory.createSendMessage(message);
 		
 		if (!myListsNames.isEmpty()) {
 			StringBuilder text = new StringBuilder(HtmlHelper.bold("My lists")).append(HtmlHelper.multipleBr(2));

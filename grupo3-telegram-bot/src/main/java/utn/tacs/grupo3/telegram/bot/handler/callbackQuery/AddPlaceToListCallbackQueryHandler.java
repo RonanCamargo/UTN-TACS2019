@@ -11,22 +11,18 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKe
 
 import utn.tacs.grupo3.telegram.bot.constants.PlacesBotConstants;
 import utn.tacs.grupo3.telegram.bot.handler.CallbackQueryHandler;
-import utn.tacs.grupo3.telegram.bot.user.LoggedUsers;
 
 public class AddPlaceToListCallbackQueryHandler implements CallbackQueryHandler{
 
 	@Override
 	public List<BotApiMethod<?>> handle(CallbackQuery callbackQuery) {
 		
-		List<String> listNames = apiRequest.listNames(
-				LoggedUsers.getUsername(callbackQuery.getFrom().getId()),
-				callbackQuery.getFrom().getId()
-				);
+		List<String> listNames = apiRequest.listNames(callbackQuery.getFrom().getId());
 
 		String placeId = callbackQuery.getData().split(PlacesBotConstants.COMMAND_SEPARATOR)[1];	
-		
+		//762715463
 		SendMessage answer = new SendMessage()
-				.setChatId(LoggedUsers.getChatId(callbackQuery.getFrom().getId()))
+				.setChatId(callbackQuery.getFrom().getId().toString())
 				.setText("Select a list to add a new place")
 				.setReplyMarkup(createKeyboard(placeId, listNames));
 		
