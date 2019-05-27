@@ -14,7 +14,7 @@ import utn.tacs.grupo3.telegram.bot.helper.HtmlHelper;
 public class StartCommandHandler implements CommandHandler{
 	
 	@Override
-	public List<BotApiMethod<?>> handleCommand(Message message) {
+	public List<BotApiMethod<?>> handle(Message message) {
 		String text = HtmlHelper.formatText(
 				HtmlHelper.bold("Welcome to UTN Places Bot"),
 				HtmlHelper.multipleBr(2),

@@ -24,7 +24,7 @@ public class ViewListCommandHandler extends AbstractCommandHandler {
 	}
 
 	@Override
-	public List<BotApiMethod<?>> handleCommand(Message message) {
+	public List<BotApiMethod<?>> handle(Message message) {
 
 		String listName = removeCommandFromMessageText(message.getText(), PlacesBotConstants.VIEW_LIST_COMMAND);
 

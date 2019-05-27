@@ -11,6 +11,6 @@ import org.telegram.telegrambots.meta.api.objects.Message;
  */
 public interface CommandHandler{
 
-	List<BotApiMethod<?>> handleCommand(Message message);
+	List<BotApiMethod<?>> handle(Message message);
 
 }

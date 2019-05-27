@@ -40,7 +40,7 @@ public class PlacesBot extends TelegramLongPollingBot{
 		try {			
 			if (update.hasMessage() && update.getMessage().getText() != null) {
 				CommandHandler handler = CommandHandlerLocator.getHandler(update.getMessage());
-				answers = handler.handleCommand(update.getMessage());
+				answers = handler.handle(update.getMessage());
 			}
 			if (update.hasCallbackQuery()) {
 				CallbackQueryHandler handler = CallbackQueryHandlerLocator.getHandler(update.getCallbackQuery());

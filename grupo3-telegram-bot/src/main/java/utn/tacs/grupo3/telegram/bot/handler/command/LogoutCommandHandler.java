@@ -20,7 +20,7 @@ public class LogoutCommandHandler extends AbstractCommandHandler{
 	}
 
 	@Override
-	public List<BotApiMethod<?>> handleCommand(Message message) {
+	public List<BotApiMethod<?>> handle(Message message) {
 		loginStatusChecker.checkUserLoginStatus(message.getFrom());
 
 //		apiRequest.logout(LoggedUsers.getUsername(message.getFrom().getId()));

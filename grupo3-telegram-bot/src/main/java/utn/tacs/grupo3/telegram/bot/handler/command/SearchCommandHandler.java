@@ -21,7 +21,7 @@ public class SearchCommandHandler extends AbstractCommandHandler{
 	}
 
 	@Override
-	public List<BotApiMethod<?>> handleCommand(Message message) {
+	public List<BotApiMethod<?>> handle(Message message) {
 		loginStatusChecker.checkUserLoginStatus(message.getFrom());
 		
 		InlineKeyboardMarkup keyboard = InlineKeyboardFactory.createInlineKeyboard(				

@@ -16,7 +16,7 @@ import utn.tacs.grupo3.telegram.bot.user.LoggedUsers;
 public class HelpCommandHandler implements CommandHandler{
 
 	@Override
-	public List<BotApiMethod<?>> handleCommand(Message message) {
+	public List<BotApiMethod<?>> handle(Message message) {
 		SendMessage answer = MessageFactory.createSendMessage(message);
 		String text;
 		

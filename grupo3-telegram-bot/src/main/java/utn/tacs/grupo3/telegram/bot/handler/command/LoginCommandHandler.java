@@ -22,7 +22,7 @@ public class LoginCommandHandler extends AbstractCommandHandler{
 	}
 
 	@Override
-	public List<BotApiMethod<?>> handleCommand(Message message) {
+	public List<BotApiMethod<?>> handle(Message message) {
 //		loginStatusChecker.checkUserLoginStatus(message.getFrom());
 		
 		//TODO Make request
