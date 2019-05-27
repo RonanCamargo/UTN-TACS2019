@@ -50,7 +50,7 @@ public class PlacesBot extends TelegramLongPollingBot{
 				String inlineQuery = getInlineQueryCommand(update.getInlineQuery().getQuery());
 				if (inlineQueries.containsKey(inlineQuery)) {
 					InlineQueryHandler handler = inlineQueries.get(inlineQuery);
-					answers = handler.handleInlineQuery(update.getInlineQuery());
+					answers = handler.handle(update.getInlineQuery());
 				}
 			}
 						
