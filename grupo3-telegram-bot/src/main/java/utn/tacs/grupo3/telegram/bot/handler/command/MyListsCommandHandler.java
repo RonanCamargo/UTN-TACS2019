@@ -2,6 +2,7 @@ package utn.tacs.grupo3.telegram.bot.handler.command;
 
 import java.util.List;
 
+import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
@@ -18,9 +19,8 @@ public class MyListsCommandHandler extends AbstractCommandHandler{
 		super(loginStatusChecker);
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
-	public List<SendMessage> handleCommand(Message message) {
+	public List<BotApiMethod<?>> handleCommand(Message message) {
 		loginStatusChecker.checkUserLoginStatus(message.getFrom());
 		
 		SendMessage answer = MessageFactory.createSendMessage(message);

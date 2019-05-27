@@ -1,6 +1,5 @@
 package utn.tacs.grupo3.telegram.bot.handler.command;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,7 +23,7 @@ public class ViewListCommandHandler extends AbstractCommandHandler{
 	}
 
 	@Override
-	public <T extends Serializable> List<BotApiMethod<?>> handleCommand(Message message) {
+	public List<BotApiMethod<?>> handleCommand(Message message) {
 		//TODO refactor
 		String listName = message.getText().substring(10);
 		List<Place> places = apiRequest.listByName(
