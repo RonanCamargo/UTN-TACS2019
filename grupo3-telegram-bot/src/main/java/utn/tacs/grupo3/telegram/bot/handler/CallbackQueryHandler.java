@@ -12,6 +12,6 @@ import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
  */
 public interface CallbackQueryHandler {
 	
-	<T extends Serializable> List<BotApiMethod<?>> handleCommand(CallbackQuery callbackQuery);
+	List<BotApiMethod<?>> handleCommand(CallbackQuery callbackQuery);
 
 }

@@ -23,7 +23,7 @@ public final class InlineKeyboardFactory {
 	
 	public static InlineKeyboardMarkup createAddPlaceToListKeyboard(Venue venue) {
 		return createInlineKeyboard(List.of(
-				new InlineKeyboardButton("Add to list").setCallbackData(PlacesBotConstants.ADD_PLACE_TO_LIST + "_" + venue.getId()))
+				new InlineKeyboardButton("Add to list").setCallbackData(PlacesBotConstants.ADD_PLACE_TO_LIST + PlacesBotConstants.COMMAND_SEPARATOR + venue.getId()))
 				);
 	}
 	

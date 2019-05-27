@@ -43,4 +43,13 @@ public abstract class AbstractCommandHandler implements CommandHandler{
 				);
 	}
 	
+	protected String removeCommandFromMessageText(String message, String command) {
+		if (message.startsWith(command + PlacesBotConstants.COMMAND_SEPARATOR)) {
+			return message.substring(command.length() + 1);
+		} else {
+			return message.substring(command.length());
+		}
+			
+	}
+	
 }
