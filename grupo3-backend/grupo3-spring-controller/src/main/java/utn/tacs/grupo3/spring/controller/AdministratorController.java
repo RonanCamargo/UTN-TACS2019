@@ -1,11 +1,18 @@
 package utn.tacs.grupo3.spring.controller;
 
+import utn.tacs.grupo3.model.User;
 import utn.tacs.grupo3.model.exception.ExceptionbyResourceNotFound;
 
 import java.util.Map;
 
 public interface AdministratorController {
-
+    /**
+     * Searches a user by its id
+     *
+     * @param userId
+     * @return
+     */
+    User userById(String userId) throws ExceptionbyResourceNotFound;
     /**
      * Searches places in common among two lists of places
      *

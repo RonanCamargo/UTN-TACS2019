@@ -22,15 +22,6 @@ public interface UserController {
 
 
     /**
-     * Searches a user by its id
-     *
-     * @param userId
-     * @return
-     */
-    User userById(String userId) throws ExceptionbyResourceNotFound;
-
-
-    /**
      * Register a new place in an user's list of places
      *
      * @param userId

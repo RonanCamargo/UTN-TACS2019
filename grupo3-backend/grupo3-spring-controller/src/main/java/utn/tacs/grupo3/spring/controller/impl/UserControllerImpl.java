@@ -42,12 +42,6 @@ public class UserControllerImpl implements UserController {
     }
 
     @Override
-    @GetMapping("/{user-id}")
-    public User userById(@PathVariable("user-id") String userId) throws ExceptionbyResourceNotFound {
-        return userRepository.userByUsername(userId);
-    }
-
-    @Override
     @PutMapping("/{user-id}/places-visited/{place-id}")
     public String markAsVisitedAPlace(@PathVariable("user-id") String userId, @PathVariable("place-id") String placeId) throws ExceptionbyResourceNotFound {
         Place place = placeRepository.placeByName(placeId);
