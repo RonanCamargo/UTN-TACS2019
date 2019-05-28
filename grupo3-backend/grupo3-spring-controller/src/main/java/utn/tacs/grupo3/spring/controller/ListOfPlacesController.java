@@ -4,6 +4,7 @@ import utn.tacs.grupo3.model.exception.ExceptionbyResourceNotFound;
 import utn.tacs.grupo3.model.ListOfPlaces;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ListOfPlacesController {
 
@@ -22,7 +23,7 @@ public interface ListOfPlacesController {
      * @param listId
      * @return
      */
-    String createListOfPlaces(String userId, String listId) throws ExceptionbyResourceNotFound;
+    Map<String, String> createListOfPlaces(String userId, String listId) throws ExceptionbyResourceNotFound;
 
     /**
      * Returns a specific list-of-places that belongs to a user
@@ -41,7 +42,7 @@ public interface ListOfPlacesController {
      * @param listId
      * @return
      */
-    String deleteListOfPlacesList(String userId, String listId) throws ExceptionbyResourceNotFound;
+    Map<String, String> deleteListOfPlacesList(String userId, String listId) throws ExceptionbyResourceNotFound;
 
 
     /**
@@ -52,6 +53,6 @@ public interface ListOfPlacesController {
      * @param newName
      * @return
      */
-    String editListOfPlacesList(String userId, String listId, String newName) throws ExceptionbyResourceNotFound;
+    Map<String, String> editListOfPlacesList(String userId, String listId, String newName) throws ExceptionbyResourceNotFound;
 
 }

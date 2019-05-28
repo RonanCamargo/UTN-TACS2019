@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.RestController;
 import utn.tacs.grupo3.model.User;
 import utn.tacs.grupo3.repository.UserRepository;
 import utn.tacs.grupo3.spring.controller.LoginController;
+import utn.tacs.grupo3.spring.converter.ConvertToJson;
+
+import java.util.Map;
 
 @RestController
 public class LoginControllerImpl implements LoginController {
@@ -15,9 +18,9 @@ public class LoginControllerImpl implements LoginController {
 
     @Override
     @PostMapping(path = "/sign-up")
-    public String createUser(@RequestBody User user) {
+    public Map<String, String> createUser(@RequestBody User user) {
         user.initialize();
         userRepository.createUser(user);
-        return "Usuario creado correctamente.";
+        return ConvertToJson.start("Usuario creado correctamente.");
     }
 }

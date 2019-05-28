@@ -6,8 +6,10 @@ import utn.tacs.grupo3.model.exception.ExceptionbyResourceNotFound;
 import utn.tacs.grupo3.model.ListOfPlaces;
 import utn.tacs.grupo3.repository.UserRepository;
 import utn.tacs.grupo3.spring.controller.ListOfPlacesController;
+import utn.tacs.grupo3.spring.converter.ConvertToJson;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/users")
@@ -23,9 +25,9 @@ public class ListOfPlacesControllerImpl implements ListOfPlacesController {
 
     @Override
     @PostMapping("/{user-id}/list-of-places/{list-id}")
-    public String createListOfPlaces(@PathVariable("user-id") String userId, @PathVariable("list-id") String listId) throws ExceptionbyResourceNotFound {
+    public Map<String, String> createListOfPlaces(@PathVariable("user-id") String userId, @PathVariable("list-id") String listId) throws ExceptionbyResourceNotFound {
         userRepository.userByUsername(userId).createListOfPlaces(listId);
-        return "Lista creada correctamente.";
+        return ConvertToJson.start("Lista creada correctamente.");
     }
 
     @Override
@@ -36,16 +38,16 @@ public class ListOfPlacesControllerImpl implements ListOfPlacesController {
 
     @Override
     @DeleteMapping("/{user-id}/list-of-places/{list-id}")
-    public String deleteListOfPlacesList(@PathVariable("user-id") String userId, @PathVariable("list-id") String listId) throws ExceptionbyResourceNotFound {
+    public Map<String, String> deleteListOfPlacesList(@PathVariable("user-id") String userId, @PathVariable("list-id") String listId) throws ExceptionbyResourceNotFound {
         userRepository.userByUsername(userId).removeFromListsOfPlaces(userRepository.userByUsername(userId).listOfPlacesByName(listId));
-        return "Lista eliminada correctamente.";
+        return ConvertToJson.start("Lista eliminada correctamente.");
     }
 
     @Override
     @PutMapping("/{user-id}/list-of-places/{list-id}")
-    public String editListOfPlacesList(@PathVariable("user-id") String userId, @PathVariable("list-id") String listId, @RequestParam("new-name") String newName) throws ExceptionbyResourceNotFound {
+    public Map<String, String> editListOfPlacesList(@PathVariable("user-id") String userId, @PathVariable("list-id") String listId, @RequestParam("new-name") String newName) throws ExceptionbyResourceNotFound {
         userRepository.userByUsername(userId).listOfPlacesByName(listId).setListName(newName);
-        return "Lista modificada correctamente.";
+        return ConvertToJson.start("Lista modificada correctamente.");
     }
 
 }

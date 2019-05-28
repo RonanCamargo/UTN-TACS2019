@@ -23,7 +23,7 @@ public class CreateToken {
         //agregar al encabezado el token
         addTheTokenToTheHeader(res, token);
 
-        sendTokenAsJson(res,token);
+        sendTokenAsJson(res, token);
     }
 
     private void addTheTokenToTheHeader(HttpServletResponse res, String token) {
@@ -42,7 +42,7 @@ public class CreateToken {
     private void sendTokenAsJson(HttpServletResponse res, String token) {
         res.setContentType("application/json");
         try {
-            res.getOutputStream().print("{\"token\":\""+token+"\"}");
+            res.getOutputStream().print("{\"token\":\"" + token + "\"}");
         } catch (IOException e) {
             e.printStackTrace();
         }

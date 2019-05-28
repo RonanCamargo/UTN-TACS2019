@@ -1,6 +1,7 @@
 package utn.tacs.grupo3.spring.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,7 +27,7 @@ public interface PlaceController {
      * @param place
      * @return
      */
-    String createPlace(Place place);
+    Map<String, String> createPlace(Place place);
 
     /**
      * Searches a place by its id

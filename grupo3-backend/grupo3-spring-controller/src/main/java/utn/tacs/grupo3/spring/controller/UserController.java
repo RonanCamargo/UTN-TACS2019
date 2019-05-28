@@ -1,7 +1,7 @@
 package utn.tacs.grupo3.spring.controller;
 
 import java.util.List;
-import javax.servlet.http.HttpServletResponse;
+import java.util.Map;
 
 
 import utn.tacs.grupo3.model.exception.ExceptionbyResourceNotFound;
@@ -29,7 +29,7 @@ public interface UserController {
      * @param placeId
      * @return
      */
-    String registerPlaceInListOfPlaces(String userId, String listId, String placeId) throws ExceptionbyResourceNotFound;
+    Map<String, String> registerPlaceInListOfPlaces(String userId, String listId, String placeId) throws ExceptionbyResourceNotFound;
 
 
     /**
@@ -39,5 +39,5 @@ public interface UserController {
      * @param placeId
      * @return
      */
-    String markAsVisitedAPlace(String userId, String placeId) throws ExceptionbyResourceNotFound;
+    Map<String, String> markAsVisitedAPlace(String userId, String placeId) throws ExceptionbyResourceNotFound;
 }
