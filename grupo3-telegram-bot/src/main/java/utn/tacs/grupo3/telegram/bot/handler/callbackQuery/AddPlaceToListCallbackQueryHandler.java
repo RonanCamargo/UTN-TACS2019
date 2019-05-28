@@ -20,7 +20,7 @@ public class AddPlaceToListCallbackQueryHandler implements CallbackQueryHandler{
 		List<String> listNames = apiRequest.listNames(callbackQuery.getFrom().getId());
 
 		String placeId = callbackQuery.getData().split(PlacesBotConstants.COMMAND_SEPARATOR)[1];	
-		//762715463
+		
 		SendMessage answer = new SendMessage()
 				.setChatId(callbackQuery.getFrom().getId().toString())
 				.setText("Select a list to add a new place")
