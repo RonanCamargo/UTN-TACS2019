@@ -4,9 +4,11 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import utn.tacs.grupo3.spring.converter.DateConverter;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Date;
 import java.util.stream.Collectors;
 
 public class CreateToken {
@@ -36,6 +38,7 @@ public class CreateToken {
                 .claim("ROL", authorities)
                 // Hash con el que firmaremos la clave
                 .signWith(SignatureAlgorithm.HS512, "P@tit0")
+                .setExpiration(DateConverter.year2020())
                 .compact();
     }
 
