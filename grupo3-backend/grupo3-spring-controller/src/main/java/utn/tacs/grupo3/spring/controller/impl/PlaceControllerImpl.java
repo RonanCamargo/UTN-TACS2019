@@ -1,7 +1,6 @@
 package utn.tacs.grupo3.spring.controller.impl;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +17,6 @@ import utn.tacs.grupo3.repository.PlaceRepository;
 import utn.tacs.grupo3.retrofit.FoursquarePlacesRequest;
 import utn.tacs.grupo3.retrofit.pojo.Venue;
 import utn.tacs.grupo3.spring.controller.PlaceController;
-import utn.tacs.grupo3.spring.converter.ConvertToJson;
 
 @RestController
 @RequestMapping("/places")
@@ -37,9 +35,8 @@ public class PlaceControllerImpl implements PlaceController {
 
     @Override
     @PostMapping
-    public Map<String, String> createPlace(@RequestBody Place place) {
+    public void createPlace(@RequestBody Place place) {
         placeRepository.createPlace(place.getName());
-        return ConvertToJson.start("Lugar creado correctamente");
     }
 
     @Override
