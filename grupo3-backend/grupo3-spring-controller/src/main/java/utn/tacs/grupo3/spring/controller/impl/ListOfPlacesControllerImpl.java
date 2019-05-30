@@ -23,9 +23,8 @@ public class ListOfPlacesControllerImpl implements ListOfPlacesController {
 
     @Override
     @PostMapping("/{user-id}/list-of-places/{list-id}")
-    public String createListOfPlaces(@PathVariable("user-id") String userId, @PathVariable("list-id") String listId) throws ExceptionbyResourceNotFound {
+    public void createListOfPlaces(@PathVariable("user-id") String userId, @PathVariable("list-id") String listId) throws ExceptionbyResourceNotFound {
         userRepository.userByUsername(userId).createListOfPlaces(listId);
-        return "Lista creada correctamente.";
     }
 
     @Override
@@ -36,16 +35,14 @@ public class ListOfPlacesControllerImpl implements ListOfPlacesController {
 
     @Override
     @DeleteMapping("/{user-id}/list-of-places/{list-id}")
-    public String deleteListOfPlacesList(@PathVariable("user-id") String userId, @PathVariable("list-id") String listId) throws ExceptionbyResourceNotFound {
+    public void deleteListOfPlacesList(@PathVariable("user-id") String userId, @PathVariable("list-id") String listId) throws ExceptionbyResourceNotFound {
         userRepository.userByUsername(userId).removeFromListsOfPlaces(userRepository.userByUsername(userId).listOfPlacesByName(listId));
-        return "Lista eliminada correctamente.";
     }
 
     @Override
     @PutMapping("/{user-id}/list-of-places/{list-id}")
-    public String editListOfPlacesList(@PathVariable("user-id") String userId, @PathVariable("list-id") String listId, @RequestParam("new-name") String newName) throws ExceptionbyResourceNotFound {
+    public void editListOfPlacesList(@PathVariable("user-id") String userId, @PathVariable("list-id") String listId, @RequestParam("new-name") String newName) throws ExceptionbyResourceNotFound {
         userRepository.userByUsername(userId).listOfPlacesByName(listId).setListName(newName);
-        return "Lista modificada correctamente.";
     }
 
 }

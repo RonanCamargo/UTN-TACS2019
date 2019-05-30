@@ -24,9 +24,8 @@ public interface PlaceController {
      * Registers a new place
      *
      * @param place
-     * @return
      */
-    String createPlace(Place place);
+    void createPlace(Place place);
 
     /**
      * Searches a place by its id
