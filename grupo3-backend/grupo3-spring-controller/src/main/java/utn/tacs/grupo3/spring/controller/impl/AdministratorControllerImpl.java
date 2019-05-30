@@ -32,9 +32,9 @@ public class AdministratorControllerImpl implements AdministratorController {
     @Override
     @GetMapping("places/places-in-common")
     public Map<String, Boolean> placesInCommon(@RequestParam("list-id-1") int listId1, @RequestParam("list-id-2") int listId2) throws ExceptionbyResourceNotFound {
-        ListOfPlaces listOfPlaces1 = userRepository.listOfPlacesById(listId1);
-        ListOfPlaces listOfPlaces2 = userRepository.listOfPlacesById(listId2);
-        return Collections.singletonMap("placesInCommon", listOfPlaces1.areTherePlacesInCommonWith(listOfPlaces2));
+//        ListOfPlaces listOfPlaces1 = userRepository.listOfPlacesById(listId1);
+//        ListOfPlaces listOfPlaces2 = userRepository.listOfPlacesById(listId2);
+        return Collections.singletonMap("placesInCommon", false);
     }
 
     @Override

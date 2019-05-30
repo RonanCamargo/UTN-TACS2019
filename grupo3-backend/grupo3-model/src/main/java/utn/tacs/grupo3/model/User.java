@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 
 public class User {
 
+	private String id;
     private String firstName;
     private String lastName;
     private List<ListOfPlaces> listsOfPlaces;
@@ -136,4 +137,12 @@ public class User {
     public void setUsername(String username) {
         this.username = username;
     }
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}    
 }

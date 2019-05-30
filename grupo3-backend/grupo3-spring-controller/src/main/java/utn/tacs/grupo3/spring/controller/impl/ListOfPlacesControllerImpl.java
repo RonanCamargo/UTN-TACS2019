@@ -3,6 +3,7 @@ package utn.tacs.grupo3.spring.controller.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import utn.tacs.grupo3.model.exception.ExceptionbyResourceNotFound;
+import utn.tacs.grupo3.mongo.repo.UserMongoRepo;
 import utn.tacs.grupo3.model.ListOfPlaces;
 import utn.tacs.grupo3.repository.UserRepository;
 import utn.tacs.grupo3.spring.controller.ListOfPlacesController;
@@ -14,6 +15,8 @@ import java.util.List;
 public class ListOfPlacesControllerImpl implements ListOfPlacesController {
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private UserMongoRepo userMongoRepo;
 
     @Override
     @GetMapping("/{user-id}/list-of-places")
@@ -24,7 +27,8 @@ public class ListOfPlacesControllerImpl implements ListOfPlacesController {
     @Override
     @PostMapping("/{user-id}/list-of-places/{list-id}")
     public String createListOfPlaces(@PathVariable("user-id") String userId, @PathVariable("list-id") String listId) throws ExceptionbyResourceNotFound {
-        userRepository.userByUsername(userId).createListOfPlaces(listId);
+//        userRepository.userByUsername(userId).createListOfPlaces(listId);
+    	userMongoRepo.addList(userId, listId);
         return "Lista creada correctamente.";
     }
 
