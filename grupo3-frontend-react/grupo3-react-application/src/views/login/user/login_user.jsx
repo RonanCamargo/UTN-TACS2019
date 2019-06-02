@@ -32,12 +32,12 @@ class LoginUser extends Component {
 		try {
 			axios.post("http://localhost:8080/login", user)
 			.then(res => {
+				this.props.updateState('userLogged', 1)
+				this.props.updateProps('userName', this.state.userName)
 				this.props.history.push("/places")
-				this.props.updateProps('userLogged',1)
-				this.props.updateProps('userName',this.state.userName)
 			})
 		} catch (error) {
-			console.log(error)
+			alert(error)
 		}
 	}
 
@@ -68,7 +68,7 @@ class LoginUser extends Component {
 					<Form.Group controlId="signup">
 						<Form.Label>
 							{"Don't have an account? "}
-							<Alert.Link href="http://localhost:8008/signup">
+							<Alert.Link href="#" onClick={() => this.props.history.push('signup')}>
 								Sign Up
 							</Alert.Link>
 						</Form.Label>

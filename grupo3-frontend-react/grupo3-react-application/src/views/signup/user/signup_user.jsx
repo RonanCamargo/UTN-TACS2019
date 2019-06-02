@@ -38,21 +38,20 @@ class SignUp extends Component {
 
 			axios.post('http://localhost:8080/sign-up', user)
 			.then(res => {
-				alert(res.data)
+				this.props.updateProps('firstName', this.state.firstName)
+				this.props.updateProps('lastName', this.state.lastName)
+				this.props.updateProps('userName', this.state.userName)
+				this.props.updateProps('password', this.state.password)
+				this.props.history.push("/login")
 			})
 
-			this.props.updateProps('firstName',this.state.firstName)
-			this.props.updateProps('lastName',this.state.lastName)
-			this.props.updateProps('userName',this.state.userName)
-			this.props.updateProps('password',this.state.password)
-			window.location.href = 'http://localhost:8008/login'
 		} catch (error) {
 			alert(error)
 		}
 	}
 
 	render() {
-
+		console.log(this.props)
 		return (
 			<div className="signup">
 				<Form onSubmit={this.handleSubmit}>

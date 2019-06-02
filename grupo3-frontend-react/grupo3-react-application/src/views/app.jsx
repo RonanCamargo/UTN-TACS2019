@@ -12,6 +12,7 @@ class App extends Component {
 		super(props)
 		this.state = {
 			userLogged : false,
+			token: '',
 			user : {
 				firstName : '',
 				lastName : '',
@@ -20,31 +21,41 @@ class App extends Component {
 			},
 		}
 		this.updateProps = this.updateProps.bind(this)
+		this.updateState = this.updateState(this)
 	}
 
 	updateProps(key, value) {
 		this.setState({
-			key : value
+			user:{
+				...this.state.user,
+				[key]:value
+			}
 		})
 	}
 
+	updateState(key, value) {
+		this.setState({
+			[key]:value
+		})
+	}
 	render() {
-		console.log(this.state)
 		if (!window.userLogged) {
 			<Redirect to="/login" />
 		}
-
 		return (
 			<div>
 				<Switch>
 					<Route path={"/login"}
 					       component={() =>
-								<LogInUser updateProps={this.updateProps} />
+								<LogInUser updateProps={this.updateProps}
+								           updateState={this.updateState}
+								           history={this.props.history} />
 					       }
 					/>
 					<Route path={"/signup"}
 					       component={() =>
-							<SignUp updateProps={this.updateProps} />}
+							<SignUp updateProps={this.updateProps}
+									history={this.props.history}/>}
 					/>
 					<Route path={"/places"} component={PlaceView} />
 					<Route path={"/users/list-of-places"} component={ListView} />
