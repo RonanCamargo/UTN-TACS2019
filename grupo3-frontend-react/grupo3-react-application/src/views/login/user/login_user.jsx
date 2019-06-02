@@ -5,17 +5,17 @@ import axios from "axios"
 import styles from "./login_user.css"
 
 class LoginUser extends Component {
-	constructor() {
-		super()
+	constructor(props){
+		super(props)
 		this.state = {
-			username: "",
-			password: ""
+			userName : '',
+			password : '',
 		}
 	}
-
-	validateForm() {
-		return this.state.username.length > 0 && this.state.password.length > 0
-	}
+	
+	// validateForm() {
+	// 	return this.state.name.length > 0 && this.state.password.length > 0
+	// }
 
 	handleChange = event => {
 		this.setState({
@@ -23,22 +23,19 @@ class LoginUser extends Component {
 		})
 	}
 
-	login = user => {
-		window.loggedUser = { user }
-	}
-
 	handleSubmit = event => {
 		event.preventDefault()
 		const user = {
-			username: this.state.username,
+			username: this.state.userName,
 			password: this.state.password
 		}
 		try {
 			axios.post("http://localhost:8080/login", user)
-				.then(res => {
-					this.login(user)
-					this.props.history.push("/places")
-				})
+			.then(res => {
+				this.props.history.push("/places")
+				this.props.updateProps('userLogged',1)
+				this.props.updateProps('userName',this.state.userName)
+			})
 		} catch (error) {
 			console.log(error)
 		}
@@ -48,12 +45,12 @@ class LoginUser extends Component {
 		return (
 			<div className="Login">
 				<Form onSubmit={this.handleSubmit}>
-					<Form.Group controlId="username">
+					<Form.Group controlId="userName">
 						<Form.Label>Username/Email</Form.Label>
 						<Form.Control
 							autoFocus
 							type="text"
-							value={this.state.username}
+							value={this.state.userName}
 							onChange={this.handleChange}
 							placeholder="Enter username or email"
 						/>
@@ -78,7 +75,7 @@ class LoginUser extends Component {
 					</Form.Group>
 					<Button
 						block
-						disabled={!this.validateForm()}
+//						disabled={!this.validateForm()}
 						type="submit"
 						variant="primary"
 					>

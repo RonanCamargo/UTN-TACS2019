@@ -1,36 +1,59 @@
-import React, { Component } from "react";
-import { Route, Redirect, Switch, withRouter } from "react-router-dom";
-import LogInUser from "views/login/user/login_user";
-import SignUp from "views/signup/user/signup_user";
-import PlaceView from "views/place/PlaceView";
-import ListView from "views/place/ListView";
-import AdminView from "views/admin/AdminView";
-import UserView from "views/admin/UserView";
+import React, { Component } from "react"
+import { Route, Redirect, Switch, withRouter } from "react-router-dom"
+import LogInUser from "views/login/user/login_user"
+import SignUp from "views/signup/user/signup_user"
+import PlaceView from "views/place/PlaceView"
+import ListView from "views/place/ListView"
+import AdminView from "views/admin/AdminView"
+import UserView from "views/admin/UserView"
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    window.dataLayer = window.dataLayer || [];
-  }
+	constructor(props) {
+		super(props)
+		this.state = {
+			userLogged : false,
+			user : {
+				firstName : '',
+				lastName : '',
+				userName : '',
+				password : '',
+			},
+		}
+		this.updateProps = this.updateProps.bind(this)
+	}
 
-  render() {
-    if (!window.loggedUser) {
-      <Redirect to="/login" />;
-    }
+	updateProps(key, value) {
+		this.setState({
+			key : value
+		})
+	}
 
-    return (
-      <div>
-        <Switch>
-          <Route path={"/login"} component={LogInUser} />
-          <Route path={"/signup"} component={SignUp} />
-          <Route path={"/places"} component={PlaceView} />
-          <Route path={"/users/list-of-places"} component={ListView} />
-          <Route path={"/users"} component={UserView} />
-          <Route path={"/stats"} component={AdminView} />
-        </Switch>
-      </div>
-    );
-  }
+	render() {
+		console.log(this.state)
+		if (!window.userLogged) {
+			<Redirect to="/login" />
+		}
+
+		return (
+			<div>
+				<Switch>
+					<Route path={"/login"}
+					       component={() =>
+								<LogInUser updateProps={this.updateProps} />
+					       }
+					/>
+					<Route path={"/signup"}
+					       component={() =>
+							<SignUp updateProps={this.updateProps} />}
+					/>
+					<Route path={"/places"} component={PlaceView} />
+					<Route path={"/users/list-of-places"} component={ListView} />
+					<Route path={"/users"} component={UserView} />
+					<Route path={"/stats"} component={AdminView} />
+				</Switch>
+			</div>
+		)
+	}
 }
 
-export default withRouter(App);
+export default withRouter(App)
