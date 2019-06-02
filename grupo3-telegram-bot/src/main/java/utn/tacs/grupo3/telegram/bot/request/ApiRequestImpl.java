@@ -12,6 +12,7 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import utn.tacs.grupo3.telegram.bot.request.entity.ListOfPlaces;
+import utn.tacs.grupo3.telegram.bot.request.entity.LoginResponse;
 import utn.tacs.grupo3.telegram.bot.request.entity.Venue;
 import utn.tacs.grupo3.telegram.bot.request.exception.BadCredentialsException;
 import utn.tacs.grupo3.telegram.bot.request.exception.TelegramUserNotLoggedException;
@@ -20,7 +21,7 @@ import utn.tacs.grupo3.telegram.bot.user.UserCredentials;
 
 public class ApiRequestImpl implements ApiRequest{
 	
-	private static final String API_BASE_URL = "http://localhost:8080";
+	private static final String API_BASE_URL = "http://tacs.us-east-2.elasticbeanstalk.com";
 	private static final String NEAR_PLACES = "/places/near?coordinates=:lat,:long";
 	private static final String USER_LISTS_OF_PLACES = "/users/:user-id/list-of-places";
 	private static final String PLACES_BY_NAME = "/places/near-by-name?name=:name";
@@ -40,9 +41,8 @@ public class ApiRequestImpl implements ApiRequest{
 				.build();
 		
 		try {
-			String token = rest.exchange(uri, HttpMethod.POST, new HttpEntity<UserCredentials>(user), ResponseEntity.class)
-					.getHeaders()
-					.getFirst(AUTHORIZATION_HEADER);
+			String token = rest.exchange(uri, HttpMethod.POST, new HttpEntity<UserCredentials>(user), LoginResponse.class)
+					.getBody().getToken();
 			
 			LoggedUsers.addLoggedUser(telegramUserId, user.getUsername(), token);
 			
