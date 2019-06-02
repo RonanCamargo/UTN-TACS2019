@@ -64,7 +64,6 @@ public class ApiRequestImpl implements ApiRequest{
 	@Override
 	public void logout(Integer telegramUserId) {
 		LoggedUsers.removeLoggedUser(telegramUserId);
-		//request a backend
 	}
 
 	@Override

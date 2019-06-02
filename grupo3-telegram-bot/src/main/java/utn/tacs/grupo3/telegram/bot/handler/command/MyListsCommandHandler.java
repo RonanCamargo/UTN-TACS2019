@@ -22,9 +22,14 @@ public class MyListsCommandHandler extends AbstractCommandHandler{
 	public List<BotApiMethod<?>> handle(Message message) {
 
 		List<String> myListsNames = apiRequest.listNames(message.getFrom().getId());
-
-		SendMessage answer = MessageFactory.createSendMessage(message);
 		
+		SendMessage answer = MessageFactory.createSendMessage(message)
+				.setText(createText(myListsNames));
+		
+		return List.of(answer);
+	}
+
+	private String createText(List<String> myListsNames) {
 		if (!myListsNames.isEmpty()) {
 			StringBuilder text = new StringBuilder(HtmlHelper.bold("My lists")).append(HtmlHelper.multipleBr(2));
 			
@@ -37,12 +42,12 @@ public class MyListsCommandHandler extends AbstractCommandHandler{
 					.append(HtmlHelper.multipleBr(2))
 					);
 			
-			answer.setText(text.toString());						
+			return text.toString();						
 		} else {
-			answer.setText("You don't have any list of places");			
+			return "You don't have any list of places";			
 		}
-		
-		return List.of(answer);
 	}
+	
+	
 
 }

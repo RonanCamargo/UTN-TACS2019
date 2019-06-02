@@ -14,6 +14,7 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import utn.tacs.grupo3.telegram.bot.constants.PlacesBotConstants;
 import utn.tacs.grupo3.telegram.bot.exception.TelegramBotException;
+import utn.tacs.grupo3.telegram.bot.factory.ReplyKeyboardFactory;
 import utn.tacs.grupo3.telegram.bot.handler.CallbackQueryHandler;
 import utn.tacs.grupo3.telegram.bot.handler.CommandHandler;
 import utn.tacs.grupo3.telegram.bot.handler.InlineQueryHandler;
@@ -21,6 +22,8 @@ import utn.tacs.grupo3.telegram.bot.handler.inlineQuery.SearchByNameInlineQueryH
 import utn.tacs.grupo3.telegram.bot.handler.inlineQuery.SearchNearMeInlineQueryHandler;
 import utn.tacs.grupo3.telegram.bot.handler.locator.CallbackQueryHandlerLocator;
 import utn.tacs.grupo3.telegram.bot.handler.locator.CommandHandlerLocator;
+import utn.tacs.grupo3.telegram.bot.request.exception.SessionExpiredException;
+import utn.tacs.grupo3.telegram.bot.request.exception.TelegramUserNotLoggedException;
 
 public class PlacesBot extends TelegramLongPollingBot{
 	
@@ -64,7 +67,10 @@ public class PlacesBot extends TelegramLongPollingBot{
 						
 		} catch (TelegramBotException e) {
 			answers = this.handleException(e, update);
-		} finally {
+		} catch (SessionExpiredException | TelegramUserNotLoggedException e) {
+			 answers = this.handleUserNotLogged(update);
+		} 
+		finally {
 			this.sendAnswers(answers);
 		}
 	}
@@ -92,6 +98,30 @@ public class PlacesBot extends TelegramLongPollingBot{
 	}
 	
 	/**
+	 * Handles errors when a user is not logged in
+	 * @param update
+	 * @return answer
+	 */
+	private List<BotApiMethod<?>> handleUserNotLogged(Update update){
+		String chatId = "";
+		
+		if (update.hasMessage()) {
+			chatId = update.getMessage().getChatId().toString();
+		} else if(update.hasCallbackQuery()){
+			chatId = update.getCallbackQuery().getFrom().getId().toString();
+		} else if (update.hasInlineQuery()) {
+			chatId = update.getInlineQuery().getFrom().getId().toString();
+		}
+		
+		SendMessage userNotLoggedAnswer = new SendMessage()
+				.setChatId(chatId)
+				.setText("You need to login")
+				.setReplyMarkup(ReplyKeyboardFactory.createInitialKeyBoard());
+		
+		return List.of(userNotLoggedAnswer);
+	}
+	
+	/**
 	 * Sends all answers to the user in order.
 	 * @param answers
 	 */
@@ -114,7 +144,5 @@ public class PlacesBot extends TelegramLongPollingBot{
 			return PlacesBotConstants.SEARCH_BY_NAME;
 		}
 		return "";
-	}
-	
-	
+	}	
 }
