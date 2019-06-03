@@ -22,6 +22,7 @@ import utn.tacs.grupo3.telegram.bot.user.UserCredentials;
 public class ApiRequestImpl implements ApiRequest{
 	
 	private static final String API_BASE_URL = "http://tacs.us-east-2.elasticbeanstalk.com";
+	
 	private static final String NEAR_PLACES = "/places/near?coordinates=:lat,:long";
 	private static final String USER_LISTS_OF_PLACES = "/users/:user-id/list-of-places";
 	private static final String PLACES_BY_NAME = "/places/near-by-name?name=:name";
@@ -46,7 +47,7 @@ public class ApiRequestImpl implements ApiRequest{
 			
 			LoggedUsers.addLoggedUser(telegramUserId, user.getUsername(), token);
 			
-			return token.replace("Bearer ", "");
+			return token;
 			
 			
 		} catch (HttpClientErrorException e) {
@@ -78,7 +79,7 @@ public class ApiRequestImpl implements ApiRequest{
 		
 		ResponseEntity<List<ListOfPlaces>> lists = rest.exchange(
 				uri,
-				HttpMethod.GET, getHeaders(telegramUserId),
+				HttpMethod.GET, createHeaders(telegramUserId),
 				new ParameterizedTypeReference<List<ListOfPlaces>>() {});
 		
 		return lists.getBody().stream().map(list -> list.getListName()).collect(Collectors.toList());
@@ -99,7 +100,7 @@ public class ApiRequestImpl implements ApiRequest{
 		ResponseEntity<List<Venue>> venuesNearLocation = rest.exchange(
 				uri, 
 				HttpMethod.GET,
-				getHeaders(telegramUserId),
+				createHeaders(telegramUserId),
 				new ParameterizedTypeReference<List<Venue>>() {});
 		
 		return venuesNearLocation.getBody();
@@ -119,7 +120,7 @@ public class ApiRequestImpl implements ApiRequest{
 		ResponseEntity<List<Venue>> venuesByName = rest.exchange(
 				uri,
 				HttpMethod.GET, 
-				getHeaders(telegramUserId), 
+				createHeaders(telegramUserId), 
 				new ParameterizedTypeReference<List<Venue>>() {});
 		
 		return venuesByName.getBody();
@@ -141,7 +142,7 @@ public class ApiRequestImpl implements ApiRequest{
 		ResponseEntity<String> response = rest.exchange(
 				uri,
 				HttpMethod.POST,
-				getHeaders(telegramUserId),
+				createHeaders(telegramUserId),
 				String.class);
 		response.getBody();
 	}
@@ -161,13 +162,13 @@ public class ApiRequestImpl implements ApiRequest{
 		ResponseEntity<ListOfPlaces> listOfPlaces = rest.exchange(
 				uri,
 				HttpMethod.GET,
-				getHeaders(telegramUserId),
+				createHeaders(telegramUserId),
 				ListOfPlaces.class);
 		
 		return listOfPlaces.getBody();
 	}
 	
-	private HttpEntity<String> getHeaders(Integer telegramUserId) {
+	private HttpEntity<String> createHeaders(Integer telegramUserId) {
 		
 		HttpHeaders header = new HttpHeaders();
 		header.add(AUTHORIZATION_HEADER, LoggedUsers.getToken(telegramUserId));
