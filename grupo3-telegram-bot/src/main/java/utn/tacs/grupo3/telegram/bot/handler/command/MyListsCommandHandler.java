@@ -1,5 +1,6 @@
 package utn.tacs.grupo3.telegram.bot.handler.command;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
@@ -26,7 +27,7 @@ public class MyListsCommandHandler extends AbstractCommandHandler{
 		SendMessage answer = MessageFactory.createSendMessage(message)
 				.setText(createText(myListsNames));
 		
-		return List.of(answer);
+		return Arrays.asList(answer);
 	}
 
 	private String createText(List<String> myListsNames) {

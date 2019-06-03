@@ -1,5 +1,6 @@
 package utn.tacs.grupo3.telegram.bot.handler.command;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
@@ -30,7 +31,7 @@ public class StartCommandHandler implements CommandHandler{
 				.setText(text)
 				.setReplyMarkup(ReplyKeyboardFactory.createKeyboardRemove());
 		
-		return List.of(answer);
+		return Arrays.asList(answer);
 	}
 
 }

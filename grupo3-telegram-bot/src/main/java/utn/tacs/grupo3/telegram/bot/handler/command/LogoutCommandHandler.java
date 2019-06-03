@@ -1,5 +1,6 @@
 package utn.tacs.grupo3.telegram.bot.handler.command;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
@@ -25,7 +26,7 @@ public class LogoutCommandHandler extends AbstractCommandHandler{
 				.setText(HtmlHelper.bold("Successful logout"))
 				.setReplyMarkup(ReplyKeyboardFactory.createInitialKeyBoard());
 		
-		return List.of(answer);
+		return Arrays.asList(answer);
 		
 	}
 

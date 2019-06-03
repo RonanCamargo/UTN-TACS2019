@@ -1,5 +1,6 @@
 package utn.tacs.grupo3.telegram.bot.handler.callbackQuery;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,14 +27,14 @@ public class AddPlaceToListCallbackQueryHandler implements CallbackQueryHandler{
 				.setText("Select a list to add a new place")
 				.setReplyMarkup(createKeyboard(placeId, listNames));
 		
-		return List.of(answer);
+		return Arrays.asList(answer);
 	}
 
 	private InlineKeyboardMarkup createKeyboard(String placeId, List<String> listNames) {
 		InlineKeyboardMarkup kb = new InlineKeyboardMarkup();
 		List<List<InlineKeyboardButton>> buttons = listNames.stream()
 				.map(listName -> 
-					List.of(new InlineKeyboardButton(listName).setCallbackData(
+					Arrays.asList(new InlineKeyboardButton(listName).setCallbackData(
 							PlacesBotConstants.ADD_PLACE_TO_SELECTED_LIST + PlacesBotConstants.COMMAND_SEPARATOR + 
 							listName + PlacesBotConstants.COMMAND_SEPARATOR + 
 							placeId)))

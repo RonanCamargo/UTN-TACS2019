@@ -1,5 +1,6 @@
 package utn.tacs.grupo3.telegram.bot.handler.command;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
@@ -22,7 +23,7 @@ public class SearchCommandHandler extends AbstractCommandHandler{
 	public List<BotApiMethod<?>> handle(Message message) {
 		
 		InlineKeyboardMarkup keyboard = InlineKeyboardFactory.createInlineKeyboard(				
-				List.of(
+				Arrays.asList(
 					new InlineKeyboardButton("By name").setSwitchInlineQueryCurrentChat(PlacesBotConstants.SEARCH_BY_NAME),
 					new InlineKeyboardButton("Near me").setSwitchInlineQueryCurrentChat(PlacesBotConstants.SEARCH_NEAR_ME_INLINE)
 				));
@@ -31,7 +32,7 @@ public class SearchCommandHandler extends AbstractCommandHandler{
 				.setText("Search places")
 				.setReplyMarkup(keyboard);		
 		
-		return List.of(answer);
+		return Arrays.asList(answer);
 	}
 
 }

@@ -1,5 +1,6 @@
 package utn.tacs.grupo3.telegram.bot.handler.command;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
@@ -42,14 +43,14 @@ public class LoginCommandHandler extends AbstractCommandHandler{
 
 			apiRequest.login(credentials, message.getFrom().getId());			
 
-			return List.of(successfulLogin, answer);
+			return Arrays.asList(successfulLogin, answer);
 			
 		} catch (BadCredentialsException e) {
 			SendMessage failedLogin = MessageFactory.createSendMessage(message)
 					.setText("You have entered an invalid username or password")
 					.setReplyMarkup(ReplyKeyboardFactory.createInitialKeyBoard());
 			
-			return List.of(failedLogin);
+			return Arrays.asList(failedLogin);
 		}
 
 	}

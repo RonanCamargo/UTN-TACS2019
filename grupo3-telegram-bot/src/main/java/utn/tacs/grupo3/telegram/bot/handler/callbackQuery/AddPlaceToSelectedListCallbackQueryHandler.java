@@ -1,5 +1,6 @@
 package utn.tacs.grupo3.telegram.bot.handler.callbackQuery;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
@@ -26,7 +27,7 @@ public class AddPlaceToSelectedListCallbackQueryHandler implements CallbackQuery
 		SendMessage answer = MessageFactory.createSendMessage(callbackQuery.getMessage())
 				.setText("Place added to list successfully");
 
-		return List.of(answer);
+		return Arrays.asList(answer);
 	}
 
 }

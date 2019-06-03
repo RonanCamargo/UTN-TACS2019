@@ -1,5 +1,6 @@
 package utn.tacs.grupo3.telegram.bot.handler.inlineQuery;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.telegram.telegrambots.meta.api.methods.AnswerInlineQuery;
@@ -31,7 +32,7 @@ public class SearchNearMeInlineQueryHandler implements InlineQueryHandler{
 		AnswerInlineQuery answer = MessageFactory.createAnswerInlineQuery(inlineQuery);		
 		answer.setResults(InlineQueryResultFactory.createNearMeQueryResultsWithKeyboard(venues));		
 
-		return List.of(answer);
+		return Arrays.asList(answer);
 	}
 
 }

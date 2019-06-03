@@ -1,5 +1,6 @@
 package utn.tacs.grupo3.telegram.bot.handler.command;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,13 +33,13 @@ public class ViewListCommandHandler extends AbstractCommandHandler {
 				.setText(HtmlHelper.bold("Select a place"))
 				.setReplyMarkup(createKeyboard(listName, listOfPlaces.getPlaces()));
 
-		return List.of(answer);
+		return Arrays.asList(answer);
 	}
 
 	private InlineKeyboardMarkup createKeyboard(String listName, List<Place> places) {
 		InlineKeyboardMarkup keyboard = new InlineKeyboardMarkup();		
 		List<List<InlineKeyboardButton>> buttons = places.stream()
-				.map(place -> List.of(new InlineKeyboardButton(place.getName())
+				.map(place -> Arrays.asList(new InlineKeyboardButton(place.getName())
 						.setCallbackData(createCallbackData(listName, place.getName()))))
 				.collect(Collectors.toList());
 		keyboard.setKeyboard(buttons);

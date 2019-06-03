@@ -1,5 +1,6 @@
 package utn.tacs.grupo3.telegram.bot.handler.callbackQuery;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
@@ -23,7 +24,7 @@ public class ViewPlaceCallbackQueryHandler implements CallbackQueryHandler{
 		Place place = places.stream().filter(aPlace -> aPlace.getName().equalsIgnoreCase(parsed[2])).findFirst().get();		
 		SendVenue venue = createVenue(callbackQuery, place);
 		
-		return List.of(venue);
+		return Arrays.asList(venue);
 	}
 
 	private SendVenue createVenue(CallbackQuery callbackQuery, Place place) {

@@ -1,5 +1,6 @@
 package utn.tacs.grupo3.telegram.bot;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -94,7 +95,7 @@ public class PlacesBot extends TelegramLongPollingBot{
 				.setChatId(update.getMessage().getChatId())
 				.setText(e.getMessage());
 		
-		return List.of(errorAnswer);
+		return Arrays.asList(errorAnswer);
 	}
 	
 	/**
@@ -118,7 +119,7 @@ public class PlacesBot extends TelegramLongPollingBot{
 				.setText("You need to login")
 				.setReplyMarkup(ReplyKeyboardFactory.createInitialKeyBoard());
 		
-		return List.of(userNotLoggedAnswer);
+		return Arrays.asList(userNotLoggedAnswer);
 	}
 	
 	/**
