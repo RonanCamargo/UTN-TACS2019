@@ -13,10 +13,6 @@ class LoginUser extends Component {
 		}
 	}
 	
-	// validateForm() {
-	// 	return this.state.name.length > 0 && this.state.password.length > 0
-	// }
-
 	handleChange = event => {
 		this.setState({
 			[event.target.id]: event.target.value
@@ -75,7 +71,6 @@ class LoginUser extends Component {
 					</Form.Group>
 					<Button
 						block
-//						disabled={!this.validateForm()}
 						type="submit"
 						variant="primary"
 					>

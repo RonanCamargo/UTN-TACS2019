@@ -32,7 +32,7 @@ class SignUp extends Component {
 			const user = {
 				firstName: this.state.firstName,
 				lastName: this.state.lastName,
-				userName: this.state.userName,
+				username: this.state.userName,
 				password: this.state.password
 			}
 
