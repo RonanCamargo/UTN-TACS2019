@@ -19,10 +19,8 @@ public class LoginControllerImpl implements LoginController {
 
     @Override
     @PostMapping(path = "/sign-up")
-    public String createUser(@RequestBody User user) {
-        user.setRol("USER");
+    public void createUser(@RequestBody User user) {
+        user.initialize();
         userRepository.createUser(user);
-        userMongoRepo.save(user);
-        return "Usuario creado correctamente.";
     }
 }

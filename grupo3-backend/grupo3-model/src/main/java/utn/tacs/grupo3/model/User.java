@@ -33,6 +33,12 @@ public class User {
         this.password = password;
     }
 
+    public void initialize() {
+        this.listsOfPlaces = new ArrayList<>();
+        this.placesVisited = new ArrayList<>();
+        setRol("USER");
+        setLastAccess(null);
+    }
 
     public boolean havePlacesInCommonWith(Place aPlace) {
         return listsOfPlaces.stream().anyMatch(listPlaces -> listPlaces.getPlaces().contains(aPlace));
@@ -116,8 +122,9 @@ public class User {
     }
 
     public String getPassword() {
-        return "{noop}"+this.password;
+        return "{noop}" + this.password;
     }
+
     public void setPassword(String password) {
         this.password = password;
     }
@@ -138,11 +145,4 @@ public class User {
         this.username = username;
     }
 
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}    
 }

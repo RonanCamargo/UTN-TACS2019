@@ -20,9 +20,8 @@ public interface ListOfPlacesController {
      *
      * @param userId
      * @param listId
-     * @return
      */
-    String createListOfPlaces(String userId, String listId) throws ExceptionbyResourceNotFound;
+    void createListOfPlaces(String userId, String listId) throws ExceptionbyResourceNotFound;
 
     /**
      * Returns a specific list-of-places that belongs to a user
@@ -39,9 +38,8 @@ public interface ListOfPlacesController {
      *
      * @param userId
      * @param listId
-     * @return
      */
-    String deleteListOfPlacesList(String userId, String listId) throws ExceptionbyResourceNotFound;
+    void deleteListOfPlacesList(String userId, String listId) throws ExceptionbyResourceNotFound;
 
 
     /**
@@ -50,8 +48,7 @@ public interface ListOfPlacesController {
      * @param userId
      * @param listId
      * @param newName
-     * @return
      */
-    String editListOfPlacesList(String userId, String listId, String newName) throws ExceptionbyResourceNotFound;
+    void editListOfPlacesList(String userId, String listId, String newName) throws ExceptionbyResourceNotFound;
 
 }

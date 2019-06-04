@@ -7,7 +7,6 @@ public interface LoginController {
      * Registers a new user
      *
      * @param user
-     * @return
      */
-    String createUser(User user);
+    void createUser(User user);
 }

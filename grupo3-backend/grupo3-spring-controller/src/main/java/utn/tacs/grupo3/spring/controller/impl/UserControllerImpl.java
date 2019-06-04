@@ -43,19 +43,17 @@ public class UserControllerImpl implements UserController {
 
     @Override
     @PutMapping("/{user-id}/places-visited/{place-id}")
-    public String markAsVisitedAPlace(@PathVariable("user-id") String userId, @PathVariable("place-id") String placeId) throws ExceptionbyResourceNotFound {
+    public void markAsVisitedAPlace(@PathVariable("user-id") String userId, @PathVariable("place-id") String placeId) throws ExceptionbyResourceNotFound {
         Place place = placeRepository.placeByName(placeId);
         userRepository.userByUsername(userId).markAsVisited(place);
-        return "lugar marcado como visitado.";
     }
 
     @Override
     @PostMapping("/{user-id}/list-of-places/{list-id}/{place-id}")
-    public String registerPlaceInListOfPlaces(@PathVariable("user-id") String userId, @PathVariable("list-id") String listId, @PathVariable("place-id") String placeId) throws ExceptionbyResourceNotFound {
+    public void registerPlaceInListOfPlaces(@PathVariable("user-id") String userId, @PathVariable("list-id") String listId, @PathVariable("place-id") String placeId) throws ExceptionbyResourceNotFound {
     	FullVenue venue = foursquarePlacesRequest.getVenueById(placeId);
     	Place place = fullVenueToPlaceConverter.convert(venue);
 
         userRepository.userByUsername(userId).registerAPlaceinAListOfPlaces(listId, placeRepository.createPlace(place));
-        return "Lugar registrado correctamente.";
     }
 }
