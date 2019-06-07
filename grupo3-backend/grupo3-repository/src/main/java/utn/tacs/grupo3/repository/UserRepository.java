@@ -54,6 +54,7 @@ public class UserRepository {
         users.add(user);
     }
 
+    @Deprecated
     public long amountOfUsersInterestedIn(Place aPlace) {
         return users.stream().filter(u -> u.havePlacesInCommonWith(aPlace)).count();
     }
