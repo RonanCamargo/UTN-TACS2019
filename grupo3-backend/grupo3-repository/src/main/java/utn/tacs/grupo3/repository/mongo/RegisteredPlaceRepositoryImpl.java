@@ -31,6 +31,18 @@ public class RegisteredPlaceRepositoryImpl extends GenericRepositoryImpl<Registe
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public void deleteInterestedUser(String id, String username) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void addInterestedUser(String id, String username) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 
 }

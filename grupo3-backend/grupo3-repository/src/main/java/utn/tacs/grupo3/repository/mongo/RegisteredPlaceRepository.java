@@ -21,7 +21,20 @@ public interface RegisteredPlaceRepository extends GenericRepository<RegisteredP
 	 * @return
 	 */
 	List<RegisteredPlace> placesRegisteredUntil(LocalDate date);
+
+	/**
+	 * Deletes an interested user from a registered place 
+	 * @param id
+	 * @param username
+	 */
+	void deleteInterestedUser(String id, String username);
 	
+	/**
+	 * Adds a new interested user to a registered place
+	 * @param id
+	 * @param username
+	 */
+	void addInterestedUser(String id, String username);
 	
 
 }
