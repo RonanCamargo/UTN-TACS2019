@@ -15,7 +15,7 @@ import utn.tacs.grupo3.model.Role;
 import utn.tacs.grupo3.model.User;
 import utn.tacs.grupo3.mongo.configuration.MongoConfiguration;
 import utn.tacs.grupo3.repository.exception.DocumentNotUniqueException;
-import utn.tacs.grupo3.repository.exception.UserNotFoundException;
+import utn.tacs.grupo3.repository.exception.DocumentNotFoundException;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {MongoConfiguration.class})
@@ -68,7 +68,7 @@ public class MongoUserRepositoryTest {
 		Assert.assertTrue(exists);
 	}
 	
-	@Test(expected = UserNotFoundException.class)
+	@Test(expected = DocumentNotFoundException.class)
 	public void usernameNotFoundTest() {
 		userRepository.userByUsername("pepe");
 	}
@@ -108,6 +108,12 @@ public class MongoUserRepositoryTest {
 		ListOfPlaces listOfPlaces = userRepository.findListOfPlaces("JPerez1", "Bancos");
 		
 		Assert.assertEquals("Bancos", listOfPlaces.getListName());
+	}
+	
+	@Test(expected = DocumentNotFoundException.class)
+	public void tryToFindANonExistingListOfPlaces() {
+		userRepository.save(juan);
+		userRepository.findListOfPlaces("JPerez1", "Non existing list");
 	}
 	
 

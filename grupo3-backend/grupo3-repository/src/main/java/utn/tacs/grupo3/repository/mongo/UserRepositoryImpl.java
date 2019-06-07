@@ -11,7 +11,7 @@ import utn.tacs.grupo3.model.ListOfPlaces;
 import utn.tacs.grupo3.model.Place;
 import utn.tacs.grupo3.model.User;
 import utn.tacs.grupo3.repository.exception.DocumentNotUniqueException;
-import utn.tacs.grupo3.repository.exception.UserNotFoundException;
+import utn.tacs.grupo3.repository.exception.DocumentNotFoundException;
 
 @Repository
 public class UserRepositoryImpl extends GenericRepositoryImpl<User, String> implements UserRepository{
@@ -31,7 +31,7 @@ public class UserRepositoryImpl extends GenericRepositoryImpl<User, String> impl
 		List<User> users = findBy("username", username);
 		
 		if (users == null || (users != null && users.isEmpty())) {
-			throw new UserNotFoundException("User with username [" + username + "] does not exist");
+			throw new DocumentNotFoundException("User with username [" + username + "] does not exist");
 		} else if (users.size() > 1) {
 			throw new DocumentNotUniqueException("Multiple users with username [" + username + "] were found");
 		} else {
@@ -95,7 +95,12 @@ public class UserRepositoryImpl extends GenericRepositoryImpl<User, String> impl
 		query.addCriteria(Criteria.where("username").is(username));
 		
 		User user = mongoOps.findOne(query, getClassType());
-		return user.getListsOfPlaces().stream().filter(list -> list.getListName().contentEquals(listName)).findFirst().get();
+		return user.getListsOfPlaces().stream()
+				.filter(list -> list.getListName().contentEquals(listName))
+				.findFirst()
+				.orElseThrow(() -> new DocumentNotFoundException(
+						"User ["+ username +"] does not have a list of places named [" + listName + "]"));				
+
 	}
 
 	@Override
