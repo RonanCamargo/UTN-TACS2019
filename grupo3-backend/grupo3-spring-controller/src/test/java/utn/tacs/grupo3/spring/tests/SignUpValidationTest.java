@@ -3,10 +3,7 @@ package utn.tacs.grupo3.spring.tests;
 import org.junit.Before;
 import org.junit.Test;
 import utn.tacs.grupo3.model.User;
-import utn.tacs.grupo3.model.exception.signUpValidation.ExceptionbyRepeatedUserName;
-import utn.tacs.grupo3.model.exception.signUpValidation.ExceptionbySignUpValidation;
-import utn.tacs.grupo3.model.exception.signUpValidation.ExceptionbyVeryShortPassword;
-import utn.tacs.grupo3.model.exception.signUpValidation.ExceptionbyVeryshortUserName;
+import utn.tacs.grupo3.model.exception.signUpValidation.*;
 import utn.tacs.grupo3.repository.UserRepository;
 import utn.tacs.grupo3.spring.validations.SignUpValidation;
 
@@ -17,7 +14,7 @@ public class SignUpValidationTest {
 
     @Before
     public void initialize() {
-        user1 = new User("Pedro", "Rodriguez", "pedrito", null, null);
+        user1 = new User("Pedro", "Rodriguez", "pedrito", "", null);
         signUpValidation = new SignUpValidation();
         userRepository = new UserRepository();
     }
@@ -37,7 +34,20 @@ public class SignUpValidationTest {
 
     @Test(expected = ExceptionbyRepeatedUserName.class)
     public void usernameAlreadyExists() throws ExceptionbySignUpValidation {
-        userRepository.createUser(user1 = new User("Pedro", "Rodriguez", "pedrito", null, null));
+        userRepository.createUser(user1 = new User("Pedro", "Rodriguez", "pedrito", "", null));
         signUpValidation.validate(user1, userRepository);
     }
+
+    @Test(expected = ExceptionByEmptyFields.class)
+    public void theFirstNameIsEmpty() throws ExceptionbySignUpValidation {
+        userRepository.createUser(user1 = new User(null, "Rodriguez", "", "", null));
+        signUpValidation.validate(user1, userRepository);
+    }
+
+    @Test(expected = ExceptionByEmptyFields.class)
+    public void theLastNameAndUserNameIsEmpty() throws ExceptionbySignUpValidation {
+        userRepository.createUser(user1 = new User("Pedro", null, null, "", null));
+        signUpValidation.validate(user1, userRepository);
+    }
+
 }
