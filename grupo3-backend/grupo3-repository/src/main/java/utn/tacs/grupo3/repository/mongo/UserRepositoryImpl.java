@@ -1,8 +1,16 @@
 package utn.tacs.grupo3.repository.mongo;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.data.mongodb.core.aggregation.Aggregation;
+import org.springframework.data.mongodb.core.aggregation.AggregationOperation;
+import org.springframework.data.mongodb.core.aggregation.ExposedFields;
+import org.springframework.data.mongodb.core.aggregation.TypedAggregation;
+import org.springframework.data.mongodb.core.aggregation.UnwindOperation;
+import org.springframework.data.mongodb.core.aggregation.UnwindOperation.UnwindOperationBuilder;
 import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Field;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
@@ -31,9 +39,9 @@ public class UserRepositoryImpl extends GenericRepositoryImpl<User, String> impl
 		List<User> users = findBy("username", username);
 		
 		if (users == null || (users != null && users.isEmpty())) {
-			throw new UserNotFoundException("User with username [" + username + "] does not exists.");
+			throw new UserNotFoundException("User with username [" + username + "] does not exist");
 		} else if (users.size() > 1) {
-			throw new DocumentNotUniqueException("Multiple users with username [" + username + "] were found.");
+			throw new DocumentNotUniqueException("Multiple users with username [" + username + "] were found");
 		} else {
 			return users.get(0);
 		}
@@ -83,8 +91,19 @@ public class UserRepositoryImpl extends GenericRepositoryImpl<User, String> impl
 
 	@Override
 	public ListOfPlaces findListOfPlaces(String username, String listName) {
+//		List<AggregationOperation> aggs = new ArrayList<AggregationOperation>();
+//		aggs.add(Aggregation.unwind("listsOfPlaces"));
+//		aggs.add(Aggregation.match(Criteria.where("listName").is(listName)));
+//		
+//		TypedAggregation<User> tAgg = new TypedAggregation<User>(User.class, aggs);
+//
+//		
+//		return mongoOps.aggregate(tAgg, User.class, ListOfPlaces.class).getUniqueMappedResult();
+		Query query = new Query();
+		query.addCriteria(Criteria.where("username").is(username));
 		
-		return null;
+		User user = mongoOps.findOne(query, getClassType());
+		return user.getListsOfPlaces().stream().filter(list -> list.getListName().contentEquals(listName)).findFirst().get();
 	}
 
 	@Override

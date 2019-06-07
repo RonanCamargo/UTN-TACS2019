@@ -10,6 +10,7 @@ import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import utn.tacs.grupo3.model.ListOfPlaces;
 import utn.tacs.grupo3.model.Role;
 import utn.tacs.grupo3.model.User;
 import utn.tacs.grupo3.mongo.configuration.MongoConfiguration;
@@ -92,11 +93,22 @@ public class MongoUserRepositoryTest {
 	public void renameListOfPlacesTest() {
 		userRepository.save(juan);
 		userRepository.createListOfPlaces("JPerez1", "Bancos");
-		userRepository.createListOfPlaces("JPerez1", "Universidades");
-
 		userRepository.renameListOfPlaces("JPerez1", "Bancos", "B4nc0s");
+		
+		ListOfPlaces listOfPlaces = userRepository.findListOfPlaces("JPerez1", "B4nc0s");
+		
+		Assert.assertEquals("B4nc0s", listOfPlaces.getListName());
 	}
 	
+	@Test
+	public void getListOfPlacesTest() {
+		userRepository.save(juan);
+		userRepository.createListOfPlaces("JPerez1", "Bancos");
+		
+		ListOfPlaces listOfPlaces = userRepository.findListOfPlaces("JPerez1", "Bancos");
+		
+		Assert.assertEquals("Bancos", listOfPlaces.getListName());
+	}
 	
 
 }

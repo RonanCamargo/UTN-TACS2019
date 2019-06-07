@@ -65,12 +65,12 @@ public class UserRepository {
 //                .filter(listsOfPlaces ->
 //                        listsOfPlaces.stream().anyMatch(lp -> lp.getId() == id));
 //    }
-
+//
 //    private List<ListOfPlaces> searchForListsOfPlacesBy(int id) throws ExceptionbyResourceNotFound {
 //        return listsOfPlacesById(id).findFirst().
 //                orElseThrow(() -> new ExceptionbyListOfPlaceNotFound(""+id));
 //    }
-
+//
 //    public ListOfPlaces listOfPlacesById(int id) throws ExceptionbyResourceNotFound {
 //        return searchForListsOfPlacesBy(id).get(0);
 //
