@@ -17,11 +17,11 @@ public class UserMongoRepo {
 	@Autowired
 	private MongoTemplate mongoTemplate;
 			
-	public void save(User user) {
-		mongoTemplate.save(user);
+	public User save(User user) {
+		return mongoTemplate.save(user);
 	}
 	
-	public void addList(String username, String listName) {
+	public User addList(String username, String listName) {
 		Query query = new Query();
 		query.addCriteria(Criteria.where("username").is(username));
 		User user = mongoTemplate.findOne(query, User.class);
@@ -32,7 +32,14 @@ public class UserMongoRepo {
 		
 		user.getListsOfPlaces().add(listOfPlaces);
 		
-		mongoTemplate.save(user);
+		return mongoTemplate.save(user);
+	}
+	
+	public User getUserByUsername(String username) {
+		Query query = new Query();
+		query.addCriteria(Criteria.where("username").is(username));
+		
+		return mongoTemplate.findOne(query, User.class);
 	}
 
 }

@@ -6,10 +6,12 @@ public class Place {
 
     private String name;
     private String address;
+    @Deprecated
 	private LocalDate registrationDate;
 	private Float latitude;
 	private Float longitude;
 	private String foursquareId;
+	private Boolean visited;
 
 
 	public Place() {}
@@ -24,6 +26,7 @@ public class Place {
 		return name;
 	}
 
+	@Deprecated
 	public boolean wasRegisteredInTheDays(LocalDate lastDays, LocalDate currentDate) {
 		return registrationDate.isAfter(lastDays) || registrationDate.equals(currentDate);
 	}
@@ -70,6 +73,14 @@ public class Place {
 	
 	public void setFoursquareId(String foursquareId) {
 		this.foursquareId = foursquareId;
+	}
+
+	public Boolean getVisited() {
+		return visited;
+	}
+
+	public void setVisited(Boolean visited) {
+		this.visited = visited;
 	}
 }
 
