@@ -35,18 +35,21 @@ public class UserRepository {
         return users;
     }
 
+    @Deprecated
     public List<User> usersByUsername(String name) {
         return users.stream().
                 filter(user -> user.getUsername().equalsIgnoreCase(name)).
                 collect(Collectors.toList());
     }
 
+    @Deprecated
     public User userByUsername(String name) throws ExceptionbyResourceNotFound {
         return usersByUsername(name)
                 .stream().findFirst()
                 .orElseThrow(() -> new ExceptionbyUserNotFound(name));
     }
 
+    @Deprecated
     public void createUser(User user) {
         users.add(user);
     }

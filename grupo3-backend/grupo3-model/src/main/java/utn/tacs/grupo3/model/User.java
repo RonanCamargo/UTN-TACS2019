@@ -14,9 +14,12 @@ public class User {
 
 	private String username;
 	private String password;
+	@Deprecated
 	private String role;
 	
-    private String firstName;
+	private Role roleEnum;
+
+	private String firstName;
     private String lastName;
     private List<ListOfPlaces> listsOfPlaces;
     @Deprecated
@@ -24,6 +27,7 @@ public class User {
     private LocalDateTime lastAccess;
 
     public User() {
+    	this.listsOfPlaces = new ArrayList<ListOfPlaces>();
     }
 
     @Deprecated
@@ -167,12 +171,21 @@ public class User {
         this.username = username;
     }
 
-	public String getRole() {
-		return role;
+//	public String getRole() {
+//		return role;
+//	}
+//
+//	public void setRole(String role) {
+//		this.role = role;
+//	}
+	
+    public Role getRole() {
+		return roleEnum;
 	}
 
-	public void setRole(String role) {
-		this.role = role;
+	public void setRole(Role role) {
+		this.roleEnum = role;
 	}
+
 
 }
