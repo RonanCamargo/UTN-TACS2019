@@ -58,4 +58,29 @@ public class UserRepositoryImpl extends GenericRepositoryImpl<User, String> impl
 		mongoOps.updateFirst(query, update, getCollectionName());
 	}
 
+	@Override
+	public void deleteListOfPlaces(String username, String listName) {
+		Query query = new Query();
+		query.addCriteria(Criteria.where("username").is(username));
+		Update update = new Update().pull("listsOfPlaces", new ListOfPlaces(listName));
+		
+		mongoOps.updateMulti(query, update, getCollectionName());
+	}
+
+	@Override
+	public void renameListOfPlaces(String username, String actualListName, String newListName) {		
+		Update update = new Update().set("listsOfPlaces.$.listName", newListName);
+		
+		Query query = new Query();
+		query.addCriteria(Criteria.where("username").is(username).and("listsOfPlaces").elemMatch(Criteria.where("listName").is(actualListName)));
+		
+		mongoOps.updateFirst(query, update, getCollectionName());
+	}
+
+	@Override
+	public ListOfPlaces findListOfPlaces(String username, String listName) {
+		
+		return null;
+	}
+
 }

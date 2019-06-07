@@ -78,5 +78,25 @@ public class MongoUserRepositoryTest {
 		userRepository.createListOfPlaces("JPerez1", "Universidades");
 		userRepository.createListOfPlaces("JPerez1", "Universidades");		
 	}
+	
+	@Test
+	public void deleteListOfPlacesTest() {
+		userRepository.save(juan);
+		userRepository.createListOfPlaces("JPerez1", "Bancos");
+		userRepository.deleteListOfPlaces("JPerez1", "Bancos");
+		userRepository.createListOfPlaces("JPerez1", "Bancos");
+		userRepository.createListOfPlaces("JPerez1", "Universidades");
+	}
+	
+	@Test
+	public void renameListOfPlacesTest() {
+		userRepository.save(juan);
+		userRepository.createListOfPlaces("JPerez1", "Bancos");
+		userRepository.createListOfPlaces("JPerez1", "Universidades");
+
+		userRepository.renameListOfPlaces("JPerez1", "Bancos", "B4nc0s");
+	}
+	
+	
 
 }
