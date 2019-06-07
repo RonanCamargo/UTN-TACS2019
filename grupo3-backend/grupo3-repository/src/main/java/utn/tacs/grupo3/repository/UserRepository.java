@@ -71,4 +71,8 @@ public class UserRepository {
         return searchForListsOfPlacesBy(id).get(0);
 
     }
+
+    public boolean isThereAnUser(User user) {
+        return !usersByUsername(user.getUsername()).isEmpty();
+    }
 }
