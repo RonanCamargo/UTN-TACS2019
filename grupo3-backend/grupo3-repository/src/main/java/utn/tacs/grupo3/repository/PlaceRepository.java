@@ -37,6 +37,7 @@ public class PlaceRepository {
                 .orElseThrow(() -> new ExceptionbyPlaceNotFound(placeId));
     }
 
+    @Deprecated
     public Place createPlace(String placeId) {
         if (placesByName(placeId).isEmpty()) {
             Place place = new Place(placeId, "");
@@ -45,6 +46,7 @@ public class PlaceRepository {
         return placesByName(placeId).get(0);
     }
     
+    @Deprecated
     public Place createPlace(Place place) {
         if (placesByName(place.getName()).isEmpty()) {
             places.add(place);
@@ -52,6 +54,7 @@ public class PlaceRepository {
         return placesByName(place.getName()).get(0);
     }
 
+    @Deprecated
     public long amountOfPlacesRegisteredInTheSystemInTheLast(int days) {
         LocalDate lastDays = currentDate.minusDays(days);
 

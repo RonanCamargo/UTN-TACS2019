@@ -8,6 +8,7 @@ import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
 import utn.tacs.grupo3.model.ListOfPlaces;
+import utn.tacs.grupo3.model.Place;
 import utn.tacs.grupo3.model.User;
 import utn.tacs.grupo3.repository.exception.DocumentNotUniqueException;
 import utn.tacs.grupo3.repository.exception.UserNotFoundException;
@@ -84,6 +85,24 @@ public class UserRepositoryImpl extends GenericRepositoryImpl<User, String> impl
 	public ListOfPlaces findListOfPlaces(String username, String listName) {
 		
 		return null;
+	}
+
+	@Override
+	public void addPlaceToListOfPlaces(String username, String listName, Place place) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deletePlaceFromListOfPlaces(String username, String listName, String foursquareId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void markAPlaceAsVisited(String username, String listName, String foursquareId) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
