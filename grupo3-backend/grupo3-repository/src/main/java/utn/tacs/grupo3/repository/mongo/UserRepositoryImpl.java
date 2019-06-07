@@ -69,10 +69,13 @@ public class UserRepositoryImpl extends GenericRepositoryImpl<User, String> impl
 
 	@Override
 	public void renameListOfPlaces(String username, String actualListName, String newListName) {		
-		Update update = new Update().set("listsOfPlaces.$.listName", newListName);
-		
 		Query query = new Query();
-		query.addCriteria(Criteria.where("username").is(username).and("listsOfPlaces").elemMatch(Criteria.where("listName").is(actualListName)));
+		query.addCriteria(
+				Criteria.where("username").is(username)
+				.and("listsOfPlaces")
+				.elemMatch(Criteria.where("listName").is(actualListName)));
+		
+		Update update = new Update().set("listsOfPlaces.$.listName", newListName);
 		
 		mongoOps.updateFirst(query, update, getCollectionName());
 	}

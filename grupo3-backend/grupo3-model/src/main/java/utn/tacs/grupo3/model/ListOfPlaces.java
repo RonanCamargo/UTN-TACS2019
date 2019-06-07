@@ -5,7 +5,6 @@ import java.util.List;
 
 public class ListOfPlaces {
 
-	String id;
     private String listName;
     private List<Place> places;
 
@@ -41,13 +40,5 @@ public class ListOfPlaces {
 
 	public void setPlaces(List<Place> places) {
 		this.places = places;
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
 	}
 }
