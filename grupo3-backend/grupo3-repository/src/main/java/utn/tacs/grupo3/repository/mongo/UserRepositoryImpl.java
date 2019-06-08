@@ -89,11 +89,8 @@ public class UserRepositoryImpl extends GenericRepositoryImpl<User, String> impl
 	public ListOfPlaces findListOfPlaces(String username, String listName) {
 //		List<AggregationOperation> aggs = new ArrayList<AggregationOperation>();
 //		aggs.add(Aggregation.unwind("listsOfPlaces"));
-//		aggs.add(Aggregation.match(Criteria.where("listName").is(listName)));
-//		
+//		aggs.add(Aggregation.match(Criteria.where("listName").is(listName)));		
 //		TypedAggregation<User> tAgg = new TypedAggregation<User>(User.class, aggs);
-//
-//		
 //		return mongoOps.aggregate(tAgg, User.class, ListOfPlaces.class).getUniqueMappedResult();
 		Query query = new Query();
 		query.addCriteria(Criteria.where("username").is(username));
@@ -121,8 +118,16 @@ public class UserRepositoryImpl extends GenericRepositoryImpl<User, String> impl
 
 	@Override
 	public void deletePlaceFromListOfPlaces(String username, String listName, String foursquareId) {
-		// TODO Auto-generated method stub
+		Query query = new Query();
+		query.addCriteria(Criteria.where("username").is(username)
+				.and("listsOfPlaces.listName").is(listName)
+				.and("listsOfPlaces.places.foursquareId").is(foursquareId));
 		
+		Place place = new Place();
+		place.setFoursquareId(foursquareId);
+		Update update = new Update().pull("listsOfPlaces.$.places", place);
+		
+		mongoOps.updateFirst(query, update, getCollectionName());
 	}
 
 	@Override

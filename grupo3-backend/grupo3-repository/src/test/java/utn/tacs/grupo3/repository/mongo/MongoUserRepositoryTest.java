@@ -211,5 +211,21 @@ public class MongoUserRepositoryTest {
 		Assert.assertTrue(banks.getPlaces().stream().anyMatch(anyPlace -> anyPlace.getName().equals("Banco Nacion")));
 		
 	}
+	
+	@Test
+	public void deletePlaceFromList() {
+		userRepository.save(juan);
+		userRepository.createListOfPlaces("JPerez1", "Universidades");
+
+		Place medrano = new Place("UTN Medrano", "Av. Medrano 951");
+		medrano.setFoursquareId("asdf1234");
+		
+		userRepository.addPlaceToListOfPlaces("JPerez1", "Universidades", medrano);
+		userRepository.deletePlaceFromListOfPlaces("JPerez1", "Universidades", "asdf1234");
+		
+		ListOfPlaces universities = userRepository.findListOfPlaces("JPerez1", "Universidades");
+		
+		Assert.assertTrue(universities.getPlaces().isEmpty());
+	}
 
 }
