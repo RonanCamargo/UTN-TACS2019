@@ -27,7 +27,7 @@ public class User {
     private LocalDateTime lastAccess;
 
     public User() {
-    	this.listsOfPlaces = new ArrayList<ListOfPlaces>();
+    	
     }
 
     @Deprecated

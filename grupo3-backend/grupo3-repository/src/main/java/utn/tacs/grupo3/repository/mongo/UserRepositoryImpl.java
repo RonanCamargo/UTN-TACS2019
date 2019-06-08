@@ -1,5 +1,6 @@
 package utn.tacs.grupo3.repository.mongo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -63,7 +64,10 @@ public class UserRepositoryImpl extends GenericRepositoryImpl<User, String> impl
 	public void deleteListOfPlaces(String username, String listName) {
 		Query query = new Query();
 		query.addCriteria(Criteria.where("username").is(username));
-		Update update = new Update().pull("listsOfPlaces", new ListOfPlaces(listName));
+		
+		ListOfPlaces list = new ListOfPlaces();
+		list.setListName(listName);
+		Update update = new Update().pull("listsOfPlaces", list);
 		
 		mongoOps.updateMulti(query, update, getCollectionName());
 	}
@@ -95,6 +99,7 @@ public class UserRepositoryImpl extends GenericRepositoryImpl<User, String> impl
 		query.addCriteria(Criteria.where("username").is(username));
 		
 		User user = mongoOps.findOne(query, getClassType());
+		
 		return user.getListsOfPlaces().stream()
 				.filter(list -> list.getListName().contentEquals(listName))
 				.findFirst()
@@ -105,7 +110,12 @@ public class UserRepositoryImpl extends GenericRepositoryImpl<User, String> impl
 
 	@Override
 	public void addPlaceToListOfPlaces(String username, String listName, Place place) {
-		// TODO Auto-generated method stub
+		Query query = new Query();
+		query.addCriteria(Criteria.where("username").is(username).and("listsOfPlaces.listName").is(listName));
+		
+		Update update = new Update().push("listsOfPlaces.$.places", place);
+		
+		mongoOps.updateFirst(query, update, getCollectionName());
 		
 	}
 
@@ -120,5 +130,4 @@ public class UserRepositoryImpl extends GenericRepositoryImpl<User, String> impl
 		// TODO Auto-generated method stub
 		
 	}
-
 }
