@@ -1,32 +1,40 @@
 package utn.tacs.grupo3.spring.controller.impl;
 
+import java.time.LocalDate;
+import java.util.Collections;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-import utn.tacs.grupo3.model.ListOfPlaces;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
 import utn.tacs.grupo3.model.Place;
 import utn.tacs.grupo3.model.User;
 import utn.tacs.grupo3.model.exception.ExceptionbyResourceNotFound;
 import utn.tacs.grupo3.repository.PlaceRepository;
-import utn.tacs.grupo3.repository.UserRepository;
+import utn.tacs.grupo3.repository.mongo.UserRepository;
 import utn.tacs.grupo3.spring.controller.AdministratorController;
-
-import java.time.LocalDate;
-import java.util.Collections;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/administrator")
 public class AdministratorControllerImpl implements AdministratorController {
 
-    @Autowired
-    private UserRepository userRepository;
+//    @Autowired
+    private utn.tacs.grupo3.repository.UserRepository userRepository;
     @Autowired
     private PlaceRepository placeRepository;
+    
+    @Autowired
+    private UserRepository userRepoMongo;
 
     @Override
     @GetMapping("users/{user-id}")
     public User userById(@PathVariable("user-id") String userId) throws ExceptionbyResourceNotFound {
-        return userRepository.userByUsername(userId);
+//        return userRepository.userByUsername(userId);
+    	return userRepoMongo.userByUsername(userId);
     }
 
     @Override
