@@ -175,11 +175,11 @@ public class User {
         this.placesVisited = placesVisited;
     }
     public Role getRole() {
+    	return roleEnum;
 	}
-		return roleEnum;
 
 	public void setRole(Role role) {
-	}
 		this.roleEnum = role;
+	}
 
 }
