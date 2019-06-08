@@ -109,34 +109,6 @@ public class User {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public List<ListOfPlaces> getListsOfPlaces() {
-        return listsOfPlaces;
-    }
-
-    public void setListsOfPlaces(List<ListOfPlaces> listsOfPlaces) {
-        this.listsOfPlaces = listsOfPlaces;
-    }
-
-    public List<Place> getPlacesVisited() {
-        return placesVisited;
-    }
-
-    public void setPlacesVisited(List<Place> placesVisited) {
-        this.placesVisited = placesVisited;
-    }
-
     public LocalDateTime getLastAccess() {
         return lastAccess;
     }
@@ -171,21 +143,43 @@ public class User {
         this.username = username;
     }
 
-//	public String getRole() {
-//		return role;
-//	}
-//
-//	public void setRole(String role) {
-//		this.role = role;
-//	}
-	
+    public boolean areThereEmptyFieldsToSignUp() {
+        return username == null || password == null || firstName == null || lastName == null;
+    }
+
+    public List<ListOfPlaces> getListsOfPlaces() {
+        return listsOfPlaces;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setListsOfPlaces(List<ListOfPlaces> listsOfPlaces) {
+        this.listsOfPlaces = listsOfPlaces;
+    }
+
+    public List<Place> getPlacesVisited() {
+        return placesVisited;
+    }
+
+    public void setPlacesVisited(List<Place> placesVisited) {
+        this.placesVisited = placesVisited;
+    }
     public Role getRole() {
-		return roleEnum;
 	}
+		return roleEnum;
 
 	public void setRole(Role role) {
-		this.roleEnum = role;
 	}
-
+		this.roleEnum = role;
 
 }
