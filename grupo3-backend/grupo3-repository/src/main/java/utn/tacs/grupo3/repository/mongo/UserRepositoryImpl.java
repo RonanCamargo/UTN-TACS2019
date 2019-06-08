@@ -1,6 +1,5 @@
 package utn.tacs.grupo3.repository.mongo;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -11,8 +10,8 @@ import org.springframework.stereotype.Repository;
 import utn.tacs.grupo3.model.ListOfPlaces;
 import utn.tacs.grupo3.model.Place;
 import utn.tacs.grupo3.model.User;
-import utn.tacs.grupo3.repository.exception.DocumentNotUniqueException;
 import utn.tacs.grupo3.repository.exception.DocumentNotFoundException;
+import utn.tacs.grupo3.repository.exception.DocumentNotUniqueException;
 
 @Repository
 public class UserRepositoryImpl extends GenericRepositoryImpl<User, String> implements UserRepository{
@@ -132,7 +131,21 @@ public class UserRepositoryImpl extends GenericRepositoryImpl<User, String> impl
 
 	@Override
 	public void markAPlaceAsVisited(String username, String listName, String foursquareId) {
-		// TODO Auto-generated method stub
+		ListOfPlaces list = findListOfPlaces(username, listName);
+		Place place = list.getPlaces().stream()
+				.filter(aPlace -> aPlace.getFoursquareId().equals(foursquareId))
+				.findFirst()
+				.get();
 		
+		place.setVisited(Boolean.TRUE);
+		
+		Query query = new Query();
+		query.addCriteria(Criteria.where("username").is(username)
+				.and("listsOfPlaces.listName").is(listName)
+				.and("listsOfPlaces.places.foursquareId").is(foursquareId));
+		
+		Update update = new Update().set("listsOfPlaces.$.places", list.getPlaces());
+		
+		mongoOps.updateFirst(query, update, getClassType());
 	}
 }

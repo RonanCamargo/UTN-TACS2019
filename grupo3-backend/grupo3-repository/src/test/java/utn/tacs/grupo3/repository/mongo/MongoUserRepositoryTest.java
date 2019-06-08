@@ -3,7 +3,6 @@ package utn.tacs.grupo3.repository.mongo;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.assertj.core.util.Arrays;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -226,6 +225,33 @@ public class MongoUserRepositoryTest {
 		ListOfPlaces universities = userRepository.findListOfPlaces("JPerez1", "Universidades");
 		
 		Assert.assertTrue(universities.getPlaces().isEmpty());
+	}
+	
+	@Test
+	public void markAPlaceAsVisited() {
+		userRepository.save(juan);
+		userRepository.createListOfPlaces("JPerez1", "Universidades");
+
+		Place medrano = new Place("UTN Medrano", "Av. Medrano 951");
+		medrano.setFoursquareId("asdf1234");
+		medrano.setVisited(Boolean.FALSE);
+		
+		Place campus = new Place("UTN Campus", "Saraza 123");
+		campus.setFoursquareId("1234");
+		campus.setVisited(Boolean.FALSE);
+		
+		userRepository.addPlaceToListOfPlaces("JPerez1", "Universidades", medrano);
+		userRepository.addPlaceToListOfPlaces("JPerez1", "Universidades", campus);
+		
+		userRepository.markAPlaceAsVisited("JPerez1", "Universidades", "asdf1234");
+		
+		ListOfPlaces universities = userRepository.findListOfPlaces("JPerez1", "Universidades");
+
+		Assert.assertTrue(universities.getPlaces().size() == 2);
+		Assert.assertTrue(universities.getPlaces()
+				.stream()
+				.anyMatch(anyPlace -> anyPlace.getName().equals("UTN Medrano") && anyPlace.getVisited()));
+
 	}
 
 }
