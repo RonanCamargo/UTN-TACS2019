@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static utn.tacs.grupo3.model.Encryptor.decrypt;
+import static utn.tacs.grupo3.model.Encryptor.getEncryption;
+
 public class User {
 
     private String firstName;
@@ -36,6 +39,7 @@ public class User {
         this.listsOfPlaces = new ArrayList<>();
         this.placesVisited = new ArrayList<>();
         setRol("USER");
+        setPassword(getEncryption(password));
         setLastAccess(null);
     }
 
@@ -93,7 +97,10 @@ public class User {
     }
 
     public String getPassword() {
-        return "{noop}" + this.password;
+        return "{noop}" + decrypt(password);
+    }
+    public String getPasswordPlane() {
+        return this.password;
     }
 
     public void setPassword(String password) {
