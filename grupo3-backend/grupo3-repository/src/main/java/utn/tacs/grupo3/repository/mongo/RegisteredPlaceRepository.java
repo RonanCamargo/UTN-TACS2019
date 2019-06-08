@@ -16,11 +16,11 @@ public interface RegisteredPlaceRepository extends GenericRepository<RegisteredP
 	List<String> usernamesOfInterestedInPlaceUsers(String id);
 	
 	/**
-	 * Returns all places registered in the system until a given date
+	 * Returns all places registered in the system between two dates
 	 * @param date
 	 * @return
 	 */
-	List<RegisteredPlace> placesRegisteredUntil(LocalDate date);
+	List<RegisteredPlace> placesRegisteredBetween(LocalDate from, LocalDate to);
 
 	/**
 	 * Deletes an interested user from a registered place 
@@ -35,6 +35,7 @@ public interface RegisteredPlaceRepository extends GenericRepository<RegisteredP
 	 * @param username
 	 */
 	void addInterestedUser(String id, String username);
+
 	
 
 }
