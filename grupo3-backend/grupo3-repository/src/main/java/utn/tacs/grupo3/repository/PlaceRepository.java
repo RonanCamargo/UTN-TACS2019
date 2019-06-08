@@ -7,9 +7,9 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Repository;
 
+import utn.tacs.grupo3.model.Place;
 import utn.tacs.grupo3.model.exception.ExceptionbyPlaceNotFound;
 import utn.tacs.grupo3.model.exception.ExceptionbyResourceNotFound;
-import utn.tacs.grupo3.model.Place;
 
 @Repository
 public class PlaceRepository {
@@ -52,15 +52,6 @@ public class PlaceRepository {
             places.add(place);
         }
         return placesByName(place.getName()).get(0);
-    }
-
-    @Deprecated
-    public long amountOfPlacesRegisteredInTheSystemInTheLast(int days) {
-        LocalDate lastDays = currentDate.minusDays(days);
-
-        return places.stream()
-                .filter(place -> place.wasRegisteredInTheDays(lastDays,currentDate))
-                .count();
     }
 
     public void setCurrentDate(LocalDate currentDate) {

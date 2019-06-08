@@ -1,13 +1,9 @@
 package utn.tacs.grupo3.model;
 
-import java.time.LocalDate;
-
 public class Place {
 
     private String name;
     private String address;
-    @Deprecated
-	private LocalDate registrationDate;
 	private Float latitude;
 	private Float longitude;
 	private String foursquareId;
@@ -19,16 +15,10 @@ public class Place {
     public Place(String name, String address) {
         this.name = name;
         this.address = address;
-        this.registrationDate = LocalDate.now();
     }
 
 	public String getName() {
 		return name;
-	}
-
-	@Deprecated
-	public boolean wasRegisteredInTheDays(LocalDate lastDays, LocalDate currentDate) {
-		return registrationDate.isAfter(lastDays) || registrationDate.equals(currentDate);
 	}
 
 	public void setName(String name) {
@@ -41,14 +31,6 @@ public class Place {
 
 	public void setAddress(String address) {
 		this.address = address;
-	}
-
-	public LocalDate getRegistrationDate() {
-		return registrationDate;
-	}
-
-	public void setRegistrationDate(LocalDate registrationDate) {
-		this.registrationDate = registrationDate;
 	}
 
 	public Float getLatitude() {

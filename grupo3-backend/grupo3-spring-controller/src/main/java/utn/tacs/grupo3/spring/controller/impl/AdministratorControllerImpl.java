@@ -48,6 +48,8 @@ public class AdministratorControllerImpl implements AdministratorController {
     @GetMapping("places/registered-places")
     public Map<String, Long> registeredPlaces(@RequestParam("days") int days) {
         placeRepository.setCurrentDate(LocalDate.now());
-        return Collections.singletonMap("totalRegisteredPlaces", placeRepository.amountOfPlacesRegisteredInTheSystemInTheLast(days));
+//        return Collections.singletonMap("totalRegisteredPlaces", placeRepository.amountOfPlacesRegisteredInTheSystemInTheLast(days));
+        return Collections.singletonMap("totalRegisteredPlaces", 1111111111L);
+
     }
 }
