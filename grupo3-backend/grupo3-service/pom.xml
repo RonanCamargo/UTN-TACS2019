@@ -9,7 +9,32 @@
 		<artifactId>utn.tacs.grupo3</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	
+
 	<artifactId>utn.tacs.grupo3-service</artifactId>
+
+	<dependencies>
+		<dependency>
+			<groupId>utn.tacs</groupId>
+			<artifactId>utn.tacs.grupo3-model</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>utn.tacs</groupId>
+			<artifactId>utn.tacs.grupo3-service</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
 
 </project>
