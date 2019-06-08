@@ -44,7 +44,7 @@ public class User {
     public void initialize() {
         this.listsOfPlaces = new ArrayList<>();
         this.placesVisited = new ArrayList<>();
-        setRol("USER");
+        this.roleEnum = Role.USER;
         setLastAccess(null);
     }
 
