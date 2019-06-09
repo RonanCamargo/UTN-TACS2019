@@ -21,7 +21,6 @@ public class UserRepository {
     public UserRepository() {
         users = new ArrayList<User>();
         User user1 = new User("Juan", "Perez","JPerez1","123","ADMIN");
-        user1.initialize();
         ListOfPlaces listOfPlaces1 = new ListOfPlaces("LugaresFavoritos");
         Place casa = new Place("Casa", "Calle falsa 123");
         casa.setLatitude(-34.659581f);
@@ -29,7 +28,7 @@ public class UserRepository {
 
         listOfPlaces1.addPlace(casa);
         user1.getListsOfPlaces().add(listOfPlaces1);
-        createUser(user1);
+        users.add(user1);
     }
 
     public List<User> allUsers() {
