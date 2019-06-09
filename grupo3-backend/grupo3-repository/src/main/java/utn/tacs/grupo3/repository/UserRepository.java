@@ -20,7 +20,7 @@ public class UserRepository {
 
     public UserRepository() {
         users = new ArrayList<User>();
-        User user1 = new User("Juan", "Perez","JPerez1","123","ADMIN");
+        User user1 = new User("Juan", "Perez","JPerez1","$2a$10$drCbdd8tk2Hs.rFZScoBguX4U/SsuzjdCIZIWuQm/dEhO2/KydXca","ADMIN");
         ListOfPlaces listOfPlaces1 = new ListOfPlaces("LugaresFavoritos");
         Place casa = new Place("Casa", "Calle falsa 123");
         casa.setLatitude(-34.659581f);

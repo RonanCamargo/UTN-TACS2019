@@ -17,7 +17,7 @@ public class SignUpValidation {
         if (userRepository.isThereAnUser(user)) {
             throw new ExceptionbyRepeatedUserName();
         }
-        if (!(user.getPassword().length() >= 9)) {
+        if (!(user.getPassword().length() >= 3)) {
             throw new ExceptionbyVeryShortPassword();
         }
     }
