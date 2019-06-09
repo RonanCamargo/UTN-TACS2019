@@ -28,7 +28,8 @@ class LoginUser extends Component {
 		try {
 			axios.post("http://localhost:8080/login", user)
 			.then(res => {
-				this.props.updateState('userLogged', 1)
+				this.props.updateState('userLogged', true)
+				this.props.updateState('token', res.data.token)
 				this.props.updateProps('userName', this.state.userName)
 				this.props.history.push("/places")
 			})

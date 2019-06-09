@@ -9,7 +9,7 @@ class PlaceView extends Component {
 		const location = this.props.coords.latitude + ',' + this.props.coords.longitude
 		axios.get('http://localhost:8080/places/near?coordinates=' + location, {
 			headers: {
-				Authorization: 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJKUGVyZXoxIiwiUk9MIjoiQURNSU4ifQ.3I3laL6doeyt7iSf_Ew_dHAKqIHSeHFE5SmfwwkDh0Gx-1qhBY9GmT11iz8KS3_dEvOlBzn8uM2t4f2ZGxHYbQ'
+				Authorization: 'Bearer ' + this.props.token
 			}
 		})
 	    .then(response =>

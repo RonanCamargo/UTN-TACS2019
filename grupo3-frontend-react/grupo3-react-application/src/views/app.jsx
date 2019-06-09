@@ -21,7 +21,7 @@ class App extends Component {
 			},
 		}
 		this.updateProps = this.updateProps.bind(this)
-		this.updateState = this.updateState(this)
+		this.updateState = this.updateState.bind(this)
 	}
 
 	updateProps(key, value) {
@@ -57,7 +57,10 @@ class App extends Component {
 							<SignUp updateProps={this.updateProps}
 									history={this.props.history}/>}
 					/>
-					<Route path={"/places"} component={PlaceView} />
+					<Route path={"/places"}
+					       component={PlaceView}
+					       token={this.state.token}
+					/>
 					<Route path={"/users/list-of-places"} component={ListView} />
 					<Route path={"/users"} component={UserView} />
 					<Route path={"/stats"} component={AdminView} />
