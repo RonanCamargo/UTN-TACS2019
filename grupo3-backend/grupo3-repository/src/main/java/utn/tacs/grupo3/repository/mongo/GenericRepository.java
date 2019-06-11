@@ -5,6 +5,8 @@ import java.util.List;
 
 public interface GenericRepository<T, ID> {
 	
+	List<T> findAll();
+	
 	T save(T object);
 
 	T findById(ID id);
