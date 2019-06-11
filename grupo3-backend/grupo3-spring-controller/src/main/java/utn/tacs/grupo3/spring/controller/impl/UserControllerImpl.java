@@ -33,8 +33,8 @@ public class UserControllerImpl implements UserController {
 
 //    @Autowired
     private utn.tacs.grupo3.repository.UserRepository userRepository;
-    @Autowired
-    private PlaceRepository placeRepository;
+//    @Autowired
+//    private PlaceRepository placeRepository;
     @Autowired
     private FoursquarePlacesRequest foursquarePlacesRequest;
     @Autowired
@@ -54,11 +54,11 @@ public class UserControllerImpl implements UserController {
 
     //TODO modificar endpoint
     @Override
-    @PutMapping("/{user-id}/places-visited/{place-id}")
-    public void markAsVisitedAPlace(@PathVariable("user-id") String userId, @PathVariable("place-id") String placeId) throws ExceptionbyResourceNotFound {
-        Place place = placeRepository.placeByName(placeId);
-        userRepository.userByUsername(userId).markAsVisited(place);
-//    	userRepoMongo.markAPlaceAsVisited(username, listName, foursquareId);        
+    @PutMapping("/{user-id}/{list-id}/places-visited/{place-id}")
+    public void markAsVisitedAPlace(@PathVariable("user-id") String userId, @PathVariable("list-id") String listId, @PathVariable("place-id") String placeId) throws ExceptionbyResourceNotFound {
+//        Place place = placeRepository.placeByName(placeId);
+//        userRepository.userByUsername(userId).markAsVisited(place);
+    	userRepoMongo.markAPlaceAsVisited(userId, listId, placeId);        
     }
 
     @Override
