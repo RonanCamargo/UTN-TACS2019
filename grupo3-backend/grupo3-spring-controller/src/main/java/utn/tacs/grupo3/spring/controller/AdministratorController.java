@@ -1,9 +1,11 @@
 package utn.tacs.grupo3.spring.controller;
 
+import java.util.List;
+import java.util.Map;
+
+import utn.tacs.grupo3.model.RegisteredPlace;
 import utn.tacs.grupo3.model.User;
 import utn.tacs.grupo3.model.exception.ExceptionbyResourceNotFound;
-
-import java.util.Map;
 
 public interface AdministratorController {
     /**
@@ -28,7 +30,7 @@ public interface AdministratorController {
      * @param placeId
      * @return
      */
-    Map<String, Long> numberOfInterestedUsers(String placeId) throws ExceptionbyResourceNotFound;
+    List<String> interestedUsers(String placeId) throws ExceptionbyResourceNotFound;
 
     /**
      * Returns the number of registered places in the last days
@@ -36,5 +38,5 @@ public interface AdministratorController {
      * @param days
      * @return
      */
-    Map<String, Long> registeredPlaces(int days);
+    List<RegisteredPlace> registeredPlaces(int days);
 }
