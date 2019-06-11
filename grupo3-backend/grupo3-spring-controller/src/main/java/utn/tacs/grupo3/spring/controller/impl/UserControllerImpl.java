@@ -18,7 +18,6 @@ import utn.tacs.grupo3.model.Place;
 import utn.tacs.grupo3.model.RegisteredPlace;
 import utn.tacs.grupo3.model.User;
 import utn.tacs.grupo3.model.exception.ExceptionbyResourceNotFound;
-import utn.tacs.grupo3.repository.PlaceRepository;
 import utn.tacs.grupo3.repository.mongo.RegisteredPlaceRepository;
 import utn.tacs.grupo3.repository.mongo.UserRepository;
 import utn.tacs.grupo3.retrofit.FoursquarePlacesRequest;
@@ -32,7 +31,7 @@ import utn.tacs.grupo3.spring.converter.FullVenueToPlaceConverter;
 public class UserControllerImpl implements UserController {
 
 //    @Autowired
-    private utn.tacs.grupo3.repository.UserRepository userRepository;
+//    private utn.tacs.grupo3.repository.UserRepository userRepository;
 //    @Autowired
 //    private PlaceRepository placeRepository;
     @Autowired
@@ -49,10 +48,9 @@ public class UserControllerImpl implements UserController {
     @Override
     @GetMapping
     public List<User> users() {
-        return userRepository.allUsers();
+        return userRepoMongo.findAll();
     }
 
-    //TODO modificar endpoint
     @Override
     @PutMapping("/{user-id}/{list-id}/places-visited/{place-id}")
     public void markAsVisitedAPlace(@PathVariable("user-id") String userId, @PathVariable("list-id") String listId, @PathVariable("place-id") String placeId) throws ExceptionbyResourceNotFound {
