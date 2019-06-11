@@ -3,6 +3,7 @@ package utn.tacs.grupo3.spring.controller;
 import java.util.List;
 import java.util.Map;
 
+import utn.tacs.grupo3.model.Place;
 import utn.tacs.grupo3.model.RegisteredPlace;
 import utn.tacs.grupo3.model.User;
 import utn.tacs.grupo3.model.exception.ExceptionbyResourceNotFound;
@@ -23,6 +24,8 @@ public interface AdministratorController {
      * @return
      */
     Map<String, Boolean> placesInCommon(int listId1, int listId2) throws ExceptionbyResourceNotFound;
+    
+    List<Place> placesInCommon2(String userId1, String listName1, String userId2, String listName2);
 
     /**
      * Returns the number of interested users in a place
