@@ -42,6 +42,7 @@ class SignUp extends Component {
 				this.props.updateProps('lastName', this.state.lastName)
 				this.props.updateProps('userName', this.state.userName)
 				this.props.updateProps('password', this.state.password)
+				alert(res.text)
 				this.props.history.push("/login")
 			})
 

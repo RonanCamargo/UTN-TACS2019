@@ -58,8 +58,8 @@ class App extends Component {
 									history={this.props.history}/>}
 					/>
 					<Route path={"/places"}
-					       component={PlaceView}
-					       token={this.state.token}
+					       component={() =>
+					       <PlaceView token={this.state.token} />}
 					/>
 					<Route path={"/users/list-of-places"} component={ListView} />
 					<Route path={"/users"} component={UserView} />

@@ -5,25 +5,37 @@ import { geolocated } from 'react-geolocated'
 import axios from 'axios'
 
 class PlaceView extends Component {
+	constructor(props) {
+		super(props)
+		this.state = {
+			places : []
+		}
+		this.initDashboard = this.initDashboard.bind(this)
+	}
+
 	initDashboard() {
 		const location = this.props.coords.latitude + ',' + this.props.coords.longitude
-		axios.get('http://localhost:8080/places/near?coordinates=' + location, {
-			headers: {
-				Authorization: 'Bearer ' + this.props.token
-			}
-		})
-	    .then(response =>
-			this.setState({places : response.data})
-	    )
-		.catch(err => {
-			console.log(err);
-		})
+		try {
+			axios.get('http://localhost:8080/places/near?coordinates=' + location, {
+				headers: {
+					Authorization: 'Bearer ' + this.props.token
+				}
+			})
+		    .then(response => {
+				this.setState({places : response.data})
+		    })
+		} catch (e) {
+			console.log(e)
+		}
+    }
+
+    componentDidUpdate(prevProps) {
+        if (this.props.coords && !prevProps.coords) {
+	        this.initDashboard()
+        }
     }
 
 	render() {
-		if(this.props.coords) {
-			this.initDashboard()
-		}
 		const places = this.state.places.map(place => {
 			return(
 				<PlaceCard key={place.id} cardName = {place.name} id = {place.id} url = {place.location.address} image = "w3-grayscale-max" />
