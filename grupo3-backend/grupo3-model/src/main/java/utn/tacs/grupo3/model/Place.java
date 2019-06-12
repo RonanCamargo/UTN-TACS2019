@@ -4,8 +4,7 @@ public class Place {
 
     private String name;
     private String address;
-	private Float latitude;
-	private Float longitude;
+    private Coordinates coordinates;
 	private String foursquareId;
 	private Boolean visited;
 
@@ -32,22 +31,6 @@ public class Place {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-
-	public Float getLatitude() {
-		return latitude;
-	}
-	
-	public void setLatitude(Float latitude) {
-		this.latitude = latitude;
-	}
-	
-	public Float getLongitude() {
-		return longitude;
-	}
-	
-	public void setLongitude(Float longitude) {
-		this.longitude = longitude;
-	}
 	
 	public String getFoursquareId() {
 		return foursquareId;
@@ -63,6 +46,14 @@ public class Place {
 
 	public void setVisited(Boolean visited) {
 		this.visited = visited;
+	}
+
+	public Coordinates getCoordinates() {
+		return coordinates;
+	}
+
+	public void setCoordinates(Coordinates coordinates) {
+		this.coordinates = coordinates;
 	}
 }
 
