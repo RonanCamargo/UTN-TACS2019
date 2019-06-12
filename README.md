@@ -3,7 +3,21 @@ Repositorio del TP cuatrimestral de TACS UTN 1C-2019
 
 ### Proyecto backend
 
-### Install
+#### Precondiciones
+Pull imagen de MongoDB
+```
+docker pull mongo:4.0.4
+```
+Para ejecutar la api en local
+```
+docker run -d -p 27017-27019:27017-27019 --name grupo3-mongodb mongo:4.0.4
+```
+Para ejecutar tests
+```
+docker run -d -p 27027-27029:27017-27019 mongo:4.0.4
+```
+
+#### Install
 
 Desde el root del proyecto
 
