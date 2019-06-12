@@ -2,9 +2,7 @@ package utn.tacs.grupo3.spring.controller.impl;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,15 +39,6 @@ public class AdministratorControllerImpl implements AdministratorController {
     	return userRepository.userByUsername(userId);
     }
 
-    @Deprecated
-    @Override
-//    @GetMapping("places/places-in-common")
-    public Map<String, Boolean> placesInCommon(@RequestParam("list-id-1") int listId1, @RequestParam("list-id-2") int listId2) throws ExceptionbyResourceNotFound {
-//        ListOfPlaces listOfPlaces1 = userRepository.listOfPlacesById(listId1);
-//        ListOfPlaces listOfPlaces2 = userRepository.listOfPlacesById(listId2);
-        return Collections.singletonMap("placesInCommon", false);
-    }
-
     @Override
     @GetMapping("places/{place-id}/interested-users")
     public List<String> interestedUsers(@PathVariable("place-id") String placeId) throws ExceptionbyResourceNotFound {
@@ -72,7 +61,7 @@ public class AdministratorControllerImpl implements AdministratorController {
 
 	@Override
     @GetMapping("places/places-in-common")
-	public List<Place> placesInCommon2(
+	public List<Place> placesInCommon(
 			@RequestParam("user-id-1")String userId1, 
 			@RequestParam("list-id-1")String listName1,
 			@RequestParam("user-id-2")String userId2, 
