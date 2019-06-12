@@ -17,10 +17,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import utn.tacs.grupo3.model.Coordinates;
 import utn.tacs.grupo3.model.RegisteredPlace;
-import utn.tacs.grupo3.mongo.configuration.MongoConfiguration;
+import utn.tacs.grupo3.mongo.test.configuration.MongoTestConfiguration;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = MongoConfiguration.class)
+@ContextConfiguration(classes = MongoTestConfiguration.class)
 public class MongoRegisteredPlaceRepositoryTest {
 
 	@Autowired

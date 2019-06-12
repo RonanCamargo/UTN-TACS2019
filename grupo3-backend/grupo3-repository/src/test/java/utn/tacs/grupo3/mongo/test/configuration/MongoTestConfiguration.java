@@ -14,12 +14,13 @@ public class MongoTestConfiguration {
 	
 	@Bean
 	public MongoClient mongoClient() {
-		return new MongoClient("localhost");
+		return new MongoClient("localhost", 27027);
 	}
 	
 	@Bean
 	public MongoOperations mongoOps() {
 		return new MongoTemplate(mongoClient(), "grupo3-mongodb-test");
 	}
+	
 
 }
