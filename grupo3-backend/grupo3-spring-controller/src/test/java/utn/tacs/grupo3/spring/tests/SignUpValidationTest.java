@@ -5,7 +5,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -16,13 +15,14 @@ import utn.tacs.grupo3.model.exception.signUpValidation.ExceptionbyRepeatedUserN
 import utn.tacs.grupo3.model.exception.signUpValidation.ExceptionbySignUpValidation;
 import utn.tacs.grupo3.model.exception.signUpValidation.ExceptionbyVeryShortPassword;
 import utn.tacs.grupo3.model.exception.signUpValidation.ExceptionbyVeryshortUserName;
-import utn.tacs.grupo3.mongo.configuration.MongoConfiguration;
+import utn.tacs.grupo3.mongo.test.configuration.MongoTestConfiguration;
 import utn.tacs.grupo3.repository.mongo.UserRepository;
 import utn.tacs.grupo3.spring.validations.SignUpValidation;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = MongoConfiguration.class)
+@ContextConfiguration(classes = MongoTestConfiguration.class)
 public class SignUpValidationTest {
+	
     private User user1;
     private SignUpValidation signUpValidation;
     
