@@ -41,11 +41,12 @@ public class User {
         this.password = password;
     }
 
-    public void initialize() {
+    public void initialize(String encryptedPassword) {
         this.listsOfPlaces = new ArrayList<>();
         this.placesVisited = new ArrayList<>();
         this.roleEnum = Role.USER;
         setLastAccess(null);
+        setPassword(encryptedPassword);
     }
 
     public String getId() {
@@ -118,7 +119,7 @@ public class User {
     }
 
     public String getPassword() {
-        return "{noop}" + this.password;
+        return this.password;
     }
 
     public void setPassword(String password) {
