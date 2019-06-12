@@ -15,12 +15,12 @@ import utn.tacs.grupo3.model.exception.signUpValidation.ExceptionbyRepeatedUserN
 import utn.tacs.grupo3.model.exception.signUpValidation.ExceptionbySignUpValidation;
 import utn.tacs.grupo3.model.exception.signUpValidation.ExceptionbyVeryShortPassword;
 import utn.tacs.grupo3.model.exception.signUpValidation.ExceptionbyVeryshortUserName;
-import utn.tacs.grupo3.mongo.test.configuration.MongoTestConfiguration;
 import utn.tacs.grupo3.repository.mongo.UserRepository;
+import utn.tacs.grupo3.spring.configuration.SpringControllerTestConfiguration;
 import utn.tacs.grupo3.spring.validations.SignUpValidation;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = MongoTestConfiguration.class)
+@ContextConfiguration(classes = SpringControllerTestConfiguration.class)
 public class SignUpValidationTest {
 	
     private User user1;
