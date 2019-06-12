@@ -21,6 +21,7 @@ import utn.tacs.grupo3.model.exception.ExceptionbyResourceNotFound;
 import utn.tacs.grupo3.repository.mongo.RegisteredPlaceRepository;
 import utn.tacs.grupo3.repository.mongo.UserRepository;
 import utn.tacs.grupo3.spring.controller.AdministratorController;
+import utn.tacs.grupo3.spring.helper.TodayHelper;
 
 @RestController
 @RequestMapping("/administrator")
@@ -28,10 +29,11 @@ public class AdministratorControllerImpl implements AdministratorController {
 
    
     @Autowired
-    private UserRepository userRepository;
-    
+    private UserRepository userRepository;    
     @Autowired
     private RegisteredPlaceRepository registeredPlaceRepository;
+    @Autowired
+    private TodayHelper todayHelper;
 
     @Override
     @GetMapping("users/{user-id}")
@@ -60,7 +62,7 @@ public class AdministratorControllerImpl implements AdministratorController {
     	if (days == 0) {
 			return registeredPlaceRepository.findAll();
 		} else {
-			LocalDate today = LocalDate.now();
+			LocalDate today = todayHelper.today();
 			LocalDate initialDate = today.minus(days-1, ChronoUnit.DAYS);
 			
 			return registeredPlaceRepository.placesRegisteredBetween(initialDate, today);			
