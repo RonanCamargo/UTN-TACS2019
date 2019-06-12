@@ -8,13 +8,15 @@ Pull imagen de MongoDB
 ```
 docker pull mongo:4.0.4
 ```
-Para ejecutar la api en local
+Para ejecutar la api en local y ejecutar tests
 ```
 docker run -d -p 27017-27019:27017-27019 --name grupo3-mongodb mongo:4.0.4
+docker run -d -p 27027-27029:27017-27019 --name grupo3-mongodb-test mongo:4.0.4
 ```
-Para ejecutar tests
+Si los containers están apagados
 ```
-docker run -d -p 27027-27029:27017-27019 mongo:4.0.4
+docker start grupo3-mongodb
+docker start grupo3-mongodb-test
 ```
 
 #### Install
