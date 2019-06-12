@@ -57,10 +57,15 @@ public class AdministratorControllerImpl implements AdministratorController {
     @Override
     @GetMapping("places/registered-places")
     public List<RegisteredPlace> registeredPlaces(@RequestParam("days") int days) {
-        LocalDate today = LocalDate.now();
-        LocalDate initialDate = today.minus(days-1, ChronoUnit.DAYS);
-        
-        return registeredPlaceRepository.placesRegisteredBetween(initialDate, today);
+    	if (days == 0) {
+			return registeredPlaceRepository.findAll();
+		} else {
+			LocalDate today = LocalDate.now();
+			LocalDate initialDate = today.minus(days-1, ChronoUnit.DAYS);
+			
+			return registeredPlaceRepository.placesRegisteredBetween(initialDate, today);			
+		}
+    	
     }
 
 	@Override
