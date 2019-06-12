@@ -14,10 +14,7 @@ import utn.tacs.grupo3.spring.validations.SignUpValidation;
 
 @RestController
 public class LoginControllerImpl implements LoginController {
-
-//	@Autowired
-//    private UserRepository userRepository;
-    
+  
 	@Autowired
     private UserRepository userRepository;
 

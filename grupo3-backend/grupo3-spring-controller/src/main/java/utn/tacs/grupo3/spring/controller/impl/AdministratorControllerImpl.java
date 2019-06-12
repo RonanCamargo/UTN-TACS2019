@@ -26,11 +26,7 @@ import utn.tacs.grupo3.spring.controller.AdministratorController;
 @RequestMapping("/administrator")
 public class AdministratorControllerImpl implements AdministratorController {
 
-//    @Autowired
-//    private utn.tacs.grupo3.repository.UserRepository userRepository;
-//    @Autowired
-//    private PlaceRepository placeRepository;
-    
+   
     @Autowired
     private UserRepository userRepository;
     
@@ -40,7 +36,6 @@ public class AdministratorControllerImpl implements AdministratorController {
     @Override
     @GetMapping("users/{user-id}")
     public User userById(@PathVariable("user-id") String userId) throws ExceptionbyResourceNotFound {
-//        return userRepository.userByUsername(userId);
     	return userRepository.userByUsername(userId);
     }
 
@@ -56,8 +51,6 @@ public class AdministratorControllerImpl implements AdministratorController {
     @Override
     @GetMapping("places/{place-id}/interested-users")
     public List<String> interestedUsers(@PathVariable("place-id") String placeId) throws ExceptionbyResourceNotFound {
-//        Place place = placeRepository.placeByName(placeId);
-//        return Collections.singletonMap("totalOfUsersInterested", userRepository.amountOfUsersInterestedIn(place));
     	return registeredPlaceRepository.usernamesOfInterestedInPlaceUsers(placeId);
     }
 

@@ -30,10 +30,6 @@ import utn.tacs.grupo3.spring.converter.FullVenueToPlaceConverter;
 @RequestMapping("/users")
 public class UserControllerImpl implements UserController {
 
-//    @Autowired
-//    private utn.tacs.grupo3.repository.UserRepository userRepository;
-//    @Autowired
-//    private PlaceRepository placeRepository;
     @Autowired
     private FoursquarePlacesRequest foursquarePlacesRequest;
     @Autowired
@@ -54,14 +50,16 @@ public class UserControllerImpl implements UserController {
     @Override
     @PutMapping("/{user-id}/{list-id}/places-visited/{place-id}")
     public void markAsVisitedAPlace(@PathVariable("user-id") String userId, @PathVariable("list-id") String listId, @PathVariable("place-id") String placeId) throws ExceptionbyResourceNotFound {
-//        Place place = placeRepository.placeByName(placeId);
-//        userRepository.userByUsername(userId).markAsVisited(place);
     	userRepoMongo.markAPlaceAsVisited(userId, listId, placeId);        
     }
 
     @Override
     @PostMapping("/{user-id}/list-of-places/{list-id}/{place-id}")
-    public void registerPlaceInListOfPlaces(@PathVariable("user-id") String userId, @PathVariable("list-id") String listId, @PathVariable("place-id") String placeId) throws ExceptionbyResourceNotFound {
+    public void registerPlaceInListOfPlaces(
+    		@PathVariable("user-id") String userId, 
+    		@PathVariable("list-id") String listId, 
+    		@PathVariable("place-id") String placeId) throws ExceptionbyResourceNotFound {
+    	
     	FullVenue venue = foursquarePlacesRequest.getVenueById(placeId);
     	Place place = fullVenueToPlaceConverter.convert(venue);
     	
@@ -73,8 +71,6 @@ public class UserControllerImpl implements UserController {
 		} else {
 			registeredPlaceRepository.save(getRegisteredPlace(venue, userId));
 		}
-
-//        userRepository.userByUsername(userId).registerAPlaceinAListOfPlaces(listId, placeRepository.createPlace(place));
     }
     
     //TODO extraer
