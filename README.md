@@ -3,7 +3,23 @@ Repositorio del TP cuatrimestral de TACS UTN 1C-2019
 
 ### Proyecto backend
 
-### Install
+#### Precondiciones
+Pull imagen de MongoDB
+```
+docker pull mongo:4.0.4
+```
+Para ejecutar la api en local y ejecutar tests
+```
+docker run -d -p 27017-27019:27017-27019 --name grupo3-mongodb mongo:4.0.4
+docker run -d -p 27027-27029:27017-27019 --name grupo3-mongodb-test mongo:4.0.4
+```
+Si los containers están apagados
+```
+docker start grupo3-mongodb
+docker start grupo3-mongodb-test
+```
+
+#### Install
 
 Desde el root del proyecto
 
@@ -50,8 +66,8 @@ Desde el root del proyecto
 | PUT | /users/{user-id}/list-of-places/{list-id} | Modificar una lista de lugares | parameter=new-name
 | PUT | /users/{user-id}/places-visited/{place-id} | marcar un lugar como visitado | 
 | GET | /administrator/users/{user-id} | Ver Datos de un usuario | 
-| GET | /administrator/places/{place-id}/interested-users | Cantidad de usuarios interesados en un lugar | 
-| GET | /administrator/places/places-in-common | Obtener lugares en comun entre usuarios | parameter1=list-id-1 parameter2=,list-id-2
+| GET | /administrator/places/{place-id}/interested-users | Nombres de usuario interesados en un lugar | place-id es el id de foursquare
+| GET | /administrator/places/places-in-common | Obtener lugares en comun entre usuarios | parameters: list-id-1, user-id-1, list-id-2, user-id-2
 | GET | /administrator/places/registered-places | Consultar lugares registrados en el sistema | days: hoy, últimos 3 días. última semana, último mes, todos (days=0)
 | GET | /places | Todos los lugares | 
 

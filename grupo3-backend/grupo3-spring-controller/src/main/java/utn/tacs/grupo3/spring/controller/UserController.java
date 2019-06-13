@@ -36,5 +36,5 @@ public interface UserController {
      * @param userId
      * @param placeId
      */
-    void markAsVisitedAPlace(String userId, String placeId) throws ExceptionbyResourceNotFound;
+    void markAsVisitedAPlace(String userId, String listId, String placeId) throws ExceptionbyResourceNotFound;
 }
