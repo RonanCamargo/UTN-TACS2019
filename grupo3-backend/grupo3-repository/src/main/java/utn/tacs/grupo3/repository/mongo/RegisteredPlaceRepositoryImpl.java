@@ -9,6 +9,7 @@ import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
 import utn.tacs.grupo3.model.RegisteredPlace;
+import utn.tacs.grupo3.repository.exception.DocumentNotFoundException;
 
 @Repository
 public class RegisteredPlaceRepositoryImpl extends GenericRepositoryImpl<RegisteredPlace, String> implements RegisteredPlaceRepository{
@@ -25,7 +26,13 @@ public class RegisteredPlaceRepositoryImpl extends GenericRepositoryImpl<Registe
 
 	@Override
 	public List<String> usernamesOfInterestedInPlaceUsers(String id) {
-		return findById(id).getUsersWhoMarkedAsFavourite();
+		List<RegisteredPlace> places = findBy("foursquareId", id);
+		
+		if (places.isEmpty()) {
+			throw new DocumentNotFoundException("There is no any registered place with foursquareId [" + id + "]");
+		}
+		
+		return places.get(0).getUsersWhoMarkedAsFavourite();
 	}
 
 	@Override
