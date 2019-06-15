@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import utn.tacs.grupo3.model.ListOfPlaces;
 import utn.tacs.grupo3.model.exception.ExceptionbyResourceNotFound;
-import utn.tacs.grupo3.repository.mongo.UserRepository;
+import utn.tacs.grupo3.service.ListOfPlacesService;
 import utn.tacs.grupo3.spring.controller.ListOfPlacesController;
 
 @RestController
@@ -22,36 +22,36 @@ import utn.tacs.grupo3.spring.controller.ListOfPlacesController;
 public class ListOfPlacesControllerImpl implements ListOfPlacesController {
 
 	@Autowired
-    private UserRepository userRepository;
+    private ListOfPlacesService listOfPlacesService;
 
     @Override
     @GetMapping("/{user-id}/list-of-places")
     public List<ListOfPlaces> listsOfListOfPlaces(@PathVariable("user-id") String userId) throws ExceptionbyResourceNotFound {
-        return userRepository.userByUsername(userId).getListsOfPlaces();
+        return listOfPlacesService.allUserListsOfPlaces(userId);
     }
 
     @Override
     @PostMapping("/{user-id}/list-of-places/{list-id}")
     public void createListOfPlaces(@PathVariable("user-id") String userId, @PathVariable("list-id") String listId) throws ExceptionbyResourceNotFound {
-    	userRepository.createListOfPlaces(userId, listId);
+    	listOfPlacesService.createListOfPlaces(userId, listId);
     }
 
     @Override
     @GetMapping("/{user-id}/list-of-places/{list-id}")
     public ListOfPlaces listOfPlacesListById(@PathVariable("user-id") String userId, @PathVariable("list-id") String listId) throws ExceptionbyResourceNotFound {
-    	return userRepository.findListOfPlaces(userId, listId);
+    	return listOfPlacesService.userListOfPlacesByName(userId, listId);
     }
 
     @Override
     @DeleteMapping("/{user-id}/list-of-places/{list-id}")
     public void deleteListOfPlacesList(@PathVariable("user-id") String userId, @PathVariable("list-id") String listId) throws ExceptionbyResourceNotFound {
-    	userRepository.deleteListOfPlaces(userId, listId);
+    	listOfPlacesService.deleteUserListOfPlaces(userId, listId);
     }
 
     @Override
     @PutMapping("/{user-id}/list-of-places/{list-id}")
     public void editListOfPlacesList(@PathVariable("user-id") String userId, @PathVariable("list-id") String listId, @RequestParam("new-name") String newName) throws ExceptionbyResourceNotFound {
-    	userRepository.renameListOfPlaces(userId, listId, newName);
+    	listOfPlacesService.renameListOfPlaces(userId, listId, newName);
     }
 
 }
