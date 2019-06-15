@@ -17,7 +17,8 @@ public class ListOfPlacesServiceImpl implements ListOfPlacesService{
 
 	@Override
 	public List<ListOfPlaces> allUserListsOfPlaces(String username) {
-        return userRepository.userByUsername(username).getListsOfPlaces();	}
+        return userRepository.userByUsername(username).getListsOfPlaces();	
+	}
 
 	@Override
 	public void createListOfPlaces(String username, String listName) {
