@@ -9,11 +9,18 @@ import org.springframework.data.mongodb.core.query.Query;
 
 public abstract class GenericRepositoryImpl<T, ID> implements GenericRepository<T,ID>{
 
+
 	@Autowired
 	protected MongoOperations mongoOps;
 	
 	protected abstract Class<T> getClassType();
 	protected abstract String getCollectionName();
+
+	
+	@Override
+	public List<T> findAll() {
+		return mongoOps.findAll(getClassType());
+	}
 	
 	@Override
 	public T save(T object) {

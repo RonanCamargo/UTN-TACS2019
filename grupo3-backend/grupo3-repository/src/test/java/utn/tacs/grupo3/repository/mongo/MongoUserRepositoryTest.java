@@ -17,12 +17,12 @@ import utn.tacs.grupo3.model.ListOfPlaces;
 import utn.tacs.grupo3.model.Place;
 import utn.tacs.grupo3.model.Role;
 import utn.tacs.grupo3.model.User;
-import utn.tacs.grupo3.mongo.configuration.MongoConfiguration;
+import utn.tacs.grupo3.mongo.test.configuration.MongoTestConfiguration;
 import utn.tacs.grupo3.repository.exception.DocumentNotFoundException;
 import utn.tacs.grupo3.repository.exception.DocumentNotUniqueException;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {MongoConfiguration.class})
+@ContextConfiguration(classes = {MongoTestConfiguration.class})
 public class MongoUserRepositoryTest {
 	
 	@Autowired

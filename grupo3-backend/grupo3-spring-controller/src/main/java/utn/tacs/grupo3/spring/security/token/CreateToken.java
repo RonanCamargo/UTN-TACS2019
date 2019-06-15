@@ -1,15 +1,16 @@
 package utn.tacs.grupo3.spring.security.token;
 
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import utn.tacs.grupo3.spring.converter.DateConverter;
+import java.io.IOException;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.Date;
-import java.util.stream.Collectors;
+
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import utn.tacs.grupo3.spring.converter.DateConverter;
 
 public class CreateToken {
 

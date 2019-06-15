@@ -1,11 +1,11 @@
 package utn.tacs.grupo3.telegram.bot.user;
 
-public class User {
+public class UserCredentials {
 	
 	private String username;
 	private String password;
 		
-	public User(String username, String password) {
+	public UserCredentials(String username, String password) {
 		this.username = username;
 		this.password = password;
 	}	

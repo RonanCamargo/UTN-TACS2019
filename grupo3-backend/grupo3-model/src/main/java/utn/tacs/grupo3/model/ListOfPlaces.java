@@ -2,6 +2,7 @@ package utn.tacs.grupo3.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ListOfPlaces {
 
@@ -24,6 +25,17 @@ public class ListOfPlaces {
         return places
                 .stream()
                 .anyMatch(place -> aListOfPlaces.getPlaces().contains(place));
+    }
+    
+    public List<Place> placesInCommonWith(ListOfPlaces anotherList){
+    	return places
+    			.stream()
+    			.filter(place -> anotherList.getPlaces()
+    					.stream()
+    					.anyMatch(placeFromAnotherList -> placeFromAnotherList
+    							.getFoursquareId().equals(place.getFoursquareId()))
+    					)
+    			.collect(Collectors.toList());    					
     }
 
 	public String getListName() {
