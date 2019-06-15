@@ -11,42 +11,38 @@ import org.springframework.web.bind.annotation.RestController;
 
 import utn.tacs.grupo3.model.RegisteredPlace;
 import utn.tacs.grupo3.model.exception.ExceptionbyResourceNotFound;
-import utn.tacs.grupo3.repository.mongo.RegisteredPlaceRepository;
-import utn.tacs.grupo3.retrofit.FoursquarePlacesRequest;
 import utn.tacs.grupo3.retrofit.pojo.Venue;
+import utn.tacs.grupo3.service.PlaceService;
 import utn.tacs.grupo3.spring.controller.PlaceController;
 
 @RestController
 @RequestMapping("/places")
 public class PlaceControllerImpl implements PlaceController {
 
-    @Autowired
-    private FoursquarePlacesRequest foursquarePlacesRequest;
-    @Autowired
-    private RegisteredPlaceRepository registeredPlaceRepository;
-    
+	@Autowired
+	private PlaceService placeService;
 
     @GetMapping
     public List<RegisteredPlace> places() {
-        return registeredPlaceRepository.findAll();
+        return placeService.allRegisteredPlaces();
     }
 
     @Override
     @GetMapping("/{place-id}")
     public RegisteredPlace placeById(@PathVariable("place-id") String placeId) throws ExceptionbyResourceNotFound {
-        return registeredPlaceRepository.findById(placeId);
+        return placeService.findById(placeId);
     }
 
     @Override
     @GetMapping("/near")
     public List<Venue> near(@RequestParam("coordinates") String coordinates) {
-        return foursquarePlacesRequest.getAllPlacesByCoordinates(coordinates);
+        return placeService.venuesNearByCoordinates(coordinates);
     }
 
     @Override
     @GetMapping("/near-by-name")
     public List<Venue> nearByName(@RequestParam("name") String name) {
-        return foursquarePlacesRequest.getAllPlacesByName(name);
+        return placeService.venuesNearByName(name);
     }
 
 }
