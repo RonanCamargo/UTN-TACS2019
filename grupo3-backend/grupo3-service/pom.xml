@@ -21,7 +21,7 @@
 
 		<dependency>
 			<groupId>utn.tacs</groupId>
-			<artifactId>utn.tacs.grupo3-service</artifactId>
+			<artifactId>utn.tacs.grupo3-repository</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 
