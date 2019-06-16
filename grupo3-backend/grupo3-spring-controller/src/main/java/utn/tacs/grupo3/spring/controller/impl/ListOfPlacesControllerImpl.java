@@ -1,8 +1,5 @@
 package utn.tacs.grupo3.spring.controller.impl;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,84 +13,64 @@ import org.springframework.web.bind.annotation.RestController;
 
 import utn.tacs.grupo3.model.exception.ExceptionbyResourceNotFound;
 import utn.tacs.grupo3.service.ListOfPlacesService;
-import utn.tacs.grupo3.service.exception.ApiTacsException;
 import utn.tacs.grupo3.spring.controller.ListOfPlacesController;
 import utn.tacs.grupo3.spring.controller.response.Response;
+import utn.tacs.grupo3.spring.controller.response.ResponseHandler;
 
 @RestController
 @RequestMapping("/users")
 public class ListOfPlacesControllerImpl implements ListOfPlacesController {
-	private static final Logger logger = Logger.getLogger(ListOfPlacesControllerImpl.class.getName());
-
+	
 	@Autowired
     private ListOfPlacesService listOfPlacesService;
+	
+	@Autowired
+	private ResponseHandler responseHandler;
 
     @Override
     @GetMapping("/{user-id}/list-of-places")
     public Response listsOfListOfPlaces(@PathVariable("user-id") String userId) throws ExceptionbyResourceNotFound {
-    	try {
-    		return new Response(HttpStatus.OK, listOfPlacesService.allUserListsOfPlaces(userId));
-    	} catch (ApiTacsException e) {
-    		return new Response(e.getHttpStatus(), e.getMessage());
-    	} catch (Exception e) {
-    		logger.log(Level.WARNING, e.getMessage(), e);
-    		return new Response(HttpStatus.INTERNAL_SERVER_ERROR, "Internal server error");
-    	}        
+    	return responseHandler.handle(
+    			() -> new Response(
+    					HttpStatus.OK,
+    					"All users lists of places",
+    					listOfPlacesService.allUserListsOfPlaces(userId)));
     }
 
     @Override
     @PostMapping("/{user-id}/list-of-places/{list-id}")
     public Response createListOfPlaces(@PathVariable("user-id") String userId, @PathVariable("list-id") String listId) throws ExceptionbyResourceNotFound {
-    	try {
+    	return responseHandler.handle(()->{
     		listOfPlacesService.createListOfPlaces(userId, listId);
-			return new Response(HttpStatus.OK, "List successfully created");
-		} catch (ApiTacsException e) {
-    		return new Response(e.getHttpStatus(), e.getMessage());
-    	} catch (Exception e) {
-    		logger.log(Level.WARNING, e.getMessage(), e);
-    		return new Response(HttpStatus.INTERNAL_SERVER_ERROR, "Internal server error");
-    	}
+    		return new Response(HttpStatus.OK, "List successfully created");
+    	});
     }
 
     @Override
     @GetMapping("/{user-id}/list-of-places/{list-id}")
     public Response listOfPlacesListById(@PathVariable("user-id") String userId, @PathVariable("list-id") String listId) throws ExceptionbyResourceNotFound {
-    	try {
-			return new Response(HttpStatus.OK, listOfPlacesService.userListOfPlacesByName(userId, listId));
-		} catch (ApiTacsException e) {
-    		return new Response(e.getHttpStatus(), e.getMessage());
-    	} catch (Exception e) {
-    		logger.log(Level.WARNING, e.getMessage(), e);
-    		return new Response(HttpStatus.INTERNAL_SERVER_ERROR, "Internal server error");
-    	}
+    	return responseHandler.handle(
+    			() -> new Response(HttpStatus.OK, listOfPlacesService.userListOfPlacesByName(userId, listId).toString()));
     }
 
     @Override
     @DeleteMapping("/{user-id}/list-of-places/{list-id}")
     public Response deleteListOfPlacesList(@PathVariable("user-id") String userId, @PathVariable("list-id") String listId) throws ExceptionbyResourceNotFound {
-    	try {
-    		listOfPlacesService.deleteUserListOfPlaces(userId, listId);
-    		return new Response(HttpStatus.OK, "List of places successfully deleted");
-		} catch (ApiTacsException e) {
-    		return new Response(e.getHttpStatus(), e.getMessage());
-    	} catch (Exception e) {
-    		logger.log(Level.WARNING, e.getMessage(), e);
-    		return new Response(HttpStatus.INTERNAL_SERVER_ERROR, "Internal server error");
-    	}
+    	return responseHandler.handle(
+    			() -> {
+    				listOfPlacesService.deleteUserListOfPlaces(userId, listId);
+    				return new Response(HttpStatus.OK, "List successfully deleted");
+    			});
     }
 
     @Override
     @PutMapping("/{user-id}/list-of-places/{list-id}")
     public Response editListOfPlacesList(@PathVariable("user-id") String userId, @PathVariable("list-id") String listId, @RequestParam("new-name") String newName) throws ExceptionbyResourceNotFound {
-    	try {
-    		listOfPlacesService.renameListOfPlaces(userId, listId, newName);
-    		return new Response(HttpStatus.OK, "List of places successfully renamed");
-		} catch (ApiTacsException e) {
-    		return new Response(e.getHttpStatus(), e.getMessage());
-    	} catch (Exception e) {
-    		logger.log(Level.WARNING, e.getMessage(), e);
-    		return new Response(HttpStatus.INTERNAL_SERVER_ERROR, "Internal server error");
-    	}
+    	return responseHandler.handle(
+    			() -> {
+    				listOfPlacesService.renameListOfPlaces(userId, listId, newName);
+    				return new Response(HttpStatus.OK, "List successfully renamed");
+    			});
     }
 
 }

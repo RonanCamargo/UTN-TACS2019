@@ -1,24 +1,25 @@
 package utn.tacs.grupo3.spring.controller.response;
 
-import java.util.Collections;
-
 import org.springframework.http.HttpStatus;
 
 public class Response {
 	private int status;
+	private String message;
 	private Object body;
-
-	
-	public Response(HttpStatus status, Object body) {
-		this.status = status.value();
-		this.body = body;
-	}
 	
 	public Response(HttpStatus status, String message) {
 		this.status = status.value();
-		this.body = Collections.singletonMap("message",message);
+		this.message = message;
+		this.body = "";
 	}
 	
+	public Response(HttpStatus status, String message, Object body) {
+		super();
+		this.status = status.value();
+		this.message = message;
+		this.body = body;
+	}	
+
 	public int getStatus() {
 		return status;
 	}
@@ -30,5 +31,11 @@ public class Response {
 	}
 	public void setBody(Object body) {
 		this.body = body;
+	}
+	public String getMessage() {
+		return message;
+	}
+	public void setMessage(String message) {
+		this.message = message;
 	}	
 }
