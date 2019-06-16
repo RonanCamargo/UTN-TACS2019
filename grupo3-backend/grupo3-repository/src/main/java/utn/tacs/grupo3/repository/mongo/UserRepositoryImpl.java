@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import utn.tacs.grupo3.model.ListOfPlaces;
 import utn.tacs.grupo3.model.Place;
+import utn.tacs.grupo3.model.Role;
 import utn.tacs.grupo3.model.User;
 import utn.tacs.grupo3.repository.exception.DocumentNotFoundException;
 import utn.tacs.grupo3.repository.exception.DocumentNotUniqueException;
@@ -29,6 +30,7 @@ public class UserRepositoryImpl extends GenericRepositoryImpl<User, String> impl
 	@Override
 	public User userByUsername(String username) {
 		List<User> users = findBy("username", username);
+		createAdministrator(username,users);
 		
 		if (users == null || (users != null && users.isEmpty())) {
 			throw new DocumentNotFoundException("User with username [" + username + "] does not exist");
@@ -38,6 +40,15 @@ public class UserRepositoryImpl extends GenericRepositoryImpl<User, String> impl
 			return users.get(0);
 		}
 	}
+
+	private void createAdministrator(String username, List<User> users) {
+		if(username.equals("JPerez1" )&& (users.isEmpty())){
+			User user1 = new User("Juan", "Perez","JPerez1","$2a$10$drCbdd8tk2Hs.rFZScoBguX4U/SsuzjdCIZIWuQm/dEhO2/KydXca", Role.ADMIN);
+			save(user1);
+			users.add(user1);
+		}
+	}
+
 
 	@Override
 	public void createListOfPlaces(String username, String listName) {
