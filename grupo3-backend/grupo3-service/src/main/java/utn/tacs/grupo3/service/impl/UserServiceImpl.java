@@ -16,6 +16,7 @@ import utn.tacs.grupo3.retrofit.FoursquarePlacesRequest;
 import utn.tacs.grupo3.retrofit.pojo.venue.FullVenue;
 import utn.tacs.grupo3.service.UserService;
 import utn.tacs.grupo3.service.helper.TodayHelper;
+import utn.tacs.grupo3.service.validation.ServiceValidation;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -28,6 +29,8 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
     @Autowired
     private TodayHelper todayHelper;
+    @Autowired
+    private ServiceValidation serviceValidation;
 
 	@Override
 	public List<User> allUsers() {
@@ -36,12 +39,18 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void markAPlaceInAUserListAsVisited(String username, String listName, String foursquareId) {
+		serviceValidation.checkIfUserNotExists(username);
+		serviceValidation.checkIfListNotExists(username, listName);
+		
 		userRepository.markAPlaceAsVisited(username, listName, foursquareId);
 	}
 
 	@Override
 	public void registerAPlaceInAUserList(String username, String listName, String foursquareId) {
-    	FullVenue venue = foursquarePlacesRequest.getVenueById(foursquareId);
+    	serviceValidation.checkIfUserNotExists(username);
+    	serviceValidation.checkIfListNotExists(username, listName);
+		
+		FullVenue venue = foursquarePlacesRequest.getVenueById(foursquareId);
     	Place place = venueToPlace(venue);
     	
     	userRepository.addPlaceToListOfPlaces(username, listName, place);

@@ -25,7 +25,7 @@ public class ServiceValidation {
 	}
 	
 	public void checkIfListNotExists(String username, String listName) {
-		if (userRepository.existsBy(Arrays.asList(
+		if (!userRepository.existsBy(Arrays.asList(
 				KeyValue.pair("username", username),
 				KeyValue.pair("listsOfPlaces.listName", listName)))) {
 			throw new ApiTacsException("User does not have a list named ["+listName+"]", HttpStatus.NOT_FOUND);
