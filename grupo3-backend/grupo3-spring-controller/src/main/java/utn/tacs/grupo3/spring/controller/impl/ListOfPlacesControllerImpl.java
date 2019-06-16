@@ -32,7 +32,7 @@ public class ListOfPlacesControllerImpl implements ListOfPlacesController {
     	return responseHandler.handle(
     			() -> new Response(
     					HttpStatus.OK,
-    					"All users lists of places",
+    					"All user lists of places",
     					listOfPlacesService.allUserListsOfPlaces(userId)));
     }
 
@@ -49,7 +49,9 @@ public class ListOfPlacesControllerImpl implements ListOfPlacesController {
     @GetMapping("/{user-id}/list-of-places/{list-id}")
     public Response listOfPlacesListById(@PathVariable("user-id") String userId, @PathVariable("list-id") String listId){
     	return responseHandler.handle(
-    			() -> new Response(HttpStatus.OK, listOfPlacesService.userListOfPlacesByName(userId, listId).toString()));
+    			() -> new Response(HttpStatus.OK, 
+    					"User list of places",
+    					listOfPlacesService.userListOfPlacesByName(userId, listId)));
     }
 
     @Override

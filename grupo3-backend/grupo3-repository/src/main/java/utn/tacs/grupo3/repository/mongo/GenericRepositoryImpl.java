@@ -52,6 +52,17 @@ public abstract class GenericRepositoryImpl<T, ID> implements GenericRepository<
 		
 		return mongoOps.exists(query, getClassType(), getCollectionName());
 	}
+	
+	@Override
+	public boolean existsBy(List<KeyValue> keyValues) {
+		Query query = new Query();
+		
+		keyValues.forEach(kv -> query.addCriteria(
+				Criteria.where(kv.getKey()).is(kv.getValue()))
+				);
+		
+		return mongoOps.exists(query, getClassType(), getCollectionName());
+	}
 
 	
 	

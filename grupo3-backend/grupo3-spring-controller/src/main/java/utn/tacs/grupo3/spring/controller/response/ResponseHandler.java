@@ -16,10 +16,10 @@ public class ResponseHandler {
 		try {
 			return function.apply();
 		} catch (ApiTacsException e) {
-    		return new Response(e.getHttpStatus(), e.getMessage(), null);
+    		return new Response(e.getHttpStatus(), e.getMessage());
     	} catch (Exception e) {
     		logger.log(Level.WARNING, e.getMessage(), e);
-    		return new Response(HttpStatus.INTERNAL_SERVER_ERROR, "Internal server error", null);
+    		return new Response(HttpStatus.INTERNAL_SERVER_ERROR, "Internal server error");
     	}	}
 
 }

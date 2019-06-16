@@ -16,5 +16,7 @@ public interface GenericRepository<T, ID> {
 	boolean exists(ID id);
 	
 	boolean existsBy(String key, Object value);
+	
+	boolean existsBy(List<KeyValue> keyValue);
 
 }

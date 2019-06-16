@@ -14,6 +14,7 @@ public class ApiTacsException extends RuntimeException{
 
 	public ApiTacsException(String message, HttpStatus httpStatus) {
 		super(message);
+		this.httpStatus = httpStatus;
 	}
 	
 	public ApiTacsException(String message, HttpStatus httpStatus, Throwable cause) {
