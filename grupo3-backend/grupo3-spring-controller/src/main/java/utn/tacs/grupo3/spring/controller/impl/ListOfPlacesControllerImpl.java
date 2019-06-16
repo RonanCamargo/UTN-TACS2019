@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import utn.tacs.grupo3.model.exception.ExceptionbyResourceNotFound;
 import utn.tacs.grupo3.service.ListOfPlacesService;
 import utn.tacs.grupo3.spring.controller.ListOfPlacesController;
 import utn.tacs.grupo3.spring.controller.response.Response;
@@ -29,7 +28,7 @@ public class ListOfPlacesControllerImpl implements ListOfPlacesController {
 
     @Override
     @GetMapping("/{user-id}/list-of-places")
-    public Response listsOfListOfPlaces(@PathVariable("user-id") String userId) throws ExceptionbyResourceNotFound {
+    public Response listsOfListOfPlaces(@PathVariable("user-id") String userId){
     	return responseHandler.handle(
     			() -> new Response(
     					HttpStatus.OK,
@@ -39,7 +38,7 @@ public class ListOfPlacesControllerImpl implements ListOfPlacesController {
 
     @Override
     @PostMapping("/{user-id}/list-of-places/{list-id}")
-    public Response createListOfPlaces(@PathVariable("user-id") String userId, @PathVariable("list-id") String listId) throws ExceptionbyResourceNotFound {
+    public Response createListOfPlaces(@PathVariable("user-id") String userId, @PathVariable("list-id") String listId){
     	return responseHandler.handle(()->{
     		listOfPlacesService.createListOfPlaces(userId, listId);
     		return new Response(HttpStatus.OK, "List successfully created");
@@ -48,14 +47,14 @@ public class ListOfPlacesControllerImpl implements ListOfPlacesController {
 
     @Override
     @GetMapping("/{user-id}/list-of-places/{list-id}")
-    public Response listOfPlacesListById(@PathVariable("user-id") String userId, @PathVariable("list-id") String listId) throws ExceptionbyResourceNotFound {
+    public Response listOfPlacesListById(@PathVariable("user-id") String userId, @PathVariable("list-id") String listId){
     	return responseHandler.handle(
     			() -> new Response(HttpStatus.OK, listOfPlacesService.userListOfPlacesByName(userId, listId).toString()));
     }
 
     @Override
     @DeleteMapping("/{user-id}/list-of-places/{list-id}")
-    public Response deleteListOfPlacesList(@PathVariable("user-id") String userId, @PathVariable("list-id") String listId) throws ExceptionbyResourceNotFound {
+    public Response deleteListOfPlacesList(@PathVariable("user-id") String userId, @PathVariable("list-id") String listId){
     	return responseHandler.handle(
     			() -> {
     				listOfPlacesService.deleteUserListOfPlaces(userId, listId);
@@ -65,7 +64,7 @@ public class ListOfPlacesControllerImpl implements ListOfPlacesController {
 
     @Override
     @PutMapping("/{user-id}/list-of-places/{list-id}")
-    public Response editListOfPlacesList(@PathVariable("user-id") String userId, @PathVariable("list-id") String listId, @RequestParam("new-name") String newName) throws ExceptionbyResourceNotFound {
+    public Response editListOfPlacesList(@PathVariable("user-id") String userId, @PathVariable("list-id") String listId, @RequestParam("new-name") String newName){
     	return responseHandler.handle(
     			() -> {
     				listOfPlacesService.renameListOfPlaces(userId, listId, newName);
