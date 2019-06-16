@@ -1,11 +1,6 @@
 package utn.tacs.grupo3.spring.controller;
 
-import java.util.List;
-
-import utn.tacs.grupo3.model.Place;
-import utn.tacs.grupo3.model.RegisteredPlace;
-import utn.tacs.grupo3.model.User;
-import utn.tacs.grupo3.model.exception.ExceptionbyResourceNotFound;
+import utn.tacs.grupo3.spring.controller.response.Response;
 
 public interface AdministratorController {
     /**
@@ -14,7 +9,7 @@ public interface AdministratorController {
      * @param userId
      * @return
      */
-    User userById(String userId) throws ExceptionbyResourceNotFound;
+    Response userById(String userId);
     /**
      * Searches places in common among two lists of places
      *
@@ -22,7 +17,7 @@ public interface AdministratorController {
      * @param listId2
      * @return
      */    
-    List<Place> placesInCommon(String userId1, String listName1, String userId2, String listName2);
+    Response placesInCommon(String userId1, String listName1, String userId2, String listName2);
 
     /**
      * Returns the number of interested users in a place
@@ -30,7 +25,7 @@ public interface AdministratorController {
      * @param placeId
      * @return
      */
-    List<String> interestedUsers(String placeId) throws ExceptionbyResourceNotFound;
+    Response interestedUsers(String placeId);
 
     /**
      * Returns the number of registered places in the last days
@@ -38,5 +33,5 @@ public interface AdministratorController {
      * @param days
      * @return
      */
-    List<RegisteredPlace> registeredPlaces(int days);
+    Response registeredPlaces(int days);
 }

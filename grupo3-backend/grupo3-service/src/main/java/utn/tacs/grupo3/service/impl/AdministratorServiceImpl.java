@@ -15,6 +15,7 @@ import utn.tacs.grupo3.repository.mongo.RegisteredPlaceRepository;
 import utn.tacs.grupo3.repository.mongo.UserRepository;
 import utn.tacs.grupo3.service.AdministratorService;
 import utn.tacs.grupo3.service.helper.TodayHelper;
+import utn.tacs.grupo3.service.validation.ServiceValidation;
 
 @Service
 public class AdministratorServiceImpl implements AdministratorService{
@@ -25,19 +26,26 @@ public class AdministratorServiceImpl implements AdministratorService{
     private RegisteredPlaceRepository registeredPlaceRepository;
     @Autowired
     private TodayHelper todayHelper;
+    @Autowired
+    private ServiceValidation serviceValidation;
 	
 	@Override
 	public User userById(String username) {
+		serviceValidation.checkIfUserNotExists(username);
+		
 		return userRepository.userByUsername(username);
 	}
 
 	@Override
-	public List<String> interestedUsersInAPlace(String placeId) {
-		return registeredPlaceRepository.usernamesOfInterestedInPlaceUsers(placeId);
+	public List<String> interestedUsersInAPlace(String foursquareId) {
+		serviceValidation.checkIfRegisteredPlaceNotExists(foursquareId);
+		return registeredPlaceRepository.usernamesOfInterestedInPlaceUsers(foursquareId);
 	}
 
 	@Override
 	public List<RegisteredPlace> registeredPlaces(int days) {
+		serviceValidation.checkIfDaysIsLessThanZero(days);
+		
     	if (days == 0) {
 			return registeredPlaceRepository.findAll();
 		} else {
@@ -50,6 +58,11 @@ public class AdministratorServiceImpl implements AdministratorService{
 
 	@Override
 	public List<Place> placesInCommon(String username1, String listName1, String username2, String listName2) {
+		serviceValidation.checkIfUserNotExists(username1);
+		serviceValidation.checkIfListNotExists(username1, listName1);
+		serviceValidation.checkIfUserNotExists(username2);
+		serviceValidation.checkIfListNotExists(username2, listName2);
+		
 		ListOfPlaces list1 = userRepository.findListOfPlaces(username1, listName1);
 		ListOfPlaces list2 = userRepository.findListOfPlaces(username2, listName2);
 		
