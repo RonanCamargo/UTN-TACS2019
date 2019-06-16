@@ -21,8 +21,7 @@ import utn.tacs.grupo3.spring.controller.response.ResponseHandler;
 public class ListOfPlacesControllerImpl implements ListOfPlacesController {
 	
 	@Autowired
-    private ListOfPlacesService listOfPlacesService;
-	
+    private ListOfPlacesService listOfPlacesService;	
 	@Autowired
 	private ResponseHandler responseHandler;
 
