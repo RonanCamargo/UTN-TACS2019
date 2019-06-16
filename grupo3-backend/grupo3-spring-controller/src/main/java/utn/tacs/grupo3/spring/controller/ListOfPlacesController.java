@@ -1,9 +1,7 @@
 package utn.tacs.grupo3.spring.controller;
 
 import utn.tacs.grupo3.model.exception.ExceptionbyResourceNotFound;
-import utn.tacs.grupo3.model.ListOfPlaces;
-
-import java.util.List;
+import utn.tacs.grupo3.spring.controller.response.Response;
 
 public interface ListOfPlacesController {
 
@@ -13,15 +11,15 @@ public interface ListOfPlacesController {
      * @param userId
      * @return
      */
-    List<ListOfPlaces> listsOfListOfPlaces(String userId) throws ExceptionbyResourceNotFound;
-
+    Response listsOfListOfPlaces(String userId) throws ExceptionbyResourceNotFound;
+    
     /**
      * Creates a new list-of-places for a user
      *
      * @param userId
      * @param listId
      */
-    void createListOfPlaces(String userId, String listId) throws ExceptionbyResourceNotFound;
+    Response createListOfPlaces(String userId, String listId) throws ExceptionbyResourceNotFound;
 
     /**
      * Returns a specific list-of-places that belongs to a user
@@ -30,7 +28,7 @@ public interface ListOfPlacesController {
      * @param listId
      * @return
      */
-    ListOfPlaces listOfPlacesListById(String userId, String listId) throws ExceptionbyResourceNotFound;
+    Response listOfPlacesListById(String userId, String listId) throws ExceptionbyResourceNotFound;
 
 
     /**
@@ -39,7 +37,7 @@ public interface ListOfPlacesController {
      * @param userId
      * @param listId
      */
-    void deleteListOfPlacesList(String userId, String listId) throws ExceptionbyResourceNotFound;
+    Response deleteListOfPlacesList(String userId, String listId) throws ExceptionbyResourceNotFound;
 
 
     /**
@@ -49,6 +47,6 @@ public interface ListOfPlacesController {
      * @param listId
      * @param newName
      */
-    void editListOfPlacesList(String userId, String listId, String newName) throws ExceptionbyResourceNotFound;
+    Response editListOfPlacesList(String userId, String listId, String newName) throws ExceptionbyResourceNotFound;
 
 }

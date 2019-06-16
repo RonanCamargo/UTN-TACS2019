@@ -1,16 +1,18 @@
 package utn.tacs.grupo3.spring.security;
 
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.filter.GenericFilterBean;
-import org.springframework.security.core.Authentication;
-import utn.tacs.grupo3.spring.security.token.ValidateToken;
+import java.io.IOException;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
+
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.filter.GenericFilterBean;
+
+import utn.tacs.grupo3.spring.security.token.ValidateToken;
 
 /**
  * Las peticiones que no sean /login pasarán por este filtro
@@ -29,7 +31,7 @@ public class JwtFilter extends GenericFilterBean {
         Authentication authentication = new ValidateToken().getAuthentication((HttpServletRequest)request);
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
-
+                	
         filterChain.doFilter(request,response);
     }
 }

@@ -3,11 +3,14 @@ package utn.tacs.grupo3.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import utn.tacs.grupo3.model.ListOfPlaces;
+import utn.tacs.grupo3.repository.exception.DocumentNotFoundException;
 import utn.tacs.grupo3.repository.mongo.UserRepository;
 import utn.tacs.grupo3.service.ListOfPlacesService;
+import utn.tacs.grupo3.service.exception.ApiTacsException;
 
 @Service
 public class ListOfPlacesServiceImpl implements ListOfPlacesService{
@@ -17,7 +20,11 @@ public class ListOfPlacesServiceImpl implements ListOfPlacesService{
 
 	@Override
 	public List<ListOfPlaces> allUserListsOfPlaces(String username) {
-        return userRepository.userByUsername(username).getListsOfPlaces();	
+		try {
+			return userRepository.userByUsername(username).getListsOfPlaces();			
+		} catch (DocumentNotFoundException e) {
+			throw new ApiTacsException("Username not found", HttpStatus.NOT_FOUND, e);
+		}
 	}
 
 	@Override
