@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import utn.tacs.grupo3.model.exception.ExceptionbyResourceNotFound;
 import utn.tacs.grupo3.service.UserService;
 import utn.tacs.grupo3.spring.controller.UserController;
 import utn.tacs.grupo3.spring.controller.response.Response;
@@ -35,7 +34,7 @@ public class UserControllerImpl implements UserController {
 
     @Override
     @PutMapping("/{user-id}/{list-id}/places-visited/{place-id}")
-    public Response markAsVisitedAPlace(@PathVariable("user-id") String userId, @PathVariable("list-id") String listId, @PathVariable("place-id") String placeId) throws ExceptionbyResourceNotFound {
+    public Response markAsVisitedAPlace(@PathVariable("user-id") String userId, @PathVariable("list-id") String listId, @PathVariable("place-id") String placeId){
     	return responseHandler.handle(() -> {
     		userService.markAPlaceInAUserListAsVisited(userId, listId, placeId);
     		return new Response(HttpStatus.OK, "Place successfully marked as visited");
@@ -47,7 +46,7 @@ public class UserControllerImpl implements UserController {
     public Response registerPlaceInListOfPlaces(
     		@PathVariable("user-id") String userId, 
     		@PathVariable("list-id") String listId, 
-    		@PathVariable("place-id") String placeId) throws ExceptionbyResourceNotFound {
+    		@PathVariable("place-id") String placeId){
     	return responseHandler.handle(() -> {
     			userService.registerAPlaceInAUserList(userId, listId, placeId);
     			return new Response(HttpStatus.OK, "Place successfully registered");
