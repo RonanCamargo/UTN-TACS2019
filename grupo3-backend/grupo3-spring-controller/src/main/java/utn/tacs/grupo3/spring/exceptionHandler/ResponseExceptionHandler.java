@@ -10,7 +10,8 @@ import utn.tacs.grupo3.spring.converter.ConvertToJson;
 @ControllerAdvice
 public class ResponseExceptionHandler {
 
-    @ExceptionHandler(HTTPException.class)
+    @SuppressWarnings("rawtypes")
+	@ExceptionHandler(HTTPException.class)
     public ResponseEntity handleException(HTTPException e) {
         return ResponseEntity.status(e.getStatusCode()).body(ConvertToJson.start(e.getMessage()));
     }
