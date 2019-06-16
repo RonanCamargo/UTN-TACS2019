@@ -41,6 +41,7 @@ public class UserServiceImpl implements UserService {
 	public void markAPlaceInAUserListAsVisited(String username, String listName, String foursquareId) {
 		serviceValidation.checkIfUserNotExists(username);
 		serviceValidation.checkIfListNotExists(username, listName);
+		serviceValidation.checkIfPlaceNotExistsInList(username, listName, foursquareId);
 		
 		userRepository.markAPlaceAsVisited(username, listName, foursquareId);
 	}
@@ -49,6 +50,7 @@ public class UserServiceImpl implements UserService {
 	public void registerAPlaceInAUserList(String username, String listName, String foursquareId) {
     	serviceValidation.checkIfUserNotExists(username);
     	serviceValidation.checkIfListNotExists(username, listName);
+    	serviceValidation.checkIfPlaceExistsInList(username, listName, foursquareId);
 		
 		FullVenue venue = foursquarePlacesRequest.getVenueById(foursquareId);
     	Place place = venueToPlace(venue);

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
+import utn.tacs.grupo3.model.ListOfPlaces;
 import utn.tacs.grupo3.repository.mongo.KeyValue;
 import utn.tacs.grupo3.repository.mongo.RegisteredPlaceRepository;
 import utn.tacs.grupo3.repository.mongo.UserRepository;
@@ -40,6 +41,23 @@ public class ServiceValidation {
 			throw new ApiTacsException("User not exists ["+username+"]", HttpStatus.NOT_FOUND);
 		}
 	}
+	
+	public void checkIfPlaceExistsInList(String username, String listName, String foursquareId) {
+		ListOfPlaces list = userRepository.findListOfPlaces(username, listName);
+		
+		if (list.getPlaces().stream().anyMatch(place -> place.getFoursquareId().equals(foursquareId))) {
+			throw new ApiTacsException("Place with foursquareId ["+ foursquareId+"] already exists in list ["+ listName +"]", HttpStatus.CONFLICT);
+		}		
+	}
+	
+	public void checkIfPlaceNotExistsInList(String username, String listName, String foursquareId) {
+		ListOfPlaces list = userRepository.findListOfPlaces(username, listName);
+		
+		if (!list.getPlaces().stream().anyMatch(place -> place.getFoursquareId().equals(foursquareId))) {
+			throw new ApiTacsException("Place with foursquareId ["+ foursquareId+"] does not exist in list ["+ listName +"]", HttpStatus.NOT_FOUND);
+		}		
+	}
+
 	
 	public void checkIfRegisteredPlaceNotExists(String foursquareId) {
 		if (!registeredPlaceRepository.existsBy("foursquareId", foursquareId)) {
