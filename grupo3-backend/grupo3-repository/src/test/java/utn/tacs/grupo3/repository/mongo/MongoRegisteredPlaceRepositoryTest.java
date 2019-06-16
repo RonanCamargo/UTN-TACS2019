@@ -30,9 +30,12 @@ public class MongoRegisteredPlaceRepositoryTest {
 	
 	private RegisteredPlace utnMedrano;
 	private LocalDate april4th;
+	private String medranoFoursquareId;
 	
 	@Before
 	public void setUp() {
+		medranoFoursquareId = "asdf1234";
+		
 		if (!mongoOps.collectionExists(RegisteredPlace.class)) {
 			mongoOps.createCollection(RegisteredPlace.class);
 		}
@@ -40,7 +43,7 @@ public class MongoRegisteredPlaceRepositoryTest {
 		utnMedrano = new RegisteredPlace();
 		utnMedrano.setName("UTN Medrano");
 		utnMedrano.setAddress("Av. Medrano 951");
-		utnMedrano.setFoursquareId("asdf1234");
+		utnMedrano.setFoursquareId(medranoFoursquareId);
 		utnMedrano.setRegistrationDate(april4th);
 		utnMedrano.setUsersWhoMarkedAsFavourite(Arrays.asList("JPerez1", "GGonzalez2"));
 		utnMedrano.setCoordinates(new Coordinates(-34.598561f, -58.420024f));
@@ -58,7 +61,7 @@ public class MongoRegisteredPlaceRepositoryTest {
 	
 	@Test
 	public void interestedUsersInAPlaceTest() {
-		List<String> usernames = registeredPlaceRepository.usernamesOfInterestedInPlaceUsers(utnMedrano.getId());
+		List<String> usernames = registeredPlaceRepository.usernamesOfInterestedInPlaceUsers(medranoFoursquareId);
 		
 		Assert.assertTrue(usernames.containsAll(Arrays.asList("JPerez1", "GGonzalez2")));
 	}
@@ -66,7 +69,7 @@ public class MongoRegisteredPlaceRepositoryTest {
 	@Test
 	public void addInterestedUserTest() {
 		registeredPlaceRepository.addInterestedUser(utnMedrano.getId(), "JJLopez");
-		List<String> usernames = registeredPlaceRepository.usernamesOfInterestedInPlaceUsers(utnMedrano.getId());
+		List<String> usernames = registeredPlaceRepository.usernamesOfInterestedInPlaceUsers(medranoFoursquareId);
 		
 		Assert.assertTrue(usernames.contains("JJLopez"));
 	}
@@ -74,7 +77,7 @@ public class MongoRegisteredPlaceRepositoryTest {
 	@Test
 	public void deleteInterestedUserTest() {
 		registeredPlaceRepository.deleteInterestedUser(utnMedrano.getId(), "JPerez1");
-		List<String> usernames = registeredPlaceRepository.usernamesOfInterestedInPlaceUsers(utnMedrano.getId());
+		List<String> usernames = registeredPlaceRepository.usernamesOfInterestedInPlaceUsers(medranoFoursquareId);
 		
 		Assert.assertFalse(usernames.contains("JPerez1"));
 	}

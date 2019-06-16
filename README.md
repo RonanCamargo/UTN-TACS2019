@@ -50,7 +50,7 @@ Desde el root del proyecto
 ```
 
 ## Endpoints
-## [Importante] Ver collecion de Postman para ver los parametros y el body que se envian en los metodos HTTP
+## https://docs.google.com/spreadsheets/d/1xrxhWOG7OjL9U1zAM0P0Gv7L8v-4OYh7J83FAs1J9Yw/edit#gid=0
 
 | Method | URI | Descripción | Observación | 
 | ------ | ------ | ------ | ------ |
