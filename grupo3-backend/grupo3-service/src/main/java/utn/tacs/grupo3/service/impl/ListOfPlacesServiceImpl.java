@@ -41,6 +41,7 @@ public class ListOfPlacesServiceImpl implements ListOfPlacesService{
 	@Override
 	public ListOfPlaces userListOfPlacesByName(String username, String listName) {
 		serviceValidation.checkIfUserNotExists(username);
+		serviceValidation.checkIfListNotExists(username, listName);
 		
 		return userRepository.findListOfPlaces(username, listName);
 	}
