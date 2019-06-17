@@ -22,7 +22,7 @@ import utn.tacs.grupo3.spring.validations.SignUpValidation;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = SpringControllerTestConfiguration.class)
 public class SignUpValidationTest {
-	
+
     private User user1;
     private SignUpValidation signUpValidation;
     
@@ -36,11 +36,11 @@ public class SignUpValidationTest {
     	if (!mongoOps.collectionExists(User.class)) {
 			mongoOps.createCollection(User.class);
 		}
-    	
+
         user1 = new User("Pedro", "Rodriguez", "pedrito", "", null);
         signUpValidation = new SignUpValidation();
     }
-    
+
     @After
     public void tearDown() {
     	if (mongoOps.collectionExists(User.class)) {
