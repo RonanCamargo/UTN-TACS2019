@@ -11,9 +11,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
-import utn.tacs.grupo3.telegram.bot.request.entity.ListOfPlaces;
 import utn.tacs.grupo3.telegram.bot.request.entity.LoginResponse;
 import utn.tacs.grupo3.telegram.bot.request.entity.Venue;
+import utn.tacs.grupo3.telegram.bot.request.entity.listOfPlaces.ListOfPlacesResponse;
+import utn.tacs.grupo3.telegram.bot.request.entity.listsOfPlaces.ListOfPlaces;
+import utn.tacs.grupo3.telegram.bot.request.entity.listsOfPlaces.ListsOfPlacesResponse;
 import utn.tacs.grupo3.telegram.bot.request.exception.BadCredentialsException;
 import utn.tacs.grupo3.telegram.bot.request.exception.TelegramUserNotLoggedException;
 import utn.tacs.grupo3.telegram.bot.user.LoggedUsers;
@@ -21,7 +23,7 @@ import utn.tacs.grupo3.telegram.bot.user.UserCredentials;
 
 public class ApiRequestImpl implements ApiRequest{
 	
-	private static final String API_BASE_URL = "http://tacs.us-east-2.elasticbeanstalk.com";
+	private static final String API_BASE_URL = "http://localhost:8080";
 	
 	private static final String NEAR_PLACES = "/places/near?coordinates=:lat,:long";
 	private static final String USER_LISTS_OF_PLACES = "/users/:user-id/list-of-places";
@@ -52,7 +54,7 @@ public class ApiRequestImpl implements ApiRequest{
 			
 		} catch (HttpClientErrorException e) {
 			switch (e.getStatusCode()) {
-			case FORBIDDEN:
+			case UNAUTHORIZED:
 				throw new BadCredentialsException("Invalid username or password. Status code [" + e.getRawStatusCode() + "]", e);
 			default:
 				throw e;
@@ -77,12 +79,12 @@ public class ApiRequestImpl implements ApiRequest{
 				.setParameter(":user-id", LoggedUsers.getUsername(telegramUserId))
 				.build();
 		
-		ResponseEntity<List<ListOfPlaces>> lists = rest.exchange(
+		ResponseEntity<ListsOfPlacesResponse> lists = rest.exchange(
 				uri,
 				HttpMethod.GET, createHeaders(telegramUserId),
-				new ParameterizedTypeReference<List<ListOfPlaces>>() {});
+				ListsOfPlacesResponse.class);
 		
-		return lists.getBody().stream().map(list -> list.getListName()).collect(Collectors.toList());
+		return lists.getBody().getListOfPlaces().stream().map(list -> list.getListName()).collect(Collectors.toList());
 	}
 
 
@@ -159,13 +161,13 @@ public class ApiRequestImpl implements ApiRequest{
 				.setParameter(":list-name", listName)
 				.build();
 		
-		ResponseEntity<ListOfPlaces> listOfPlaces = rest.exchange(
+		ResponseEntity<ListOfPlacesResponse> listOfPlaces = rest.exchange(
 				uri,
 				HttpMethod.GET,
 				createHeaders(telegramUserId),
-				ListOfPlaces.class);
+				ListOfPlacesResponse.class);
 		
-		return listOfPlaces.getBody();
+		return listOfPlaces.getBody().getListOfPlaces();
 	}
 	
 	private HttpEntity<String> createHeaders(Integer telegramUserId) {
