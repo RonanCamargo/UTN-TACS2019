@@ -1,15 +1,17 @@
 package utn.tacs.grupo3.spring.security.token;
 
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import utn.tacs.grupo3.spring.converter.DateConverter;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.Date;
-import java.util.stream.Collectors;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import utn.tacs.grupo3.spring.converter.DateConverter;
+import utn.tacs.grupo3.spring.converter.JsonResponseConverter;
 
 public class CreateToken {
 
@@ -43,11 +45,6 @@ public class CreateToken {
     }
 
     private void sendTokenAsJson(HttpServletResponse res, String token) {
-        res.setContentType("application/json");
-        try {
-            res.getOutputStream().print("{\"token\":\"" + token + "\"}");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        new JsonResponseConverter().convert(res, HttpServletResponse.SC_OK, HttpStatus.OK, "User successfully logged", token);
     }
 }
