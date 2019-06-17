@@ -9,9 +9,10 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import utn.tacs.grupo3.spring.security.service.UserDetailsServiceImpl;
-
+import utn.tacs.grupo3.spring.validations.InvalidOrNonExistingJwtTokenHandler;
 
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -40,6 +41,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login").permitAll() //permitimos el acceso a /login a cualquiera
                 .antMatchers("/sign-up").permitAll()
                 .anyRequest().authenticated() //cualquier otra peticion requiere autenticacion
+//                .and()
+//                .exceptionHandling().authenticationEntryPoint(invalidOrNonExistingJwtTokenValidation())
                 .and()
                 // Las peticiones /login pasaran previamente por este filtro
                 .addFilterBefore(new LoginFilter("/login", authenticationManager()),
@@ -48,6 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // Las demás peticiones pasarán por este filtro para validar el token
                 .addFilterBefore(new JwtFilter(),
                         UsernamePasswordAuthenticationFilter.class);
+
     }
 
     @Override
@@ -66,5 +70,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
+    }
+    
+    @Bean
+    public AuthenticationEntryPoint invalidOrNonExistingJwtTokenValidation() {
+    	return new InvalidOrNonExistingJwtTokenHandler();
     }
 }

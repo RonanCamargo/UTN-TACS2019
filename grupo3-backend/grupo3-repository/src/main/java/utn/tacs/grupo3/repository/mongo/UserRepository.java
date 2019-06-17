@@ -66,5 +66,4 @@ public interface UserRepository extends GenericRepository<User, String>{
 	 * @param foursquareId
 	 */
 	void markAPlaceAsVisited(String username, String listName, String foursquareId);
-
 }

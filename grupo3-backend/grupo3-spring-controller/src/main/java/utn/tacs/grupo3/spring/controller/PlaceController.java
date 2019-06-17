@@ -1,13 +1,9 @@
 package utn.tacs.grupo3.spring.controller;
 
-import java.util.List;
-
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import utn.tacs.grupo3.model.RegisteredPlace;
-import utn.tacs.grupo3.model.exception.ExceptionbyResourceNotFound;
-import utn.tacs.grupo3.retrofit.pojo.Venue;
+import utn.tacs.grupo3.spring.controller.response.Response;
 
 /**
  * Interface for place-related controller methods
@@ -19,7 +15,7 @@ public interface PlaceController {
      *
      * @return a list of places
      */
-    List<RegisteredPlace> places();
+    Response places();
 
     /**
      * Searches a place by its id
@@ -27,7 +23,7 @@ public interface PlaceController {
      * @param placeId
      * @return
      */
-    RegisteredPlace placeById(String placeId) throws ExceptionbyResourceNotFound;
+    Response placeById(String placeId);
 
     /**
      * Searches near places based on coordinates
@@ -35,8 +31,8 @@ public interface PlaceController {
      * @param coordinates
      * @return
      */
-    List<Venue> near(String coordinates);
+    Response near(String coordinates);
 
     @GetMapping("/near-by-name")
-    List<Venue> nearByName(@RequestParam("name") String name);
+    Response nearByName(@RequestParam("name") String name);
 }

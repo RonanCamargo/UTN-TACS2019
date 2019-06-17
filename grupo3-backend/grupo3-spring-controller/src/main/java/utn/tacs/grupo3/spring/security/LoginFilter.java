@@ -1,12 +1,14 @@
 package utn.tacs.grupo3.spring.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import utn.tacs.grupo3.spring.converter.JsonResponseConverter;
 import utn.tacs.grupo3.spring.security.token.CreateToken;
 
 import javax.servlet.FilterChain;
@@ -56,6 +58,11 @@ public class LoginFilter extends AbstractAuthenticationProcessingFilter {
 
         // Si la autenticacion fue exitosa, agregamos el token a la respuesta
         new CreateToken().addAuthentication(res, auth);
+    }
+
+    @Override
+    protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {
+        new JsonResponseConverter().convert(response, HttpServletResponse.SC_UNAUTHORIZED, HttpStatus.UNAUTHORIZED, "User unsuccessfully logged", "");
     }
 }
 
