@@ -10,13 +10,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
-import utn.tacs.grupo3.telegram.bot.request.entity.LoginResponse;
+import utn.tacs.grupo3.telegram.bot.request.entity.ListOfPlaces;
 import utn.tacs.grupo3.telegram.bot.request.entity.Venue;
-import utn.tacs.grupo3.telegram.bot.request.entity.listOfPlaces.ListOfPlacesResponse;
-import utn.tacs.grupo3.telegram.bot.request.entity.listsOfPlaces.ListOfPlaces;
-import utn.tacs.grupo3.telegram.bot.request.entity.listsOfPlaces.ListsOfPlacesResponse;
 import utn.tacs.grupo3.telegram.bot.request.exception.BadCredentialsException;
 import utn.tacs.grupo3.telegram.bot.request.exception.TelegramUserNotLoggedException;
+import utn.tacs.grupo3.telegram.bot.request.response.ListOfPlacesResponse;
+import utn.tacs.grupo3.telegram.bot.request.response.ListsOfPlacesResponse;
+import utn.tacs.grupo3.telegram.bot.request.response.LoginResponse;
 import utn.tacs.grupo3.telegram.bot.request.response.VenuesResponse;
 import utn.tacs.grupo3.telegram.bot.user.LoggedUsers;
 import utn.tacs.grupo3.telegram.bot.user.UserCredentials;

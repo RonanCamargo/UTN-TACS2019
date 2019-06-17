@@ -14,8 +14,8 @@ import utn.tacs.grupo3.telegram.bot.constants.PlacesBotConstants;
 import utn.tacs.grupo3.telegram.bot.factory.MessageFactory;
 import utn.tacs.grupo3.telegram.bot.handler.AbstractCommandHandler;
 import utn.tacs.grupo3.telegram.bot.helper.HtmlHelper;
-import utn.tacs.grupo3.telegram.bot.request.entity.listsOfPlaces.ListOfPlaces;
-import utn.tacs.grupo3.telegram.bot.request.entity.listsOfPlaces.Place;
+import utn.tacs.grupo3.telegram.bot.request.entity.ListOfPlaces;
+import utn.tacs.grupo3.telegram.bot.request.entity.Place;
 
 /**
  * Handler for /viewlist command

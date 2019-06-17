@@ -1,20 +1,19 @@
-package utn.tacs.grupo3.telegram.bot.request.entity.listsOfPlaces;
+package utn.tacs.grupo3.telegram.bot.request.response;
 
-import java.util.List;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({ "status", "message", "body" })
-public class ListsOfPlacesResponse {
+public class LoginResponse {
 
 	@JsonProperty("status")
 	private Integer status;
 	@JsonProperty("message")
 	private String message;
 	@JsonProperty("body")
-	private List<ListOfPlaces> listOfPlaces = null;
+	private String token;
 
 	@JsonProperty("status")
 	public Integer getStatus() {
@@ -37,13 +36,13 @@ public class ListsOfPlacesResponse {
 	}
 
 	@JsonProperty("body")
-	public List<ListOfPlaces> getListOfPlaces() {
-		return listOfPlaces;
+	public String getToken() {
+		return token;
 	}
 
 	@JsonProperty("body")
-	public void setListOfPlaces(List<ListOfPlaces> listOfPlaces) {
-		this.listOfPlaces = listOfPlaces;
+	public void setToken(String body) {
+		this.token = body;
 	}
 
 }

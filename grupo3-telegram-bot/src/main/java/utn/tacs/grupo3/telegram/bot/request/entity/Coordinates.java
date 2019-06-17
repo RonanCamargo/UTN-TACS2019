@@ -1,4 +1,4 @@
-package utn.tacs.grupo3.telegram.bot.request.entity.listsOfPlaces;
+package utn.tacs.grupo3.telegram.bot.request.entity;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;

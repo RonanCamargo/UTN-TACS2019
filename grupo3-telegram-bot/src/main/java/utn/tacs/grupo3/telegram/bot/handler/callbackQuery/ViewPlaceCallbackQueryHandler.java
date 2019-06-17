@@ -9,7 +9,7 @@ import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 
 import utn.tacs.grupo3.telegram.bot.constants.PlacesBotConstants;
 import utn.tacs.grupo3.telegram.bot.handler.CallbackQueryHandler;
-import utn.tacs.grupo3.telegram.bot.request.entity.listsOfPlaces.Place;
+import utn.tacs.grupo3.telegram.bot.request.entity.Place;
 
 public class ViewPlaceCallbackQueryHandler implements CallbackQueryHandler{
 

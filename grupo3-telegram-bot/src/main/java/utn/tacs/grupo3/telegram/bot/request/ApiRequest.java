@@ -2,8 +2,8 @@ package utn.tacs.grupo3.telegram.bot.request;
 
 import java.util.List;
 
+import utn.tacs.grupo3.telegram.bot.request.entity.ListOfPlaces;
 import utn.tacs.grupo3.telegram.bot.request.entity.Venue;
-import utn.tacs.grupo3.telegram.bot.request.entity.listsOfPlaces.ListOfPlaces;
 import utn.tacs.grupo3.telegram.bot.request.exception.BadCredentialsException;
 import utn.tacs.grupo3.telegram.bot.user.UserCredentials;
 
