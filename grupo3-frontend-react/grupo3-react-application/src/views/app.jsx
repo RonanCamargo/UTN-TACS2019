@@ -6,6 +6,8 @@ import PlaceView from "views/place/PlaceView"
 import ListView from "views/place/ListView"
 import AdminView from "views/admin/AdminView"
 import UserView from "views/admin/UserView"
+import Home from 'views/home/home'
+import ListNew from 'views/list/new'
 
 class App extends Component {
 	constructor(props) {
@@ -22,6 +24,7 @@ class App extends Component {
 		}
 		this.updateProps = this.updateProps.bind(this)
 		this.updateState = this.updateState.bind(this)
+		this.logoutUser = this.logoutUser(this)
 	}
 
 	updateProps(key, value) {
@@ -38,8 +41,14 @@ class App extends Component {
 			[key]:value
 		})
 	}
+
+	logoutUser() {
+		localStorage.removeItem('token')
+		this.props.history.push('/login')
+	}
+
 	render() {
-		if (!window.userLogged) {
+		if (!this.state.userLogged) {
 			<Redirect to="/login" />
 		}
 		return (
@@ -52,6 +61,12 @@ class App extends Component {
 								           history={this.props.history} />
 					       }
 					/>
+					<Route path={"/home"}
+					       component={() =>
+						       <Home logoutUser={this.logoutUser}
+					                 history={this.props.history} />
+					       }
+					/>
 					<Route path={"/signup"}
 					       component={() =>
 							<SignUp updateProps={this.updateProps}
@@ -60,6 +75,11 @@ class App extends Component {
 					<Route path={"/places"}
 					       component={() =>
 					       <PlaceView token={this.state.token} />}
+					/>
+					<Route path={"/list/new"}
+					       component={() =>
+						       <ListNew token={this.state.token}
+						                />}
 					/>
 					<Route path={"/users/list-of-places"} component={ListView} />
 					<Route path={"/users"} component={UserView} />

@@ -15,10 +15,11 @@ class PlaceView extends Component {
 
 	initDashboard() {
 		const location = this.props.coords.latitude + ',' + this.props.coords.longitude
+		const token = localStorage.getItem("token")
 		try {
 			axios.get('http://localhost:8080/places/near?coordinates=' + location, {
 				headers: {
-					Authorization: 'Bearer ' + this.props.token
+					Authorization: 'Bearer ' + token
 				}
 			})
 		    .then(response => {
