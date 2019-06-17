@@ -1,5 +1,7 @@
 package utn.tacs.grupo3.spring.controller;
 
+import org.springframework.http.ResponseEntity;
+
 import utn.tacs.grupo3.spring.controller.response.Response;
 
 public interface AdministratorController {
@@ -9,7 +11,7 @@ public interface AdministratorController {
      * @param userId
      * @return
      */
-    Response userById(String userId);
+    ResponseEntity<Response> userById(String userId);
     /**
      * Searches places in common among two lists of places
      *
@@ -17,7 +19,7 @@ public interface AdministratorController {
      * @param listId2
      * @return
      */    
-    Response placesInCommon(String userId1, String listName1, String userId2, String listName2);
+    ResponseEntity<Response> placesInCommon(String userId1, String listName1, String userId2, String listName2);
 
     /**
      * Returns the number of interested users in a place
@@ -25,7 +27,7 @@ public interface AdministratorController {
      * @param placeId
      * @return
      */
-    Response interestedUsers(String placeId);
+    ResponseEntity<Response> interestedUsers(String placeId);
 
     /**
      * Returns the number of registered places in the last days
@@ -33,5 +35,5 @@ public interface AdministratorController {
      * @param days
      * @return
      */
-    Response registeredPlaces(int days);
+    ResponseEntity<Response> registeredPlaces(int days);
 }

@@ -1,5 +1,6 @@
 package utn.tacs.grupo3.spring.controller;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -15,7 +16,7 @@ public interface PlaceController {
      *
      * @return a list of places
      */
-    Response places();
+    ResponseEntity<Response> places();
 
     /**
      * Searches a place by its id
@@ -23,7 +24,7 @@ public interface PlaceController {
      * @param placeId
      * @return
      */
-    Response placeById(String placeId);
+    ResponseEntity<Response> placeById(String placeId);
 
     /**
      * Searches near places based on coordinates
@@ -31,8 +32,8 @@ public interface PlaceController {
      * @param coordinates
      * @return
      */
-    Response near(String coordinates);
+    ResponseEntity<Response> near(String coordinates);
 
     @GetMapping("/near-by-name")
-    Response nearByName(@RequestParam("name") String name);
+    ResponseEntity<Response> nearByName(@RequestParam("name") String name);
 }
