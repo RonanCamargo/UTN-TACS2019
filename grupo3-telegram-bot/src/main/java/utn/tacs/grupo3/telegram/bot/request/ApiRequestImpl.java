@@ -3,7 +3,6 @@ package utn.tacs.grupo3.telegram.bot.request;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -18,6 +17,7 @@ import utn.tacs.grupo3.telegram.bot.request.entity.listsOfPlaces.ListOfPlaces;
 import utn.tacs.grupo3.telegram.bot.request.entity.listsOfPlaces.ListsOfPlacesResponse;
 import utn.tacs.grupo3.telegram.bot.request.exception.BadCredentialsException;
 import utn.tacs.grupo3.telegram.bot.request.exception.TelegramUserNotLoggedException;
+import utn.tacs.grupo3.telegram.bot.request.response.VenuesResponse;
 import utn.tacs.grupo3.telegram.bot.user.LoggedUsers;
 import utn.tacs.grupo3.telegram.bot.user.UserCredentials;
 
@@ -99,13 +99,13 @@ public class ApiRequestImpl implements ApiRequest{
 				.setParameter(":long", longitude)
 				.build();
 		
-		ResponseEntity<List<Venue>> venuesNearLocation = rest.exchange(
+		ResponseEntity<VenuesResponse> venuesNearLocation = rest.exchange(
 				uri, 
 				HttpMethod.GET,
 				createHeaders(telegramUserId),
-				new ParameterizedTypeReference<List<Venue>>() {});
+				VenuesResponse.class);
 		
-		return venuesNearLocation.getBody();
+		return venuesNearLocation.getBody().getVenues();
 	}
 
 
@@ -119,13 +119,13 @@ public class ApiRequestImpl implements ApiRequest{
 				.setParameter(":name", name)
 				.build();
 		
-		ResponseEntity<List<Venue>> venuesByName = rest.exchange(
+		ResponseEntity<VenuesResponse> venuesByName = rest.exchange(
 				uri,
 				HttpMethod.GET, 
 				createHeaders(telegramUserId), 
-				new ParameterizedTypeReference<List<Venue>>() {});
+				VenuesResponse.class);
 		
-		return venuesByName.getBody();
+		return venuesByName.getBody().getVenues();
 	}
 
 
