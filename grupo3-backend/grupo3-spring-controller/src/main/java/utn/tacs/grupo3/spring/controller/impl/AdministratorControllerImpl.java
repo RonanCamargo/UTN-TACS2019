@@ -2,6 +2,7 @@ package utn.tacs.grupo3.spring.controller.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +25,7 @@ public class AdministratorControllerImpl implements AdministratorController {
 
     @Override
     @GetMapping("users/{user-id}")
-    public Response userById(@PathVariable("user-id") String userId){
+    public ResponseEntity<Response> userById(@PathVariable("user-id") String userId){
     	return responseHandler.handle(
     			() -> new Response(
     					HttpStatus.OK, 
@@ -34,7 +35,7 @@ public class AdministratorControllerImpl implements AdministratorController {
 
     @Override
     @GetMapping("places/{place-id}/interested-users")
-    public Response interestedUsers(@PathVariable("place-id") String placeId){
+    public ResponseEntity<Response> interestedUsers(@PathVariable("place-id") String placeId){
     	return responseHandler.handle(
     			() -> new Response(
     					HttpStatus.OK, 
@@ -44,7 +45,7 @@ public class AdministratorControllerImpl implements AdministratorController {
 
     @Override
     @GetMapping("places/registered-places")
-    public Response registeredPlaces(@RequestParam("days") int days) {
+    public ResponseEntity<Response> registeredPlaces(@RequestParam("days") int days) {
     	return responseHandler.handle(
     			() -> new Response(
     					HttpStatus.OK, 
@@ -55,7 +56,7 @@ public class AdministratorControllerImpl implements AdministratorController {
 
 	@Override
     @GetMapping("places/places-in-common")
-	public Response placesInCommon(
+	public ResponseEntity<Response> placesInCommon(
 			@RequestParam("user-id-1")String userId1, 
 			@RequestParam("list-id-1")String listName1,
 			@RequestParam("user-id-2")String userId2, 

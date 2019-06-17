@@ -2,6 +2,7 @@ package utn.tacs.grupo3.spring.controller.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,14 +28,14 @@ public class UserControllerImpl implements UserController {
     
     @Override
     @GetMapping
-    public Response users() {
+    public ResponseEntity<Response> users() {
         return responseHandler.handle(
         		() -> new Response(HttpStatus.OK, "All users", userService.allUsers()));
     }
 
     @Override
     @PutMapping("/{user-id}/{list-id}/places-visited/{place-id}")
-    public Response markAsVisitedAPlace(@PathVariable("user-id") String userId, @PathVariable("list-id") String listId, @PathVariable("place-id") String placeId){
+    public ResponseEntity<Response> markAsVisitedAPlace(@PathVariable("user-id") String userId, @PathVariable("list-id") String listId, @PathVariable("place-id") String placeId){
     	return responseHandler.handle(() -> {
     		userService.markAPlaceInAUserListAsVisited(userId, listId, placeId);
     		return new Response(HttpStatus.OK, "Place successfully marked as visited");
@@ -43,7 +44,7 @@ public class UserControllerImpl implements UserController {
 
     @Override
     @PostMapping("/{user-id}/list-of-places/{list-id}/{place-id}")
-    public Response registerPlaceInListOfPlaces(
+    public ResponseEntity<Response> registerPlaceInListOfPlaces(
     		@PathVariable("user-id") String userId, 
     		@PathVariable("list-id") String listId, 
     		@PathVariable("place-id") String placeId){
