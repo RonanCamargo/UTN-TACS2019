@@ -2,6 +2,7 @@ package utn.tacs.grupo3.spring.controller.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,7 +28,7 @@ public class ListOfPlacesControllerImpl implements ListOfPlacesController {
 
     @Override
     @GetMapping("/{user-id}/list-of-places")
-    public Response listsOfListOfPlaces(@PathVariable("user-id") String userId){
+    public ResponseEntity<Response> listsOfListOfPlaces(@PathVariable("user-id") String userId){
     	return responseHandler.handle(
     			() -> new Response(
     					HttpStatus.OK,
@@ -37,7 +38,7 @@ public class ListOfPlacesControllerImpl implements ListOfPlacesController {
 
     @Override
     @PostMapping("/{user-id}/list-of-places/{list-id}")
-    public Response createListOfPlaces(@PathVariable("user-id") String userId, @PathVariable("list-id") String listId){
+    public ResponseEntity<Response> createListOfPlaces(@PathVariable("user-id") String userId, @PathVariable("list-id") String listId){
     	return responseHandler.handle(()->{
     		listOfPlacesService.createListOfPlaces(userId, listId);
     		return new Response(HttpStatus.OK, "List successfully created");
@@ -46,7 +47,7 @@ public class ListOfPlacesControllerImpl implements ListOfPlacesController {
 
     @Override
     @GetMapping("/{user-id}/list-of-places/{list-id}")
-    public Response listOfPlacesListById(@PathVariable("user-id") String userId, @PathVariable("list-id") String listId){
+    public ResponseEntity<Response> listOfPlacesListById(@PathVariable("user-id") String userId, @PathVariable("list-id") String listId){
     	return responseHandler.handle(
     			() -> new Response(HttpStatus.OK, 
     					"User list of places",
@@ -55,7 +56,7 @@ public class ListOfPlacesControllerImpl implements ListOfPlacesController {
 
     @Override
     @DeleteMapping("/{user-id}/list-of-places/{list-id}")
-    public Response deleteListOfPlacesList(@PathVariable("user-id") String userId, @PathVariable("list-id") String listId){
+    public ResponseEntity<Response> deleteListOfPlacesList(@PathVariable("user-id") String userId, @PathVariable("list-id") String listId){
     	return responseHandler.handle(
     			() -> {
     				listOfPlacesService.deleteUserListOfPlaces(userId, listId);
@@ -65,7 +66,7 @@ public class ListOfPlacesControllerImpl implements ListOfPlacesController {
 
     @Override
     @PutMapping("/{user-id}/list-of-places/{list-id}")
-    public Response editListOfPlacesList(@PathVariable("user-id") String userId, @PathVariable("list-id") String listId, @RequestParam("new-name") String newName){
+    public ResponseEntity<Response> editListOfPlacesList(@PathVariable("user-id") String userId, @PathVariable("list-id") String listId, @RequestParam("new-name") String newName){
     	return responseHandler.handle(
     			() -> {
     				listOfPlacesService.renameListOfPlaces(userId, listId, newName);
