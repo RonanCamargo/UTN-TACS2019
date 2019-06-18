@@ -1,11 +1,12 @@
 import React, {Component} from 'react'
+import {Button} from "react-bootstrap"
 
 class Navigation extends Component {
 	render() {
 		return(
 			<nav className = "navbar navbar-dark bg-dark">
-				<a href="" className ="text-white">  { this.props.title} </a>
-				<div className = "row-md-2">
+				<Button variant="dark" onClick={() => this.props.history.push('/home')}>{this.props.title}</Button>
+					<div className = "row-md-2">
 					<div className="input-group">
 						<input type="text" className="form-control" placeholder="Search"></input >
 						<span className="input-group-btn">
