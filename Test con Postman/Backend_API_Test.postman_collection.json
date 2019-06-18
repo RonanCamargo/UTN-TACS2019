@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "b5972d81-b320-4957-a608-fbee62acb7ac",
-		"name": "API_TP_TACS Test",
+		"name": "Backend_API_Test",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -77,7 +77,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"firstName\":\"Elver\",\"lastName\":\"Galarga\",\"username\":\"ElverX\"\n,\"listsOfPlaces\":[],\"placesVisited\":[],\"lastAccess\":null,\"password\":\"123\"}"
+					"raw": "{\"firstName\":\"Elver\",\"lastName\":\"Galarga\"\n,\"username\":\"ElverX\",\"password\":\"123\"}"
 				},
 				"url": {
 					"raw": "http://localhost:8080/sign-up",
@@ -121,7 +121,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"firstName\":\"Maxi\",\"lastName\":\"Perez\",\"username\":\"Maxi\"\n,\"listsOfPlaces\":[],\"placesVisited\":[],\"lastAccess\":null,\"password\":\"123\",\"rol\":\"USER\"}"
+					"raw": "{\"firstName\":\"Maxi\",\"lastName\":\"Perez\"\n,\"username\":\"Maxi\",\"password\":\"123\"}"
 				},
 				"url": {
 					"raw": "http://localhost:8080/sign-up",
@@ -302,7 +302,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/users/Maxi/list-of-places/2/?=",
+					"raw": "http://localhost:8080/users/Maxi/list-of-places/2/?",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -318,7 +318,8 @@
 					"query": [
 						{
 							"key": "",
-							"value": ""
+							"value": "",
+							"disabled": true
 						}
 					]
 				}
@@ -355,7 +356,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/users/ElverX/list-of-places/1/4b850a3bf964a520934931e3?",
+					"raw": "http://localhost:8080/users/ElverX/list-of-places/1/4b850a3bf964a520934931e3",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -520,7 +521,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/users/ElverX/places-visited/UTN FRBA (Sede Campus)?",
+					"raw": "http://localhost:8080/users/ElverX/1/places-visited/4b850a3bf964a520934931e3",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -529,8 +530,9 @@
 					"path": [
 						"users",
 						"ElverX",
+						"1",
 						"places-visited",
-						"UTN FRBA (Sede Campus)"
+						"4b850a3bf964a520934931e3"
 					],
 					"query": [
 						{
@@ -636,7 +638,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/administrator/places/UTN FRBA (Sede Campus)/interested-users",
+					"raw": "http://localhost:8080/administrator/places/4b850a3bf964a520934931e3/interested-users",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -645,7 +647,7 @@
 					"path": [
 						"administrator",
 						"places",
-						"UTN FRBA (Sede Campus)",
+						"4b850a3bf964a520934931e3",
 						"interested-users"
 					]
 				},
@@ -691,7 +693,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/administrator/places/places-in-common?list-id-1=2&list-id-2=3",
+					"raw": "http://localhost:8080/administrator/places/places-in-common?user-id-1=ElverX&list-id-1=1&user-id-2=Maxi&list-id-2=2",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -704,12 +706,20 @@
 					],
 					"query": [
 						{
+							"key": "user-id-1",
+							"value": "ElverX"
+						},
+						{
 							"key": "list-id-1",
-							"value": "2"
+							"value": "1"
+						},
+						{
+							"key": "user-id-2",
+							"value": "Maxi"
 						},
 						{
 							"key": "list-id-2",
-							"value": "3"
+							"value": "2"
 						}
 					]
 				},
@@ -808,7 +818,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/users/ElverX/list-of-places/1/?new-name=lugares feos 1",
+					"raw": "http://localhost:8080/users/ElverX/list-of-places/1/?new-name=a1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -824,7 +834,7 @@
 					"query": [
 						{
 							"key": "new-name",
-							"value": "lugares feos 1"
+							"value": "a1"
 						}
 					]
 				}
@@ -861,7 +871,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/users/Maxi/list-of-places/2/?new-name=lugares feos 2",
+					"raw": "http://localhost:8080/users/Maxi/list-of-places/2/?new-name=a2",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -877,7 +887,7 @@
 					"query": [
 						{
 							"key": "new-name",
-							"value": "lugares feos 2"
+							"value": "a2"
 						}
 					]
 				}
@@ -914,7 +924,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/users/ElverX/list-of-places/lugares feos 1/?",
+					"raw": "http://localhost:8080/users/ElverX/list-of-places/a1/",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -924,7 +934,7 @@
 						"users",
 						"ElverX",
 						"list-of-places",
-						"lugares feos 1",
+						"a1",
 						""
 					],
 					"query": [
@@ -968,7 +978,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/users/Maxi/list-of-places/lugares feos 2/?",
+					"raw": "http://localhost:8080/users/Maxi/list-of-places/a2/",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -978,7 +988,7 @@
 						"users",
 						"Maxi",
 						"list-of-places",
-						"lugares feos 2",
+						"a2",
 						""
 					],
 					"query": [
