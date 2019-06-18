@@ -26,7 +26,7 @@ class LoginUser extends Component {
 			password: this.state.password
 		}
 		try {
-			axios.post("http://localhost:8080/login", user)
+			axios.post(API+"/login", user)
 			.then(res => {
 				this.props.updateProps('userName', this.state.userName)
 				localStorage.setItem('token', res.data.body)

@@ -18,7 +18,7 @@ class ListCard extends Component {
 	handleSubmit = async event => {
 		event.preventDefault()
 		const token = localStorage.getItem("token")
-		axios.put('http://localhost:8080/users/'+ this.props.userName +'/list-of-places/'+ this.props.cardName +'/?new-name='+ this.state.newListName,
+		axios.put(API+'/users/'+ this.props.userName +'/list-of-places/'+ this.props.cardName +'/?new-name='+ this.state.newListName,
 			{}, {
 			headers: {
 				Authorization: 'Bearer ' + token
@@ -50,7 +50,7 @@ class ListCard extends Component {
 
 	deleteList() {
 		const token = localStorage.getItem("token")
-		axios.delete('http://localhost:8080/users/'+ this.props.userName +'/list-of-places/'+ this.props.cardName, {
+		axios.delete(API+'/users/'+ this.props.userName +'/list-of-places/'+ this.props.cardName, {
 				headers: {
 					Authorization: 'Bearer ' + token
 				}

@@ -36,7 +36,7 @@ class SignUp extends Component {
 				password: this.state.password
 			}
 
-			axios.post('http://localhost:8080/sign-up', user)
+			axios.post(API+'/sign-up', user)
 			.then(res => {
 				this.props.updateProps('firstName', this.state.firstName)
 				this.props.updateProps('lastName', this.state.lastName)

@@ -59,7 +59,7 @@ class UserView extends Component {
 	}
 
 	componentDidMount() {
-		axios.get('http://localhost:8080/users', {
+		axios.get(API +'/users', {
 			headers: {
 				Authorization: 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJKUGVyZXoxIiwiUk9MIjoiQURNSU4ifQ.3I3laL6doeyt7iSf_Ew_dHAKqIHSeHFE5SmfwwkDh0Gx-1qhBY9GmT11iz8KS3_dEvOlBzn8uM2t4f2ZGxHYbQ'
 			}})

@@ -17,7 +17,7 @@ class PlaceView extends Component {
 		const location = this.props.coords.latitude + ',' + this.props.coords.longitude
 		const token = localStorage.getItem("token")
 		try {
-			axios.get('http://localhost:8080/places/near?coordinates=' + location, {
+			axios.get(API +'/places/near?coordinates=' + location, {
 				headers: {
 					Authorization: 'Bearer ' + token
 				}
