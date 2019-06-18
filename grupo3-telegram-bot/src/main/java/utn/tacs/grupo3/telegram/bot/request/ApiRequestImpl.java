@@ -8,18 +8,21 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import utn.tacs.grupo3.telegram.bot.request.entity.ListOfPlaces;
 import utn.tacs.grupo3.telegram.bot.request.entity.Venue;
 import utn.tacs.grupo3.telegram.bot.request.exception.BadCredentialsException;
+import utn.tacs.grupo3.telegram.bot.request.exception.ListNotFoundException;
+import utn.tacs.grupo3.telegram.bot.request.exception.PlaceAlreadyInListException;
 import utn.tacs.grupo3.telegram.bot.request.exception.TelegramUserAlreadyLoggedException;
 import utn.tacs.grupo3.telegram.bot.request.exception.TelegramUserNotLoggedException;
+import utn.tacs.grupo3.telegram.bot.request.exception.UnknownRequestException;
 import utn.tacs.grupo3.telegram.bot.request.response.ListOfPlacesResponse;
 import utn.tacs.grupo3.telegram.bot.request.response.ListsOfPlacesResponse;
 import utn.tacs.grupo3.telegram.bot.request.response.LoginResponse;
 import utn.tacs.grupo3.telegram.bot.request.response.VenuesResponse;
-import utn.tacs.grupo3.telegram.bot.user.LoggedUser;
 import utn.tacs.grupo3.telegram.bot.user.LoggedUsers;
 import utn.tacs.grupo3.telegram.bot.user.UserCredentials;
 
@@ -35,6 +38,10 @@ public class ApiRequestImpl implements ApiRequest{
 	private static final String LOGIN = "/login";
 		
 	private static final String AUTHORIZATION_HEADER = "Authorization";
+	
+	private static final String UNKNOWN_ERROR_MESSAGE = "An error occured. Please try again later";
+	private static final String PLACE_IN_LIST_ERROR_MESSAGE = "The place is already in the list";
+	private static final String LIST_NOT_FOUND_ERROR_MESSAGE = "The list does not exists or was deleted";
 	
 	private RestTemplate rest = new RestTemplate();
 		
@@ -56,12 +63,12 @@ public class ApiRequestImpl implements ApiRequest{
 			return token;
 			
 			
-		} catch (HttpClientErrorException e) {
+		} catch (HttpClientErrorException | HttpServerErrorException e) {
 			switch (e.getStatusCode()) {
 			case UNAUTHORIZED:
 				throw new BadCredentialsException("Invalid username or password. Status code [" + e.getRawStatusCode() + "]", e);
 			default:
-				throw e;
+				throw new UnknownRequestException(UNKNOWN_ERROR_MESSAGE);
 			}
 		}
 		
@@ -83,12 +90,15 @@ public class ApiRequestImpl implements ApiRequest{
 				.setParameter(":user-id", LoggedUsers.getUsername(telegramUserId))
 				.build();
 		
-		ResponseEntity<ListsOfPlacesResponse> lists = rest.exchange(
-				uri,
-				HttpMethod.GET, createHeaders(telegramUserId),
-				ListsOfPlacesResponse.class);
-		
-		return lists.getBody().getListOfPlaces().stream().map(list -> list.getListName()).collect(Collectors.toList());
+		try {
+			ResponseEntity<ListsOfPlacesResponse> lists = rest.exchange(
+					uri,
+					HttpMethod.GET, createHeaders(telegramUserId),
+					ListsOfPlacesResponse.class);		
+			return lists.getBody().getListOfPlaces().stream().map(list -> list.getListName()).collect(Collectors.toList());			
+		} catch (HttpClientErrorException | HttpServerErrorException e) {
+			throw new UnknownRequestException(UNKNOWN_ERROR_MESSAGE);
+		}		
 	}
 
 
@@ -103,13 +113,16 @@ public class ApiRequestImpl implements ApiRequest{
 				.setParameter(":long", longitude)
 				.build();
 		
-		ResponseEntity<VenuesResponse> venuesNearLocation = rest.exchange(
-				uri, 
-				HttpMethod.GET,
-				createHeaders(telegramUserId),
-				VenuesResponse.class);
-		
-		return venuesNearLocation.getBody().getVenues();
+		try {
+			ResponseEntity<VenuesResponse> venuesNearLocation = rest.exchange(
+					uri, 
+					HttpMethod.GET,
+					createHeaders(telegramUserId),
+					VenuesResponse.class);		
+			return venuesNearLocation.getBody().getVenues();			
+		} catch (HttpClientErrorException | HttpServerErrorException e) {
+			throw new UnknownRequestException(UNKNOWN_ERROR_MESSAGE);
+		}		
 	}
 
 
@@ -122,14 +135,17 @@ public class ApiRequestImpl implements ApiRequest{
 				.setRelativeUri(PLACES_BY_NAME)
 				.setParameter(":name", name)
 				.build();
-		
-		ResponseEntity<VenuesResponse> venuesByName = rest.exchange(
-				uri,
-				HttpMethod.GET, 
-				createHeaders(telegramUserId), 
-				VenuesResponse.class);
-		
-		return venuesByName.getBody().getVenues();
+		try {
+			ResponseEntity<VenuesResponse> venuesByName = rest.exchange(
+					uri,
+					HttpMethod.GET, 
+					createHeaders(telegramUserId), 
+					VenuesResponse.class);		
+			return venuesByName.getBody().getVenues();
+			
+		} catch (HttpClientErrorException | HttpServerErrorException e) {
+			throw new UnknownRequestException(UNKNOWN_ERROR_MESSAGE);
+		}		
 	}
 
 
@@ -145,12 +161,24 @@ public class ApiRequestImpl implements ApiRequest{
 				.setParameter(":place-id", placeId)
 				.build();
 		
-		ResponseEntity<String> response = rest.exchange(
-				uri,
-				HttpMethod.POST,
-				createHeaders(telegramUserId),
-				String.class);
-		response.getBody();
+		try {
+			ResponseEntity<String> response = rest.exchange(
+					uri,
+					HttpMethod.POST,
+					createHeaders(telegramUserId),
+					String.class);
+			response.getBody();
+			
+		} catch (HttpClientErrorException | HttpServerErrorException e) {
+			switch (e.getStatusCode()) {
+			case CONFLICT:
+				throw new PlaceAlreadyInListException(PLACE_IN_LIST_ERROR_MESSAGE);
+			case NOT_FOUND:
+				throw new ListNotFoundException(LIST_NOT_FOUND_ERROR_MESSAGE);
+			default:
+				throw new UnknownRequestException(UNKNOWN_ERROR_MESSAGE);		
+			}
+		}
 	}
 
 	
@@ -164,14 +192,24 @@ public class ApiRequestImpl implements ApiRequest{
 				.setParameter(":user-id", LoggedUsers.getUsername(telegramUserId))
 				.setParameter(":list-name", listName)
 				.build();
+		try {
+			ResponseEntity<ListOfPlacesResponse> listOfPlaces = rest.exchange(
+					uri,
+					HttpMethod.GET,
+					createHeaders(telegramUserId),
+					ListOfPlacesResponse.class);			
+			return listOfPlaces.getBody().getListOfPlaces();
+			
+		} catch (HttpClientErrorException | HttpServerErrorException e) {
+			switch (e.getStatusCode()) {
+			case NOT_FOUND:
+				throw new ListNotFoundException(LIST_NOT_FOUND_ERROR_MESSAGE);
+			default:
+				throw new UnknownRequestException(UNKNOWN_ERROR_MESSAGE);
+			}
+
+		}		
 		
-		ResponseEntity<ListOfPlacesResponse> listOfPlaces = rest.exchange(
-				uri,
-				HttpMethod.GET,
-				createHeaders(telegramUserId),
-				ListOfPlacesResponse.class);
-		
-		return listOfPlaces.getBody().getListOfPlaces();
 	}
 	
 	private HttpEntity<String> createHeaders(Integer telegramUserId) {
