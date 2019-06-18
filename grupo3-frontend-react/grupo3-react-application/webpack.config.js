@@ -49,6 +49,9 @@ module.exports = {
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
-        new webpack.NoEmitOnErrorsPlugin()
+        new webpack.NoEmitOnErrorsPlugin(),
+        new webpack.DefinePlugin({
+            API: process.ENV === 'production' ? JSON.stringify("http://backend-tacs.us-east-2.elasticbeanstalk.com") : JSON.stringify("http://localhost:8080")
+        })
     ]
 }
