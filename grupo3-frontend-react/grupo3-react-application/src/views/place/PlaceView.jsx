@@ -39,7 +39,8 @@ class PlaceView extends Component {
 	render() {
 		const places = this.state.places.map(place => {
 			return(
-				<PlaceCard key={place.id} cardName = {place.name} id = {place.id} url = {place.location.address} image = "w3-grayscale-max" />
+				<PlaceCard key={place.id} cardName = {place.name} id = {place.id} url = {place.location.address}
+				           image = "w3-grayscale-max" userName={this.props.userName} />
 			)
 		})
 		return (

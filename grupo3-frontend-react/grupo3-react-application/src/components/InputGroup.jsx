@@ -8,6 +8,7 @@ class InputGroup extends Component {
 		this.state = {
 			isVisited : false,
 		}
+		this.markAsVisited = this.markAsVisited.bind(this)
 	}
 
 	markAsVisited() {
@@ -20,17 +21,27 @@ class InputGroup extends Component {
 					}
 				})
 				.then(response => {
+					alert(response.data.message)
+
 					//poner la response como props y obtener el id
+				})
+				.catch(error => {
+					alert(error.response.data.message)
 				})
 			}
 
-			axios.put('http://localhost:8080/users/' + this.props.userName +'/places-visited/'+ this.props.placeId, {
+			axios.put('http://localhost:8080/users/' + this.props.userName +'/places-visited/'+ this.props.placeId +'?',
+				{},{
 				headers: {
 					Authorization: 'Bearer ' + token
 				}
 			})
 			.then(response => {
-				//poner la response como props y obtener el id
+				alert(response.data.message)
+				this.setState({isVisited: true })
+			})
+			.catch(error => {
+				alert(error.response.data.message)
 			})
 		} catch (e) {
 			console.log(e)
@@ -40,15 +51,14 @@ class InputGroup extends Component {
 		let isVisited = this.props.isVisited ? 'Visited' : 'Unvisited'
 		return(
 			<div className = "card mb-2">
-                <Popup trigger={<div className = "row-md-4">
+                <Popup trigger={!this.state.isVisited && <div className = "row-md-4">
 	                <div className="input-group">
                         <select className="form-control" id="selectList" placeholder= "select a List">
-							<option>{Visited}</option>
+							<option>{isVisited}</option>
 							<option>Visited</option>
-	                        <option>Unvisited</option>
                         </select>
                          <span className="input-group-btn">
-                            <button type="submit" className="btn btn-danger" onClick={() => this.markAsVisited} >{ this.props.label }</button>
+                            <button type="submit" className="btn btn-danger" onClick={this.markAsVisited} >{ this.props.label }</button>
                         </span>
                     </div>
                     </div>}
