@@ -64,7 +64,7 @@ Desde el root del proyecto
 | GET | /users/{user-id}/list-of-places/{list-id} | buscar una lista de lugares | 
 | DELETE | /users/{user-id}/list-of-places/{list-id} | Eliminar una lista de lugares | 
 | PUT | /users/{user-id}/list-of-places/{list-id} | Modificar una lista de lugares | parameter=new-name
-| PUT | /users/{user-id}/places-visited/{place-id} | marcar un lugar como visitado | 
+| PUT | /users/{user-id}/{list-id}/places-visited/{place-id} | Marcar un lugar como visitado | user-id = username, list-id = nombre de lista, place-id = id de foursquare
 | GET | /administrator/users/{user-id} | Ver Datos de un usuario | 
 | GET | /administrator/places/{place-id}/interested-users | Nombres de usuario interesados en un lugar | place-id es el id de foursquare
 | GET | /administrator/places/places-in-common | Obtener lugares en comun entre usuarios | parameters: list-id-1, user-id-1, list-id-2, user-id-2
