@@ -31,7 +31,7 @@ class ListNew extends Component {
 		event.preventDefault()
 		const token = localStorage.getItem("token")
 		try {
-			axios.post('http://localhost:8080/users/'+ this.props.userName +'/list-of-places/'+ this.state.listName,{}, {
+			axios.post(API+'/users/'+ this.props.userName +'/list-of-places/'+ this.state.listName,{}, {
 				headers: {
 					Authorization: 'Bearer ' + token
 				}
@@ -51,7 +51,7 @@ class ListNew extends Component {
 		event.preventDefault()
 		const token = localStorage.getItem("token")
 		try {
-			axios.post('http://localhost:8080/users/'+ this.props.userName +'/list-of-places/'+ this.state.listName +'/'+ place.id,
+			axios.post(API+'/users/'+ this.props.userName +'/list-of-places/'+ this.state.listName +'/'+ place.id,
 				{}, {
 				headers: {
 					Authorization: 'Bearer ' + token
@@ -77,7 +77,7 @@ class ListNew extends Component {
 		const location = this.props.coords.latitude + ',' + this.props.coords.longitude
 		const token = localStorage.getItem("token")
 		try {
-			axios.get('http://localhost:8080/places/near?coordinates=' + location, {
+			axios.get(API+'/places/near?coordinates=' + location, {
 				headers: {
 					Authorization: 'Bearer ' + token
 				}

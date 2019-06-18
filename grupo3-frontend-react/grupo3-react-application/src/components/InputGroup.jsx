@@ -15,7 +15,7 @@ class InputGroup extends Component {
 		try {
 			const token = localStorage.getItem("token")
 			if(!this.props.userName) {
-				axios.get('http://localhost:8080/me', {
+				axios.get(API +'/me', {
 					headers: {
 						Authorization: 'Bearer ' + token
 					}
@@ -30,7 +30,7 @@ class InputGroup extends Component {
 				})
 			}
 
-			axios.put('http://localhost:8080/users/' + this.props.userName +'/places-visited/'+ this.props.placeId +'?',
+			axios.put(API +'/users/' + this.props.userName +'/places-visited/'+ this.props.placeId +'?',
 				{},{
 				headers: {
 					Authorization: 'Bearer ' + token

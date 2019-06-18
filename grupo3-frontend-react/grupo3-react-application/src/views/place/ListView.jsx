@@ -15,7 +15,7 @@ class ListView extends Component {
 	listFromUser() {
 		const token = localStorage.getItem("token")
 		try {
-			axios.get('http://localhost:8080/users/'+ this.props.userName +'/list-of-places', {
+			axios.get(API+'/users/'+ this.props.userName +'/list-of-places', {
 				headers: {
 					Authorization: 'Bearer ' + token
 				}
