@@ -83,7 +83,13 @@ class App extends Component {
 						                history={this.props.history}
 						                />}
 					/>
-					<Route path={"/users/list-of-places"} component={ListView} />
+					<Route path={"/users/list-of-places"}
+					       component={() =>
+						       <ListView token={this.state.token}
+						                 userName={this.state.user.userName}
+						                 history={this.props.history}
+						       />}
+					/>
 					<Route path={"/users"} component={UserView} />
 					<Route path={"/stats"} component={AdminView} />
 				</Switch>

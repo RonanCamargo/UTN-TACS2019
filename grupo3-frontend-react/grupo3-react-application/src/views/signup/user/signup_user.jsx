@@ -44,6 +44,8 @@ class SignUp extends Component {
 				this.props.updateProps('password', this.state.password)
 				alert(res.data.message)
 				this.props.history.push("/login")
+			}).catch(error => {
+				alert(error.response.data.message)
 			})
 
 		} catch (error) {

@@ -32,9 +32,11 @@ class LoginUser extends Component {
 				localStorage.setItem('token', res.data.body)
 				this.props.updateState('userLogged', true)
 				this.props.history.push("/home")
+			}).catch(error => {
+				alert(error.response.data.message)
 			})
 		} catch (error) {
-			console.log(error)
+			console.log(error.response)
 		}
 	}
 

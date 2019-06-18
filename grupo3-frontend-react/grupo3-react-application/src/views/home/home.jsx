@@ -21,7 +21,7 @@ class Home extends Component {
 					<h2 className="title-header"> Bienvenido </h2>
 					<Button variant="outline-dark" className="log-out" onClick={this.props.logoutUser}><b>Log out</b></Button>
 				</div>
-				<Button className="home-options" variant="primary" size="lg" onClick={() => {this.props.history.push('/login')}} block>
+				<Button className="home-options" variant="primary" size="lg" onClick={() => {this.props.history.push('/users/list-of-places')}} block>
 					My Lists of Places
 				</Button>
 				<Button className="home-options" variant="primary" size="lg" onClick={() => {this.props.history.push('/list/new')}} block>
