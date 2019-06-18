@@ -13,11 +13,13 @@ import org.springframework.web.client.RestTemplate;
 import utn.tacs.grupo3.telegram.bot.request.entity.ListOfPlaces;
 import utn.tacs.grupo3.telegram.bot.request.entity.Venue;
 import utn.tacs.grupo3.telegram.bot.request.exception.BadCredentialsException;
+import utn.tacs.grupo3.telegram.bot.request.exception.TelegramUserAlreadyLoggedException;
 import utn.tacs.grupo3.telegram.bot.request.exception.TelegramUserNotLoggedException;
 import utn.tacs.grupo3.telegram.bot.request.response.ListOfPlacesResponse;
 import utn.tacs.grupo3.telegram.bot.request.response.ListsOfPlacesResponse;
 import utn.tacs.grupo3.telegram.bot.request.response.LoginResponse;
 import utn.tacs.grupo3.telegram.bot.request.response.VenuesResponse;
+import utn.tacs.grupo3.telegram.bot.user.LoggedUser;
 import utn.tacs.grupo3.telegram.bot.user.LoggedUsers;
 import utn.tacs.grupo3.telegram.bot.user.UserCredentials;
 
@@ -38,6 +40,8 @@ public class ApiRequestImpl implements ApiRequest{
 		
 	@Override
 	public String login(UserCredentials user, Integer telegramUserId) throws BadCredentialsException {
+		checkUserNotLogged(user.getUsername(), telegramUserId);
+		
 		String uri = new URIBuilder()
 				.setBaseUri(API_BASE_URL)
 				.setRelativeUri(LOGIN)
@@ -182,6 +186,18 @@ public class ApiRequestImpl implements ApiRequest{
 	private void checkUserLogged(Integer telegramUserId) {
 		if (!LoggedUsers.isLogged(telegramUserId)) {
 			throw new TelegramUserNotLoggedException("Telegram user [Id=" + telegramUserId + "] should be logged.");
+		}
+	}
+	
+	private void checkUserNotLogged(String username, Integer telegramUserId) {
+		if (LoggedUsers.isLogged(telegramUserId)) {
+			String currentUsername = LoggedUsers.getUsername(telegramUserId);
+			
+			if (currentUsername.equals(username)) {
+				throw new TelegramUserAlreadyLoggedException("You are already logged");
+			} else {
+				throw new TelegramUserAlreadyLoggedException("You are already logged with a different user. Please logout first");
+			}			
 		}
 	}
 
