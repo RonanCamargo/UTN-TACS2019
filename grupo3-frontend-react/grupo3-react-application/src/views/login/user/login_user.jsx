@@ -29,12 +29,12 @@ class LoginUser extends Component {
 			axios.post("http://localhost:8080/login", user)
 			.then(res => {
 				this.props.updateProps('userName', this.state.userName)
-				localStorage.setItem('token', res.data.token)
+				localStorage.setItem('token', res.data.body)
 				this.props.updateState('userLogged', true)
 				this.props.history.push("/home")
 			})
 		} catch (error) {
-			alert(error)
+			console.log(error)
 		}
 	}
 

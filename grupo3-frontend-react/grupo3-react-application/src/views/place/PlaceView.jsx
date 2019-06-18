@@ -23,7 +23,7 @@ class PlaceView extends Component {
 				}
 			})
 		    .then(response => {
-				this.setState({places : response.data})
+				this.setState({places : response.data.body})
 		    })
 		} catch (e) {
 			console.log(e)
