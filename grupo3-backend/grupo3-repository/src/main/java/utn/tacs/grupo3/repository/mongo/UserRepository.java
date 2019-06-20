@@ -66,4 +66,17 @@ public interface UserRepository extends GenericRepository<User, String>{
 	 * @param foursquareId
 	 */
 	void markAPlaceAsVisited(String username, String listName, String foursquareId);
+	
+	/**
+	 * Checks if a user exists
+	 * @param username
+	 * @return
+	 */
+	boolean userExists(String username);
+	
+	/**
+	 * Updates a user last access attribute after successful login
+	 * @param username
+	 */
+	void updateUserLastAccess(String username);
 }

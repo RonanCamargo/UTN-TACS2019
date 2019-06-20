@@ -1,5 +1,6 @@
 package utn.tacs.grupo3.repository.mongo;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -16,7 +17,7 @@ import utn.tacs.grupo3.repository.exception.DocumentNotUniqueException;
 
 @Repository
 public class UserRepositoryImpl extends GenericRepositoryImpl<User, String> implements UserRepository{
-	
+		
 	@Override
 	protected Class<User> getClassType() {
 		return User.class;
@@ -158,5 +159,22 @@ public class UserRepositoryImpl extends GenericRepositoryImpl<User, String> impl
 		Update update = new Update().set("listsOfPlaces.$.places", list.getPlaces());
 		
 		mongoOps.updateFirst(query, update, getClassType());
+	}
+
+	@Override
+	public boolean userExists(String username) {
+		return existsBy("username", username);
+	}
+
+	@Override
+	public void updateUserLastAccess(String username) {
+		Query query = new Query();
+		query.addCriteria(Criteria.where("username").is(username));
+
+		Update update = new Update();
+		update.set("lastAccess", LocalDate.now());
+		
+		mongoOps.updateFirst(query, update, getClassType());
+		
 	}
 }
