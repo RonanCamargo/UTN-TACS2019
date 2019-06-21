@@ -76,7 +76,8 @@ class App extends Component {
 					<Route path={"/places"}
 					       component={() =>
 					       <PlaceView token={this.state.token}
-					                  userName={this.state.user.userName} />}
+					                  userName={this.state.user.userName}
+					                  history={this.props.history} />}
 					/>
 					<Route path={"/list/new"}
 					       component={() =>

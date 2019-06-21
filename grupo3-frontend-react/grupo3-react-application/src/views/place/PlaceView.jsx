@@ -45,7 +45,7 @@ class PlaceView extends Component {
 		})
 		return (
 			<div className="main-container">
-				<Navigation title= "Home" />
+				<Navigation title= "Home" history={this.props.history} />
 				<div className= "container">
 					<div className= "row mt-4">
 						<div className="row active-with-click">
