@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import InputGroup from './InputGroup'
 import EditButton from './EditButton'
+import { Redirect } from "react-router-dom"
 import {Button, Form, ButtonToolbar} from "react-bootstrap";
 import axios from "axios";
 
@@ -79,6 +80,9 @@ class ListCard extends Component {
 									<ButtonToolbar>
 										<EditButton editListName={this.editListName} />
 										<Button variant="danger" className="button-delete" onClick={this.deleteList}>Delete</Button>
+										<Button variant="link"
+										        className="button-places"
+										        onClick={() => this.props.history.push('/list/places/'+this.props.cardName)}>Places</Button>
 									</ButtonToolbar>
 								</div>
 								) : (

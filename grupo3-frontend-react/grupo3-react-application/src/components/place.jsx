@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import { Route, Redirect, Switch, withRouter } from "react-router-dom"
 import {Button, Card} from "react-bootstrap"
+import axios from "axios";
 
 class Place extends Component {
 	constructor(props) {
@@ -10,9 +11,11 @@ class Place extends Component {
 				title: '',
 				subTitle: '',
 				description: '',
-			}
+			},
+			isVisited : false,
 		}
 		this.addPlace = this.addPlace.bind(this)
+		this.markAsVisitedPlace = this.markAsVisitedPlace.bind(this)
 	}
 
 	addPlace() {
@@ -25,6 +28,23 @@ class Place extends Component {
 		this.props.addPlaceToList(place)
 	}
 
+	markAsVisitedPlace(){
+		const token = localStorage.getItem("token")
+		axios.put(API +'/users/'+ this.props.userName +'/'+ this.props.match.params.id +'/places-visited/'+ this.props.id +'?',
+		{},{
+			headers: {
+				Authorization: 'Bearer ' + token
+			}
+		})
+		.then(response => {
+			alert(response.data.message)
+			this.setState({isVisited: true })
+		})
+		.catch(error => {
+			alert(error.response.data.message)
+		})
+	}
+
 	render() {
 		return (
 			<div>
@@ -35,7 +55,9 @@ class Place extends Component {
 						<Card.Text>
 							{this.props.description}
 						</Card.Text>
-						<Button variant="primary" onClick={this.addPlace}>Add</Button>
+						{this.props.showAddButon ?
+							(<Button variant="primary" onClick={this.addPlace}>Add</Button>):
+							(!this.state.isVisited && <Button variant="primary" onClick={this.markAsVisitedPlace}>Visited</Button>)}
 					</Card.Body>
 				</Card>
 			</div>
