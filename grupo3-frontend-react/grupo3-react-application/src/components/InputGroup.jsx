@@ -13,7 +13,7 @@ class InputGroup extends Component {
 	render() {
 		return(
 			<div className = "card mb-2">
-          </div>
+			</div>
 		)
 	}
 }
