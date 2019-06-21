@@ -43,4 +43,10 @@ public interface AdministratorController {
      * @return
      */
 	ResponseEntity<Response> me(String token);
+	
+	/**
+	 * Returs info about all users
+	 * @return
+	 */
+	ResponseEntity<Response> users();
 }

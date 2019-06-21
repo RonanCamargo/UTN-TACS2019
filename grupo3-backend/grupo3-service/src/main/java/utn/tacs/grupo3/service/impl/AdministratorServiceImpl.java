@@ -2,6 +2,7 @@ package utn.tacs.grupo3.service.impl;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import utn.tacs.grupo3.model.ListOfPlaces;
 import utn.tacs.grupo3.model.Place;
 import utn.tacs.grupo3.model.RegisteredPlace;
 import utn.tacs.grupo3.model.User;
+import utn.tacs.grupo3.model.dto.UserInfo;
 import utn.tacs.grupo3.repository.mongo.RegisteredPlaceRepository;
 import utn.tacs.grupo3.repository.mongo.UserRepository;
 import utn.tacs.grupo3.service.AdministratorService;
@@ -68,5 +70,24 @@ public class AdministratorServiceImpl implements AdministratorService{
 		
 		return list1.placesInCommonWith(list2);
 	}
-
+	
+	@Override
+	public List<UserInfo> allUsersInfo(){
+		List<UserInfo> users = new ArrayList<UserInfo>();
+		
+		List<User> allUsers = userRepository.findBy("role", "USER");
+		
+		for (User user : allUsers) {
+			UserInfo userInfo = new UserInfo();
+			userInfo.setUsername(user.getUsername());
+			userInfo.setLastAccess(user.getLastAccess());
+			userInfo.setAmountOfLists(user.getListsOfPlaces().size());
+			long visitedPlaces = user.getListsOfPlaces().stream().mapToLong(list -> list.amountOfVisitedPlaces()).sum();
+			userInfo.setAmountOfVisitedPlaces(visitedPlaces);
+			
+			users.add(userInfo);
+		}		
+		
+		return users;
+	}
 }

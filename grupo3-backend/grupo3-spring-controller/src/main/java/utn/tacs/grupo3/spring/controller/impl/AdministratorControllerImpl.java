@@ -77,4 +77,11 @@ public class AdministratorControllerImpl implements AdministratorController {
 		return responseHandler.handle(
 				() -> new Response(HttpStatus.OK, "Your data", administratorService.userById(username)));
 	}
+	
+	@Override
+	@GetMapping("/users")
+	public ResponseEntity<Response> users() {
+		return responseHandler.handle(
+				() -> new Response(HttpStatus.OK, "All users", administratorService.allUsersInfo()));
+	}	
 }
