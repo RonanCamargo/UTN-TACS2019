@@ -35,7 +35,9 @@ public class ValidateToken {
                 String userName = getUserNameFromToken(token);
                 // el recurso[2] es: /{user-id}
                 if (!recurso[2].equals(userName)) {
-                    token = null;
+                	if (!recurso[2].equals("me")) {
+                		token = null;						
+					}
                 }
 
                 break;
