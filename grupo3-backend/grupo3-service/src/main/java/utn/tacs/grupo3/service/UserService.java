@@ -14,4 +14,6 @@ public interface UserService {
 	
 	User userByUsername(String username);
 	
+	void updateUserLastAccess(String username);
+	
 }

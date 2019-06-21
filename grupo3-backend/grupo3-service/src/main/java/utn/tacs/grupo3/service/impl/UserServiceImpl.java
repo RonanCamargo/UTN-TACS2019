@@ -98,5 +98,10 @@ public class UserServiceImpl implements UserService {
     	return place;
 	}
 
+	@Override
+	public void updateUserLastAccess(String username) {
+		userRepository.updateUserLastAccess(username, todayHelper.today());
+	}
+
 
 }

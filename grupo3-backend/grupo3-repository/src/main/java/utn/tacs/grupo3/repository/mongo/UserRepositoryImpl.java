@@ -167,12 +167,12 @@ public class UserRepositoryImpl extends GenericRepositoryImpl<User, String> impl
 	}
 
 	@Override
-	public void updateUserLastAccess(String username) {
+	public void updateUserLastAccess(String username, LocalDate date) {
 		Query query = new Query();
 		query.addCriteria(Criteria.where("username").is(username));
 
 		Update update = new Update();
-		update.set("lastAccess", LocalDate.now());
+		update.set("lastAccess", date);
 		
 		mongoOps.updateFirst(query, update, getClassType());
 		
