@@ -37,6 +37,13 @@ public class ListOfPlaces {
     					)
     			.collect(Collectors.toList());    					
     }
+    
+    public long amountOfVisitedPlaces() {
+    	return places
+    			.stream()
+    			.filter(place -> place.getVisited())
+    			.collect(Collectors.toList()).size();
+    }
 
 	public String getListName() {
 		return listName;
