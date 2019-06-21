@@ -1,6 +1,6 @@
 import React, { Component } from "react"
-import Navigation from 'components/Navigation'
 import axios from 'axios'
+import Navigation from 'components/Navigation'
 import ListCard from 'components/ListCard'
 
 class ListView extends Component {
@@ -44,7 +44,11 @@ class ListView extends Component {
 		const lists = this.state.lists.map((list,i) => {
 			return(
 				<ListCard key={i} cardName = {list.listName} id = {list.id} url = {list.icon}
-				          userName={this.props.userName} updateListOfPlaces={this.updateListOfPlaces} />
+						  history={this.props.history}
+				          palces={list.places}
+				          userName={this.props.userName}
+				          updateListOfPlaces={this.updateListOfPlaces}
+				/>
 			)
 		})
 

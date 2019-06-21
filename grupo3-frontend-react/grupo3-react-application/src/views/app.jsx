@@ -8,6 +8,7 @@ import AdminView from "views/admin/AdminView"
 import UserView from "views/admin/UserView"
 import Home from 'views/home/home'
 import ListNew from 'views/list/new'
+import PlacesList from 'views/list/places'
 
 class App extends Component {
 	constructor(props) {
@@ -88,6 +89,12 @@ class App extends Component {
 					       component={() =>
 						       <ListView token={this.state.token}
 						                 userName={this.state.user.userName}
+						                 history={this.props.history}
+						       />}
+					/>
+					<Route path={"/list/places/:id"}
+					       component={() =>
+						       <PlacesList userName={this.state.user.userName}
 						                 history={this.props.history}
 						       />}
 					/>

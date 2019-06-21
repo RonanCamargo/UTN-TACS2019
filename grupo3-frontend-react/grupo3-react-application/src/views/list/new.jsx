@@ -101,13 +101,14 @@ class ListNew extends Component {
 
 	render() {
 		const places = this.state.places.map(place => {
-			console.log(place)
 			return(
 				<Place key={place.id} id={place.id} title={place.name}
 				       subTitle={place.location.address}
 				       description={"Some Desc"}
 				       addPlaceToList={this.addPlaceToList}
-				       removePlaceToList={this.removePlaceToList} />
+				       showAddButon={true}
+				       showVisitedButton={false}
+				/>
 			)
 		})
 		return (

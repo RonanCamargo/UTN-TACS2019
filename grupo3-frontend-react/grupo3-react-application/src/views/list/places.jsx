@@ -2,12 +2,16 @@ import React, { Component } from "react"
 import { withRouter } from "react-router-dom"
 import {Button, Card} from "react-bootstrap"
 import axios from "axios/index";
+import Place from 'components/place'
+import Navigation from 'components/Navigation'
 
-class Place extends Component {
+
+class PlacesList extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
 			placesInList : [],
+			isVisited: false,
 		}
 		this.getPlacesInList = this.getPlacesInList.bind(this)
 	}
@@ -36,12 +40,17 @@ class Place extends Component {
 	render() {
 		const places = this.state.placesInList.map(place => {
 			return(
-				<Place key={place.foursquareId} id={place.foursquareId} title={place.name}
-				       subTitle={place.address}
-				       description={"Some Desc"}
-				       showAddButon={false}
-				       showVisitedButton={true}
-				/>
+				<div>
+					<Navigation title= "Home" history={this.props.history}/>
+					<h2>Places in List : {this.props.match.params.id}</h2>
+					<Place key={place.foursquareId} id={place.foursquareId} title={place.name}
+					       subTitle={place.address}
+					       description={"Some Desc"}
+					       showAddButon={false}
+					       showVisitedButton={true}
+					       userName={this.props.userName}
+					/>
+				</div>
 			)
 		})
 		return (
@@ -52,4 +61,4 @@ class Place extends Component {
 	}
 }
 
-export default withRouter(Place)
+export default withRouter(PlacesList)

@@ -33,6 +33,15 @@ class Home extends Component {
 				<Button className="home-options" variant="primary" size="lg" onClick={() => {this.props.history.push('/login')}} block>
 					My Location
 				</Button>
+				<Button className="home-options" variant="primary" size="lg" onClick={() => {this.props.history.push('/users')}} block>
+					Manage Users
+				</Button>
+				<Button className="home-options" variant="primary" size="lg" onClick={() => {this.props.history.push('/login')}} block>
+					Amount Places Registered
+				</Button>
+				<Button className="home-options" variant="primary" size="lg" onClick={() => {this.props.history.push('/login')}} block>
+					Global Places Interested
+				</Button>
 			</div>
 		)
 	}
