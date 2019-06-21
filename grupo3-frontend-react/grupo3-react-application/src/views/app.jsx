@@ -9,6 +9,8 @@ import UserView from "views/admin/UserView"
 import Home from 'views/home/home'
 import ListNew from 'views/list/new'
 import PlacesList from 'views/list/places'
+import AllPlaces from 'views/admin/adminPlaces'
+import axios from "axios";
 
 class App extends Component {
 	constructor(props) {
@@ -21,6 +23,8 @@ class App extends Component {
 				lastName : '',
 				userName : '',
 				password : '',
+				listOfPlaces : [],
+				role: '',
 			},
 		}
 		this.updateProps = this.updateProps.bind(this)
@@ -47,6 +51,28 @@ class App extends Component {
 		localStorage.removeItem('token')
 		this.props.history.push('/login')
 	}
+
+	// componentDidMount() {
+	// 	const token = localStorage.getItem("token")
+	// 	if(1 && token){
+	// 		axios.get(API +'/users/me', {
+	// 			headers: {
+	// 				Authorization: 'Bearer ' + token
+	// 			}
+	// 		})
+	// 		.then(response => {
+	// 			console.log(response)
+	// 			const user = {
+	// 				firstName: response.data.body.firstName,
+	// 				lastName: response.data.body.lastName,
+	// 				userName: response.data.body.username,
+	// 				listOfPlaces: response.data.body.listOfPlaces,
+	// 				role: response.data.body.role,
+	// 			}
+	// 			this.setState({user : user})
+	// 		})
+	// 	}
+	// }
 
 	render() {
 		if (!this.state.userLogged) {
@@ -100,6 +126,12 @@ class App extends Component {
 						       />}
 					/>
 					<Route path={"/users"} component={UserView} />
+					<Route path={"/admin/places"}
+					       component={() =>
+						       <AllPlaces userName={this.state.user.userName}
+						                  history={this.props.history}
+						       />}
+					/>
 					<Route path={"/stats"} component={AdminView} />
 				</Switch>
 			</div>

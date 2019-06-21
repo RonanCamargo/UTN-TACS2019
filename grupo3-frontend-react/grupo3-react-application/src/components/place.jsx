@@ -13,9 +13,11 @@ class Place extends Component {
 				description: '',
 			},
 			isVisited : false,
+			showUsersInterested : false,
 		}
 		this.addPlace = this.addPlace.bind(this)
 		this.markAsVisitedPlace = this.markAsVisitedPlace.bind(this)
+		this.showUsersInterested =this.showUsersInterested.bind(this)
 	}
 
 	addPlace() {
@@ -45,6 +47,12 @@ class Place extends Component {
 		})
 	}
 
+	showUsersInterested(){
+		this.setState({
+			showUsersInterested : true,
+		})
+	}
+
 	render() {
 		return (
 			<div>
@@ -55,9 +63,13 @@ class Place extends Component {
 						<Card.Text>
 							{this.props.description}
 						</Card.Text>
-						{this.props.showAddButon ?
-							(<Button variant="primary" onClick={this.addPlace}>Add</Button>):
-							(!this.state.isVisited && <Button variant="primary" onClick={this.markAsVisitedPlace}>Visited</Button>)}
+						{this.props.showUsersAdded ? (
+							this.state.showUsersInterested ? (this.props.usersInterested.map(user => user + ', ')):
+								(<Button variant="primary" onClick={this.showUsersInterested}>Show Users Interested</Button>)
+						) : (this.props.showAddButon ?
+							(<Button variant="primary" onClick={this.addPlace}>Add</Button>) :
+							(!this.state.isVisited && <Button variant="primary" onClick={this.markAsVisitedPlace}>Visited</Button>)
+						)}
 					</Card.Body>
 				</Card>
 			</div>

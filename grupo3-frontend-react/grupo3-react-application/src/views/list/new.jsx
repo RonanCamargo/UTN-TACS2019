@@ -108,6 +108,7 @@ class ListNew extends Component {
 				       addPlaceToList={this.addPlaceToList}
 				       showAddButon={true}
 				       showVisitedButton={false}
+				       showUsersAdded={false}
 				/>
 			)
 		})

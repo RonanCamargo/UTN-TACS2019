@@ -49,6 +49,7 @@ class PlacesList extends Component {
 					       showAddButon={false}
 					       showVisitedButton={true}
 					       userName={this.props.userName}
+					       showUsersAdded={false}
 					/>
 				</div>
 			)

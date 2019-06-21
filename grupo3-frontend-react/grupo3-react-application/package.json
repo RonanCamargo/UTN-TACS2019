@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server --open --mode development",
-    "build": "webpack --mode production"
+    "prebuild": "rm -Rf build && mkdir build",
+    "build": "npm run prebuild && webpack --mode production"
   },
   "author": "Grupo3",
   "license": "ISC",

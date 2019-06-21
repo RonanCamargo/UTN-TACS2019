@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import axios from 'axios'
 import Navigation from 'components/Navigation'
-import UserCard from 'components/UserCard'
+import User from 'components/user'
 
 class UserView extends Component {
 	constructor(props) {
@@ -13,7 +13,7 @@ class UserView extends Component {
 
 	componentDidMount() {
 		const token = localStorage.getItem("token")
-		axios.get(API +'/users', {
+		axios.get(API +'/administrator/users', {
 		headers: {
 			Authorization: 'Bearer '+ token
 		}})
@@ -27,7 +27,7 @@ class UserView extends Component {
 	render() {
 		const users = this.state.users.map(user => {
 			return(
-				<UserCard key={user.id} cardName = {user.name} lists = {user.lists} visits = {user.visits} lastAccess = {user.lastAccess} url = {user.url} />
+				<User key={user.id} userName= {user.username} amountOfLists = {user.amountOfLists} amountOfVisitedPlaces = {user.amountOfVisitedPlaces} lastAccess = {user.lastAccess} />
 			)
 		})
 		return (
