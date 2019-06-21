@@ -12,4 +12,8 @@ public interface UserService {
 	
 	void registerAPlaceInAUserList(String username, String listName, String foursquareId);
 	
+	User userByUsername(String username);
+	
+	void updateUserLastAccess(String username);
+	
 }

@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,6 +14,7 @@ import utn.tacs.grupo3.service.AdministratorService;
 import utn.tacs.grupo3.spring.controller.AdministratorController;
 import utn.tacs.grupo3.spring.controller.response.Response;
 import utn.tacs.grupo3.spring.controller.response.ResponseHandler;
+import utn.tacs.grupo3.spring.security.token.ValidateToken;
 
 @RestController
 @RequestMapping("/administrator")
@@ -67,4 +69,19 @@ public class AdministratorControllerImpl implements AdministratorController {
     					"Places in common between two user lists", 
     					administratorService.placesInCommon(userId1, listName1, userId2, listName2)));		
 	}
+    
+	@Override
+	@GetMapping("/me")
+	public ResponseEntity<Response> me(@RequestHeader("Authorization") String token){
+		String username = new ValidateToken().getUserNameFromToken(token);
+		return responseHandler.handle(
+				() -> new Response(HttpStatus.OK, "Your data", administratorService.userById(username)));
+	}
+	
+	@Override
+	@GetMapping("/users")
+	public ResponseEntity<Response> users() {
+		return responseHandler.handle(
+				() -> new Response(HttpStatus.OK, "All users", administratorService.allUsersInfo()));
+	}	
 }
