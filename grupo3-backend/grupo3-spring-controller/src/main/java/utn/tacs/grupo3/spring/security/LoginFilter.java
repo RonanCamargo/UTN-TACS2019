@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -17,12 +18,18 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import utn.tacs.grupo3.service.UserService;
 import utn.tacs.grupo3.spring.converter.JsonResponseConverter;
 import utn.tacs.grupo3.spring.security.token.CreateToken;
 
 public class LoginFilter extends AbstractAuthenticationProcessingFilter {
+	
+	@Autowired
+	private UserService userService;
 
     public LoginFilter(String url, AuthenticationManager authManager) {
         super(new AntPathRequestMatcher(url));
@@ -34,12 +41,7 @@ public class LoginFilter extends AbstractAuthenticationProcessingFilter {
             HttpServletRequest req, HttpServletResponse res)
             throws AuthenticationException, IOException, ServletException {
 
-        // obtenemos el body de la peticion que asumimos viene en formato JSON
-        InputStream body = req.getInputStream();
-
-        // Asumimos que el body tendrá el siguiente JSON  {"username":"ask", "password":"123"}
-        // Realizamos un mapeo a nuestra clase User para tener ahi los datos
-        User user = new ObjectMapper().readValue(body, User.class);
+        User user = getUserFromRequest(req);
 
         // Finalmente autenticamos
         // Spring comparará el user/password recibidos
@@ -58,15 +60,28 @@ public class LoginFilter extends AbstractAuthenticationProcessingFilter {
             HttpServletRequest req,
             HttpServletResponse res, FilterChain chain,
             Authentication auth) throws IOException, ServletException {
-
+    	
         // Si la autenticacion fue exitosa, agregamos el token a la respuesta
         new CreateToken().addAuthentication(res, auth);
+        userService.updateUserLastAccess(((org.springframework.security.core.userdetails.User)auth.getPrincipal()).getUsername());
+        
     }
 
     @Override
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {
         new JsonResponseConverter().convert(response, HttpServletResponse.SC_UNAUTHORIZED, HttpStatus.UNAUTHORIZED, "User unsuccessfully logged", "");
     }
+    
+	private User getUserFromRequest(HttpServletRequest req)
+			throws IOException, JsonParseException, JsonMappingException {
+		// obtenemos el body de la peticion que asumimos viene en formato JSON
+        InputStream body = req.getInputStream();
+
+        // Asumimos que el body tendrá el siguiente JSON  {"username":"ask", "password":"123"}
+        // Realizamos un mapeo a nuestra clase User para tener ahi los datos
+        User user = new ObjectMapper().readValue(body, User.class);
+		return user;
+	}   
 }
 
 class User {
