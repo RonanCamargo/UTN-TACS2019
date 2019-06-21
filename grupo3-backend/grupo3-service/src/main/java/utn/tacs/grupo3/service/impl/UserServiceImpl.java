@@ -65,7 +65,12 @@ public class UserServiceImpl implements UserService {
 		}
 	}
 
-    private RegisteredPlace getRegisteredPlace(FullVenue venue, String username) {
+	@Override
+	public User userByUsername(String username) {
+		return userRepository.userByUsername(username);
+	}
+
+	private RegisteredPlace getRegisteredPlace(FullVenue venue, String username) {
     	RegisteredPlace registeredPlace = new RegisteredPlace();
     	registeredPlace.setName(venue.getName());
     	registeredPlace.setAddress(venue.getLocation().getAddress());
@@ -92,5 +97,11 @@ public class UserServiceImpl implements UserService {
 		
     	return place;
 	}
+
+	@Override
+	public void updateUserLastAccess(String username) {
+		userRepository.updateUserLastAccess(username, todayHelper.today());
+	}
+
 
 }

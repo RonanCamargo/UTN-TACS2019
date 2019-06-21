@@ -36,4 +36,11 @@ public interface AdministratorController {
      * @return
      */
     ResponseEntity<Response> registeredPlaces(int days);
+    
+    /**
+     * Returns the data of the current admin
+     * @param token
+     * @return
+     */
+	ResponseEntity<Response> me(String token);
 }

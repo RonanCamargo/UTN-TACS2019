@@ -33,4 +33,12 @@ public interface UserController {
      * @param placeId
      */
     ResponseEntity<Response> markAsVisitedAPlace(String userId, String listId, String placeId);
+    
+    /**
+     * Returns the data of the current user
+     * @param token
+     * @return
+     */
+    ResponseEntity<Response> me(String token);
+
 }

@@ -35,7 +35,9 @@ public class ValidateToken {
                 String userName = getUserNameFromToken(token);
                 // el recurso[2] es: /{user-id}
                 if (!recurso[2].equals(userName)) {
-                    token = null;
+                	if (!recurso[2].equals("me")) {
+                		token = null;						
+					}
                 }
 
                 break;
@@ -54,7 +56,7 @@ public class ValidateToken {
         return token;
     }
 
-    private String getUserNameFromToken(String token) {
+    public String getUserNameFromToken(String token) {
         if (token != null) {
             return Jwts.parser()
                     .setSigningKey("P@tit0")
@@ -66,7 +68,7 @@ public class ValidateToken {
         return null;
     }
 
-    private String getRolFromToken(String token) {
+    public String getRolFromToken(String token) {
         if (token != null) {
             Claims claims = Jwts.parser()
                     .setSigningKey("P@tit0")

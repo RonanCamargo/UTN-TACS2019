@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,6 +16,7 @@ import utn.tacs.grupo3.service.UserService;
 import utn.tacs.grupo3.spring.controller.UserController;
 import utn.tacs.grupo3.spring.controller.response.Response;
 import utn.tacs.grupo3.spring.controller.response.ResponseHandler;
+import utn.tacs.grupo3.spring.security.token.ValidateToken;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*", maxAge = 3600)
@@ -53,4 +55,12 @@ public class UserControllerImpl implements UserController {
     			return new Response(HttpStatus.OK, "Place successfully registered");
     	});
     }
+
+    @Override
+	@GetMapping("/me")
+	public ResponseEntity<Response> me(@RequestHeader("Authorization") String token){
+		String username = new ValidateToken().getUserNameFromToken(token);
+		return responseHandler.handle(
+				() -> new Response(HttpStatus.OK, "Your data", userService.userByUsername(username)));
+	}
 }

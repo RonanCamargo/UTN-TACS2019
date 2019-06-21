@@ -45,8 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .exceptionHandling().authenticationEntryPoint(invalidOrNonExistingJwtTokenValidation())
                 .and()
                 // Las peticiones /login pasaran previamente por este filtro
-                .addFilterBefore(new LoginFilter("/login", authenticationManager()),
-                        UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(loginFilter(), UsernamePasswordAuthenticationFilter.class)
 
                 // Las demás peticiones pasarán por este filtro para validar el token
                 .addFilterBefore(new JwtFilter(),
@@ -75,5 +74,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public AuthenticationEntryPoint invalidOrNonExistingJwtTokenValidation() {
     	return new InvalidOrNonExistingJwtTokenHandler();
+    }
+    
+    @Bean
+    public LoginFilter loginFilter() throws Exception {
+    	return new LoginFilter("/login", authenticationManager());
     }
 }
