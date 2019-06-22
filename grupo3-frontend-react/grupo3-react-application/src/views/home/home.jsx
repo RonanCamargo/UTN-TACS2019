@@ -12,6 +12,13 @@ class Home extends Component {
 		this.state = {
 			user : {}
 		}
+		this.logoutUser =this.logoutUser.bind(this)
+	}
+
+	logoutUser() {
+		localStorage.removeItem('token')
+		this.props.updateState('userLogged', false)
+		this.props.history.push('/login')
 	}
 
 	componentDidMount() {
@@ -22,25 +29,24 @@ class Home extends Component {
 					Authorization: 'Bearer ' + token
 				}
 			})
-				.then(response => {
-					console.log(response)
-					const user = {
-						firstName: response.data.body.firstName,
-						lastName: response.data.body.lastName,
-						userName: response.data.body.username,
-						listOfPlaces: response.data.body.listOfPlaces,
-						role: response.data.body.role,
-					}
-					this.setState({user : user})
-				})
+			.then(response => {
+				const user = {
+					firstName: response.data.body.firstName,
+					lastName: response.data.body.lastName,
+					userName: response.data.body.username,
+					listOfPlaces: response.data.body.listOfPlaces,
+					role: response.data.body.role,
+				}
+				this.setState({user : user})
+			})
 		}
 	}
 	render() {
 		return (
 			<div className="home-container">
 				<div className="header-options">
-					<h2 className="title-header"> Welcome </h2>
-					<Button variant="outline-dark" className="log-out" onClick={this.props.logoutUser}><b>Log out</b></Button>
+					<h2 className="title-header"> Welcome {this.props.userName || this.state.user.userName}</h2>
+					<Button variant="outline-dark" className="log-out" onClick={this.logoutUser}><b>Log out</b></Button>
 				</div>
 				{this.state.user.role !== "ADMIN" ?(
 					<div>
@@ -62,7 +68,7 @@ class Home extends Component {
 						<Button className="home-options" variant="primary" size="lg" onClick={() => {this.props.history.push('/users')}} block>
 							Manage Users
 						</Button>
-						<Button className="home-options" variant="primary" size="lg" onClick={() => {this.props.history.push('/login')}} block>
+						<Button className="home-options" variant="primary" size="lg" onClick={() => {this.props.history.push('/places-registered')}} block>
 							Amount Places Registered
 						</Button>
 						<Button className="home-options" variant="primary" size="lg" onClick={() => {this.props.history.push('/admin/places')}} block>

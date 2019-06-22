@@ -10,6 +10,7 @@ import Home from 'views/home/home'
 import ListNew from 'views/list/new'
 import PlacesList from 'views/list/places'
 import AllPlaces from 'views/admin/adminPlaces'
+import PlacesRegistered from 'views/admin/placesRegistered'
 import axios from "axios";
 
 class App extends Component {
@@ -29,7 +30,6 @@ class App extends Component {
 		}
 		this.updateProps = this.updateProps.bind(this)
 		this.updateState = this.updateState.bind(this)
-		this.logoutUser = this.logoutUser(this)
 	}
 
 	updateProps(key, value) {
@@ -47,32 +47,12 @@ class App extends Component {
 		})
 	}
 
-	logoutUser() {
-		localStorage.removeItem('token')
-		this.props.history.push('/login')
+	componentDidMount() {
+		const token = localStorage.getItem("token")
+		if(!token){
+			this.props.history.push('/login')
+		}
 	}
-
-	// componentDidMount() {
-	// 	const token = localStorage.getItem("token")
-	// 	if(1 && token){
-	// 		axios.get(API +'/users/me', {
-	// 			headers: {
-	// 				Authorization: 'Bearer ' + token
-	// 			}
-	// 		})
-	// 		.then(response => {
-	// 			console.log(response)
-	// 			const user = {
-	// 				firstName: response.data.body.firstName,
-	// 				lastName: response.data.body.lastName,
-	// 				userName: response.data.body.username,
-	// 				listOfPlaces: response.data.body.listOfPlaces,
-	// 				role: response.data.body.role,
-	// 			}
-	// 			this.setState({user : user})
-	// 		})
-	// 	}
-	// }
 
 	render() {
 		if (!this.state.userLogged) {
@@ -90,7 +70,7 @@ class App extends Component {
 					/>
 					<Route path={"/home"}
 					       component={() =>
-						       <Home logoutUser={this.logoutUser}
+						       <Home updateState={this.updateState}
 					                 history={this.props.history} />
 					       }
 					/>
@@ -130,6 +110,12 @@ class App extends Component {
 					       component={() =>
 						       <AllPlaces userName={this.state.user.userName}
 						                  history={this.props.history}
+						       />}
+					/>
+					<Route path={"/admin/places-registered"}
+					       component={() =>
+						       <PlacesRegistered userName={this.state.user.userName}
+						                         history={this.props.history}
 						       />}
 					/>
 					<Route path={"/stats"} component={AdminView} />
