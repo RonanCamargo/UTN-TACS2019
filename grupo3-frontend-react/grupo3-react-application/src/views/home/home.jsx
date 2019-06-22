@@ -65,7 +65,7 @@ class Home extends Component {
 						<Button className="home-options" variant="primary" size="lg" onClick={() => {this.props.history.push('/users')}} block>
 							Manage Users
 						</Button>
-						<Button className="home-options" variant="primary" size="lg" onClick={() => {this.props.history.push('/places-registered')}} block>
+						<Button className="home-options" variant="primary" size="lg" onClick={() => {this.props.history.push('/admin/places-registered')}} block>
 							Amount Places Registered
 						</Button>
 						<Button className="home-options" variant="primary" size="lg" onClick={() => {this.props.history.push('/admin/places')}} block>
