@@ -41,8 +41,6 @@ class PlacesList extends Component {
 		const places = this.state.placesInList.map(place => {
 			return(
 				<div>
-					<Navigation title= "Home" history={this.props.history}/>
-					<h2>Places in List : {this.props.match.params.id}</h2>
 					<Place key={place.foursquareId} id={place.foursquareId} title={place.name}
 					       subTitle={place.address}
 					       description={"Some Desc"}
@@ -56,6 +54,8 @@ class PlacesList extends Component {
 		})
 		return (
 			<div>
+				<Navigation title= "Home" history={this.props.history}/>
+				<h2>Places in List : {this.props.match.params.id}</h2>
 				{places}
 			</div>
 		)
