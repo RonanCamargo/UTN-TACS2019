@@ -102,21 +102,5 @@ Desde el root del proyecto
 ```
     TACS20191CGrupo3Bot
 ```
-##
-### Proyecto React
-```
-    cd grupo3-frontend-react/grupo3-react-application
-    npm i
-    npm start
-```
-
-#### URLs para probar el frontend
-```
-    http://localhost:8008/stats
-    http://localhost:8008/users/list-of-places
-    http://localhost:8008/places
-    http://localhost:8008/users
-    http://localhost:8008/signup
-    http://localhost:8008/login
     
 ```
