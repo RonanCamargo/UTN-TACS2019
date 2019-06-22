@@ -59,9 +59,6 @@ class Home extends Component {
 						<Button className="home-options" variant="primary" size="lg" onClick={() => {this.props.history.push('/places')}} block>
 							Near Places
 						</Button>
-						<Button className="home-options" variant="primary" size="lg" onClick={() => {this.props.history.push('/login')}} block>
-							My Location
-						</Button>
 					</div>
 				) :	(
 					<div>
