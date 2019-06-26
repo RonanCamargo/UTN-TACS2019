@@ -1,0 +1,5 @@
+FROM maven:3.6.1-jdk-8-slim AS build
+COPY ./ grupo3-backend
+RUN mvn -f grupo3-backend/pom.xml clean install -DskipTests
+CMD mvn -f grupo3-backend/grupo3-spring-controller/pom.xml spring-boot:run
+
