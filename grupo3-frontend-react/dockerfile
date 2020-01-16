@@ -1,0 +1,5 @@
+FROM node:8.16.0-alpine
+COPY ./grupo3-react-application ./
+EXPOSE 8008
+RUN npm i 
+CMD ["npm","start"]
